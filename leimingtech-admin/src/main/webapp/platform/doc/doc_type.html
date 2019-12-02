@@ -1,0 +1,24 @@
+<#include '/platform/doc/header.html' />
+<!--正文-->
+<div id="main">
+	<div class="menu">
+<#include '/platform/doc/menu.html' />
+	</div>
+	<div class="right">
+		<h1 class="summarize">${doctype.name}列表</h1>
+		<#if doctype.name=='标签'>
+			<#include '/platform/doc/inc/tag/index.html' />
+		<#else>
+			<#include '/platform/doc/inc/api/index.html' />
+		</#if>
+	</div>
+</div>
+
+<!--正文结束-->
+</body>
+</html>
+
+
+
+
+

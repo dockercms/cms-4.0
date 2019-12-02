@@ -1,0 +1,156 @@
+
+<!-- saved from url=(0039)http://www.ahciq.gov.cn/jgsz/jgjj.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${catalogF.name}</title>
+
+<link rel="stylesheet" href="/zfxxgk/css/zwmain.css" type="text/css">
+<script type="text/javascript"> 
+function displayTip(id) 
+{ var x = event.x;
+document.getElementById(id).style.left = x + 20 ;
+document.getElementById(id).style.display='block'; 
+} 
+function hideTip(id) 
+{ 
+document.getElementById(id).style.display='none'; 
+} 
+</script>
+<script>var lmid=43;</script>
+<script>var newsid=0;</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+	<table width="100%" border="0" cellspacing="1" cellpadding="1">
+		<tbody>
+			<tr>
+
+				<td height="34" background="/zfxxgk/images/mid.jpg" class="font10"
+					style="padding-left:10px;font-weight:bold">当前位置：
+					<a href="/" target="_blank">首页</a> &gt; 
+					<#assign name="catalogTag"> 
+					<#assign catalogTag=newTag("${name}")>
+					<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbaadb60005'}")>
+					<#if catalog?exists>
+						<a href="${catalog.url!'javascript:void(0);'}">政务公开</a>
+					</#if>
+					&gt; 
+					<#assign navTag =newTag("navTag")>
+					<#assign navTagList =navTag("{'name':'${catalogF.id}','levels':'self'}")> 
+					<#if navTagList?exists> 
+					<#list navTagList as navTag>
+					<#if catalogF.id==navTag.id>
+					<font color="red">${navTag.name}</font>
+					</#if>
+					</#list>
+					</#if>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table width="100%" border="0" cellspacing="15" cellpadding="0">
+		<tbody>
+			<tr>
+				<td>
+					<table width="100%" border="0" cellspacing="1" cellpadding="1"
+						bgcolor="#CCCCCC">
+						<tbody>
+							<tr>
+								<td background="/zfxxgk/images/mid_1.jpg" height="32">
+									<table width="100%" border="0" cellpadding="0" cellspacing="0"
+										height="32">
+										<tbody>
+											<tr>
+												<td align="center"><strong>标题</strong></td>
+												<td width="25%" align="center"><strong>索引号</strong></td>
+												<td width="15%" align="center"><strong>发布时间</strong></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="2"
+						bgcolor="#ffffff">
+						<tbody>
+						<#assign articleTag=newTag("articleTag")>
+						<#assign articleList=articleTag("{'name':'${catalogF.id}','level':'all'}")>
+						<#if articleList?exists && articleList?size gt 0>
+						<#list articleList as article>
+							<tr>
+								<td class="list">&#8226; <a
+									href="${article.url!'javascript:void(0);'}"
+									onmouseover="displayTip(&#39;Tip11614&#39;);"
+									onmouseout="hideTip(&#39;Tip11614&#39;);" target="_blank"
+									title="${article.title}">${article.title}</a>
+								<div id="Tip11614" class="Tip"
+										style="width:350px;BORDER-RIGHT: 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: 1px solid; DISPLAY: none; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.dropshadow(OffX=4, OffY=4, Color=&#39;gray&#39;, Positive=true); PADDING-BOTTOM: 5px; BORDER-LEFT: 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: 1px solid; POSITION: absolute; BACKGROUND-COLOR: white">
+										<table border="0" cellspacing="0" cellpadding="0"
+											style="width:100%;">
+											<tbody>
+												<tr>
+													<td width="70"><strong>索&nbsp;引&nbsp;号</strong>：</td>
+													<td>002992525/201405-00020</td>
+												</tr>
+												<tr>
+													<td width="70"><strong>分&nbsp;&nbsp;&nbsp;&nbsp;类</strong>：</td>
+													<td>机构简介</td>
+												</tr>
+												<tr>
+													<td width="70"><strong>发布机构</strong>：</td>
+													<td>${site.siteName}</td>
+												</tr>
+												<tr>
+													<td width="70"><strong>发文日期</strong>：</td>
+													<td><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></td>
+												</tr>
+												<tr>
+													<td width="70"><strong>名&nbsp;&nbsp;&nbsp;&nbsp;称</strong>：</td>
+													<td colspan="3">${article.title}</td>
+												</tr>
+												<tr>
+													<td width="70"><strong>文&nbsp;&nbsp;&nbsp;&nbsp;号</strong>：</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td width="70"><strong>关&nbsp;键&nbsp;词</strong>：</td>
+													<td>${article.tags}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div></td>
+								<td width="25%" align="center" class="list">002992525/201405-00020</td>
+								<td width="15%" align="center" class="list">
+									<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+								</td>
+							</tr>
+						</#list>
+						</#if>
+						</tbody>
+					</table>
+					<table width="90%" border="0" cellspacing="5" cellpadding="0">
+						<tbody>
+							<tr>
+								<td align="center">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<form name="formarticle" method="post" action=""></form>
+										<tbody>
+											<tr>
+												<td align="right" height="23">
+													${pagebar}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

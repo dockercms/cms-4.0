@@ -1,0 +1,162 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">调查选项</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<input type="hidden" id="surveyId" name="surveyId" value="${surveyId}"/>
+		<input type="hidden" id="optionVId" name="optionVId" value="${temporary}"/>
+		<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCatId}"/>
+		<input type="hidden" id="contentsId" name="contentsId" value="${contentsId}"/>
+		<input type="hidden" id="mark" name="mark" value="${mark}"/>
+		
+		<div class="control-group" style="display:none">
+			<label class="control-label">调查ID</label>
+			<div class="controls">
+				<input type="text" id="surveyid" name="surveyid" class="span3 form-control" value="<#if page.surveyid=="">${surveyId}</#if><#if page.surveyid!="">${page.surveyid?if_exists}</#if>"/>
+				<span class="help-inline">填写调查ID</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">选项名称：</label>
+			<div class="controls">
+				<input type="text" id="optionname" name="optionname" class="span3 form-control" value="${page.optionname?if_exists}"/>
+			</div>
+		</div>
+		<#--
+		<div class="control-group">
+			<label class="control-label">图片：</label>
+			<div class="controls">
+				<input type="text" id="picture" name="picture" class="span3 form-control" value="${page.picture?if_exists}"/>
+				<a class="btn blue" href="javascript:void(0);" onclick="toEditModel('attachPictureController.do?tableDialog',$('#pictureModel'))">
+					图片库 <i class="icon-search"></i>
+				</a>
+				<div id="uploadThumb" class="btn green" style="padding:0px !important;">本地选取</div>
+			</div>
+		</div>
+		-->
+		<div class="control-group">
+			<label class="control-label">说明：</label>
+			<div class="controls">
+				<input type="text" id="interpretation" name="interpretation" class="span3 form-control" value="${page.interpretation?if_exists}"/>
+			</div>
+		</div>
+		<#--
+		<#if mark=="text">
+		<div class="control-group">
+			<label class="control-label">内容：</label>
+			<div class="controls">
+				<input type="text" id="optionContent" name="optionContent" class="span3 form-control" value="${page.optionContent?if_exists}"/>
+			</div>
+		</div>
+		</#if>
+		-->
+		<#if mark=="checkbox" || mark=='radio'>
+		<div class="control-group">
+			<label class="control-label">选项：</label>
+			<div class="controls">
+				<div id="optionDiv">
+				</div>
+				<input type="button" class="btn green mini" value="增加选项" onclick="toEditModel('surveyOptionExtController.do?addPageModel&optionVId=${temporary}&surveyOptionId=${page.id?if_exists}',$('#editOption'))"/>
+			</div>
+		</div>
+		</#if>
+		<#--
+		<#if mark=="textarea">
+		<div class="control-group">
+			<label class="control-label">内容：</label>
+			<div class="controls">
+				<textarea id="optionContent" name="optionContent" class="span3 form-control" rows="3">${page.optionContent?if_exists}</textarea>
+			</div>
+		</div>
+		</#if>
+		-->
+		<div class="control-group">
+			<label class="control-label" >排序：</label>
+			<div class="controls">
+				<input type="text" id="optionsort" name="optionsort" class="span1 form-control" value="${page.optionsort!0}"/>
+				<span class="help-inline">（数字越大越靠前）</span>
+			</div>
+			</div>
+		       <div class="control-group">
+				<label class="control-label">是否必选：</label>
+						<div class="controls">
+						<label class="radio">
+							   <input  type="radio"   name="isCheck"  value="1" <#if page.isCheck?if_exists && page.isCheck =='1'>checked</#if>>是
+					
+							</label>
+							<label class="radio">
+									<input  type="radio" name="isCheck" value="0" 
+										<#if page.isCheck?if_exists && page.isCheck =='0'>checked</#if>
+										<#if page.isCheck !='0' && page.isCheck !='1'>checked</#if>
+										>否
+							</label>
+					</div>
+			</div>
+			
+			
+	</form>
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="formSubmitModel('surveyOptionController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">  
+    <input type="button" class="btn" value="取消" data-dismiss="modal">  
+</div>
+<div id="editOption" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="700"></div>
+<div id="pictureModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800"></div>
+<script>
+<#--
+function selectPictureBack(){
+	var result = $("input[name='path']:checked").val();
+	$("#picture").val(result);
+	$('#pictureModel').modal('hide');
+}
+var uploaderThumb = WebUploader.create({
+	
+	// 选完文件后，是否自动上传。
+    auto: true,
+    
+    // swf文件路径
+    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+    // 文件接收服务端。
+    server: 'controller.jsp?action=uploadimage',
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#uploadThumb',
+
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+    }
+});
+
+//当有文件添加进来的时候
+uploaderThumb.on( 'uploadSuccess', function( file,Object ) {
+	$("#picture").val(Object.url);
+});
+-->
+$(function (){
+	<#--$("#picture").livetip();-->
+	$.ajax({
+		type:'post',
+		url:'surveyOptionController.do?jumpOption&optionVId=${temporary}&surveyOptionId=${page.id?if_exists}',
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#optionDiv').empty();
+			$('#optionDiv').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+});
+</script>

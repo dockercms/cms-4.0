@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="gb2312" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+
+		<title>${site.name}</title>
+		<meta name="Description" content="${catalog.Meta_Description} ${Site.Meta_Description}"  />
+		<meta name="Keywords" content="${catalog.Meta_Keywords} ${Site.Meta_Keywords}" />
+		<meta name="copyright" content="" />
+		
+        <script type="text/javascript" src="../js/2015/jquery-2.0.2.js"></script>
+	    <script type="text/javascript" src="../js/2015/jquery.hammer.js"></script>
+	    <link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+	    
+        <script src="../js/jquery.mobile-1.3.2.min.js"></script>
+        <link href="../css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
+
+		<link type="text/css" rel="stylesheet" href="../css/jquery.mmenu.all.css" />
+		<link type="text/css" rel="stylesheet" href="../css/yuxi.css" />
+
+		<script type="text/javascript" src="../js/jquery.mmenu.js"></script>
+		<script type="text/javascript" src="../js/yuxi.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="../css/2015/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/2015/app.css">
+	    
+		<script type="text/javascript">
+		var curUrl="${level}${catalog.url}";
+		$(function (){
+			jQuery.mobile.ajaxEnabled = false;
+			
+			var flag=false;
+			var toleft=false;
+			var toright=false;
+			$(".comp-navTop a").each(function (i){
+				var $self=$(this);
+				if(curUrl+"index.shtml"==$self.attr("href")){
+					$self.parent("li").addClass("active");
+					flag=true;
+					toleft=true;
+					if($(".comp-navTop a:eq("+(i+1)+")").length!=0){
+						toright=true;
+					}
+				}
+			});
+			if(!flag){
+				$(".comp-navTop li:eq(0)").addClass("active");
+				if($(".comp-navTop a").length>1){
+					toright=true;
+				}
+			}
+			$(document).on('swipeleft', '#scroller .list_li', function() {
+				if(toright){
+					var url=$(".comp-navTop .active").next().find("a").attr("href");
+					location.href=url;
+				}
+			});
+			$(document).on('swiperight', '#scroller .list_li', function() {
+				if(toleft){
+					var url=$(".comp-navTop .active").prev().find("a").attr("href");
+					location.href=url;
+				}
+			});
+			
+			var activeMenu=$(".comp-navTop .active");
+			  var el=$(".comp-navTop ul");
+			  var mc = new Hammer(el);
+			  var curLeft=0;
+			  
+			  var activeWidth=activeMenu.width();
+			  var activeleft=activeMenu.position().left+activeWidth/2;
+			  
+			  var lastLi=$(el).find("li").last();
+			  var left=lastLi.position().left;
+			  var maxLeft=left+lastLi.width()-$(window).width()+8+5;
+			  
+			  if($(window).width()/2<activeleft){
+				  var thisX=activeleft-$(window).width()/2;
+				  if(maxLeft>thisX){
+					  curLeft=-thisX;
+					  el.css ('-webkit-transform', 'translateX('+ (-thisX) +'px)');
+					  el.css ('-moz-transform', 'translateX('+ (-thisX) +'px)');
+					  el.css ('transform', 'translateX('+ (-thisX) +'px)');
+				  }else if(maxLeft>0){
+					  curLeft=-maxLeft;
+					  el.css ('-webkit-transform', 'translateX('+(-maxLeft)+'px)');
+					  el.css ('-moz-transform', 'translateX('+(-maxLeft)+'px)');
+					  el.css ('transform', 'translateX('+(-maxLeft)+'px)');
+				  }else{
+					  curLeft=0;
+					  el.css ('-webkit-transform', 'translateX(0px)');
+					  el.css ('-moz-transform', 'translateX(0px)');
+					  el.css ('transform', 'translateX(0px)');
+				  }
+			  }
+			  
+			  mc.on('drag',function(ev){
+				  var aa=ev.gesture.deltaX+"  "+ev.gesture.deltaY;
+				  el.css ('-webkit-transform', 'translateX('+ (curLeft+ev.gesture.deltaX) +'px)');
+				  el.css ('-moz-transform', 'translateX('+ (curLeft+ev.gesture.deltaX) +'px)');
+				  el.css ('transform', 'translateX('+ (curLeft+ev.gesture.deltaX) +'px)');
+			  });
+			  mc.on('dragend',function(ev){
+				  var aa=ev.gesture.deltaX+"  "+ev.gesture.deltaY;
+				  var elWidth=el.width();
+				  var wWidth=$(window).width();
+				  var lastLi=$(el).find("li").last();
+				  var left=lastLi.position().left;
+				  var maxLeft=left+lastLi.width()-wWidth+8+5;
+				  var thisleft=curLeft;
+				  curLeft=curLeft+ev.gesture.deltaX;
+				  if(thisleft+ev.gesture.deltaX>0 || wWidth>elWidth){
+					  curLeft=0;
+					  el.css ('-webkit-transform', 'translateX(0px)');
+					  el.css ('-moz-transform', 'translateX(0px)');
+					  el.css ('transform', 'translateX(0px)');
+				  }else if((maxLeft+thisleft+ev.gesture.deltaX)<0){
+					  curLeft=-maxLeft;
+					  el.css ('-webkit-transform', 'translateX('+(-maxLeft)+'px)');
+					  el.css ('-moz-transform', 'translateX('+(-maxLeft)+'px)');
+					  el.css ('transform', 'translateX('+(-maxLeft)+'px)');
+				  }
+			  });
+			
+			var $menu = $('nav#menutwo');
+
+			$menu.mmenu({
+				position	: 'right',
+				classes		: 'mm-light'
+			});
+			
+		    var mySwiper = new Swiper('.swiper-container',{
+		        pagination: '.my-pager',
+		        autoplay:3000,
+		        loop:true,
+		        grabCursor: true,
+		        paginationClickable: true
+		    })
+		    setTimeout("changewindow()",60);
+		    
+		    $("#wrapper").css("bottom","0");
+		});
+		</script>
+		
+	</head>
+	<body>
+		<div id="page">
+	       <cms:include file="../include/2015wapheader.html"></cms:include>
+			<div id="wrapper" style="top:87px;position: fixed;left: 0;bottom: 0;right: 0;z-index: -1;">
+				<a href="#"><img src="../images/2015/2015-4-14.jpg" style="width:100%;border: 0;height:100%;"/></a>
+			</div>
+        <cms:include file="../include/2015rightMenu.html"></cms:include>    
+		</div>
+		<div style="display: none;">
+   	  		<script src="http://s95.cnzz.com/stat.php?id=1253598148&web_id=1253598148 " language="JavaScript"></script>
+     	</div>
+	</body>
+</html>

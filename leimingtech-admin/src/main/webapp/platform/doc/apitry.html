@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+	<title>Lmcms API亲自试一试</title>
+<#--<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />-->
+<script src="${contextpath}/platform/doc/jquery-1.8.3.min.js"></script>
+<link href="${contextpath}/platform/doc/stylecss.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header">
+	<div class="header_top">
+		<h1><em>Lmcms</em>文档</h1>
+	</div>
+</div>
+<div id="function">
+	<#--
+	<input type="button" value="登录" name="button" id="login"></input>
+	<input type="button" value="注销登录" id="logout"></input>
+	-->	
+</div>
+<div id="api">
+<h1>API地址：</h1>
+<input type="text" id="url" style="width:600px" value="${apiurl!''}">
+<input type="button" value="提交" name="button"  id="prevBtn" class="prevbtn">
+</div>
+<div id="show">
+<h1>输出结果</h1>
+<textarea  id="frm" >
+
+</textarea>
+</div>
+
+<script>
+$(function(){
+	$("#prevBtn").click(function(){
+		 var apiurl=$("#url").val();
+		apiurl = encodeURI(encodeURI(apiurl));
+		$.ajax({
+			type:'post',
+			url:"${contextpath}"+apiurl,
+			dataType:"html",
+			success:function(html){
+				 $("#frm").val(html)
+			},
+			error:function(){
+				alert("api地址错误，请检查");
+			}
+			
+		});
+	});
+	
+	$("#login").click(function(){
+		var apiurl="/api/shop/member!login.do?username=18611138651&password=123456";
+		$.ajax({
+			url:"${contextpath}"+apiurl,
+			dataType:"json",
+			success:function(aa){
+				if(aa.result==1){
+					alert("恭喜登录成功")
+				}
+				else{
+					alert("用户名和密码错误")
+				}
+			},
+			error:function(){
+				alert("api地址错误，请检查");
+			}
+			
+		});
+	});
+	
+	$("#logout").click(function(){
+		var apiurl="/api/shop/member!logout.do";
+		$.ajax({
+			url:"${contextpath}"+apiurl,
+			dataType:"json",
+			success:function(bb){
+				if(bb.result==1){
+					alert("恭喜注销成功")
+				}
+				else{
+					alert("已经注销过了错误")
+				}
+			},
+			error:function(){
+				alert("api地址错误，请检查");
+			}
+		});
+	});
+})
+</script>
+</body>
+</html>

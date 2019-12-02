@@ -1,0 +1,181 @@
+<div class="modal-body">
+    <div class="row-fluid">
+        <div class="span12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption"><i class="icon-globe"></i>跟帖列表</div>
+                    <div class="actions">
+                        <button class="btn yellow-stripe" data-dismiss="modal" aria-hidden="true"> 关闭 </button>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+                    <div class="span12 booking-search">
+                        <form id="searchSub_form">
+                            <div class="clearfix">
+                                <div class="span4">
+                                    <label> 回帖人： <input name="username" class="form-control span7"
+                                                        type="text" value="${searchMap["returnperson"]?if_exists[0]}">
+                                    </label>
+                                </div>
+                                <div class=" span4">
+                                    <label> 回帖内容： <input name="content" class="form-control span7"
+                                                         type="text" value="${searchMap["returncontent"]?if_exists[0]}">
+                                    </label>
+                                </div>
+                                <div class="pull-right&quot;">
+                                    <button type="button" class="btn yellow btn-sm" onclick="toSearchSub('replyController.do?replyList&commentId=${commentId?if_exists}', 'searchSub_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+                                    <button type="button" class="btn yellow btn-sm" onclick="resetForm('searchSub_form');">重置 <i class="icon-repeat m-icon-white"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover" id="sample_1">
+
+                        <thead>
+                        <tr>
+                            <th width="20" style="text-align:center;">
+                                <input type="checkbox" onclick="checkAllReply(this)">
+                            </th>
+                            <th style="width: 40px;text-align:center">序号</th>
+                            <th style="width: 80px;text-align:center">回帖人</th>
+                            <th style="">回帖内容</th>
+                            <th style="width:80px;">审核状态</th>
+                            <th style="width:180px;text-align:center">操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <#if replyList?exists>
+                            <#list replyList as reply>
+                                <tr class="odd greyeX">
+                                    <td style="text-align:center;">
+                                        <input type="checkbox" name="replyIds" value="${reply.id?if_exists}">
+                                    </td>
+                                    <td>${(pageNo-1)*pageSize+reply_index?if_exists+1}</td>
+                                    <td>${reply.returnperson}</td>
+                                    <td>${reply.returncontent}</td>
+                                    <td>
+                                        <#if reply.ischeck == '1'>
+                                            已通过
+                                        <#elseif reply.ischeck == '0'>
+                                            已禁止
+                                        <#else>
+                                            未审核
+                                        </#if>
+                                    </td>
+
+                                    <td style="text-align:center;">
+                                        <a class="text-decoration:none" href="javaScript:void(0)" onclick="toCheckReply('replyController.do?checkReply&pageNo=${pageNo}', '${reply.id?if_exists}', '1')">
+                                            <button type="button" class="btn green btn-sm">
+                                                通过
+                                            </button>
+                                        </a>
+                                        <a class="text-decoration:none" href="javaScript:void(0)" onclick="toCheckReply('replyController.do?checkReply&pageNo=${pageNo}', '${reply.id?if_exists}', '2')">
+                                            <button type="button" class="btn yellow btn-sm">
+                                                禁止
+                                            </button>
+                                        </a>
+                                        <a class="text-decoration:none" href="javaScript:void(0)" onclick="delSub('replyController.do?del', '${reply.id?if_exists}')">
+                                            <button type="button" class="btn red btn-sm">
+                                                删除
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </#if>
+                        </tbody>
+                    </table>
+                    <form class="form-horizontal">
+                        <div class="clearfix">
+                            <div class="">
+                                <button type="button" class="btn blue btn-sm"
+                                        onclick="operateReplySelected('replyController.do?checkReply&pageNo=${pageNo}','1')">
+                                    通过所选项
+                                </button>
+                                <button type="button" class="btn grey btn-sm"
+                                        onclick="operateReplySelected('replyController.do?checkReply&pageNo=${pageNo}','2');">
+                                    禁止所选项
+                                </button>
+                                <button type="button" class="btn red btn-sm"
+                                        onclick="selectedReplyDel(this);">
+                                    删除所选项
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <#include "/lmPage/common/pageSub.html">
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    App.init();
+    function toCheckReply(urlStr, id, data){
+        $.ajax({
+            type:'post',
+            url:urlStr,
+            data:'id=' + id + "&ischeck=" + data,
+            success:function(msg) {
+                var obj = JSON.parse(eval(msg));
+                if(obj.isSuccess){
+                    lmAlert(obj.msg);
+                    $.ajax({
+                        type: 'post',
+                        url:'replyController.do?replyList&commentId=${commentId}',
+                        data: 'data=0',
+                        dataType: 'text',
+                        success: function (msg) {
+                            $('#editModel').empty();
+                            $('#editModel').append(msg);
+                        }
+                    });
+                }else{
+                    lmAlert("处理失败!");
+                }
+            },
+
+        });
+    }
+
+    function operateReplySelected(urlStr,data){
+        var obj = document.getElementsByName("replyIds");
+        for(i in obj){
+            if(obj[i].checked){
+                toCheckReply(urlStr, obj[i].value,data);
+            }
+        }
+    }
+
+    function checkAllReply(obj){
+        if(obj.checked==true){
+            $("input[name='replyIds']").each(function(){
+                $(this).attr("checked", "checked");
+            });
+        }else{
+            $("input[name='replyIds']").each(function(){
+                $(this).attr("checked", false);
+            });
+        }
+        //解决调整uniform对checkbox美化后，全选不自动更新问题
+        $.uniform.update();
+    }
+
+    function selectedReplyDel(obj){
+        if(!confirm("是否删除所选记录？")){
+            return;
+        }
+        obj = document.getElementsByName("replyIds");
+        for(i in obj){
+            if(obj[i].checked){
+                toCheckReply('replyController.do?del', obj[i].value,'0');
+            }
+        }
+    }
+</script>

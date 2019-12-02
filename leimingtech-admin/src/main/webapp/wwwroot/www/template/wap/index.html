@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<title>${site.siteName}</title>
+<meta name="Description" content="" />
+<meta name="Keywords" content="" />
+<script type="text/javascript" src="/wapStyle/js/2015/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="/wapStyle/js/2015/jquery.hammer.js"></script>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<link href="/wapStyle/css/swiper.css" rel="stylesheet" type="text/css" />
+<script src="/wapStyle/js/swiper.js"></script>
+
+<script src="/wapStyle/js/jquery.mobile-1.3.2.min.js"></script>
+<link href="/wapStyle/css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
+
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/yuxi.css" />
+
+<script type="text/javascript" src="/wapStyle/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="/wapStyle/js/yuxi.js"></script>
+
+<link href="/wapStyle/css/scrollbar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/wapStyle/js/iscroll.js"></script>
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/iscroll.css" />
+
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/common.css">
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/app.css">
+<script type="text/javascript" src="/wapStyle/js/2015/myScroll.js"></script>
+
+<script type="text/javascript">
+    var contextPath="${contextpath}";
+	/* --------------------控制轮换图--------------------------- */
+	var curUrl = "2015/rd/";
+	$(function() {
+		jQuery.mobile.ajaxEnabled = false;
+		//--------------------加载数据------------------
+		//loadDataMy($("contentCatId").val(),1);
+		//-------------验证是否登陆------------------
+		if(islogin()){  //-------已经登陆----------
+			$("#loginLiId").hide();//---隐藏《 登陆 》按钮
+			$("#registerLiId").hide();//---隐藏《 注册 》按钮
+			var storage = window.localStorage;//---浏览器本地存储---
+	        var username=storage.getItem("yuxiuser");//---取出username---
+			$("#usernamePId").text("欢迎："+username);
+		}else{  //还没有登陆
+		    $("#exitLiId").hide();//---隐藏《 退出 》按钮
+		    $("#userLiId").hide();//---隐藏《 用户姓名 》信息
+		}
+	});
+	
+	/*---------------------退出----------------------------*/
+	function exit(){
+			var storage = window.localStorage;//---浏览器本地存储---
+			storage.clear();//清除用户的用户名和id
+			window.location.href="/wap_index.shtml";//------返回到首页------
+	}
+</script>
+</head>
+<body>
+	<div id="page">
+		<div style="text-align: center;width:100%;">
+            <a href="#menutwo" class="right_menu index" data-role='none'> <img src="/wapStyle/images/3index_09.png" style="padding-top: 2px;"></a>
+			<h1 style="margin: 5px;">
+				<img src="/wapStyle/images/3index_03.png" width="95" height="30" style="margin-right: -32px;">
+			</h1>
+		</div>
+		<div style="position: relative;padding-right: 5px;border-top: 1px solid #e7e7e7;">
+			<div class="comp-navTop" id="comp-navTop" style="-webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none; overflow: hidden;">
+				<ul style="position: relative;">
+					<#assign catalogList =newTag("catalogList")>
+					 <#assign catalogLists =catalogList()> 
+					 <#list catalogLists as list> <#if list_index==0>
+					 <#assign indexCatalogId ='${list.id}'>
+					<li id="liId${list.id}" class="li active "><a href="/${list.wapUrl!''}" data-ajax=false>${list.name} </a> <input type="hidden" id="contentCatId" value="${list.id}"></li> <#else>
+					<li id="liId${list.id}" class="li"><a href="/${list.wapUrl!''}" data-ajax=false>${list.name} </a></li> </#if> </#list>
+				</ul>
+			</div>
+			<div style="position: absolute;top: 0px;right: 0px;width: 5px;height: 40px;line-height: 40px;text-align: center;"></div>
+		</div>
+		<div id="wrapper" style="top:87px;">
+			<!-- 论换图 -->
+			<div id="scroller">
+				<div id="pullDown">
+					<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新</span>
+				</div>
+
+				<ul id="thelist" data-role="listview" data-icon="arrow-r">
+					<li data-role='none' style="padding:0px;">
+						<div class="swiper-container" id="swiper-container">
+							<div class="swiper-wrapper">
+								<!--循环：article count：4-->
+								<#assign HeadlineList =newTag("headlineList")> <#assign headlineList =HeadlineList("{'catalog':'${indexCatalogId}','isGetImage':'true'}")> <#list headlineList as list>
+								<div class="swiper-slide">
+									<a href="${list.wapurl}" data-ajax=false><img src="${list.thumb}" border="0"> </a>
+									<div class="title-bg"></div>
+									<div class="title">
+										<a href="${list.wapurl}" data-ajax=false> ${list.title} </a>
+									</div>
+								</div>
+								</#list>
+							</div>
+							<div class="my-pager"></div>
+						</div></li>
+					<!-- ----------------------------------------------某个栏目下新闻------------------------------------------------------- -->
+				</ul>
+				<div id="pullUp">
+					<span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多</span>
+				</div>
+				<input type="hidden" id="pageNo" value="1">
+			</div>
+		</div>
+			<nav id="menutwo">
+				<ul>
+					
+					 
+				   <li id="userLiId" class="loginview">
+          		   <img alt="" src="/wapStyle/images/15youxianshilan_03.png">
+          		    <p id="usernamePId"></p>
+		           </li>
+					<li id="loginLiId"><a href="${contextpath}/front/login.do?toLogin" > 
+							<div style="float:left;">
+								<img src="/wapStyle/images/yuyin.png">登录
+							</div> <img src="/wapStyle/images/jiantou.png" style="float:right"> </a>
+					</li>
+					<li id="registerLiId"><a href="${contextpath}/front/login.do?toRegister" > 
+							<div style="float:left;">
+								<img src="/wapStyle/images/yuyin.png">注册
+							</div> <img src="/wapStyle/images/jiantou.png" style="float:right"> </a>
+					</li>
+					<li><a href="${contextpath}/front/login.do?toDisclose" > 
+							<div style="float:left;">
+								<img src="/wapStyle/images/yuyin.png">爆料
+							</div> <img src="/wapStyle/images/jiantou.png" style="float:right"> </a>
+					</li>
+					 
+					<li><a href="${contextpath}/front/login.do?toSearch" data-ajax=false>
+							<div style="float:left;">
+								<img src="/wapStyle/images/sou.png">搜索
+							</div> <img src="/wapStyle/images/jiantou.png" style="float:right"> </a>
+					</li>
+					 <li  id="exitLiId"><a onclick="exit();" > 
+							<div style="float:left;">
+								<img src="/wapStyle/images/yuyin.png">退出
+							</div> <img src="/wapStyle/images/jiantou.png" style="float:right"> </a>
+					</li>
+				</ul>
+			</nav>
+	</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+<#--Lmcms-->
+雷铭
+<#if docTypeList?exists>
+	<#list docTypeList as docType>
+		<#if docType_index ==0>
+			${docType.name}
+		<#elseif docTypeList?size == docType_index+1>
+			及${docType.name}
+		<#else>
+			、${docType.name}
+		</#if>
+	</#list>
+</#if>
+使用手册
+</title>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<link href="${contextpath}/platform/doc/stylecss.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${contextpath}/platform/doc/jquery-1.8.3.min.js"></script>
+<script>
+var _hmt  = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?428510de6398e5ed526cc8e926b21c0a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+<body>
+<!--头部-->
+<div id="header">
+	<div class="header_top">
+		<a href="docAct.do?index&platform=${platform!''}"><h1><em><#--Lmcms-->雷铭</em>文档</h1></a>
+	</div>
+</div>
+<!--头部结束-->
+<!--手册开始-->
+<div id="top_nav">
+	<h1>
+	<#if docTypeList?exists>
+		<#list docTypeList as docType>
+			<#if docType_index ==0>
+				${docType.name}
+			<#elseif docTypeList?size == docType_index+1>
+				及${docType.name}
+			<#else>
+				、${docType.name}
+			</#if>
+		</#list>
+	</#if>
+	使用手册
+	<div class="platformType">
+		<#--
+		<span platform="cms">CMS</span>
+		<span platform="b2c">B2C</span>
+		<span platform="weixin">微信</span>
+		<span platform="mobile">移动</span>
+		-->
+	</div>
+	</h1>
+</div>
+<!--手册结束-->
+<script type="text/javascript">
+	$(function() {
+		$(".platformType span").click(function() {
+			var self = this;
+			var url = window.location.href;
+			var platform = $(self).attr("platform");
+			if (url.indexOf("&platform=" + platform) == -1) {
+				if (url.indexOf("&platform=") == -1) {
+					window.location.href = url + "&platform=" + platform;
+				} else {
+					var params = url.split("&");
+					for(var i=0;i<params.length;i++){
+						if(params[i].indexOf("platform")!=-1){
+							params[i]="platform=" + platform;
+							break;
+						}
+					}
+					window.location.href =params.join("&");
+				}
+			}
+		});
+	});
+</script>

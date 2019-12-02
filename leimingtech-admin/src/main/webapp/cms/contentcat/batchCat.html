@@ -1,0 +1,77 @@
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h3 class="modal-title">批量添加栏目</h3>
+	</div>
+	<div class="modal-body" id="body">
+		<form id="form_sample_2">
+			<div class="alert alert-error hide">
+				<button class="close" data-dismiss="alert"></button>
+				有未填写项或错误项. 请检查后再提交.
+			</div>
+			<div class="alert alert-success hide">
+				<button class="close" data-dismiss="alert"></button>
+				表单验证成功!
+			</div>
+			<table cellspacing="0" cellpadding="1" align="center" width="100%" height="100%">
+				<tbody>
+					<tr>
+						<td align="center" width="3%">&nbsp;</td>
+						<td valign="top">
+							<p>
+								<span ><br>请按如下要求输入栏目名称：</span>        
+						  	</p>
+						  	<p>
+						  		<span>1.每行填写一个栏目；</span><br>
+						    	<span>2.子栏目相对父栏目使用两个英文空格。</span><br>
+						  		&nbsp;
+						  	</p>
+							<p>
+								<textarea name="BatchColumn" id="BatchColumn" style="height:200px;width:500px;vertical-align:top;"></textarea>
+							</p>
+							<p>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>列表页模板</label>
+									<div class="controls">
+										<input style="margin-bottom: 0px;" type="text" id="templateshowlist" name="listModel" class="form-control span4" data-rule-required="true" value="${contentCat?if_exists.listModel}"/>
+										<button class="btn purple" type="button"  onclick="toEditModel('templateController.do?tableDialog&model=list')">选择模板</button>
+									</div>
+								</div>
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="hidden" name="templateIndex" id="templateIndex" value='{"文章":"false","组图":"false","链接":"false","视频":"false","活动":"false","投票":"false","访谈":"false","调查":"false","专题":"false"}'>
+			<input type="hidden" name="templateList" id="templateList" value='{"文章":"detail.html","组图":"detail_pictureGroup.html","链接":"detail.html","视频":"detail_video.html","活动":"detail.html","投票":"detail_vote.html","访谈":"detail.html","调查":"survey_detail.html","专题":"detail.html"}'>
+		</form>
+	</div>
+	<div class="modal-footer">  
+    	<input  type="button" class="btn btn-primary" value="提交"  onclick="formSubmitBatchCat('contentCatController.do?importCatalog&catPId=${catId}','form_sample_2')">  
+        <input type="button" class="btn" value="取消" data-dismiss="modal"> 
+    </div>
+<script>
+function formSubmitBatchCat(urlStr,formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				$('#editModel2').modal('hide');
+				lmAlert(obj.msg);
+				lazyChangePage(obj.toUrl);
+			}else{
+				lmAlert("提交处理失败!");
+			}
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	});
+}
+</script>

@@ -1,0 +1,155 @@
+.picture-wrap .crumb {
+  margin-top: 9px;
+}
+.picture-wrap .crumb em {
+  font-family: SimSun;
+  padding: 0 4px;
+}
+.picture-wrap .crumb span {
+  color: #444;
+}
+.picture-wrap .crumb a:hover {
+  color: #c00;
+}
+.picture-main {
+  margin-top: 10px;
+}
+/*鏍囬鍖哄ご閮�*/
+.picture-header {
+  overflow: hidden;
+  _zoom: 1;
+  background-color: #111;
+  padding: 0 0 0 10px;
+}
+.picture-header .h1,
+.picture-header .picture-infos,
+.picture-header .summary {
+  margin: 10px 20px 0 20px;
+  color: #ccc;
+}
+.picture-header .h1 {
+  font-family: Microsoft YaHei, SimHei, Arial;
+  font-size: 22px;
+  color: #ffffff;
+}
+.picture-header .picture-infos {
+  margin-top: 10px;
+}
+.picture-header .picture-infos .post-time,
+.picture-header .picture-infos .source,
+.picture-header .picture-infos .editor,
+.picture-header .picture-infos .z-editor,
+.picture-header .picture-infos .comments {
+  margin-right: 20px
+}
+.picture-header .picture-infos .comments a,.picture-header .picture-infos .source a {
+  color: #ccc;
+}
+.picture-header .picture-infos .comments a:hover ,.picture-header .picture-infos .source a:hover{
+  color: #ff0;
+}
+.picture-header .picture-infos em {
+  color: #ff0;
+}
+.picture-header .summary {
+  color: #ccc;
+  text-indent: 0em;
+  line-height: 20px;
+}
+/*鎺ㄨ崘缁勫浘*/
+.title-hd {
+  height: 30px;
+  background: transparent url('../images/sprite-bar.png') repeat-x 0 0;
+}
+.title-hd .title .words {
+  color: #cc0000;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 30px;
+}
+.title-hd .link {
+  float: right;
+  _display: inline;
+  line-height: 30px;
+}
+.title-hd .ico {
+  float: left;
+  _display: inline;
+}
+.title-hd .ico {
+  background: transparent url('../images/sprite-ico.png') no-repeat -60px -160px;
+  width: 16px;
+  height: 30px;
+}
+.title-hd .ico {
+  margin-right: 10px;
+}
+.picture-hot {
+  margin-top: 9px;
+}
+.picture-hot .inner {
+  border: 1px solid #ccc;
+}
+.piclist {
+  overflow: hidden;
+  _zoom: 1;
+  margin-left: 4px;
+}
+.piclist .v-pic {
+  margin-right: 9px;
+  float: left;
+  _display: inline;
+  width: 120px;
+  margin: 19px;
+}
+.piclist .v-pic .title {
+  height: 44px;
+  line-height: 20px;
+  margin-top: 4px;
+  overflow: hidden;
+  _zoom: 1;
+}
+.piclist .v-pic .title a {
+  color: #333333;
+  font-size: 12px;
+}
+.piclist .v-pic .title a:hover {
+  color: #cc0000;
+}
+.piclist .v-pic .thumb {
+  position: relative;
+}
+.piclist .v-pic .thumb .opa,
+.piclist .v-pic .thumb .ico,
+.piclist .v-pic .thumb .info {
+  position: absolute;
+}
+.piclist .v-pic .thumb .opa {
+  height: 20px;
+  background-color: #000;
+  bottom: 0;
+  width: 100%;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+.piclist .v-pic .thumb .ico {
+  background: transparent url('../images/sprite-ico.png') no-repeat -108px -169px;
+  width: 16px;
+  height: 13px;
+  bottom: 4px;
+  left: 4px;
+}
+.piclist .v-pic .thumb .info {
+  color: #fff;
+  bottom: 3px;
+  right: 5px;
+  font-size: 12px;
+}
+.gallery-end .piclist .v-pic .title a,
+.gallery-end .piclist .v-pic .title a:visited {
+    color: #FFF;
+}
+.gallery-end .piclist .v-pic .title a:hover,
+.gallery-end .piclist .v-pic .title a:active {
+    color: #FFFF00;
+}

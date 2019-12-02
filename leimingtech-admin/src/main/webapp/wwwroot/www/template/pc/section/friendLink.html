@@ -1,0 +1,33 @@
+<div class="link_tab">
+<ul>
+<li class="curr">媒体合作</li>
+<li>网址导航</li>
+<li>友情链接</li>
+</ul>
+</div>
+<div class="link_tab_cont">
+<#assign friendLinkTag =newTag("friendLinkTag")>
+<#assign friendLinkList =friendLinkTag("{'name':'1'}")>
+<#if friendLinkList?exists && friendLinkList?size gt 0>
+<#list friendLinkList as friendLink>
+<a href="${friendLink.domain!''}" class="friendLink_click" data="${friendLink.id!''}" target="_blank">${friendLink.siteName!''}</a>
+</#list>
+</#if>
+</div>
+<div class="link_tab_cont hide">
+<#assign friendLinkList =friendLinkTag("{'name':'402881864e43edda014e43f46ac30001'}")>
+<#if friendLinkList?exists && friendLinkList?size gt 0>
+<#list friendLinkList as friendLink>
+<a href="${friendLink.domain!''}" class="friendLink_click" data="${friendLink.id!''}" target="_blank">${friendLink.siteName!''}</a>
+</#list>
+</#if>
+</div>
+<div class="link_tab_cont hide">
+<#assign friendLinkList =friendLinkTag("{'name':'402881864e43edda014e43f4c12d0003'}")>
+<#if friendLinkList?exists && friendLinkList?size gt 0>
+<#list friendLinkList as friendLink>
+<a href="${friendLink.domain!''}" class="friendLink_click" data="${friendLink.id!''}" target="_blank">${friendLink.siteName!''}</a>
+</#list>
+</#if>
+</div>
+</div>

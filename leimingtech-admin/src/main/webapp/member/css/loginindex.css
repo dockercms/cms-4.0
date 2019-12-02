@@ -1,0 +1,29 @@
+﻿#maincontent{ border:solid 1px #E6E5E5;width:948px; background-color:White; padding:25px 0px 25px 25px; margin:20px auto;}
+#maincontent .maintop{ width:920px; padding:0px 0px 10px 0px; border-bottom:dotted 1px #DDDDDD;}
+#maincontent .maintop .l{ line-height:22px; width:450px; float:left; height:100px;}
+#maincontent .maintop .l p{ color:#FD8110;}
+#maincontent .maintop .l h3{ font-size:16px; color:#595C5F; padding:10px 0px 15px 0px; border-bottom:dotted 1px #DDDDDD; height:25px; line-height:25px;}
+#maincontent .maintop .l .fun{ padding:10px 0px 0px 0px;}
+#maincontent .maintop .l .fun a{ margin:0px 9px 0px 0px;}
+#maincontent .maintop .l .fun img{ width:141px; height:60px;}
+#maincontent .maintop .l ul{ display:inline-block;}
+#maincontent .maintop .l li{ margin:10px 14px 0px 0px; display:inline; background:url(../pic/funs.jpg) no-repeat 0px 0px; float:left; width:213px; line-height:30px; height:32px; overflow:hidden;}
+#maincontent .maintop .l li a{ display:block; height:32px; padding:0px 0px 0px 70px; color:#5E99D6; font-size:14px;}
+#maincontent .maintop .l .li1{}
+#maincontent .maintop .l .li2{ margin-right:0px; background-position:-231px 0px;}
+#maincontent .maintop .l .li3{ background-position:0px -39px;}
+#maincontent .maintop .l .li4{ margin-right:0px; background-position:-231px -39px;}
+#maincontent .maintop .r{ padding:0px 0px 0px 20px; width:450px; float:left;}
+#maincontent .maintop .r dt{ color:#FE8F12; font-size:18px; font-family:'微软雅黑'; font-weight:bold; padding:0px 0px 0px 45px; background:url(../pic/alarmtitle.jpg) no-repeat 0px 0px; height:37px; line-height:37px;}
+#maincontent .maintop .r dd{ padding:10px 0px 10px 20px;  line-height:20px;}
+#maincontent .maintop .r dd a{ color:#FD8110;}
+#maincontent .maintop .r dd .a{ color:#5E99D6;}
+#maincontent .maintop .r dd b{ font-weight:normal; color:#FD8110;}
+#maincontent .maintop .r dd strong{}
+#maincontent .maintop .r dd .b{ font-weight:bold;}
+#maincontent .maintop .r dd .b b{ font-weight:bold;}
+#maincontent .menulist{ padding:20px 0px 0px 0px;}
+#maincontent .menulist dl{  float:left; width:450px; padding:0px 20px 0px 0px;}
+#maincontent .menulist dt{ padding:0px 15px; color:#123174; font-size:14px; font-weight:bold; font-family:'微软雅黑'; height:25px; line-height:25px; overflow:hidden; background-color:#F7F7F7;}
+#maincontent .menulist dd{ line-height:22px; padding:8px 5px 10px 15px;_padding:8px 5px 0px 15px;  }
+#maincontent .menulist dd a{color:#5E99D6; margin:0px 10px 0px 0px;}

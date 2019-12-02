@@ -1,0 +1,104 @@
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>用户管理</div>
+				<div class="actions">
+					<a href="javascript:void(0);" onclick="toEditModel('metroUserController.do?addPageModel')" class="btn yellow-stripe">
+					<i class="fa fa-plus"></i> 新增
+					</a>
+						</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class=" span4">
+								<label>用户名:
+									<input name="userName" class="form-control span7" type="text" value="${searchMap["userName"]?if_exists[0]}">
+								</label>
+							</div>
+							<div  class=" span4">
+								<label>真实姓名：
+									<input name="realName" class="form-control span7" type="text" value="${searchMap["realName"]?if_exists[0]}">
+								</label>
+							</div>
+							<div  class=" span4">
+								<label>部门名称 ：
+									<input name="departName" class="form-control span7" type="text" value="${searchMap["departName"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class=" pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('metroUserController.do?table', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr class="">
+							<!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
+							<th width="40" style="text-align:center;">序号</th>
+							<th>用户名</th>
+							<th>部门</th>
+							<th>角色</th>
+							<th>真实姓名</th>
+							<th>状态</th>
+							<th width="80" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if userList?exists>
+					  <#list userList as user>
+						<tr class="odd gradeX">
+							<td style="text-align:center;">${(pageNo-1)*pageSize+user_index?if_exists+1}</td>
+							<td>${user.userName?if_exists}</td>
+							<td>${user.TSDepart.departname?if_exists}</td>
+							<td>${user.userKey?if_exists}</td>
+							<td>${user.realName?if_exists}</td>
+							<td><#if user.status==1>正常<#elseif user.status==0>禁用 <#else>超级管理员</#if></td>
+							<td style="text-align:center;">
+								<input type='button' title='修改' href="javaScript:void(0)" class="editbtn"  onclick="toEditModel('metroUserController.do?updatePageModel&id=${user.id?if_exists}')"/>
+								<input type='button' title='删除' href="javaScript:void(0)" class="delbtn"  onclick="del('metroUserController.do?del', '${user.id?if_exists}')"/>
+								<!--<input type='button' title='修改密码' href="javaScript:void(0)" style=' width:16px; height:16px;  border:0; background:url(media/image/icon_padlock.gif) no-repeat left top' href="javaScript:void(0)" onclick="toEditModel('metroUserController.do?editKey&id=${user.id?if_exists}')"/>-->
+								<input type='button' title='重置密码(初始密码为：123456)' href="javaScript:void(0)" style=' width:16px; height:16px;  border:0; background:url(media/image/icon_key.gif) no-repeat left top' href="javaScript:void(0)" onclick="reset('metroUserController.do?resetKey&id=${user.id?if_exists}')"/>
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+	function reset(urlStr){
+		if(!confirm("是否重置密码？")){
+			return;
+		}
+		var resetKey = "123456";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:{'key':resetKey},
+			dataType:'text',
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				alert(obj.message);
+			},
+			error:function(){
+				alert("load page error, page url is " + lefUrl);
+			}
+		});
+	}
+</script>

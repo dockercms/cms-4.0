@@ -1,0 +1,180 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">活动报名选项内容</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id"
+			value="${activityOption.id?if_exists}" />
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>选项名称</label>
+			<div class="controls">
+				<input type="text" id="optionName" name="optionName"
+					class="span3 form-control" data-rule-required="true"
+					value="${activityOption.optionName?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">字段标识</label>
+
+			<div class="controls">
+				<#if activityOption.optionMark?if_exists> <span style="color:gray;">${activityOption.optionMark}</span>
+				<#else> <input type="text" id="optionMark" name="optionMark"
+					class="span3 form-control"
+					value="${activityOption.optionMark?if_exists}" /> <span
+					style="color:gray;">以字母开头，只能包含字母、数字和下划线</span> </#if>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">数据类型</label>
+			<div class="controls">
+				<select id="dateType" name="dateType" style="width:195px"
+					onchange="selected()"> <#list typelist as type> <#if
+					type?exists> <#if activityOption.dateType?if_exists==type.typecode>
+					<option selected="selected" value="${type.typecode}">${type.typename}</option>
+					<#else>
+					<option value="${type.typecode}">${type.typename}</option> </#if>
+					</#if> </#list>
+				</select>
+			</div>
+		</div>
+
+		<div class="control-group" id="textsize">
+			<label class="control-label">大小限制</label>
+			<div class="controls">
+				<input type="text" id="textsizeLimit" name="textsizeLimit"
+					class="span3 form-control"
+					value="${activityOption.textsizeLimit?if_exists}" /> <span
+					style="color:gray;">最多允许输入多少字</span>
+			</div>
+		</div>
+
+		<div class="control-group" id="selectsize" style="display: none;">
+			<label class="control-label">大小限制</label>
+			<div class="controls">
+				<input type="text" id="selectsizeLimit" name="selectsizeLimit"
+					class="span3 form-control"
+					value="${activityOption.selectsizeLimit?if_exists}" /> <span
+					style="color:gray;">最多允许选择几项</span>
+			</div>
+		</div>
+
+
+		<div class="control-group" id="filesize" style="display: none;">
+			<label class="control-label">大小限制</label>
+			<div class="controls">
+				<input type="text" id="filesizeLimit" name=filesizeLimit
+					class="span3 form-control"
+					value="${activityOption.filesizeLimit?if_exists}" /> <span
+					style="color:gray;">MB</span>
+			</div>
+		</div>
+
+		<div class="control-group" id="selectvalue" style="display: none;">
+			<label class="control-label">可选值</label>
+			<div class="controls">
+				<textarea style="height: 80px" id="optionalValue"
+					name="optionalValue" class="span3 form-control"
+					value="${activityOption.optionalValue?if_exists}">${activityOption.optionalValue?if_exists}</textarea>
+				<span style="color:gray;">一行一个选项可选使用 | 将文字与值隔开如：选项A|1</span>
+			</div>
+		</div>
+
+		<div class="control-group" id="validationvalue">
+			<label class="control-label">验证规则</label>
+			<div class="controls">
+				<select id="validation" name="validation" style="width:195px">
+					<option value="">不使用</option> <#list validationlist as type> <#if
+					type?exists> <#if activityOption.validation==type.typecode>
+					<option selected="selected" value="${type.typecode}">${type.typename}</option>
+					<#else>
+					<option value="${type.typecode}">${type.typename}</option> </#if>
+					</#if> </#list>
+				</select>
+
+
+			</div>
+		</div>
+
+
+		<div class="control-group">
+			<label class="control-label">排序</label>
+			<div class="controls">
+				<input type="text" id="sort" name="sort" class="span1 form-control"
+					value="${activityOption.sort?if_exists}" /> <span
+					style="color:gray;">数字越大越靠前</span>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label">是否启用</label>
+			<div class="controls">
+				<label class="radio"> <input type="radio" id="isEnabled1"
+					name="isEnabled" value="1"<#if
+					activityOption.isEnabled=="1"||
+					activityOption.isEnabled=="">checked</#if>/>启用 </label> <label
+					class="radio"> <input type="radio" id="isEnabled2"
+					name="isEnabled" value="0"<#if
+					activityOption.isEnabled=="0">checked</#if>/>禁用 </label>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">默认勾选</label>
+			<div class="controls">
+				<label class="radio"> <input type="radio" id="isShow1"
+					name="isShow" value="1"<#if
+					activityOption.isShow=="1">checked</#if>/>是 </label> <label class="radio">
+					<input type="radio" id="isShow1" name="isShow" value="0"<#if
+					activityOption.isShow=="0" ||
+					activityOption.isShow=="">checked</#if>/>否 </label>
+			</div>
+
+		</div>
+
+
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button"
+		onclick="formSubmitModel('activityOptionController.do?saveForm', 'form_sample_2');"
+		class="btn btn-primary" value="提交"> <input type="button"
+		class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+	$(function() {
+		selected();
+	});
+	function selected() {
+		var options = $("#dateType option:selected"); //获取选中的项
+		if (options.val() == 'text' || options.val() == 'textarea') {
+			$("#textsize").show();
+			$("#selectsize,#filesize,#selectvalue").hide();
+
+		} else if (options.val() == 'radio') {
+
+			$("#selectvalue").show();
+			$("#selectsize,#textsize,#filesize,#validationvalue").hide()
+
+		} else if (options.val() == 'checkbox') {
+			$("#selectsize,#selectvalue").show();
+			$("#textsize,#filesize,#validationvalue").hide();
+
+		} else if (options.val() == 'select') {
+			$("#selectsize,#textsize,#filesize,#validationvalue").hide();
+
+			$("#selectvalue").show();
+
+		} else {
+			$("#filesize").show();
+			$("#textsize,#selectsize,#selectvalue,#validationvalue").hide();
+		}
+	}
+
+	//校验
+	jQuery(document).ready(function() {
+		App.init();
+		$("#form_sample_2").myValidate();
+	});
+</script>

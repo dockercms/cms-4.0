@@ -1,0 +1,209 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title"><#if depart.id>修改<#else>录入</#if></h4>
+</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<!--<form id="form" class="form-horizontal">-->
+			<form id="form_sample_2" class="form-horizontal">
+	<input type="hidden" id="id" name="id" value="${depart.id?if_exists }"/>
+			<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+				<div class="control-group" style="padding-top: 20px;">
+					<label class="control-label"><span class="required">*</span>部门名称</label>
+					<div class="controls">
+						<input type="text" name="departname" class="form-control span3" data-rule-required="true" value="${depart.departname?if_exists }"/>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>职能描述</label>
+					<div class="controls">
+						<input type="text" name="description" class="form-control span3" data-rule-required="true" value="${depart.description?if_exists }"/>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">上级 部门</label>
+					<div class="controls" style="position: relative;">
+					<input id="citySel" type="text" name="TSPDepart.id" readonly value="<#if depart.TSPDepart?if_exists>${depart.TSPDepart.departname?if_exists}</#if>" class="form-control span3" style="width:120px;"/>
+					<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>
+					<div id="menuContent" class="menuContent" style="display:none;z-index:10000; position: absolute;">
+						<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+					</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>角色</label>
+					<div class="controls" style="position: relative;">
+						<input id="attribute" name="roleName" type="text" class="form-control span3" data-rule-required="true" readonly value="${roles?if_exists}" onclick="showRoleMenu();" />
+						<input id="attribute_id" name="roleid" type="hidden" class="form-control span3" readonly value="${roles_id?if_exists}" />
+						<!-- 角色树DIV -->
+						<div id="roleMenuContent" class="menuContent" style="display:none; position: absolute;">
+							<ul id="roleRreeDemo" class="ztree" style="margin-top:0; width:258px; height: 150px;">
+							</ul>
+						</div>
+						<div class="right" style="display:none">
+							<input type="button" value="获取选中的值" id="button"/>
+							<input type="text" id="funVal" name="funVal"/>
+							<ul class="info">
+								<li class="title"><h2>1、setting 配置信息说明</h2>
+									<ul class="list">
+										<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+										<li><p>父子关联关系：<br/>
+											被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+											<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+											取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+											<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+											<ul id="code" class="log" style="height:20px;"></ul></p>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- 角色树DIV -->
+					</div>
+				</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('memberMngAction.do?saveOrUpdate', 'form_sample_2');" class="btn btn-primary" value="提交" />
+	<input type="button" class="btn" data-dismiss="modal" aria-hidden="true" value="关闭" />
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   //initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	   $("#menuContent").hide();
+		$.ajax({
+			type:'post',
+			url:'departAction.do?getDepartTree',
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				msg= eval('('+msg+')');
+				$.fn.zTree.init($("#treeDemo"), setting,msg );
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	});
+</script>
+<script>
+	var setting1 = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick1,
+			onCheck: onCheck
+		}
+	};
+
+	var code;
+	function setCheck() {
+		var zTree = $.fn.zTree.getZTreeObj("roleRreeDemo"),
+				py = $("#py").attr("checked")? "p":"",
+				sy = $("#sy").attr("checked")? "s":"",
+				pn = $("#pn").attr("checked")? "p":"",
+				sn = $("#sn").attr("checked")? "s":"",
+				type = { "Y":py + sy, "N":pn + sn};
+		zTree.setting.check.chkboxType = type;
+		showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+	}
+	function showCode(str) {
+		if (!code) code = $("#code");
+		code.empty();
+		code.append("<li>"+str+"</li>");
+	}
+
+	function beforeClick1(treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("roleRreeDemo");
+		zTree.checkNode(treeNode, !treeNode.checked, null, true);
+		return false;
+	}
+
+	function onCheck(e, treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("roleRreeDemo"),
+				nodes = zTree.getCheckedNodes(true),
+				v = "";
+		v_id="";
+		for (var i=0, l=nodes.length; i<l; i++) {
+			v += nodes[i].name + ",";
+			v_id+=nodes[i].id + ",";
+		}
+		if (v.length > 0 ) v = v.substring(0, v.length-1);
+		var cityObj = $("#attribute");
+		var cityObj_id = $("#attribute_id");
+		cityObj.attr("value", v);
+		cityObj_id.attr("value", v_id);
+	}
+
+	function showRoleMenu() {
+		var cityObj = $("#attribute");
+		var cityOffset = $("#attribute").offset();
+		$("#roleMenuContent").css({left:"0px", top:cityObj.outerHeight()+ "px"}).slideDown("fast");
+		$("body").bind("mousedown", onBodyDown1);
+	}
+	function hideMenu1() {
+		$("#roleMenuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown1);
+	}
+	function onBodyDown1(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "attribute" || event.target.id == "roleMenuContent" || $(event.target).parents("#roleMenuContent").length>0)) {
+			hideMenu1();
+		}
+	}
+	var zNodes = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'memberMngAction.do?loadRole&departId=${depart.id?if_exists }',
+		data:'data=0',
+		success:function(data){
+			zNodes = data;
+		}
+	})
+	var json = JSON.parse(zNodes);
+	$(document).ready(function(){
+		$.fn.zTree.init($("#roleRreeDemo"), setting1,json);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+		$('#roleRreeDemo').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("roleRreeDemo");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#funVal').attr("value",v);
+		});
+
+	});
+
+
+</script>

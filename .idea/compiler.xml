@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="leimingtech-lucene" />
+        <module name="leimingtech-cms" />
+        <module name="leimingtech-api" />
+        <module name="leimingtech-gencode" />
+        <module name="leimingtech-core" />
+        <module name="leimingtech-ucenter" />
+        <module name="leimingtech-ueditor" />
+        <module name="leimingtech-wap" />
+        <module name="leimingtech-member" />
+        <module name="leimingtech-wechat" />
+        <module name="leimingtech-weibo" />
+        <module name="leimingtech-mobile" />
+        <module name="leimingtech-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="leimingtech-admin" target="1.7" />
+      <module name="leimingtech-api" target="1.7" />
+      <module name="leimingtech-cms" target="1.7" />
+      <module name="leimingtech-core" target="1.7" />
+      <module name="leimingtech-gencode" target="1.7" />
+      <module name="leimingtech-lucene" target="1.7" />
+      <module name="leimingtech-member" target="1.7" />
+      <module name="leimingtech-mobile" target="1.7" />
+      <module name="leimingtech-ucenter" target="1.7" />
+      <module name="leimingtech-ueditor" target="1.7" />
+      <module name="leimingtech-wap" target="1.7" />
+      <module name="leimingtech-wechat" target="1.7" />
+      <module name="leimingtech-weibo" target="1.7" />
+      <module name="lmcms_v4.0" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

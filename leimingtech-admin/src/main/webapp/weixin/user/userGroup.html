@@ -1,0 +1,116 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">前台用户组</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="form-horizontal">
+	
+	<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+				<input type="hidden" id="id" name="id" value="${userGroup.id?if_exists}"/>
+				
+				<div class="control-group">
+					<label class="control-label">是否显示版权</label>
+					<div class="controls">
+						<label class="radio">
+							<input  class="form-control span3" type="radio" name="iscopyright" <#if userGroup.iscopyright==1||!userGroup.iscopyright?exists>checked="checked"</#if> value="1" />启用
+						</label>
+						<label class="radio">
+							<input  class="form-control span3" type="radio" name="iscopyright" <#if userGroup.iscopyright==0>checked="checked"</#if> value="0" />关闭
+						</label>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">用户状态</label>
+					<div class="controls">
+						<label class="radio">
+							<input class="form-control span3" type="radio" name="status" <#if userGroup.status==1||!userGroup.status?exists>checked="checked"</#if> value="1" />启用
+						</label>
+						<label class="radio">
+							<input class="form-control span3" type="radio" name="status" <#if userGroup.status==0>checked="checked"</#if> value="0" />关闭
+						</label>
+					</div>
+				</div>
+				
+				<div class="control-group">
+						<label class="control-label">用户组名称</label>
+						<div class="controls">
+							<input class="form-control span3"  data-rule-required="true"  type="text" id="name" name="name" value="${userGroup.name?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">自定义图文条数</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="diynum" name="diynum" value="${userGroup.diynum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">功能请求次数</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="connectnum" name="connectnum" value="${userGroup.connectnum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">活动创建次数</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="activitynum" name="activitynum" value="${userGroup.activitynum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">价格</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="price" name="price" value="${userGroup.price!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">statisticsUser</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="statisticsUser" name="statisticsUser" value="${userGroup.statisticsUser!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">创建会员卡数量</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="createCardNum" name="createCardNum" value="${userGroup.createCardNum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">公众号数量</label>
+						<div class="controls">
+							<input class="form-control span3"   type="text" id="wechatCardNum" name="wechatCardNum" value="${userGroup.wechatCardNum!'0'}"/>
+						</div>
+				</div>
+				
+			</form>
+			
+			<!-- END FORM-->       
+		</div>
+		
+		
+		
+				<div class="modal-footer"><button type="button"
+					<button type="button" onclick="formSubmitModel('userGroupController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+				</div>
+				
+				
+				<script>
+
+
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+
+</script>

@@ -1,0 +1,97 @@
+
+	<div class="clearfix">
+		<div class="control-group pull-left" style="width:340px">
+			<div class="controls">
+				<input type="text" value="" style="width:120px;" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="startTime" id="startTime">
+				&nbsp;~&nbsp;
+				<input type="text" value="" style="width:120px;" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="endTime" id="endTime">
+			</div>
+		</div>
+		<div class="control-group pull-left" style="width:140px">
+			<div class="controls">
+				<select id="model" name="model" style="width:120px">
+					<option value="0">--所有模型--</option>
+					<option value="1">文章</option>
+					<option value="2">组图</option>
+					<option value="3">链接</option>
+					<option value="4">视频</option>
+					<option value="6">投票</option>
+					<option value="8">调查</option>
+				</select>
+			</div>
+		</div>
+		<a id="sample" class="btn green" href="javascript:;" onclick="queryStat()" style="text-decoration: none">
+			查询 <i class="icon-search"></i>
+		</a>
+		<a id="sample" class="btn green" href="javascript:;" onclick="exportXlS()" style="text-decoration: none">
+			导出Excel <i class="icon-share"></i>
+		</a>
+	</div>
+		<div id="personnelStatistics"></div>
+	
+	<script>
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'personnelStatisticsController.do?personnelStatistics&id=${id}',
+			success:function(data){
+				$('#personnelStatistics').empty();
+				$('#personnelStatistics').append(data);
+			}
+		});
+		function queryStat(){
+			var startTime = $("#startTime").val();
+			if(startTime==""){
+				startTime = "0";
+			}
+			var endTime = $("#endTime").val();
+			if(endTime==""){
+				endTime = "0";
+			}
+			var model = $("#model").val();
+			$.ajax({
+				type:'post',
+				async:false,
+				url:'personnelStatisticsController.do?personnelStatistics&id=${id}',
+				data:{'startTime':startTime,'endTime':endTime,'model':model},
+				success:function(data){
+					$('#personnelStatistics').empty();
+					$('#personnelStatistics').append(data);
+				}
+			});
+		}
+		//导出Excel
+		function exportXlS() {
+			var startTime = $("#startTime").val();
+			if(startTime==""){
+				startTime = "0";
+			}
+			var endTime = $("#endTime").val();
+			if(endTime==""){
+				endTime = "0";
+			}
+			var model = $("#model").val();
+			
+			alert("导出时间较长请耐心等待...");
+			var cUrl = "personnelStatisticsController.do?exportXls&id=${id}";
+			$.ajax({
+				url : cUrl,
+				type : 'post',
+				cache : false,
+				data:{'startTime':startTime,'endTime':endTime,'model':model},
+				success : function(result) {
+					var d = $.parseJSON(result);
+					if (d.success) {
+						var msg = d.msg;
+						if("" != msg){
+							location.href=msg;
+						}else{
+							alert("导出失败");
+						}
+					}else{
+						alert("导出失败");
+					}
+				}
+			}); 
+		}
+	</script>

@@ -1,0 +1,139 @@
+<#assign name ="catalogTag"> <#assign catalogTag =newTag("${name}")>
+
+<div class="topWelBox w">
+	<div class="w1190 mtauto clearfix">
+		<div class="weather f-fl"></div>
+		<div class="order f-fr">
+			<a href="javascript:;" onclick="SetHome(this,window.location)"
+				class="order_1" target="_self">设为首页</a> <a href="javascript:;"
+				onclick="AddFavorite(window.location,document.title)"
+				class="order_2" target="_blank">加入收藏</a>
+		</div>
+	</div>
+</div>
+
+
+<div class="header">
+	<div class="hot_header_bg"></div>
+	<div class="w1190 mtauto h120 headerCon">
+		<div class="newYear_headerCon_bg"></div>
+		<div class="newYear_headerCon_people_bg"></div>
+		<#assign advTag =newTag("advTag")>
+			<#assign advList=advTag("{'name':'402881a55276e2480152779f5d98001d','count':'1'}")>
+				<#if advList?exists && advList?size gt 0>
+					<#list advList as adv>
+						<h2 class="logo f-fl mt20 mr20">
+							<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if> target="_blank">
+								<img src="${adv.imgUrl!''}" title="欢迎来到本站" style="max-height:68px">
+							</a>
+						</h2>
+					</#list>
+				</#if>
+
+		<#assign advTag =newTag("advTag")>
+			<#assign advList=advTag("{'name':'402881a55276e248015277a181710022','count':'2'}")>
+				<#if advList?exists && advList?size gt 0>
+					<#list advList as adv>
+						<img src="${adv.imgUrl!''}" style="width: 400px;padding-left:20px" class="f-fl mt10 titleRImg1">
+					</#list>
+				</#if>
+	</div>
+
+	<div class="navgation w1190 mtauto f-fs14">
+		<div class="navgationLeft f-fl">
+			<h2 class="navgationLeftAll f-fs14">产品分类</h2>
+			<#assign name ="catalogTag"> <#assign
+			catalogList=catalogTag("{'name':'4028818d518b5f0e01518b75758d000b','levels':'child'}")>
+			<#if catalogList?exists> <#list catalogList as catList>
+			<div class="navAllsort">
+				<div class="fore">
+					<div>
+						<span><a href="${catList.url!'javascript:void(0);'}"
+							class="foreTitle">${catList.name!''}</a> </span>
+					</div>
+					<div class="foreBox">
+						<dl>
+							<dd>
+								<#assign name ="catalogTag"> <#assign
+								catalogListchild=catalogTag("{'name':'${catList.id!''}','levels':'child'}")>
+								<#if catalogListchild?exists> <#list catalogListchild as
+								catchild> <em><a
+									href="${catchild.url!'javascript:void(0);'}">${catchild.name!''}</a>
+								</em> </#list> </#if>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			</#list> </#if>
+		</div>
+
+
+
+		<ul class="f-fl navCon" id="catnav">
+			<li><a href="/" target="_self">首页</a></li> 
+			<#assign catalogList =catalogTag("{'levels':'root','siteid':'${site.id}'}")>
+				<#if catalogList?exists> 
+				<#list catalogList as catList>
+			<li><a href="${catList.url!'javascript:void(0);'}"
+				target="_self">${catList.name!''}</a>
+			</li> 
+				</#list> 
+				</#if>
+
+		</ul>
+
+
+
+
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				var url = window.location.href;
+				var linkArry = $("#catnav").find("a");
+				linkArry.each(function() {
+					var winurl = window.location.protocol + "//"
+							+ window.location.host + $(this).attr("href");
+					if (winurl == url) {
+						$(this).css("background", "#05542e");
+					}
+				});
+			});
+
+	//  加入收藏 <a onclick="AddFavorite(window.location,document.title)">加入收藏</a>
+
+	function AddFavorite(sURL, sTitle) {
+		try {
+			window.external.addFavorite(sURL, sTitle);
+		} catch (e) {
+			try {
+				window.sidebar.addPanel(sTitle, sURL, "");
+			} catch (e) {
+				alert("加入收藏失败，请使用Ctrl+D进行添加");
+			}
+		}
+	}
+	//设为首页 <a onclick="SetHome(this,window.location)">设为首页</a>
+	function SetHome(obj, vrl) {
+		try {
+			obj.style.behavior = 'url(#default#homepage)';
+			obj.setHomePage(vrl);
+		} catch (e) {
+			if (window.netscape) {
+				try {
+					netscape.security.PrivilegeManager
+							.enablePrivilege("UniversalXPConnect");
+				} catch (e) {
+					alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+				}
+				var prefs = Components.classes['@mozilla.org/preferences-service;1']
+						.getService(Components.interfaces.nsIPrefBranch);
+				prefs.setCharPref('browser.startup.homepage', vrl);
+			}
+		}
+	}
+</script>

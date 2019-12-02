@@ -1,0 +1,138 @@
+
+<div>
+	<form id="subform">
+		<input type="hidden" id="id" name="id"
+			value="${contents.id?if_exists}" />
+
+		<table width="100%" style="border:0px none;">
+		<tr><td>	栏目：</td></tr>
+		<tr>
+		
+				<td><select name="contentCatId" id="contentCatId"
+					style="height:30px;">
+						<option value="">---请选择栏目---</option> 
+						<#list content as con>
+
+
+
+						
+						<option value="${con.id}"
+						<#if contents.catid?if_exists[0]?has_content> 
+						<#if con.id==contents.catid> 
+						selected="selected" 
+						</#if>
+						</#if> > 
+							${con.name?if_exists}</option> 
+						</#list>
+				</select> <!-- <input type="text" id="catid" name="catid" class="txt" value=""/> -->
+					<!-- 栏目树 --> <!-- <div id="treediv" style="display:none; position: absolute;z-index:100; border:1px solid #999; background-color: #fff;">
+							<ul id="treeDemo" class="ztree span5" style="height:auto;border:28px;margin-top:0px;overflow-y:hidden;overflow-x:auto;">
+							</ul>
+							<input type="hidden" id="funVal" name="contentCatId"/>
+							<input type="hidden" id="ids" name="ids" value=""/>
+							<input type="hidden" id="toType" name="toType" value=""/>
+					</div> --> <!-- 栏目树 --></td>
+
+			</tr>
+		
+			<tr><td>	标题：</td></tr>
+			<tr>
+			
+				<td><input type="text" name="title" id="title"
+					value="${contents.title?if_exists}" style="width:400px;" />
+				</td>
+			</tr>
+				<tr><td>	爆料内容：</td></tr>
+			<tr>
+				
+				<td><textarea id="ueditor" name="content" type="text/plain"
+						style="height: 500px; width: 100%">${contents.content?if_exists}</textarea>
+					<script type="text/javascript">
+						//实例化编辑器
+						//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+						var ueditor = UE.getEditor('ueditor', {
+							autoHeightEnabled : true,
+							autoFloatEnabled : true
+						});
+					</script></td>
+			</tr>
+			<!-- <tr>
+				<th>摘要：</th>
+				<td><textarea rows="" cols="" name="digest"
+						style="width:100%; height:100px;">${contents.digest?if_exists}</textarea>
+				</td>
+			</tr> -->
+			<!-- <tr>
+				<th>关键词：</th>
+				<td><input type="text" name="" value="" class="txt" /></td>
+			</tr> -->
+			
+			<!-- <tr>
+				<th>来源：</th>
+				<td><input type="text" name="sourceid" class="txt"
+					value="${contents.sourceid?if_exists}" />
+				</td>
+
+			</tr> -->
+			<!-- <tr>
+				<th>来源地址：</th>
+				<td><input type="text" name="" value="" class="txt" /></td>
+
+			</tr> -->
+			<!-- <tr>
+				<th>作者：</th>
+				<td><input type="text" name="author" class="txt"
+					value="${contents.author?if_exists}" />
+				</td>
+			</tr> -->
+			<tr>
+			
+				<td>	验证码：<input type="text" name="valicode" id="valicode"
+					class="txt" /> <span
+					style="position: absolute; top: 32px; left: 0px;"
+					class="help-inline" htmlfor="valicode"></span> <img title="点击刷新验证码"
+					alt="点击刷新验证码" id="randCodeImage" src="${contextpath}/randCodeImage"
+					style="margin-bottom:-8px; width:74px; height:37px;"></td>
+			</tr>
+			<tr>
+				<td class="tc" colspan="4">
+					<div class="form-actions" style="text-align: center">
+						<input type="button" class="btn btn-primary"
+							onclick="subContentform('contributeController.do?saveContribute', 'subform');"
+							value="保存投稿">
+					</div></td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="/pcstyle/js/contribute.js"></script>
+<script type="text/javascript"
+	src="${contextpath}/media/js/jquery-2.1.1.js"></script>
+
+<script type="text/javascript" src="js/regist.js"></script>
+
+<script type="text/javascript">
+	function subContentform(urlStr, formName) {
+		if ($('#' + formName)) {
+			$.ajax({
+				type : 'post',
+				url : urlStr,
+				data : $('#' + formName).serialize(),
+				success : function(msg) {
+					var obj = JSON.parse(eval(msg));
+					var toUrl = obj.toUrl;
+					if (!obj.isSuccess) {
+						alert(obj.msg);
+					} else {
+						alert(obj.msg);
+						location.href = toUrl;
+					}
+				},
+				error : function() {
+					alert("提交通讯失败!");
+				}
+			});
+		}
+
+	}
+</script>

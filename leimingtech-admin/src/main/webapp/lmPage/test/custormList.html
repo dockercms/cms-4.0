@@ -1,0 +1,203 @@
+    <style type="text/css">
+    leimingtech.leimingtech_limengbo_float_right{
+		float:right;
+		padding:0 4px;
+	}
+	leimingtech.leimingtech_limengbo_float_right:hover{
+ 		background-color:#99FF33;
+ 	}
+    </style>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="portlet">
+					<div class="portlet-title">
+						<div class="caption"><i class="icon-globe"></i>维度管理</div>
+						
+						<div class="actions">
+							<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditModel('custormController.do?editModelPage')">
+								新增 <i class="icon-plus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="portlet-body fuelux">
+						<ul class="tree" id="tree_2">
+							
+								<#if list?exists>
+				  					<#list list as function>
+				  						<#if (function.TSCustoms?size > 0) > 
+										<li>
+											<a href="custormController.do?loadCustorm&id=${function.id}" data-role="branch" class="tree-toggle closed" data-toggle="branch" data-value="${function.id}">
+                                        <leimingtech class="leimingtech_limengbo_float_right del"  url="custormController.do?del&id=${function.id?if_exists}">删除</leimingtech>
+                                        <leimingtech class="leimingtech_limengbo_float_right editor"  url="custormController.do?editModelPage&selectId=${selectId}&id=${function.id?if_exists}">修改</leimingtech>
+                                        <leimingtech class="leimingtech_limengbo_float_right add" url="custormController.do?editModelPage&selectId=${selectId}&parentId=${function.id?if_exists}">添加</leimingtech>
+												${function.customName}
+											</a>	
+										</li>
+										<#else>
+											<li><a href="#" data-role="leaf" id="nut" data-value="${function.id}">
+                                        <leimingtech class="leimingtech_limengbo_float_right del" url="custormController.do?del&id=${function.id?if_exists}">删除</leimingtech>
+                                        <leimingtech class="leimingtech_limengbo_float_right editor"  url="custormController.do?editModelPage&selectId=${selectId}&id=${function.id?if_exists}">修改</leimingtech>
+                                       	<leimingtech class="leimingtech_limengbo_float_right add" url="custormController.do?editModelPage&selectId=${selectId}&parentId=${function.id?if_exists}">添加</leimingtech>
+                                       <i class="icon-file-text"></i> ${function.customName}
+											</a></li>
+										</#if>
+									</#list>
+								</#if>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+
+<script>
+
+var a=$(function(){
+	$(".del").click(function(event){
+	var urlStr=$(this).attr("url");
+	lmConfirm("是否删除该记录？","",function (){
+	
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				lmAlert(obj.msg);
+				changePage(toUrl);
+			}else{
+				lmAlert("删除处理失败!");
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		}
+	});
+	
+	})
+	
+	  event.stopPropagation();
+	  return false;
+	});
+
+	$(".editor").click(function(event){
+		var urlStr=$(this).attr("url");
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editModel').empty();
+			$('#editModel').append(msg);
+			$('#editModel').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+	 event.stopPropagation();
+	  return false;
+	});
+	$(".add").click(function(event){
+		var urlStr=$(this).attr("url");
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editModel').empty();
+			$('#editModel').append(msg);
+			$('#editModel').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+	 event.stopPropagation();
+	  return false;
+	});
+
+$(".del").live("click",function(event){
+	var urlStr=$(this).attr("url");
+	if(!confirm("是否删除该记录？")){
+		return false;
+	}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				lmAlert(obj.msg);
+				changePage(toUrl);
+			}else{
+				lmAlert("删除处理失败!");
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		}
+	});
+	  event.stopPropagation();
+	  return false;
+	});
+
+	$(".editor").live("click",function(event){
+		var urlStr=$(this).attr("url");
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editModel').empty();
+			$('#editModel').append(msg);
+			$('#editModel').modal('show');
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	});
+	 event.stopPropagation();
+	  return false;
+	});
+	$(".add").live("click",function(event){
+		var urlStr=$(this).attr("url");
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editModel').empty();
+			$('#editModel').append(msg);
+			$('#editModel').modal('show');
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	});
+	 event.stopPropagation();
+	  return false;
+	});
+
+});
+
+</script>

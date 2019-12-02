@@ -1,0 +1,344 @@
+ <script type="text/javascript" src="js/contentMobile.js"></script>
+ <div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>全部内容</div>
+				<div class="actions">
+					<!--<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('contentsController.do?addPageModel')">
+						新增 <i class="icon-plus"></i>
+					</button>-->
+					<!-- <#if contentCat?exists><a class="btn purple publishcatalog" catalogid="${contentCat.id}" href="javascript:void(0);">发布栏目《${contentCat.name}》</a></#if> -->
+					<!-- <a class="btn purple publishsite" href="javascript:void(0);">发布站点</a>
+					<button id="sample_editable_1_new" class="btn blue" onclick="createIndex('luceneController.do?creatIndex')">
+						建立索引 <i class="icon-plus"></i>
+					</button> -->
+					
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class=" span4">
+								<label >
+									标题：
+									<input name="title" class="form-control span7" type="text" value="${searchMap["title"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="dataTables_filter span7">
+								<label >
+									时间：
+									<input type="text" value="${publishedStart?if_exists}" class="Wdate span3" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="publishedStart">
+									<span style="margin: 0 30px">——</span>
+									<input type="text" value="${publishedEnd?if_exists}" class="Wdate span3" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="publishedEnd">
+								</label>
+							</div>
+							<div class="dataTables_filter pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('contentsMobileController.do?table&mobileChannelId=&tab=', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetFormRefresh('contentsMobileController.do?table&tab=all','search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<#--
+				<div class="actions extended tasks">
+					<#if mobileChannelId!="-1">
+						<div class="btn-group">
+							<#if mobileChannel?if_exists.channelType=="news">
+								<a class="btn blue btn-sm" href="javaScript:void(0)" data-toggle="dropdown" onclick="changePage('articleMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')" data-hover="dropdown" data-delay="500" data-close-others="true">
+									<span class="icon-plus"><b style="margin-left:10px">新建</b></span>
+								</a> 
+							</#if>
+							<#if mobileChannel?if_exists.channelType=="pic">
+								<a class="btn blue btn-sm" href="javaScript:void(0)" data-toggle="dropdown" onclick="changePage('pictureGroupMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')" data-hover="dropdown" data-delay="500" data-close-others="true">
+									<span class="icon-plus"><b style="margin-left:10px">新建</b></span>
+								</a> 
+							</#if>
+							<#if mobileChannel?if_exists.channelType=="video">
+								<a class="btn blue btn-sm" href="javaScript:void(0)" data-toggle="dropdown" onclick="changePage('contentVideoMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')" data-hover="dropdown" data-delay="500" data-close-others="true">
+									<span class="icon-plus"><b style="margin-left:10px">新建</b></span>
+								</a> 
+							</#if>
+							<ul class="dropdown-menu pull-right" style="min-width:80px;" role="menu">
+								<#list modelsList as models>
+									<#if mobileChannel?if_exists.channelType=="news">
+										<#if models.name=='文章'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('articleMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-book"></i> 文章</a></li>
+										</#if>
+										<#if models.name=='链接'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('contentLinkMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-link"></i> 链接</a></li>
+										</#if>
+										<#if models.name=='投票'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('voteMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-thumbs-up"></i> 投票</a></li>
+										</#if>
+										<#if models.name=='调查'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('surveyMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-credit-card"></i> 调查</a></li>
+										</#if>
+									</#if>
+									<#if mobileChannel?if_exists.channelType=="pic">
+										<#if models.name=='组图'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('pictureGroupMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-picture"></i> 组图</a></li>
+										</#if>
+									</#if>
+									<#if mobileChannel?if_exists.channelType=="video">
+										<#if models.name=='视频'&&mobileChannelId!='-1'>
+											<li><a href="javaScript:void(0)" onclick="changePage('contentVideoMobileController.do?addPageModel&mobileChannelId=${mobileChannelId?if_exists}')"><i class="icon-facetime-video"></i> 视频</a></li>
+										</#if>
+									</#if>
+								</#list>
+							</ul>
+						</div>
+					</#if>
+				</div>
+				-->
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<!-- <th width="20" style="text-align:center;"><input type="checkbox" onclick="checkall(this)"></th> -->
+							<th width="50" style="text-align:center;">序号</th>
+							<th>标题</th>
+							<th width="85" >发布人</th>
+							<th width="120" >时间</th>
+							<th width="45" >浏览量</th>
+							<th width="40" >置顶</th>
+							<th width="40" >头图</th>
+							<th width="75" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if contentMobileList?exists>
+						  <#list contentMobileList as page>
+							<tr class="odd gradeX">
+								<!-- <td class="center">
+									<input type="checkbox" name="contentsids" value="${page.id?if_exists}">
+								</td> -->
+								<td style="text-align:center;">
+									${(pageNo-1)*pageSize+page_index?if_exists+1}
+								</td>
+								<td >
+									<!-- 分类(1文章2组图3链接4视频5活动6投票7访谈8调查9专题) -->
+									<#if page.classify =='1'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-book" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='2'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-picture" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='3'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-link" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='4'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-facetime-video" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='5'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-trophy" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='6'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-thumbs-up" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='7'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-comments-alt" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='8'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-credit-card" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='9'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-film" style="text-decoration: none;color:black"></a></#if>
+									<#if page.constants!="60">
+										<a href="javascript:void(0)" title="点击编辑" style="text-decoration:none;color:black" onclick="changePage('contentsMobileController.do?updatePageModel&id=${page.id?if_exists}')"><span style="color:${page.color}" >${page.title}</span></a>
+									<#else>
+										<a href="javascript:void(0)" onclick="disableEdit()"><span style="color:${page.color}" >${page.title}</span></a>
+									</#if>
+									<#if page.thumb!=''>
+										<input type='button' title='图片附件'  style=' width:18px; height:16px;  border:0; background:url(media/image/imagelittle.png) no-repeat left top'  onclick=""/>
+									</#if>
+								</td>
+								<td >
+										${page.publishedby}
+								</td>
+								<td >
+										<#if page.published?exists>${page.published?string("yyyy-MM-dd HH:mm")}</#if>
+								</td>
+								<td >
+										${page.pv}
+								</td>
+								<td>
+										<#if page.isTop!=0>置顶</#if>
+								</td>
+								<td>
+										<#if page.isTopPic!=0>是</#if>
+								</td>
+								<td style="text-align:center;">
+									<#if page.constants!="60">
+										<input type='button' title='修改' class="editbtn"   onclick="changePage('contentsMobileController.do?updatePageModel&id=${page.id?if_exists}')"/>
+									<#else>
+										<input type='button' title='修改' class="editbtn"   onclick="disableEdit()"/>
+									</#if>
+									<input type='button' title='删除' class="delbtn"  onclick="del('contentsMobileController.do?del&mobileChannelId=${mobileChannelId?if_exists}&tab=${tab}', '${page.id?if_exists}')"   />
+									<div class="btn-group <#if page_index gt 8>dropup</#if>" style="height:20px;margin: 0px !important;">
+										<input type='button' title='管理选项' class="dropdown-toggle" data-toggle="dropdown" style='width:25px; height:16px;  border:0; background:url(media/image/menu.png) no-repeat left top'>
+										<ul class="dropdown-menu pull-right" style="min-width:80px;">
+											<li><a<#if domain?exists && page.url?exists>
+													href="http://${domain}${page.url}"
+													 target="_blank"
+													<#else>
+													 href="javaScript:alert('还没有生成！');"
+													</#if> target="_blank" 
+													><i class="icon-eye-open"></i> 预览</a></li>
+											<#if page.classify=='1'>
+												<li><a <#if domain?exists && page.url?exists>href="javascript:setPushParam('contentsMobileController.do?setPushParam&id=${page.id?if_exists}')" <#else>href="javaScript:alert('还没有生成！');"</#if>  style="text-decoration: none"><i class="icon-bullhorn"></i> 推送</a></li>
+											</#if>
+											<li><a href="javaScript:void(0)" onclick="enCode('contentsMobileController.do?enCode','${page.id?if_exists}')"><i class="icon-qrcode"></i> 生成二维码</a></li>	
+											<#if page.twoCode!="">
+											<li><a<#if domain?exists && page.twoCode?exists>
+													href="http://${domain}${page.twoCode}"target="_blank"
+													<#else> href="javaScript:alert('还没有生成！');"
+													</#if> target="_blank"><i class="icon-qrcode"></i> 查看二维码</a></li>
+											</#if>
+											<#if page.classify!='6'&&page.classify!='8'>
+												<li><a href="javaScript:void(0)" onclick="changePage('invitationMobileController.do?invitationMobile&contentId=${page.id?if_exists}&mobileChannelId=${page.catid?if_exists}')"><i class="icon-file-text"></i> 查看跟帖</a></li>
+											</#if>
+											<!-- <#if page.classify=="8">
+											<li><a href="javaScript:void(0)" onclick="changePage('articleMobileController.do?publishArticle&contentsId=${page.id?if_exists}')">发布</a></li>
+												<li><a href="javaScript:void(0)" onclick="changePage('surveyOptionController.do?table&contentsId=${page.id?if_exists}')">调查选项</a></li>
+												<li><a href="javaScript:void(0)" onclick="changePage('${conpath}/front/surveyLogController.do?surveyLog&contentsId=${page.id?if_exists}')">查看记录</a></li>
+											</#if>
+											<#if page.classify=="6">
+												<li><a href="javaScript:void(0)" onclick="changePage('${conpath}/front/voteLogController.do?voteLog&contentsId=${page.id?if_exists}')">查看记录</a></li>
+											</#if> -->
+											<li><a href="javaScript:void(0)" onclick="toTop('${page.id!''}')"><#if page.isTop!=0><i class="icon-long-arrow-down"></i> 取消置顶<#else><i class="icon-long-arrow-up"></i> 置顶</#if></a></li>
+											<li><a href="javaScript:void(0)" onclick="toTopPic('${page.id!''}')"><#if page.isTopPic!=0><i class="icon-thumbs-down"></i> 取消头图<#else><i class="icon-thumbs-up"></i> 设为头图</#if></a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="1209">
+</div>
+
+<script type="text/javascript" src="media/js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script>
+	function checkall(obj){
+		if(obj.checked==true){
+			$("input[name='contentsids']").each(function(){
+	            this.checked = true;
+	        });
+		}else{
+			$("input[name='contentsids']").each(function(){
+	            this.checked = false;
+	        });
+		}
+	}
+	
+	function songshen(){
+		var ids="";
+        $("input[name='contentsids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(!confirm("是否确定送审？")){
+			return;
+		}
+		var urlStr = "contentsController.do?songshen";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + ids,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					alert(obj.msg);
+				}else{
+					alert("提交失败!");
+				}
+			},
+			error:function(){
+				alert("提交审核失败!");
+			}
+		});
+        
+	}
+	
+	function audit(result){
+		var ids="";
+        $("input[name='contentsids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(!confirm("是否确定审核？")){
+			return;
+		}
+		var urlStr = "contentsController.do?contentsAudit";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + ids + '&result=' + result,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					alert(obj.msg);
+				}else{
+					alert("审核失败!");
+				}
+			},
+			error:function(){
+				alert("提交审核失败!");
+			}
+		});
+        
+	}
+	function disableEdit(){
+		lmAlert("已下线,无法进行修改操作！");
+	}
+//建立索引	
+function createIndex(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				alert(obj.msg);
+			}else{
+				alert("生成失败!");
+			}
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+//生成二维码
+function enCode(urlStr,contentId){
+	/* if(!confirm("是否确定生成二维码？")){
+		return;
+	} */
+	 lmConfirm("是否确定生成二维码？","",function (){
+		 $.ajax({
+			type:'post',
+			url:urlStr,
+			data:'contentId='+contentId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					lmAlert(obj.msg);
+				}else{
+					lmAlert("删除处理失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交通讯失败!");
+			}
+		});
+    });
+	
+}
+function setPushParam(url,model){
+	window.open(url);
+// 	if(!model){
+// 		model=$('#editModel');
+// 	}
+// 	var ifram='<iframe id="ifrm" src="'+url+'" frameborder="no" vspace="0" hspace="0"  width="100%" height="100%" style="overflow:hidden;"></iframe>';
+// 	$("#editModel").width($(document).width()+250);
+// 	$("#editModel").height($(document).height());
+// 	model.empty();
+// 	model.append(ifram);
+// 	model.modal('show');
+}
+</script>

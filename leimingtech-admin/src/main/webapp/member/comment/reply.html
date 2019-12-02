@@ -1,0 +1,71 @@
+<div class="modal-dialog"  >
+    <div class="modal-content" style="height: 500px;">
+        <div class="modal-header">
+            ${replyPageNo}
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="clearReplyPageNo()">
+                &times;
+            </button>
+        </div>
+        <div class="viewport row pre-scrollable" style="margin-left: 50px; margin-right: 20px;">
+            <div class="overview" id="allComments" style="top: 0px;margin-right: 10px">
+                <div id="tab1_allComments" class="np-comment-list">
+                    <ul id="commentList">
+                        <li class="np-post np-post-key" >
+                            <div class="np-tip-newpost">
+
+                            </div>
+                            <#if comment.memberPic?if_exists>
+                                <img class="np-avatar popClick" src="${contextpath}/${comment.memberPic}">
+                                <#else>
+                                    <img class="np-avatar popClick" src="${contextpath}/member/pic/face.jpg">
+                            </#if>
+                            <div class="np-post-body" style="border-right: 3px solid #FF2968;">
+                                <div class="np-post-header">
+                                    <span class="">
+                                        <a href="javascript:void(0)" class="np-user popClick " >${comment.username}</a>
+                                        <a href="http://film.qq.com/vip.html?ptag=v_qq_com.comment" target="_blank" class="" title="会员尊享红名特权"></a>
+                                    </span>
+                                    <span class="np-time" data="1491439277">${comment.createdtime}</span>
+                                </div>
+                                <div class="np-post-content" data-height="5">
+                                    <p>${comment.content}</p>
+                                </div>
+                                <div class="np-post-footer">
+                                    <a href="javascript:void(0)" style="text-decoration: none" ><img src="/pcstyle/images/content-ups.png" style="align-content: center" title="赞同" onclick="addSupport('${comment.id}')" />
+                                    (<em id="reply_zantong_commentcount_${commentid}">${comment.supportcount}</em>)</a>&nbsp;
+                                    <a href="javascript:void(0)" style="text-decoration: none" ><img src="/pcstyle/images/content-downs.png" style="align-content: center" title="不赞同" onclick="deleteSupport('${comment.id}')"/>
+                                    (<em id="reply_fandui_commentcount_${commentid}">${comment.opposecount}</em>)</a>&nbsp;
+                                    <a href="javascript:void(0)" class="np-btn np-btn-reply reply" onclick="showsmallreply('${comment.id}')">回复
+                                        (<em id="reply_commentcount_${commentid}">${comment.replycount}</em>)</a>
+                                    &nbsp;
+                                    <form class="reply_smallform_${comment.id}" style="display: none" id="addSmallReply_${comment.id}">
+                                        <input type="hidden" name="commentid" value="${comment.id}" />
+                                        <input type="hidden" name="memberid" value="${comment.personid}"/>
+                                        <textarea tabindex="1" id="smallreplycontent_${comment.id}" name="content" class="small-comment-text" onkeyup="javascript:chkmaxsms(this,'80')" placeholder="(请勿超过80字)"></textarea>
+                                        <div class="commtSub np-reply-box-footer small-comment-div">
+                                            <div class="submitBtn">
+                                                <a href="javascript:void(0)" class="np-btn np-btn-submit" onclick="addSmallReply('${comment.id}')" >发表评论</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <ul class="children" id="ul_reply_list"></ul>
+                </div>
+
+               <div id="reportSpace" style="height:250px; display:none;">
+               </div>
+                <!--分页条-->
+                <br/>
+                <div id="loadMoreReply" class="np-load-more loadMoreReply" style="display:block;width: 500px;">
+
+                    <#if comment.replycount gt 10>
+                    <span onclick="loadReply('${contextpath}/front/replyFrontController.do?replyPageList&commentId=${comment.id}','ul_reply_list')">加载更多</span>
+                    <em style="display:none" class="np-load-more-loading">没有更多了</em>
+                        <#else>
+                            <em >暂无更多评论</em>
+                    </#if>
+                </div>
+        </div>
+    </div>'
+</div>

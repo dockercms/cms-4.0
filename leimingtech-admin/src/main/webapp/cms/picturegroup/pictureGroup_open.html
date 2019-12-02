@@ -1,0 +1,738 @@
+<#include "/cms/commons/header.html">
+<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>
+
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css"> 
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+<!-- biaochi -->
+<link rel="stylesheet" href="statics/themes/default/js/biaochi/css/biaochi.css" />
+<!--select2-->
+<link rel="stylesheet"  href="media/css/select2.min.css" type="text/css"/>
+
+<script type="text/javascript" src="media/js/select2/select2.js"></script>
+
+
+<!-- 功能js -->
+<script type="text/javascript" src="js/content.js"></script>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>&nbsp;${contentCat.name}&nbsp;>&nbsp;组图</div>
+			</div>
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form id="form_sample_2" class="form-horizontal">
+					<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+					<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCat.id}"/>
+					<input type="hidden" id="modelsId" name="modelsId" value="${modelsId}"/>
+					<input type="hidden" id="modelId" name="modelId" value="${contentCat.jsonid}"/>
+					<input type="hidden" id="contentid" name="contentid" value="${contents.id?if_exists}"/>
+					<input type="hidden" id="contentsId" name="contentsId" value="${contents.id?if_exists}"/>
+					<input type="hidden" id="temporary" name="temporary" value="${temporary}"/>
+					
+					<div class="alert alert-error hide">
+						<button class="close" data-dismiss="alert"></button>
+						有未填写项或错误项. 请检查后再提交.
+					</div>
+					<div class="alert alert-success hide">
+						<button class="close" data-dismiss="alert"></button>
+						表单验证成功!
+					</div>
+					<div class="clearfix">
+						<div class="control-group pull-left span4">
+							<label class="control-label">当前栏目：</label>
+							<div class="controls">
+								<span class="help-inline" style="font-size:14px;font-weight:bold;">${contentCat.name}</span>
+							</div>
+						</div>
+						<span id="relevanceCat" >
+							<div class="control-group pull-left span5">
+								<label class="control-label">同时发布到：</label>
+								<div class="controls">
+									<input type="hidden" id="mobileId">
+									<input type="hidden" id="flag" value="${flag?if_exists}">
+									<input type="text" id="souContent" name="souContent" class="form-control span10" onclick="showMenu1()" style="text-align:center;" readonly value="-----选择栏目-----">
+								</div>
+							</div>
+							<div id="menuContent1" class="menuContent1" style="display:none; position: absolute;z-index:100">
+								<ul id="treeDemo1" class="ztree" style="margin-top:0px; width:258px; height: 200px">
+								</ul>
+								
+							</div>
+							<div class="right" style="display:none">
+								<input type="text" id="funVal0" name="funVal0"/>
+								<ul class="info">
+									<li class="title"><h2>1、setting 配置信息说明</h2>
+										<ul class="list">
+											<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+											<li><p>父子关联关系：<br/>
+													被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+													<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+													取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+													<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+													<ul id="code1" class="log" style="height:20px;"></ul></p>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</span>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><span class="required">*</span>标题：</label>
+						<div class="controls">
+							<input type="text" id="title" name="title" class="span9 form-control" data-rule-required="true" style="BACKGROUND: url(plug-in/img/ressources/ruler.gif) ;BACKGROUND-REPEAT: repeat-x ;color:${contents.color?if_exists}"   value="${contents.title?if_exists}"/>
+							<div id="input1" title="选择颜色" style="position: relative;display:inline-block;vertical-align: bottom;cursor: pointer;width:30px;height:30px;background-color: <#if page.color?exists && page.color!=''>${page.color}<#else>rgb(153,153,153)</#if>">
+								<div id="colorpane" style="position:relative;z-index:999;display:none;"></div>
+							</div>
+							<input type="text" id="color" name="color" class="span6 m-wrap" style="display:none" value="${page.color?if_exists}"/>
+							<#--
+							<br/>
+							<p>
+							<input type="checkbox" <#if contents.lockContent=="true">checked</#if> onclick="$('#lockContent').val(this.checked)" />
+							<span style="color:red;font-weight:bold;">当前稿件是否锁定,锁定后复制或引用到其它栏目，一直保持与锁定稿件一致</span>
+							<p>
+							-->
+							<input type="hidden" id="lockContent" name="lockContent" value="${contents.lockContent!'false'}" >
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="control-group pull-left span5"  id="subdiv">
+							<label class="control-label">短标题：</label>
+							<div class="controls">
+								<input type="text" id="subtitle" name="subtitle" class="form-control span11" value="${contents.subtitle?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group pull-left span5">
+							<label class="control-label">引题：</label>
+							<div class="controls">
+								<input type="text" id="citetitle" name="citetitle" class="form-control span11" value="${contents.citetitle?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" id="classify" name="classify" class="span10 form-control" value="${contents.classify?if_exists}"/>
+					<div class="clearfix">
+
+						<!-- 来源 DEMO-->
+						<div class="control-group pull-left span5"">
+							<label class="control-label">来源：</label>
+							<div class="controls">
+								<input type="text"  id="sourceid" class="span11 form-control" name="sourceid" value="${contents.sourceid!'${site.shortName}'}">
+							</div>
+						</div>
+						<!-- 来源DEMO seadData -->
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">标签：</label>
+						<div class="controls">
+							<input type="hidden" id="tags" name="tags" value="${contents.tags?if_exists}">
+							　	<select  class="form-control span11" id="select2Tags" multiple="multiple" onchange="changeTages()">
+							<#if contentTagList?exists && contentTagList?size gt 0>
+								<#list contentTagList as tags>
+									<option value="${tags.tagName}">${tags.tagName}</option>
+								</#list>
+							</#if>
+
+						</select>
+						</div>
+					</div>
+					<div class="control-group" style="display:none">
+						<label class="control-label">发布人：</label>
+						<div class="controls">
+							<input type="text" id="publishedby" name="publishedby" class="span6 m-wrap" value="<#if contents.publishedby=="">${markpeople}</#if><#if contents.publishedby!="">${contents.publishedby?if_exists}</#if>"/>
+							<span class="help-inline">填写发布人</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"><span class="required">*</span>组图：</label>
+						<div class="controls">
+							<input type="hidden" value="" id="backpath1"/>
+							<a id="sample_editable_1_new" class="btn blue" href="javascript:toEditModel('attachPictureController.do?tableDialog&ischecks=true&requestCode=backpath1')" style="text-decoration: none">
+								图片库 <i class="icon-search"></i>
+							</a>
+							<a class="btn green" href="javascript:toEditModel('webUploaderController.do?dialogWebUploader')">
+								上传<i class="icon-upload-alt"></i>
+							</a>
+							<div id="pictureDiv"></div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">图片说明：</label>
+						<div class="controls">
+							<textarea id="digest" name="digest" class="span9 m-wrap tooltips" rows="3" data-original-title="请输入说明" data-trigger="hover" onKeyDown="gbcount(this.form.digest,this.form.total,this.form.used);" onKeyUp="gbcount(this.form.digest,this.form.total,this.form.used);">${contents.digest?if_exists}</textarea>
+							<input disabled id="used" style="border:none;width:25px;margin-top:60px;color:#009933;font-weight:bold;background-color: #fff !important;" name="used" value="0">
+							<input type="hidden" disabled maxLength="4" name="total" size="3" value="200" class="inputtext">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">列表缩略图：</label>
+						<div class="controls">
+							<div>
+								<input type="text" id="backpath" name="thumb" class="span7 form-control" value="${contents.thumb?if_exists}"/>
+								<a class="btn blue" href="javascript:void(0);" onclick="toEditModel('attachPictureController.do?tableDialog&ischecks=true&requestCode=backpath')">
+									图片库  <i class="icon-search"></i>
+								</a>
+								<div id="uploadThumb" class="btn green" style="padding:0px !important;">上传<i class="icon-upload-alt"></i></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label">权重：</label>
+						<div class="controls" style="position: relative;">
+							<input type="text" id="weight" name="weight" class="span1 m-wrap tooltips" value="${contents.weight!'0'}" readonly data-original-title="权重将决定在哪里显示和排序" data-trigger="hover"/>
+							
+							<div class="biaoche" id="biaochex" style="margin:5px 0px 0px 30px;position: absolute;">
+								<div class="ui-draggable" id="biaochex_left"
+									style="left: 84px;"></div>
+								<div class="biaoche-h">
+									<div class="hov"
+										style="position: absolute; left: 367px; top: 1px; background: none repeat scroll 0% 0% rgb(255, 102, 0); width: 7px; height: 6px; cursor: pointer; margin-top: 2px;"
+										msg="60：上首页图片速读、视频新闻、活动">
+										<div class="bubble"
+											style="display: none; top: 36px; right: -6px;">
+											<div class="corner tl"></div>
+											<div class="corner tr"></div>
+											<div class="corner bl"></div>
+											<div class="corner br"></div>
+											<div class="top"></div>
+											<div class="cnt">60：上首页频道滚动列表</div>
+											<div class="bot"></div>
+											<div class="point NE"></div>
+										</div>
+									</div>
+								</div>
+								<div class="biaoche-h">
+									<div class="hov"
+										style="position: absolute; left: 487px; top: 1px; background: none repeat scroll 0% 0% rgb(255, 102, 0); width: 7px; height: 6px; cursor: pointer; margin-top: 2px;"
+										msg="80：上首页图片速读、视频新闻、活动">
+										<div class="bubble"
+											style="display: none; top: 36px; right: -7px;">
+											<div class="corner tl"></div>
+											<div class="corner tr"></div>
+											<div class="corner bl"></div>
+											<div class="corner br"></div>
+											<div class="top"></div>
+											<div class="cnt">80：专栏首页推荐文章</div>
+											<div class="bot"></div>
+											<div class="point NE"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="control-group pull-left span4">
+							<label class="control-label">维度：</label>
+							<div class="controls" style="position: relative;">
+								<input id="attribute" name="attribute" type="text" class="m-wrap span11" readonly value="${contents.attribute?if_exists}" onclick="showMenu();" />
+								<span class="help-inline"></span>
+								<div id="menuContent" class="menuContent" style="display:none;z-index:999999; position: absolute;">
+									<ul id="treeDemo" class="ztree" style="margin-top:0; width:250px; height: 140px">
+									</ul>
+									
+								</div>
+							</div>
+						</div>
+						<div class="control-group pull-left span5">
+									<label class="control-label">状态：</label>
+							<div class="controls">
+								<#if contents.constants=="">
+									<label class="radio">
+												<input type="radio"  id="constants2" name="constants" value="0" checked>
+										发布
+									</label>
+									<label class="radio">
+												<input type="radio" id="constants3" name="constants" value="10">
+										草稿
+									</label>
+								</#if>
+								<#if contents.constants!="">
+									<#if contents.constants=="10">
+										<span class="help-inline" style="margin-top:10px">草稿</span>
+									</#if>
+									<#if contents.constants=="20">
+										<span class="help-inline" style="margin-top:10px">待审</span>
+									</#if>
+									<#if contents.constants=="30">
+										<span class="help-inline" style="margin-top:10px">退稿</span>
+									</#if>
+									<#if contents.constants=="40">
+										<span class="help-inline" style="margin-top:10px">待发</span>
+									</#if>
+									<#if contents.constants=="50">
+										<span class="help-inline" style="margin-top:10px">已发</span>
+									</#if>
+									<#if contents.constants=="60">
+										<span class="help-inline" style="margin-top:10px">已撤</span>
+									</#if>
+									<#if contents.constants=="70">
+										<span class="help-inline" style="margin-top:10px">回收站</span>
+									</#if>
+								</#if>	
+							</div>
+						</div>
+						<div class="control-group pull-left span3">
+							<label class="control-label span3">评论：</label>
+							<div class="controls span4">
+								<label class="checkbox">
+									<input type="checkbox" <#if contents.allowcomment=="true"||contents.allowcomment=="">checked</#if> onclick="$('#allowcomment').val(this.checked)" />允许
+								</label>
+								<input type="hidden" id="allowcomment" name="allowcomment" value="true" >
+							</div>
+						</div>
+					</div>
+					<div class="right" style="display:none">
+						<input type="button" value="获取选中的值" id="button"/>
+						<input type="text" id="funVal" name="funVal"/>
+						<ul class="info">
+							<li class="title"><h2>1、setting 配置信息说明</h2>
+								<ul class="list">
+								<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+								<li><p>父子关联关系：<br/>
+										被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+										<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+										取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+										<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+										<ul id="code" class="log" style="height:20px;"></ul></p>
+								</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="clearfix">
+						<div class="control-group pull-left span4">
+							<label class="control-label">编辑人：</label>
+							<div class="controls">
+								<input type="text" id="editor" name="editor" class="span11 form-control tooltips" value="<#if contents.editor?exists>${contents.editor!''}<#elseif memberinfo.realName?exists>${memberinfo.realName!''}<#else>${memberinfo.userName!''}</#if>" data-original-title="请输入责任编辑" data-trigger="hover"/>
+							</div>
+						</div>
+						<div class="control-group pull-left span3">
+							<label class="control-label span5">上线：</label>
+							<div class="controls span7">
+								<input type="text" value="${contents.published?if_exists}" class="Wdate" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'{%y-%M-%d %H:%m:%s}\'}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="d4311" name="published">
+							</div>
+						</div>
+						<div class="control-group pull-left span3">
+							<label class="control-label span5">下线：</label>
+							<div class="controls span7">
+								<input type="text" value="${contents.noted?if_exists}" class="Wdate" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" id="d4312"  name="noted">
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">相关：</label>
+						<div class="controls">
+								<input type="text" id="correlation" name="correlation" readonly="readonly" class="span7 m-wrap" value="${contents.tags?if_exists}"/>
+							<a id="sample_editable_1_new" class="btn blue" onclick="toEdit('','${temporary}','<#if contents.id==''>-1</#if><#if contents.id!=''>${contents.id?if_exists}</#if>')" style="text-decoration: none">
+									搜索 <i class="icon-search"></i>
+								</a>
+								<a id="sample_editable_1_new" class="btn green" onclick="toAdd('relateContentController.do?addPageModel&temporary=${temporary}&contentId=${contents.id?if_exists}')" style="text-decoration: none">
+									手工添加 <i class="icon-plus"></i>
+								</a>
+							</div>
+							<!-- 显示相关弹出框返回值 -->
+							<div id="correlationDiv" class="controls">
+								
+							</div>
+							<!-- 显示相关弹出框返回值 --> 
+					</div>
+					
+					<#--拓展字段-->
+					<#include "/cms/commons/contentExtField.html">
+				</form>
+			</div>
+			<div class="modal-footer">  
+	            <input  type="button" onclick="checkForm('contentsController.do?save','form_sample_2')" class="btn btn-primary" value="提交">  
+	            <input type="button" class="btn" value="关闭" onclick="window.opener=null;window.close();">  
+	        </div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<div id="contentModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<div id="showModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="600"></div>
+<script>
+function selectPictureBack(requestCode){
+	switch (requestCode) {
+		case "backpath1":
+			var pathInputs = $("input[name='path']:checked");
+			if (pathInputs.length > 0) {
+				var result = "";
+				for ( var i = 0; i < pathInputs.length; i++) {
+					result = result + $(pathInputs[i]).val() + ",";
+				}
+				saveAndChangePictureGroup(result);
+			}
+			break;
+		case "backpath":
+			var result = $("input[name='path']:checked");
+			var paths="";
+			if (result.length > 0) {
+				for ( var i = 0; i < result.length; i++) {
+					if(i==result.length-1){//末尾不加","
+						paths = paths + $(result[i]).val()
+					}else{
+						paths = paths + $(result[i]).val() + ",";
+					}
+				}
+			}
+			if($("#backpath").val()){
+				$("#backpath").val($("#backpath").val()+","+paths);
+			}else{
+				$("#backpath").val(paths);
+			}
+			
+			break;
+	}
+	$('#editModel').modal('hide');
+}
+	var uploaderThumb = WebUploader.create({
+		
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+	
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+	
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#uploadThumb',
+	
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+	
+	//当有文件添加进来的时候
+	uploaderThumb.on( 'uploadSuccess', function( file,Object ) {
+		
+		if($("#backpath").val()){
+				$("#backpath").val($("#backpath").val()+","+Object.url);
+			}else{
+				$("#backpath").val(Object.url);
+			}
+		
+	});
+	
+	//组图上传成功后回调
+	function uploaderGroupSuccess(urls){
+		$('#editModel').empty();
+		$('#editModel').modal('hide');
+		saveAndChangePictureGroup(urls);
+	}
+
+	//顺序值
+	var ss = new Array();
+	//表单校验
+	function checkForm(toUrl,formName){
+		var urlStr = toUrl+"&divValue="+ss;
+		if($('#form_sample_2').valid()){
+			//formSubmitModel('pictureGroupController.do?save&divValue='+ss, 'form_sample_2');
+			var el = $(".page-header-fixed");
+			App.blockUI(el);
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:$('#' + formName).serialize(),
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						window.opener.changePage(obj.toUrl);
+						if(''=='${contents.constants?if_exists}'){
+							var radio=document.getElementById("constants2");
+							if(radio.checked){
+								toEditModel("contentsController.do?pushView&contentsId="+obj.contentsid+"&contentCatId=${contentCat.id}&classify=${classify}&flag=${flag}");
+							}
+							else{
+								lmAlert(obj.msg);
+							}
+						}else{
+							if('50'=='${contents.constants}'){
+								toEditModel("contentsController.do?pushView&contentsId="+obj.contentsid+"&contentCatId=${contentCat.id}&classify=${classify}&flag=${flag}");
+							}
+						}
+					}else{
+						alert("提交处理失败!");
+					}
+				},
+				error:function(){
+					alert("提交通讯失败!");
+				},
+				complete:function (){
+					App.unblockUI(el);
+				}
+			});
+	  	}
+	}
+	function loadPictureAlone(){
+		//加载组图
+		$.ajax({
+			type:'post',
+			url:'pictureAloneController.do?pictureJump&pictureVId=${temporary}&pictureGroupId=${page.id?if_exists}',
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#pictureDiv').empty();
+				$('#pictureDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	
+	//颜色、tab等初始化
+	jQuery(document).ready(function() {    
+		$("#backpath").livetip();
+		App.init();
+		FormComponents.init();
+		$("#form_sample_2").myValidate();
+		loadPictureAlone();
+		$("#backpath1").change(function (){
+			if($(this).val()){
+				saveAndChangePictureGroup($(this).val());
+			}
+		});
+		
+		initcolor();
+		//判断是否显示关联栏目
+		var contentCat = $("#flag").val();
+		if(contentCat=="edit"){
+			$("#relevanceCat").hide();
+		}
+		//加载相关内容
+		$.ajax({
+			type:'post',
+			url:'contentsController.do?showEditDiv&contentId=${contents.id?if_exists}&temporary=${temporary}',
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#correlationDiv').empty();
+				$('#correlationDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	});
+	//组图用以保存、显示
+	function pictureChange(){
+		var pictureGroup = $("#url").val();
+		saveAndChangePictureGroup(pictureGroup);
+	}
+
+	//保存以及更新组图
+	function saveAndChangePictureGroup(urls){
+		$.ajax({
+			type:'post',
+			url:'pictureAloneController.do?pictureList&pictureVId=${temporary}&pictureGroupId=${page.id?if_exists}',
+			data:{'pictureGroup':urls},
+			dataType:'text',
+			success:function(msg){
+				$('#pictureDiv').empty();
+				$('#pictureDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	$(function(){
+		//页面加载统计字数
+		var length = $('#digest').val().length;
+		if(length!=""){
+			length = $('#used').attr('value',length);
+		}else{
+			$('#used').attr('value',0);
+		}
+		<#if modelItemList?exists>
+			<#list modelItemList as modelItem>
+				<#if modelItem.dataType=="2">
+					//给class为only的文本框绑定keypress(键盘按下)事件
+					$("#${modelItem_index}").bind("keypress",filterInt);
+					//给class为onlyInt的文本框绑定blur(失焦)事件	
+					$("#${modelItem_index}").bind("blur",checkInt);
+				</#if>
+			</#list>
+		</#if>
+		<#if modelExtList?exists>
+			<#list modelExtList as modelExt>
+				<#if modelExt.data_type=="2">
+					//给class为only的文本框绑定keypress(键盘按下)事件
+					$("#${modelExt_index}").bind("keypress",filterInt);
+					//给class为onlyInt的文本框绑定blur(失焦)事件	
+					$("#${modelExt_index}").bind("blur",checkInt);
+				</#if>
+			</#list>
+		</#if>
+		//判断是否有副题
+		<#if contents.subtitle!="">
+			document.getElementById('subdiv').style.display = 'block';
+		</#if>
+		//标尺
+		var options={};
+		options.axis = "x";
+		var s="left";
+		$("#biaoche"+options.axis+"_left").css(s,$("#weight").val()*6+6+"px");
+		$("#biaoche"+options.axis+"_left").draggable({//移动游标 采用JQuery中的UI插件
+			containment: '#biaoche'+options.axis,
+			axis: options.axis,
+			grid:[2,2],
+			start: function() {
+			},
+			drag: function() {
+					divT=$("#biaoche"+options.axis+"_left").css(s);
+					divT=parseInt(((parseInt(divT)-4)/6));
+					if(divT>100) divT=100;
+					else if(divT<0) divT=0;
+					$("#weight").val(divT);
+			}
+		});	 
+		return false;
+	});
+	$.each($('.biaoche-h'),function(){
+		var _this = $(this),
+			hov = $('.hov', _this);
+		hov.hover(function(){
+				$(this).children('.bubble').css('display','block');
+			},
+			function(){
+				$(this).children('.bubble').css('display','none');
+			}
+		);
+	});
+	//加载栏目
+	var setting1 = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick1,
+			onCheck: onCheck1
+		}
+	};
+	var zNodes1 = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'contentsMobileController.do?loadmobile',
+		data:'data=0',
+		success:function(data){
+			 zNodes1 = data;
+		}
+	})
+	var json1 = JSON.parse(zNodes1);
+	$(document).ready(function(){
+		
+		$.fn.zTree.init($("#treeDemo1"), setting1,json1);
+		setCheck1();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+		$('#treeDemo1').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo1");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#funVal0').attr("value",v);
+		});
+		
+	});
+	
+	//ztree属性下拉树选择
+	var setting = {
+			check: {
+				enable: true
+			},
+			view: {
+				dblClickExpand: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeClick: beforeClick,
+				onCheck: onCheck
+			}
+		};
+		var zNodes = new Array();
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'custormController.do?loadAttr&contentsId=${contents.id?if_exists}',
+			data:'data=0',
+			success:function(data){
+				 zNodes = data;
+			}
+		})
+		var json = JSON.parse(zNodes);
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting,json);
+			setCheck();
+			$("#py").bind("change", setCheck);
+			$("#sy").bind("change", setCheck);
+			$("#pn").bind("change", setCheck);
+			$("#sn").bind("change", setCheck);
+			$('#treeDemo').click(function(){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+				var checkCount = checked.length;
+				var v="";
+				for(var i=0;i<checkCount;i++){
+					v+=checked[i].id+",";//获取的是值
+					//v+=checked[i].name+",";//获取的是名称
+				}
+				$('#funVal').attr("value",v);
+			});
+			//获取相关内容div  li的顺序(必须在上面异步加载完div之后再调用，否则无效)
+			$( "#sortable1" ).sortable({
+				connectWith: ".connectedSortable",
+				 update: function(event, ui) { 
+					var size = ui.item.context.parentElement.children;
+					for(var i=0;i<size.length;i++){
+						ss[i] = i+"_"+size[i].id;
+					}
+				 }
+			}).disableSelection();
+		});
+	
+	//选择上传文件前清空url隐藏域
+	function clearUrl(){
+		//alert(123);
+		document.getElementById("url").value = "";
+	}
+</script>
+<#include "/cms/commons/footer.html">

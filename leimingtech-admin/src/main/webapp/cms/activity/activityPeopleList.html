@@ -1,0 +1,75 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-globe"></i>活动报名记录
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_back" class="btn yellow-stripe"
+						onclick="changePage('contentsController.do?table&tab=alone&contentCatId=${contentCatId}')">
+						<span class="icon-chevron-left"><b style="margin-left:10px">返回</b>
+						</span>
+					</button>
+				</div>
+
+				<div class="portlet-body">
+					<!-- <div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									活动id：
+									<input name="activityids" class="form-control span7" type="text" value="${searchMap["activityids"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									IP：
+									<input name="ip" class="form-control span7" type="text" value="${searchMap["ip"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('activityPeopleController.do?activityPeople', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>  -->
+
+					<table class="table table-striped table-bordered table-hover"
+						id="sample_1">
+						<thead>
+							<tr>
+								<th width="40" style="text-align:center;">序号</th>
+								<th style="">报名人</th>
+
+								<th style="">报名时间</th>
+								<th style="">报名人IP</th>
+								<th width="100" style="text-align:center;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if activityPeopleList?exists> <#list activityPeopleList as
+							activityPeople>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+activityPeople_index?if_exists+1}</td>
+								<td>${activityPeople.createby}</td>
+								<td>${activityPeople.createtime?string("yyyy-MM-dd")}</td>
+
+								<td>${activityPeople.ip}</td>
+								<td style="text-align:center;"><a href="javaScript:void(0)"
+									onclick="toEditModel('activityOptionExtController.do?queryLog&activityLogId=${activityPeople.id}&activityId=${activityPeople.activityids}')">查看详细</a>
+
+								</td>
+							</tr>
+							</#list> </#if>
+						</tbody>
+					</table>
+					<#include "/lmPage/common/page.html">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="editModel" class="modal fade" tabindex="-1"
+		data-backdrop="static" data-focus-on="input:first" data-width="800"></div>

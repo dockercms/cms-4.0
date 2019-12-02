@@ -1,0 +1,97 @@
+<table class="table table-bordered" style="width:87%;margin-bottom:0px;clear: none;">
+    <tbody>
+    <tr style="background-color:#CCCCFF;">
+        <th width="30" style="text-align:center">允许</th>
+        <th width="30" style="text-align:center">模型</th>
+        <th style="text-align:center">内容页模板</th>
+        <th width="45" style="text-align:center">操作</th>
+    </tr>
+    <#list modelsList as models>
+        <tr>
+            <td style="text-align:center;padding-top:12px;">
+                <#if models.name=='文章' && jsonobj.文章=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='文章' && jsonobj.文章!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='组图' && jsonobj.组图=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='组图' && jsonobj.组图!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='链接' && jsonobj.链接=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='链接' && jsonobj.链接!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='视频' && jsonobj.视频=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='视频' && jsonobj.视频!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='活动' && jsonobj.活动=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='活动' && jsonobj.活动!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='投票' && jsonobj.投票=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='投票' && jsonobj.投票!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='访谈' && jsonobj.访谈=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='访谈' && jsonobj.访谈!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='调查' && jsonobj.调查=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='调查' && jsonobj.调查!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                <#elseif models.name=='专题' && jsonobj.专题=='true'>
+                    <input type="checkbox" checked id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="true">
+                <#elseif models.name=='专题' && jsonobj.专题!='true'>
+                    <input type="checkbox" id="t${models_index}" onclick="$('#templateIndex${models_index}').val(this.checked)"/>
+                    <input type="hidden" id="templateIndex${models_index}" name="templateIndex${models_index}" value="false">
+                </#if>
+            </td>
+            <td style="text-align:center;padding-top:14px;">${models.name}</td>
+            <td>
+                <#if models.name=='文章'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.文章}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='组图'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.组图}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='视频'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.视频}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='活动'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.活动}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='投票'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.投票}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='访谈'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.访谈}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='调查'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.调查}<#else>${models.templateShow}</#if>"/>
+                <#elseif models.name=='专题'>
+                    <input type="text" id="templateshow${models_index}" style="width:96%;" class="form-control form-filter input-sm" name="templateshow${models_index}" value="<#if jsonobjList?exists>${jsonobjList.专题}<#else>${models.templateShow}</#if>"/>
+                </#if>
+            </td>
+            <td style="text-align:center;padding-top:14px;">
+            	<#if models.name!='链接'>
+                <input type='button' title='选择模板' style=' width:16px; height:16px;  border:0; background:url(media/image/search-icon-blue.png) no-repeat left top'  onclick="toEditModel('templateController.do?tableDialog&model=${models_index}')"/>
+                <input type='button' title='删除模板' style=' width:16px; height:16px;  border:0; background:url(media/image/sidebar-search-close-brown.png) no-repeat left top'  onclick="delet(${models_index})"   />
+                </#if>
+            </td>
+        </tr>
+    </#list>
+    </tbody>
+</table>

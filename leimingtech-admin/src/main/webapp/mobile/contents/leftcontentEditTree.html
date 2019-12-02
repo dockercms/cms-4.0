@@ -1,0 +1,39 @@
+<li>
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+	<div class="sidebar-toggler hidden-phone"></div>
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+</li>
+<#if list?exists>
+	<#list list as function>
+		<#if (function.mobileChannels?size >0) > 
+			<li <#if function_index==0>class="start"</#if>>
+				<a href="javaScript:void(0);" onclick="changePage('contentsMobileController.do?table&tab=all&mobileChannelId=${function.id?if_exists}')">
+				<i class="icon-folder-close"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="arrow "></span>
+				<span class="selected"></span>
+				</a>
+				<ul class="sub-menu">
+				<#assign list=function.mobileChannels/>
+					<#include "/mobile/contents/leftcontentEditTreeChild.html">
+				</ul>
+			</li>
+		<#else>
+			<li <#if function_index==0>class="start"</#if>>
+				<a href="javaScript:void(0);" onclick="changePage('contentsMobileController.do?table&tab=all&mobileChannelId=${function.id?if_exists}')">
+				<i class="icon-folder-close"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="selected"></span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>	
+	
+
+<script>
+$(function(){
+	changePage('contentsMobileController.do?table&tab=alone&mobileChannelId=0');
+});
+</script>
+<script type="text/javascript" src="js/publish.js"></script>

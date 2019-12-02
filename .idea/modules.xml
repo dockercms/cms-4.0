@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-admin/leimingtech-admin.iml" filepath="$PROJECT_DIR$/leimingtech-admin/leimingtech-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-api/leimingtech-api.iml" filepath="$PROJECT_DIR$/leimingtech-api/leimingtech-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-cms/leimingtech-cms.iml" filepath="$PROJECT_DIR$/leimingtech-cms/leimingtech-cms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-core/leimingtech-core.iml" filepath="$PROJECT_DIR$/leimingtech-core/leimingtech-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-gencode/leimingtech-gencode.iml" filepath="$PROJECT_DIR$/leimingtech-gencode/leimingtech-gencode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-lucene/leimingtech-lucene.iml" filepath="$PROJECT_DIR$/leimingtech-lucene/leimingtech-lucene.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-member/leimingtech-member.iml" filepath="$PROJECT_DIR$/leimingtech-member/leimingtech-member.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-mobile/leimingtech-mobile.iml" filepath="$PROJECT_DIR$/leimingtech-mobile/leimingtech-mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-ucenter/leimingtech-ucenter.iml" filepath="$PROJECT_DIR$/leimingtech-ucenter/leimingtech-ucenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-ueditor/leimingtech-ueditor.iml" filepath="$PROJECT_DIR$/leimingtech-ueditor/leimingtech-ueditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-wap/leimingtech-wap.iml" filepath="$PROJECT_DIR$/leimingtech-wap/leimingtech-wap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-wechat/leimingtech-wechat.iml" filepath="$PROJECT_DIR$/leimingtech-wechat/leimingtech-wechat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leimingtech-weibo/leimingtech-weibo.iml" filepath="$PROJECT_DIR$/leimingtech-weibo/leimingtech-weibo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lmcms_v4.0.iml" filepath="$PROJECT_DIR$/.idea/lmcms_v4.0.iml" />
+    </modules>
+  </component>
+</project>

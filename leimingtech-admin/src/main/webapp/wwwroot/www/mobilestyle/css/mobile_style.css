@@ -1,0 +1,31 @@
+
+
+/*投票*/
+.vote_view{background-color: #F4F4F4;padding:15px 8px;font-size: 12px;max-width: 500px;}
+.vote_view .vote_thumb{margin-bottom: 3px;max-width: 500px;}
+.vote_view .vote_thumb img{width:100%;}
+.vote_view .vote_footer{clear: both;padding-top: 10px;}
+.vote_view .vote_content{margin-top: 10px;display: none;}
+.vote_view .vote_digest{background-color: #fff;padding: 3px;line-height: 15px;margin-top: 10px;border: 5px dashed #ddd;}
+.vote_view .vote_title{font-size: 18px;}
+.vote_view img{max-width: 100%;}
+.vote_view ul{margin: 0px;padding: 0px;list-style: none;}
+.vote_view ul li{float: left;margin-right: 10px;}
+.vote_view .submitBtn{border: none;background-color: #4F5F6F;width:100%;max-width: 500px;cursor: pointer;height: 35px;line-height: 35px;color:#fff;outline: none;font-size: 15px;}
+.vote_view .submitBtn:active,.vote_view .submitBtn:hover{border: none;background-color: #000;}
+.vote_view .vote_publish_date{color: #BABABA;font-size: 10px;}
+
+/**调查*/
+.survey_view{background-color: #F4F4F4;padding:15px 8px;font-size: 12px;max-width: 500px;}
+.survey_view .survey_thumb{margin-bottom: 3px;max-width: 500px;}
+.survey_view .survey_thumb img{width:100%;}
+.survey_view .survey_title{font-size: 18px;}
+.survey_view .survey_publish_date{color: #BABABA;font-size: 10px;}
+.survey_view .survey_digest{background-color: #fff;padding: 3px;line-height: 15px;margin-top: 10px;border: 5px dashed #ddd;}
+.survey_view .submitBtn{border: none;background-color: #4F5F6F;width:100%;max-width: 500px;cursor: pointer;height: 35px;line-height: 35px;color:#fff;outline: none;font-size: 15px;}
+.survey_view .submitBtn:active,.survey_view .submitBtn:hover{border: none;background-color: #000;}
+.survey_view .survey_footer{clear: both;padding-top: 10px;}
+.survey_view .survey_content{margin-top: 10px;display: none;}
+.survey_view img{max-width: 100%;}
+.survey_view ul{margin: 0px;padding: 0px;list-style: none;}
+.survey_view ul li{float: left;margin-right: 10px;}

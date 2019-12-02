@@ -1,0 +1,95 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-sitemap"></i>栏目</div>
+				<div class="actions extended tasks">
+				<#if parentFunction.id != "">
+					<div class="btn-group">
+						<a class="btn purple publishcatalog" catalogid="${parentFunction.id}" href="javascript:void(0);" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+							发布《${parentFunction.name}》
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li><a href="javaScript:void(0)" class="publishcatalog" catalogid="${parentFunction.id}">快速发布栏目</a></li>
+							<li><a href="javaScript:void(0)" class="publishCatalogAndAllContent" catalogid="${parentFunction.id}">发布栏目及栏目下所有内容</a></li>
+						</ul>
+					</div>
+				<#else>
+					<div class="btn-group">
+						<a class="btn purple publishsite" href="javascript:void(0);" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+							发布所有栏目
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li><a href="javaScript:void(0)" class="publishsite">快速发布</a></li>
+							<li><a href="javaScript:void(0)" class="publishSiteAllInfo">发布全部</a></li>
+						</ul>
+					</div>
+				</#if>
+				</div>
+			</div>
+			<div class="portlet-body fuelux">
+				<table class="table" style="margin-bottom: 0px;">
+					<tbody>
+						<tr class="odd gradeX">
+							<td >栏目名称：${parentFunction.name}</td>
+							<td >UUID：${parentFunction.id}</td>
+						</tr>
+						<tr class="odd gradeX">
+							<td colspan="2" align="center">
+								<button class="btn default" onclick="toEditModel1('contentCatController.do?editModel&selectId=${selectId}&parentId=${parentFunction.id?if_exists}')"><i class="fa icon-plus"></i> 添加子节点</button>
+								<button class="btn default" onclick="toBatchCat('contentCatController.do?batchCat&selectId=${selectId}')"><i class="fa icon-plus"></i> 批量添加</button>
+								<button class="btn default" onclick="toLinkUrl('contentCatController.do?editLinkURL&selectId=${selectId}&parentId=${parentFunction.id?if_exists}')"><i class="fa icon-plus"></i> 添加链接地址</button>
+								
+								<#if parentFunction.id != "">
+								<#if parentFunction.isLinkUrl==1>
+									<button class="btn green" onclick="toLinkUrl('contentCatController.do?editLinkURL&selectId=${selectId}&id=${parentFunction.id?if_exists}')"><i class="fa fa-edit"></i> 修改</button>
+								<#else>
+									<button class="btn green" onclick="toEditModel1('contentCatController.do?editModel&selectId=${selectId}&id=${parentFunction.id?if_exists}')"><i class="fa fa-edit"></i> 修改</button>
+								
+								</#if>
+								<button class="btn red" onclick="del('contentCatController.do?del', '${parentFunction.id?if_exists}')"><i class="fa icon-remove"></i> 删除</button>
+								</#if>
+								
+								
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			
+			</div>
+			
+			<#if (catList?exists && catList?size > 0)>
+			<h3>子栏目</h3>
+			<div class="portlet-body">
+				<table class="table table-bordered" id="sample_1">
+					<thead>
+						<tr style="background-color:#CCCCFF;">
+							<td width="220"  style="text-align:center;">UUID</td>
+							<td style="text-align:center;">栏目名称</td>
+							<th width="40" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if catList?exists>
+					  <#list catList as territor>
+						<tr class="odd gradeX">
+							<td >${territor.id}</td>
+							<td >${territor.name}</td>
+							<td >
+								<input class="editbtn" onclick="toEditModel1('contentCatController.do?editModel&&selectId=${selectId}&id=${territor.id?if_exists}')" type="button"/>
+								<input class="delbtn" onclick="del('contentCatController.do?del', '${territor.id?if_exists}')" type="button"/>
+							</td>
+						</tr>
+					  </#list>
+					  </#if>
+					</tbody>
+				</table>
+			</div>
+			</#if>
+			
+		</div>
+	</div>
+<script type="text/javascript" src="media/js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>

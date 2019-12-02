@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>耳机爱好者俱乐部-详情页面</title>
+    <link href="/css/CHINAiback.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.1.4.2-min.js"></script>
+</head>
+<body>
+<!--导航开始-->
+<#include "/wwwroot/${sitePath}/template/pc/section/index_nav.html"><!-- 导航 -->
+<div class="area">
+    <div class="blank10"></div>
+    <div class="gg960 left bgcolor">
+        <div class="left gg960_gg"><img src="/images/img_16.gif"  /></div>
+        <div class="blank15"></div>
+        <div class="gg960_con left">
+            <h1>${contentF.title!''}</h1>
+             <span>
+                发布时间：
+                    <#if contentF.published?exists>${contentF.published?string('yyyy')}年</#if>
+                    <#if contentF.published?exists>${contentF.published?string('MM')}月</#if>
+                    <#if contentF.published?exists>${contentF.published?string('dd')}日</#if>
+                文章来源：${contentF.sourceid!''}　
+            </span>
+            <div class="gg960_conjj left">
+                ${articleDataF.content!''}
+            </div>
+        </div>
+    </div>
+</div>
+<!--===========================页脚==================================-->
+<#include "/wwwroot/${sitePath}/template/pc/section/footer.html">
+<!--===========================页脚==================================-->
+<script type="text/javascript" src="/js/scrolltopcontrol.js"></script>
+</body>
+</html>

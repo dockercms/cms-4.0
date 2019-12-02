@@ -1,0 +1,100 @@
+<link rel="stylesheet" type="text/css" href="media/css/search.css" />
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>前台用户</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('usersController.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+			<div class="span12 booking-search">
+				<form id="search_form">
+					 <div class="clearfix">
+							<div class="control-group pull-left margin-right-20">
+								
+								<div class="left">
+								用户名称	<input name="username" class="m-wrap" type="text" value="${searchMap["username"]?if_exists[0]}">
+								</div>
+							</div>
+							<div class="dataTables_filter pull-right">
+					<button type="button" class="btn blue"  onclick="toSearchMb('usersController.do?users', 'search_form');">搜索  <i class="m-icon-swapright m-icon-white"></i></button>
+					<button type="button" class="btn"  onclick="resetForm('search_form');">重置</button>
+					</div>
+					  </div>
+					 
+				</form>
+			</div>
+			
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>用户名</th>
+							<th>角色</th>
+							<th>邮箱</th>
+							<th>最后登录日期</th>
+							<th>状态</th>
+							<th>活动创建数</th>
+							<th>资金余额</th>
+							<th>到期时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if usersList?exists>
+						  <#list usersList as users>
+							<tr class="odd gradeX">
+									<td>${users_index?if_exists+1}</td>
+										<td class="center" style="cursor:default;"
+										title="用户角色：${users.gid?if_exists}&#13;用户名称：${users.username?if_exists}&#13;邮箱：${users.email?if_exists}&#13;注册日期：${users.createtime?if_exists}&#13;最后登录日期：${users.lasttime?if_exists}&#13;用户状态：<#if users.status==1>启用</#if><#if users.status==2>关闭</#if>&#13;注册IP：${users.createip?if_exists}&#13;最后登录IP：${users.lastip?if_exists}&#13;自定义图文条数：${users.diynum?if_exists}&#13;公众号已创建数：${users.wechatCardNum?if_exists}&#13;cardNum：${users.cardNum?if_exists}&#13;cardCreateStatus：${users.cardCreateStatus?if_exists}&#13;活动创建数：${users.activitynum?if_exists}&#13;资金余额：${users.money?if_exists}&#13;资金余额：${users.money?if_exists}&#13;到期时间：${users.viptime?string('yyyy-MM-dd')}&#13;最后登录月份：${users.lastloginmonth?if_exists}"
+										>${users.username?if_exists}</td>
+										<td class="center">${users.gid?if_exists}</td>
+										<td class="center">${users.email?if_exists}</td>
+										<td class="center">${users.lasttime?if_exists}</td>
+										<td class="center"><#if users.status==1>启用</#if><#if users.status==2>关闭</#if></td>
+										<td class="center">${users.activitynum?if_exists}</td>
+										<td class="center">${users.money?if_exists}</td>
+										<td class="center">${users.viptime?string('yyyy-MM-dd')}</td>
+									<td >
+									<a href="javaScript:void(0)" onclick="toEditModel('usersController.do?addOrUpdate&id=${users.id?if_exists}')">修改</a> |
+									<a href="javaScript:void(0)" onclick="del('usersController.do?del', '${users.id?if_exists}')">删除</a>
+									</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+function toSearchMb(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dashboard').empty();
+			$('#dashboard').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>

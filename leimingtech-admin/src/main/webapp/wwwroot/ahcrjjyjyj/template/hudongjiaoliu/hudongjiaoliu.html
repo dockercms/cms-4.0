@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://www.ahciq.gov.cn/hdjl/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>${site.siteName} - ${catalogF.name}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<script src="/js/jquery.js"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<script>
+	var lmid = 615;
+</script>
+<script>
+	var newsid = 0;
+</script>
+
+
+</head>
+<body>
+   <#include "/wwwroot/${sitePath}/template/common/head.html">
+   <div class="cl"></div>
+	<div class="container">
+		<div class="tag">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td width="36" class="center"><img src="/images/tl.gif">
+						</td>
+						<td>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody>
+									  <tr>
+										<td>当前位置：<a href="/">首页</a> &gt; 
+										<#assign navTag =newTag("navTag")>
+										<#assign navTagList =navTag("{'name':'${catalogF.id}'}")> 
+										<#if navTagList?exists> 
+											<#list navTagList as navTag> 
+												<a href="${navTag.url!'javascript:void(0);'}">${navTag.name}</a>
+											</#list> 
+										</#if>
+										</td>
+									</tr> 
+								</tbody>
+							</table></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="content-block">
+			<div class="block hdjl-content">
+				<div class="bt">
+
+					<h3>${catalogF.name}</h3>
+
+				</div>
+				
+				
+				<div class="buttons">
+
+				<ul>
+					<#assign catalogList=catalogTag("{'name':'297e501853ac5c560153ac8269b90009','levels':'child'}")>
+					<#if catalogList?exists>
+					<#list catalogList as cat>
+					<#if cat?exists>
+					<#if cat_index==0>
+					<li><img src="/images/ggly.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==1>
+					<li><img src="/images/ywzx.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==2>
+					<li><img src="/images/tsjb.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==7>
+					<li><img src="/images/bmdh.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a>
+					</li>
+					<#elseif cat_index==3>
+					<li><img src="/images/zxft.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a>
+					</li>
+					<#elseif cat_index==4>
+					<li><img src="/images/myzj.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==5>
+					<li><img src="/images/cjwt.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==6>
+					<li><img src="/images/jzxx.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					</#if>
+					</#if>
+					</#list>
+					</#if>	
+				</ul>
+
+			</div>
+			</div>
+			<div class="block zxft-content">
+				<div class="bt">
+					<h3>在线访谈</h3>
+					<a href="http://www.ahciq.gov.cn/fangtan">更多</a>
+				</div>
+				<div class="zxft-news">
+					<#assign articleTag = newTag("articleTag")>
+                    <#assign articleTagList = articleTag("{'name':'402881ec53c536ea0153c56b5e0b0001','count':'1'}")>
+					<#if articleTagList?exists && articleTagList?size gt 0>
+                    <#list articleTagList as article>
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td width="100%">
+									<div class="zxft-video">
+										<a href="${article.url!'javascript:void(0)'}"><img
+											src="${article.thumb}" width="280" height="200">
+										</a>
+									</div>
+									<ul class="zxft-nc" id="axft-nc">
+										<li><span>最近访谈</span>${article.title}</li>
+										<li><span>访谈嘉宾</span>${article.author}</li>
+										<li><span>访谈时间</span>${article.published}</li>
+										<li><span>访谈摘要</span>${article.digest}</li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+					</#list>
+					</#if>
+					
+					
+					<div class="cl"></div>
+
+					<div class="wqft">
+						<h3>
+							往期访谈<a href="">更多</a>
+						</h3>
+						<ul>
+						    <#assign articleTag = newTag("articleTag")>
+                            <#assign articleTagList = articleTag("{'name':'402881ec53c536ea0153c56b5e0b0001','count':'4'}")>
+							 <#if articleTagList?exists && articleTagList?size gt 0>
+                             <#list articleTagList as article>
+						     	<li><a href="${article.url!'javascript:void(0)'}"
+								title="${article.title}" target="_blank">${article.title}</a>
+								<span>${article.published}</span>
+							    </li>
+							 </#list>
+							 </#if>
+						</ul>
+					</div>
+
+					<div class="ftjh">
+						<h3>
+							访谈计划和预告<a href="">更多</a>
+						</h3>
+						<ul>
+							<ul>
+						    <#assign articleTag = newTag("articleTag")>
+                            <#assign articleTagList = articleTag("{'name':'402881ec53c536ea0153c56c5a360003','count':'4'}")>
+							 <#if articleTagList?exists && articleTagList?size gt 0>
+                             <#list articleTagList as article>
+						     	<li><a href="${article.url!'javascript:void(0)'}"
+								title="${article.title}" target="_blank">${article.title}</a>
+								<span>${article.published}</span>
+							    </li>
+							 </#list>
+							 </#if>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="custom-block">
+				<div class="hf" id="hf">
+					<div class="hovertitle">
+						<a 
+							data-control="content-frist" class="fthover">已回复留言</a> <a
+							
+							data-control="content-second">已回复咨询</a>
+					</div>
+					
+					<!--回复留言 -->
+					<ul class="hovercontent content-frist" id="hfly">
+						
+					</ul>
+					<!--回复资讯  -->
+					<ul class="hovercontent content-second" id="hfzx">
+					
+					</ul>
+				</div>
+				<div class="myzjb">
+					<#assign name ="catalogTag">
+					<#assign catalogTag =newTag("${name}")>
+					<#assign catalog =catalogTag("{'levels':'self','name':'402881ea53c03e640153c0553374000e'}")>
+					<#if catalog?exists>
+						<div class="hovertitle">
+							<a href="${catalog.url!'javascript:void(0);'}"
+								data-control="content-frist" class="fthover">${catalog.name}</a>
+	
+						</div>
+						<ul class="hovercontent content-frist">
+							<ul>
+							<#assign articleTag =newTag("articleTag")>
+							<#assign articleList =articleTag("{'name':'${catalog.id}',count:'6'}")>
+							<#if articleList?exists && articleList?size gt 0>
+								<#list articleList as article>
+									<li>
+										<a href="${article.url!'javascript:void(0);'}" title="${article.title}" target="_blank">${article.title}</a>
+										<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+									</li>
+								</#list>
+							</#if>
+							
+							</ul>
+						</ul>
+					</#if>
+				</div>
+				<div class="cl" style="margin-bottom:30px;"></div>
+				<br>
+			
+				<div class="wtsh">
+					<#assign name ="catalogTag">
+					<#assign catalogTag =newTag("${name}")>
+					<#assign catalog =catalogTag("{'levels':'self','name':'402881ea53c03e640153c05664040011'}")>
+					<#if catalog?exists>
+						<div class="hovertitle">
+							<a href="${catalog.url!'javascript:void(0);'}"
+								data-control="content-frist" class="fthover">${catalog.name}</a>
+	
+						</div>
+						<ul class="hovercontent content-frist">
+							<ul>
+							<#assign articleTag =newTag("articleTag")>
+							<#assign articleList =articleTag("{'name':'${catalog.id}',count:'6'}")>
+							<#if articleList?exists && articleList?size gt 0>
+								<#list articleList as article>
+									<li>
+										<a href="${article.url!'javascript:void(0);'}" title="${article.title}" target="_blank">${article.title}</a>
+										<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+									</li>
+								</#list>
+							</#if>
+							
+							</ul>
+						</ul>
+					</#if>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cl"></div>
+	<#include "/wwwroot/${sitePath}/template/common/foot.html">
+</body>
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+   
+	$(document).ready(function() {
+	      // 得到回复留言列表
+	       hfly();
+	       
+	      // 得到回复资讯列表
+	       hfzx();  
+	       
+	});
+	
+	// 得到回复留言列表
+	function hfly(){
+	  $.ajax({
+	      		 url:"${contextpath}/front/messagesFrontController.do?hdjlhfly",
+	      		 data: {},
+	      		 type: "POST",
+	      		  success : function(data){
+	      		      var obj = JSON.parse(eval(data));
+	      		      var count = obj.messagesList;
+	      		      var time=obj.dateList
+	      		      $("#hfly").empty();
+	      		      var html="";
+	                  for(var i=0;i<count.length;i++){
+	                       html+="<li><a href='${contextpath}/front/messagesFrontController.do?messageDetail&messageId="+count[i].id+"' target='_blank'>"+count[i].content+"</a>"+
+										"<span class='date'>"+time[i]+"</span></li>"
+	                   } 
+	                 $("#hfly").append(html);
+	      		  }
+	       })	 
+	}
+	
+	//得到回复资讯
+	function hfzx(){
+	      $.ajax({
+	      		 url:"${contextpath}/front/businessFrontController.do?hdjlhfzx",
+	      		 data: {},
+	      		 type: "POST",
+	      		  success : function(data){
+	      		      var obj = JSON.parse(eval(data));
+	      		      var count = obj.businessList;
+	      		      var time=obj.zxtimeList
+	      		      $("#hfzx").empty();
+	      		      var html="";
+	                  for(var i=0;i<count.length;i++){
+	                       html+="<li><a href='${contextpath}/front/businessFrontController.do?businessDetail&businessId="+count[i].id+"'>"+count[i].message+"</a>"+
+										"<span class='date'>"+time[i]+"</span></li>"
+	                   } 
+	                 $("#hfzx").append(html);
+	      		  }
+	       })	 
+	}
+	
+	
+</script>
+</html>

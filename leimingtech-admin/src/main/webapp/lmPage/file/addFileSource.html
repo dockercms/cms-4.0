@@ -1,0 +1,54 @@
+<div id="saveModel">
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">模板管理</h4>
+</div>
+	
+	<input type="hidden" id="filePath" name="filePath" value="${filePath}"> 
+	<div style="padding-left: 40px">文件名:<input type="text" id="filename" name="filename "/>.html</div><br>
+	<div style="padding-left: 40px">
+		
+		<textarea id="source" name="source" style="width:95%;height: 500px"></textarea>
+	</div>
+	<div class="modal-footer">
+	<input type="button" onclick="saveFile('fileController.do?saveSource')" class="btn btn-primary" value="提交" /> 
+	<input type="button" class="btn" data-dismiss="modal" aria-hidden="true" value="关闭" />
+</div>
+<script type="text/javascript">
+
+	function saveFile(urlStr){
+		var filename=$("#filename").val();
+		var filePath=$("#filePath").val();
+		var source=$("#source").val();
+		if(filename==''){
+		alert("请填写文件名");
+		}else{
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:{'filePath':filePath,'filename':filename,'source':source},
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess==true){
+						$('#saveModel').empty();
+    					$('#saveModel').modal('hide');
+						lmAlert(obj.msg);
+						changeDivBody('fileController.do?Table&id=' + obj.filePath, 'divBody');
+			}else{
+				lmAlert(obj.msg);
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		},
+		
+	}); 
+		}
+		
+		
+	}
+
+</script>
+</div>

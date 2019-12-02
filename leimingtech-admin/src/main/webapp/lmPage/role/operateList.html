@@ -1,0 +1,24 @@
+<div class="portlet">
+	<div class="portlet-title">
+		<div class="caption">按钮权限</div>
+		<div class="actions">
+			<button class="btn yellow" <#if funId?exists>onclick="formSubmitOperate('operationController.do?saveOperate&funId=${funId}&roleId=${roleId}')"</#if>>
+				保存 
+			</button>
+		</div>
+	</div>
+		<#if operateList?exists && operateList?size gt 0>
+	<div class="portlet-body" style="padding-left: 34px;">
+			<form id="privUrlForm" method="post">
+				<label class="checkbox"><input type="checkbox" id="checkedAll" value="">全选</label>
+				<div style="height: 19px;"></div>
+				<#list operateList as operate>
+					<label class="checkbox"><input type="checkbox" <#if (operatePrivUrl?seq_index_of(operate.operationurl) >=0)>checked="checked"</#if> name="privUrls" value="${operate.operationurl!''}">${operate.operationname!''}</label>
+				</#list>
+			</form>
+		<#else>
+	<div class="portlet-body">
+			<span style="color:red;">未加入需要权限控制的按钮</span>
+		</#if>
+	</div>
+</div>

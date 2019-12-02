@@ -1,0 +1,152 @@
+<script>
+	function toSearch4(urlStr) {
+		var keyword=document.getElementById("keyword").value;
+		var key=keyword.replace(/\s+/g,"")
+		var keyWord4 = encodeURI(key);
+		var istype=$("#istype").val();		
+		keyWord4 = encodeURI(keyWord4);
+		window.location = urlStr + "&keyword=" + keyWord4+"&siteid=${site.id}"+"&istype="+istype;
+	}
+</script>
+
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<div class="tophead">
+		<div class="headtopNav">
+			<div class="pull-left">
+				<span>欢迎访问${site.shortName}，我们会竭诚为您服务！</span> <span class="date"><script
+						src="/js/date.js"></script>
+				</span>
+			</div>
+			<div class="pull-right">
+				<a href="javascript:sethome(this,'${site.domain}');">设为首页</a>
+				<a href="javascript:addfavorite('${site.shortName}','${site.domain}');">加入收藏</a>
+			</div>
+		</div>
+	</div>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="logo" href="/images/安徽出入境检验检疫局.html"><img
+				src="/images/logo.png" alt="安徽出入境检验检疫局">
+			</a>
+			<div class="alg">
+				<img src="/images/201564162355.gif" alt="安徽出入境检验检疫局">
+				<!-- <img src="http://www.ahciq.gov.cn/images1/logo.png" alt="安徽出入境检验检疫局"> -->
+			</div>
+		</div>
+		<div class="cl"></div>
+		<div class="nav">
+			<div class="navbar-inner">
+				<ul>
+					<li class=""><a href="/">首页</a></li>
+					<!--新闻资讯-->
+					<#assign catalog =catalogTag("{'levels':'self','name':'402881e6539ce67f01539cf6ddf70015'}")>
+					<#if catalog?exists>
+					<li class="">
+					
+						<a href="${catalog.url!'javascript:void(0);'}" target="_blank">${catalog.name}</a>
+				
+						<ul class="sub-menu" style="display: none;">
+						 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child','count':'4'}")>
+						 	<#if catalogList?exists> 
+						 		<#list catalogList as cat>
+									
+										<li><a href="${cat.url!'javascript:void(0);'}" target="_blank">${cat.name}</a></li>
+									
+								</#list>
+							</#if>
+						</ul>
+					</li>
+					</#if>
+					<!--信息公开-->
+					
+				 <#assign catalog =catalogTag("{'levels':'self','name':'297e5018539ced7401539cf8ad590001'}")>
+					<#if catalog?exists>
+					<li class="">
+				
+						<a href="${catalog.url!'javascript:void(0);'}" target="_blank"> ${catalog.name}</a>
+					
+						<ul class="sub-menu" style="display: none;">
+						 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child'}")>
+						 	<#if catalogList?exists> 
+						 		<#list catalogList as cat>
+									
+										<li><a href="${cat.url!'javascript:void(0);'}" target="_blank">${cat.name}</a></li>
+									
+								</#list>
+							</#if>
+						</ul>
+					</li>
+					</#if>
+				<!--办事服务  -->
+					<#assign catalog =catalogTag("{'levels':'self','name':'402881e653ab70120153ab72691d0001'}")>
+					<#if catalog?exists>
+					<li class="">
+					
+						<a href="${catalog.url!'javascript:void(0);'}" target="_blank">${catalog.name}</a>
+					
+						<ul class="sub-menu" style="display: none;">
+						 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child'}")>
+						 	<#if catalogList?exists> 
+						 		<#list catalogList as cat>
+									
+										<li><a href="${cat.url!'javascript:void(0);'}" target="_blank">${cat.name}</a></li>
+									
+								</#list>
+							</#if>
+						</ul>
+					</li>
+					</#if>
+					<!--互动交流-->
+					<#assign catalog =catalogTag("{'levels':'self','name':'297e501853ac5c560153ac8269b90009'}")>
+					<#if catalog?exists>
+					<li class="">
+					
+					
+						<a href="${catalog.url!'javascript:void(0);'}" target="_blank">${catalog.name}</a>
+				
+						<ul class="sub-menu" style="display: none;">
+						 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child'}")>
+						 	<#if catalogList?exists> 
+						 		<#list catalogList as cat>
+									
+										<li><a href="${cat.url!'javascript:void(0);'}" target="_blank">${cat.name}</a></li>
+									
+								</#list>
+							</#if>
+						</ul>
+					</li>
+					</#if> 
+					
+					<!-- 辅助功能 -->
+					 <#assign catalog =catalogTag("{'levels':'self','name':'297e501853ac5c560153acccebc00010'}")>
+						<#if catalog?exists>
+						<li class="">
+							<a >${catalog.name}</a>
+			
+							<ul class="sub-menu" style="display: none;">
+							 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child'}")>
+							 	<#if catalogList?exists> 
+							 		<#list catalogList as cat>
+										
+											<li><a href="${cat.url!'javascript:void(0);'}" target="_blank">${cat.name}</a></li>
+										
+									</#list>
+								</#if>
+							</ul>
+						</li>
+						</#if> 
+				
+					
+				</ul>
+					<form class="search">
+						<input class="input"  name="keyword" id="keyword"  value="${keyword?if_exists}" placeholder="请输入关键词搜索！">
+						<select name="istype" id="istype">
+							<option value="1">标题</option>
+							<option value="2">正文</option>
+						</select>
+						<a href="javaScript:void(0)" target="_blank" onclick="toSearch4('${contextpath}/front/frontController.do?searchType');" class="submit" ></a>
+					</form>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,89 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">菜单管理</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${function?if_exists.id}"/>
+		<input type="hidden" id="id" name="TSFunction.id" value="${function?if_exists.TSFunction?if_exists.id}"/>
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>菜单名称</label>
+			<div class="controls">
+				<input type="text" id="functionName" name="functionName" class="form-control span3" data-rule-required="true" value="${function?if_exists.functionName}"/>
+				<span class="help-inline">菜单名称范围4~15位字符,且不为空</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">菜单地址</label>
+			<div class="controls">
+				<input type="text" id="functionUrl" name="functionUrl" class="form-control span3" value="${function?if_exists.functionUrl}"/>
+			</div>
+		</div>
+		<#--
+		<div class="control-group">
+			<label class="control-label">功能地址</label>
+			<div class="controls">
+				<input type="text" id="privurl" name="privurl" class="form-control span3" value="${function?if_exists.privurl}"/>
+			</div>
+		</div>
+		-->
+		<div class="control-group">
+			<label class="control-label">菜单图片</label>
+			<div class="controls">
+				<input type="hidden" id="iconclass" name="iconclass" class="form-control span3" value="${function?if_exists.iconclass}"/>
+			<i class="${function.iconclass!''}"></i> 
+				<button class="btn purple mini" type="button" onclick="toEditModelSub('selectIconController.do?showicon&selectIconBack=selectIconBack1')">选择图标</button>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">菜单顺序</label>
+			<div class="controls">
+				<input type="text" id="functionOrder" name="functionOrder" class="form-control span3" value="${function?if_exists.functionOrder!'110'}"/>
+				<span class="help-inline">菜单排序需要三位数，例如：100</span>
+			</div>
+		</div>
+	</form>
+	<!-- END FORM-->
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="formSubmitFunction('menuController.do?update', 'form_sample_2');" class="btn btn-primary" value="提交">  
+    <input type="button" class="btn" value="取消" data-dismiss="modal">  
+</div>
+<div id="toEditModelSub" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="700" data-height="450">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+function toEditModelSub(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+function selectIconBack1(iconclass){
+	$("#form_sample_2 #iconclass").val(iconclass).next().attr("class",iconclass);
+};
+</script>

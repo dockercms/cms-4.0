@@ -1,0 +1,92 @@
+
+
+	<!-- BEGIN SAMPLE FORM PORTLET-->   
+	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">编辑</h4>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label">名称</label>
+					<div class="controls">
+						<input type="text" id="customName" name="customName" class="form-control span3" onblur="checkNull('customName')" value="${territory?if_exists.customName}"/>
+						<span class="help-inline" id="span_customName">名称范围1~10位字符,且不为空</span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">描述</label>
+					<div class="controls">
+						<input type="text" id="description" name="description" class="form-control span3" value="${territory?if_exists.description}"/>
+						<span class="help-inline"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">排序</label>
+					<div class="controls">
+						<input type="text" id="sustomSort" name="sustomSort" class="form-control span1" value="${territory.sustomSort!0}"/>
+						<span class="help-inline">(数字越大越靠前)</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="id" name="id" value="${territory?if_exists.id}"/>
+					<input type="hidden" id="id" name="TSCustom.id" value="${territory?if_exists.TSCustom?if_exists.id}"/>
+					<button type="button" onclick="formSubmitModel2Div('custormController.do?update', 'form', 'divBody', 'territoryController.do?territoryTable&id=${selectId}','${selectId}');" class="btn btn-primary">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">关闭</button>                            
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+	</div>
+	<!-- END SAMPLE FORM PORTLET-->
+
+
+
+
+	
+<script>
+//FormComponents.init();
+var cusnameFlag = true;
+function checkNull(name){
+	var value = $("#"+name).val();
+	var len = $("#"+name).val().length;
+	if(value== null || value == "" || len <2 || len >10){
+		$('#'+name).css('border','solid 1px #990033');
+		$('#span_'+name).css('color','#990033');
+		cusnameFlag = false;
+	}else{
+		$('#'+name).removeAttr("style");
+		$('#span_'+name).removeAttr("style");
+		cusnameFlag = true;
+	}
+}
+function formSubmitModel2Div(urlStr, formName, returnUrl, selectId){
+	if(cusnameFlag){
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:$('#' + formName).serialize(),
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					$('#editModel').modal('hide');
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					lmAlert(obj.msg);
+					lazyChangePage(toUrl);
+				}else{
+					lmAlert("提交处理失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交通讯失败!");
+			}
+		});
+	}
+}
+</script>

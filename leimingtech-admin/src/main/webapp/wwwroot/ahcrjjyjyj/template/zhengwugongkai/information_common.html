@@ -1,0 +1,556 @@
+
+<!-- saved from url=(0046)http://www.ahciq.gov.cn/zhengwu/zfxxgkzd.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${catalogF.name}</title>
+<link rel="stylesheet" href="/zfxxgk/css/zwmain.css" type="text/css">
+<script src="/js/jquery.js"></script>
+<script>
+	function toSearch4(urlStr) {
+		
+		var keyword=document.getElementById("keyword").value;
+		var key=keyword.replace(/\s+/g,"")
+		var keyWord4 = encodeURI(key);
+		keyWord4 = encodeURI(keyWord4);
+		var istype=$("#ttype").val();
+		window.location = urlStr + "&keyword=" + keyWord4+ "&catid=297e501853bbaffe0153bbb5f36c0001"+"&istype="+istype;
+	}
+</script>
+</script>
+<script type="text/javascript">
+$(document).ready(function (){
+
+    $("#i_div a").click(function(){
+       $("#i_div a").removeClass("i_div_a");
+        $(this).addClass("i_div_a");
+    }); 
+});
+
+</script>
+<script type="text/javascript"> 
+function tree(id){
+	if($("#i_div"+id+"").css("display")=="none"){
+		$("#i_div"+id+"").show();
+		document.getElementById("j_img"+id+"").src="/zfxxgk/images/minusbottom.gif";
+		document.getElementById("i_img"+id+"").src="/zfxxgk/images/folderopen.gif";
+	
+		}else{
+		$("#i_div"+id+"").hide();
+		document.getElementById("j_img"+id+"").src="/zfxxgk/images/plusbottom.gif";
+		document.getElementById("i_img"+id+"").src="/zfxxgk/images/folder.gif";
+		}
+}
+
+function displayTip(id) 
+{ var x = event.x;
+document.getElementById(id).style.left = x + 20 ;
+document.getElementById(id).style.display='block'; 
+} 
+function hideTip(id) 
+{ 
+document.getElementById(id).style.display='none'; 
+} 
+function killerrors() { 
+
+return true; 
+} 
+window.onerror = killerrors;
+
+function list(id){
+	for(var i=1,len=7;i<len;i++){
+		document.getElementById('cd_'+i).className="font9";		
+	}
+//document.getElementById('ml').style.display="none";
+if(id==2){//document.getElementById('ml').style.display="block";
+}
+document.getElementById('cd_'+id).className="font9red";
+}
+</script>
+<style>
+.Tip {
+	width: 500;
+	z-index: 999;
+}
+
+.Tip table {
+	width: 100%;
+	font-size: 12px;
+}
+
+td {
+	font-size: 13px;
+}
+
+a {
+	text-decoration: none;
+	color: #000
+}
+
+.white,.white a {
+	color: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.font9 {
+	background-image: url(/zfxxgk/images/left_off.jpg);
+	padding-left: 60px
+}
+
+.font9,.font9 a,.font9red,.font9red a {
+	font-size: 13px;
+	line-height: 35px;
+	overflow: hidden;
+	text-decoration: none
+}
+
+.font9 a {
+	color: black
+}
+
+.font9red a {
+	color: #B9000A;
+	font-weight: bold
+}
+
+.font9red {
+	background-image: url(/zfxxgk/images/left_on.jpg);
+	padding-left: 60px
+}
+
+.font10,.font10 td,.font10 a {
+	font-size: 13px;
+}
+
+.i_div_a {
+	font-weight: bold;
+}
+</style>
+<script>var lmid=536;</script>
+<script>var newsid=0;</script>
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0"
+	marginwidth="0" marginheight="0">
+	<#assign name="catalogTag"> 
+	<#assign catalogTag=newTag("${name}")>
+	<#include "/wwwroot/${sitePath}/template/common/head_gov.html">
+
+	<table width="1000" border="0" cellspacing="0" cellpadding="0"
+		align="center" style="margin-top:15px;">
+		<tbody>
+			<tr>
+				<td width="250" valign="top">
+					<table width="238" border="0" cellspacing="1" cellpadding="1"
+						bgcolor="#CCCCCC">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><img src="/zfxxgk/images/left_1.jpg" width="238"
+													height="35"></td>
+											</tr>
+											<tr>
+												<td style="padding:10px;">
+													<table width="217" border="0" cellspacing="6"
+														cellpadding="0" align="center">
+														<tbody>
+															<#assign catalog=catalogTag("{'name':'297e501853bbaffe0153bbba1a130003','levels':'self'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_1" height="35" class="font9red"
+																	onmouseover="javascript:list(1)">
+																	<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbaadb60005'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_2" height="35" class="font9"
+																	onmouseover="javascript:list(2)"><a>${catalog.name}</a>
+																</td>
+															</tr>
+															<tr id="ml" class="font10">
+																<td style="padding-left:10px">
+																<#assign catChildList=catalogTag("{'levels':'child','name':'297e501853bbaffe0153bbbaadb60005'}")>
+																	<#if catChildList?exists && catChildList?size gt 0>
+																	<div id="i_div" style="display: block;">
+																		<#list catChildList as catChlid> 
+																		<#assign catThirdList=catalogTag("{'levels':'child','name':'${catChlid.id}'}")>
+																		<#if catThirdList?exists && catThirdList?size gt 0>
+																		<table cellpadding="0" cellspacing="0" border="0">
+																			<tbody>
+																				<tr>
+																					<td nowrap="">
+																						<img
+																						src="/zfxxgk/images/plusbottom.gif" border="0"
+																						align="absbottom" name="j_img1"
+																						id="j_img${catChlid_index}"
+																						onclick="tree(${catChlid_index})"> 
+																						<a href="${catChlid.url!'javascript:void(0);'}"
+																						target="_blank">
+																						<img src="/zfxxgk/images/folder.gif" border="0"
+																							align="absbottom" id="i_img${catChlid_index}"
+																							name="i_img1" class="t0im">${catChlid.name}
+																						</a>
+																				    </td>
+																				</tr>
+																			</tbody>
+																		</table>
+
+																		<div id="i_div${catChlid_index}"
+																			style="display: none;">
+																			<#list catThirdList as catThird>
+																			<table cellpadding="0" cellspacing="0" border="0">
+																				<tbody>
+																					<tr>
+																						<td nowrap=""><img
+																							src="/zfxxgk/images/line.gif" border="0"
+																							align="absbottom"> <img
+																							src="/zfxxgk/images/joinbottom.gif" border="0"
+																							align="absbottom"> <a
+																							href="${catThird.url!'javascript:void(0);'}"
+																							target="_blank"> <img
+																								src="/zfxxgk/images/page.gif" border="0"
+																								align="absbottom" name="i_img2" class="t0im">${catThird.name}
+																						</a></td>
+
+																					</tr>
+																				</tbody>
+																			</table>
+																			</#list>
+																		</div>
+																		<#else>
+																		<table cellpadding="0" cellspacing="0" border="0">
+																			<tbody>
+																				<tr>
+																					<td nowrap=""><img
+																						src="/zfxxgk/images/joinbottom.gif" border="0"
+																						align="absbottom"> <a
+																						href="${catChlid.url!'javascript:void(0);'}"
+																						target="_blank"> <img
+																							src="/zfxxgk/images/page.gif" border="0"
+																							align="absbottom" name="i_img72" class="t0im">${catChlid.name}
+																					</a></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																		</#if> 
+																		</#list>
+																	</div> 
+																</#if>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catalog=catalogTag("{'name':'297e501853bbaffe0153bbbb1c890007','levels':'self'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_3" height="35" class="font9"
+																	onmouseover="javascript:list(3)"><a
+																	href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbbcce8000a'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_4" height="35" class="font9"
+																	onmouseover="javascript:list(4)"><a>${catalog.name}</a>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catChildList=catalogTag("{'name':'297e501853bbaffe0153bbbbcce8000a','levels':'child'}")>
+															<#if catChildList?exists && catChildList?size gt 0>
+															<tr id="m2" class="font10">
+																<td style="padding-left:10px" align="right">
+																	<table width="80%" border="0" cellspacing="0"
+																		cellpadding="0">
+																		<tbody>
+																		    <#list catChildList as catChild>
+																			<tr>
+																				<td height="25"><a
+																					href="${catChild.url!'javascript:void(0);'}">${catChild.name}</a>
+																				</td>
+																			</tr>
+																			</#list>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catalog=catalogTag("{'name':'297e501853bbaffe0153bbbd8475000c','levels':'self'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_5" height="35" class="font9" onmouseover="javascript:list(5)">
+																	<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+																</td>
+															</tr>
+															</#if>
+															
+															<#assign catalog=catalogTag("{'name':'297e5018540866970154091c05bd0002','levels':'self'}")>
+															<#if catalog?exists>
+															<tr>
+																<td id="cd_6" height="35" class="font9"
+																	onmouseover="javascript:list(6)"><a
+																	href="${catalog.url!'javascript:void(0);'}" target="_blank">${catalog.name}</a>
+																</td>
+															</tr>
+															</#if>
+															
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td valign="top" align="right">
+					<table width="748" border="0" cellspacing="1" cellpadding="1"
+						bgcolor="#CCCCCC">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="748" border="0" cellspacing="1" cellpadding="1"
+										bgcolor="EFEFEF">
+										<tbody>
+											<tr>
+												<td height="34" align="center"><table width="500"
+														border="0" cellpadding="0" cellspacing="0">
+														<form name="formzw" method="post"
+															action="http://data.ahciq.gov.cn/zwsearch.shtml"></form>
+														<tbody>
+															<tr>
+																<td width="80"><img src="/zfxxgk/images/msg.gif"
+																	width="64" height="21">
+																</td>
+																
+																	
+																<td width="71">关键字：</td>
+																<td width="89">
+																	<select name="ttype" id="ttype">
+																		<option  value="1">标题</option>
+																		<option value="2">正文</option>
+																	</select>
+																</td>
+																
+																<td width="160">
+																   <input type="text" id="keyword" name="keyword" value="${keyword?if_exists}">
+																</td>
+																
+																<td width="100">
+																	
+																	<input type="image" border="0" name="imageField"  target="_blank"
+																	onclick="toSearch4('${contextpath}/front/frontController.do?searchType');" 
+																	class="submit" src="/zfxxgk/images/sousuo.gif">
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table width="748" border="0" cellspacing="1" cellpadding="1"
+						bgcolor="#CCCCCC" style="margin-top:10px">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="748" border="0" cellspacing="1" cellpadding="1">
+										<tbody>
+											<tr>
+												<td height="34" background="/zfxxgk/images/mid.jpg"
+													class="font10" style="padding-left:10px;font-weight:bold">
+													当前位置： <a href="/">首页</a> &gt; 
+													<#assign catalog=catalogTag("{'name':'297e501853bbaffe0153bbbaadb60005','levels':'self'}")>
+													<#if catalog?exists>
+													<a href="${catalog.url!'javascript:void(0);'}">政务公开</a> &gt;
+													</#if>
+													
+													<#assign navTag =newTag("navTag")> 
+													<#assign navTagList=navTag("{'name':'${catalogF.id}','levels':'self'}")>
+													<#if navTagList?exists>
+													<#list navTagList as navTag> 
+													<#if catalogF.id==navTag.id>
+														<font color="red">${navTag.name}</font>
+													</#if> 
+													</#list> 
+													</#if>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td>
+													<#assign articleTag=newTag("articleTag")> 
+													<#assign articleList=articleTag("{'name':${catalogF.id}}")> 
+													<#if articleList?exists && articleList?size gt 0> 
+													<#if articleList?size==1> 
+													<#list articleList as article> 
+													<#if article.atriles?exists>
+													<table width="100%" border="0" cellspacing="0"
+														cellpadding="0">
+														<tbody>
+															<tr>
+																<td align="center" class="title3">${article.title}</td>
+															</tr>
+															<tr>
+																<td>
+																	<table width="100%" border="0" cellspacing="0"
+																		cellpadding="10">
+																		<tbody>
+																			<tr>
+																			${article.atriles}
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+														</tbody>
+													</table> 
+													</#if> 
+													</#list> 
+													</#if> 
+													</#if>
+													<#assign articleTag=newTag("articleTag")>
+													<#assign articleList=articleTag("{'name':'${catalogF.id}','level':'all'}")>
+													<#if articleList?exists && articleList?size gt 1>
+													<table width="100%" border="0" cellspacing="1"
+														cellpadding="1" bgcolor="#CCCCCC">
+														<tbody>
+															<tr>
+																<td background="/zfxxgk/images/mid_1.jpg" height="32">
+																	<table width="100%" border="0" cellpadding="0"
+																		cellspacing="0" height="32">
+																		<tbody>
+																			<tr>
+																				<td align="center"><strong>标题</strong></td>
+																				<td width="25%" align="center"><strong>索引号</strong>
+																				</td>
+																				<td width="15%" align="center"><strong>发布时间</strong>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<table width="100%" border="0" cellspacing="0"
+														cellpadding="2" bgcolor="#ffffff">
+														<tbody>
+															<#list articleList as article>
+															<tr>
+																<td class="list">&#8226; <a
+																	href="${article.url!'javascript:void(0);'}"
+																	onmouseover="displayTip(&#39;Tip11982&#39;);"
+																	onmouseout="hideTip(&#39;Tip11982&#39;);"
+																	target="_blank" title="${article.title}">${article.title}</a>
+																	<div id="Tip11982" class="Tip"
+																		style="width:350px;BORDER-RIGHT: 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: 1px solid; DISPLAY: none; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.dropshadow(OffX=4, OffY=4, Color=&#39;gray&#39;, Positive=true); PADDING-BOTTOM: 5px; BORDER-LEFT: 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: 1px solid; POSITION: absolute; BACKGROUND-COLOR: white">
+																		<table border="0" cellspacing="0" cellpadding="0"
+																			style="width:100%;">
+																			<tbody>
+																				<tr>
+																					<td width="70"><strong>索&nbsp;引&nbsp;号</strong>：</td>
+																					<td>002992525/201011-00032</td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>分&nbsp;&nbsp;&nbsp;&nbsp;类</strong>：</td>
+																					<td>政府信息公开制度</td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>发布机构</strong>：</td>
+																					<td>${site.siteName}</td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>发文日期</strong>：</td>
+																					<td><#if
+																						article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>名&nbsp;&nbsp;&nbsp;&nbsp;称</strong>：</td>
+																					<td colspan="3">${article.title}</td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>文&nbsp;&nbsp;&nbsp;&nbsp;号</strong>：</td>
+																					<td></td>
+																				</tr>
+																				<tr>
+																					<td width="70"><strong>关&nbsp;键&nbsp;词</strong>：</td>
+																					<td>${article.tags}</td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</td>
+																<td width="25%" align="center" class="list">002992525/201011-00032</td>
+																<td width="15%" align="center" class="list"><#if
+																	article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></td>
+															</tr>
+															</#list> 
+														</tbody>
+													</table>
+													
+													<table width="90%" border="0" cellspacing="5"
+														cellpadding="0">
+														<tbody>
+															<tr>
+																<td align="center">
+																	<table width="100%" border="0" cellspacing="0"
+																		cellpadding="0">
+																		<form name="formarticle" method="post" action=""></form>
+																		<tbody>
+																			<tr>
+																				<td align="right" height="23">${pagebar}</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																	</td>
+															</tr>
+														</tbody>
+													</table>
+													</#if>
+													
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="960" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					<hr size="1" color="#bed8f1" noshade="">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<#include "/wwwroot/${sitePath}/template/common/foot_gov.html">
+</body>
+</html>

@@ -1,0 +1,140 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">评论广告</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="commentAdvertising_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${commentAdvertising.id?if_exists}"/>
+		<input type="hidden" id="siteId" name="siteId" value="${siteId?if_exists}"/>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>广告名称</label>
+			<div class="controls">
+				<input type="text" id="name" name="name" class="span3 form-control" data-rule-required="true" value="${commentAdvertising.name?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" id="pickerLabel">图片资源</label>
+			<div class="controls left" id="uploaderImage">
+				<input class="form-control span2"  type="text" id="backpath" name="imageUrl" value="${commentAdvertising.imageUrl?if_exists}"/>
+				<div class="btn" type="button green" id="picker"  style="padding:0px !important;">上传</div>
+				<button class="btn" type="button" onclick="showPictureModal('attachPictureController.do?tableDialog')">图片库</button>
+			</div>
+		</div>
+		<div class="control-group" id="whsize">
+			<label class="control-label">尺寸</label>
+			<div class="controls">
+				<input class="span1 form-control" type="text" id="imageWidth" name="imageWidth" value="${commentAdvertising.imageWidth!''}"/>
+				宽
+				<input class="span1 form-control" type="text"  id="imageHeigh" name="imageHeigh" value="${commentAdvertising.imageHeigh!''}"/>
+				高
+				<span class="help-inline">(宽×高)</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">链接提示</label>
+			<div class="controls">
+				<input type="text" id="linkRemark" name="linkRemark" class="span3 form-control" value="${commentAdvertising.linkRemark?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">接链目标</label>
+			<div class="controls">
+				<label class="radio">
+					<input id="im" type="radio" name="linkTarget" value="0" onclick="" <#if !commentAdvertising.linkTarget?if_exists || commentAdvertising.linkTarget =='0'>checked</#if>>新窗口
+				</label>
+				<label class="radio">
+					<input id="fl" type="radio" name="linkTarget" value="1" onclick="" <#if commentAdvertising.linkTarget =='1'>checked</#if>>原窗口
+				</label>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">链接地址</label>
+			<div class="controls">
+				<input type="text" id="linkUrl" name="linkUrl" class="span3 form-control" value="${commentAdvertising.linkUrl?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">权重</label>
+			<div class="controls">
+				<input type="text" id="weight" name="weight" class="span3 form-control" value="${commentAdvertising.weight?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">开始时间</label>
+			<div class="controls">
+				<input onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" class="Wdate" type="text" id="startTime" name="startTime" value="${commentAdvertising.startTime?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">结束时间</label>
+			<div class="controls">
+				<input onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" class="Wdate" type="text" id="endTime" name="endTime" value="${commentAdvertising.endTime?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">是否启用</label>
+			<div class="controls">
+				<label class="radio">
+					<input id="dx" type="radio" name="isUsing" value="1" <#if !commentAdvertising.isUsing?if_exists || commentAdvertising.isUsing =='1'>checked</#if>/>是
+				</label>
+				<label class="radio">
+					<input id="ddx" type="radio" name="isUsing" value="0"  <#if commentAdvertising.isUsing =='0'>checked</#if> />否
+				</label>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('commentAdvertisingController.do?save', 'commentAdvertising_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<div id="showPictureModal" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="800"></div>
+<script>
+	function showPictureModal(url){
+		toEditModel(url,$("#showPictureModal"));
+	}
+
+	function selectPictureBack(){
+		var result = $("input[name='path']:checked").val();
+		$("#backpath").val(result);
+		$('#showPictureModal').modal('hide');
+	}
+	var pathid;
+	var uploader = WebUploader.create({
+
+		// 选完文件后，是否自动上传。
+		auto: true,
+
+		// swf文件路径
+		swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+		// 文件接收服务端。
+		server: 'controller.jsp?action=uploadimage',
+
+		// 选择文件的按钮。可选。
+		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		pick: '#picker',
+
+		// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+		resize: false,
+
+		// 只允许选择图片文件。
+		accept: {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+		}
+	});
+
+	//当文件上传成功时触发
+	uploader.on('uploadSuccess', function(file, Object) {
+		$("#backpath").val(Object.url);
+		uploader.removeFile(file,true);
+	});
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#commentAdvertising_form").myValidate();
+});
+</script>

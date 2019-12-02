@@ -1,0 +1,8 @@
+
+.sp_pic .sp_button { position:absolute; top:30px; left:65px; width:100px; height:60px;filter:alpha(opacity=60); opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_buttons { position:absolute;  margin-left: 60px; margin-top: -89px; width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_button2 { position:absolute; margin-top: 161px;margin-left: 302px;width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_button3 { position:absolute;  margin-left: 60px; margin-top: -96px; width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_button4 { position:absolute;  margin-left: 163px; margin-top: -115px; width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_button5 { position:absolute;  margin-left: 419px; margin-top: -212px; width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}
+.sp_button6 { position:absolute;  margin-left: 44px; margin-top: -84px; width:76px;   height: 60px;opacity:0.6;background:url(images/spicon.png) no-repeat 0px 0px}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video.js | HTML5 Video Player</title>
+
+  <!-- Chang URLs to wherever Video.js files will be hosted -->
+  <link href="media/css/video-js.css" rel="stylesheet" type="text/css">
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="media/js/video.js"></script>
+
+  <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+  <script>
+    videojs.options.flash.swf = "video-js.swf";
+	
+    function GetArgs(params,paramName){     
+		var argsIndex = params.indexOf("?");     
+		var arg = params.substring(argsIndex+1);     
+		args = arg.split("&");     var valArg = "";     
+		for(var i =0;i<args.length;i++){     
+			str = args[i];     
+			var arg = str.split("=");           
+			if(arg.length<=1) continue;         
+			if(arg[0] == paramName){             
+				valArg = arg[1];         
+			}     
+		}     
+		return valArg; 
+	} 
+	window.onload = function (){
+    	var source = document.getElementById("sou1");
+		var attr = GetArgs(window.location.href,"videoUrl");
+		var prtW = window.opener;
+		var prtA;
+		if(prtW!=null){
+			prtA = prtW.document.getElementById(attr).value;
+			//alert(prtA);
+		}
+		source.src="http://"+prtA;
+    };
+    var myPlayer = videojs('example_video_1');
+    videojs("example_video_1").ready(function(){
+        var myPlayer = this;
+        myPlayer.play();
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
+      poster="http://video-js.zencoder.com/oceans-clip.png"
+      data-setup="{}">
+    <source src="" type='video/mp4' id="sou1"/>
+    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+    <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+  </video>
+
+</body>
+</html>

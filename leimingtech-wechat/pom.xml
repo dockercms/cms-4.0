@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.leimingtech.lmcms</groupId>
+		<artifactId>leimingtech</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>com.leimingtech.lmcms</groupId>
+	<artifactId>leimingtech-wechat</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>leimingtech-wechat</name>
+	<description>leimingtech-wechat</description>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-cp</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<!-- commons-codec 此依赖包遇第三方qq登录Sdk4J-0.0.1.jar包有冲突，故放在前面,以避免冲突 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.leimingtech.lmcms</groupId>
+			<artifactId>leimingtech-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.leimingtech.lmcms</groupId>
+			<artifactId>leimingtech-cms</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+        <finalName>leimingtech-wechat</finalName>
+    </build>
+</project>

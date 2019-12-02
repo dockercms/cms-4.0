@@ -1,0 +1,25 @@
+<#if list?exists>
+	<#list list as function>
+		<#if (function.contentCats?size >0) > 
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('contentCatController.do?list4tree&departid=${function.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="arrow "></span>
+				</a>
+				<ul class="sub-menu">
+				<#assign list=function.contentCats/>
+					<#include "/lmPage/main/leftcontentCatTree.html">
+				</ul>
+			</li>
+		<#else>
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('contentCatController.do?list4tree&departid=${function.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>		
+		

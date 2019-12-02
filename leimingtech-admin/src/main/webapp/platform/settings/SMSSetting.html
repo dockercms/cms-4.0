@@ -1,0 +1,86 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->   
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>
+					<span class="hidden-480">短信设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#portlet_tab1" data-toggle="tab">短信设置</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+							<form id="smssetting_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">短信账号：</label>
+									<div class="controls">
+										<input type="text" id="smsUsername" name="smsUsername" class="span6 m-wrap" value="${smsUsername}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">短信密码：</label>
+									<div class="controls">
+										<input type="text" id="smsPassword" name="smsPassword" class="span6 m-wrap" value="${smsPassword}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">测试手机：</label>
+									<div class="controls">
+										<input name="testmobile" id="testmobile" type="text" class="span6 m-wrap"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<a href="javascript:void(0);" onclick="testMobile('configSettingController.do?testSMS');" class="btn blue btn-sm"><i class="icon-search"></i>测试</a>
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?SMSSave', 'smssetting_form');" class="btn blue btn-sm"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT--> 
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	});
+	
+	//测试方法
+	function testMobile(urlStr){
+		var testmobile = $('#testmobile').val();
+		alert(testmobile);
+		if(testmobile!=''){
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:'testmobile=' + testmobile,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						alert(obj.msg);
+					}else{
+						alert("发送失败!");
+					}
+				},
+				error:function(){
+					alert("提交通讯失败!");
+				}
+			});
+		}else{
+			alert('请填写测试邮箱！');
+		}
+	}
+</script>

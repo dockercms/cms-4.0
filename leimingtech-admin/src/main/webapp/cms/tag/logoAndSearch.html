@@ -1,0 +1,36 @@
+<div class="div_top">
+  <div class="div_main">
+    <div class="div_logo"><img src="/lmcms/media/dgsw/img/logo2.png" width="481" height="99" /></div>
+    <div class="div_topbtns">
+      <div class="div_lang">
+        <table cellpadding="1" border="0" cellspacing="0">
+          <tr>
+            <td width="68"><a href="#" class="act">简体中文</a></td>
+            <td width="68"><a href="#">繁体中文</a></td>
+            <td width="68"><a href="#">English</a></td>
+          </tr>
+        </table>
+      </div>
+      <div class="div_search">
+        <table align="right" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="217">
+            <input id="keyword1" value="${keyword?if_exists}" name="keyword" autocomplete="off">
+            </td>
+            <td><a href="javaScript:void(0)" onclick="toSearch1('/frontController.do?search');"><img src="/lmcms/media/dgsw/img/btn-search.png" width="24" height="22" onmouseover="changepic(this,'/media/dgsw/img/go.png')" onmouseout="changepic(this,'media/dgsw/img/btn-search.png')" /></a></td>
+          </tr>
+        </table>
+      </div>
+      <div class="div_login"><a href="#" class="r">用户登录</a><a href="#" class="l">用户注册</a></div>
+    </div>
+  </div>
+</div>
+<script>
+function toSearch1(urlStr){
+	var keyWord1 = encodeURI(document.getElementById("keyword1").value);
+	keyWord1 = encodeURI(keyWord1);
+	//var beginTime = document.getElementById("begintime").value;
+	//var endTime = document.getElementById("endtime").value;
+	window.location = urlStr+"&keyword="+keyWord1;
+}
+</script>

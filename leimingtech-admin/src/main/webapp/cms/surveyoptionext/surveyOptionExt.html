@@ -1,0 +1,135 @@
+<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+	<h4 class="modal-title">调查选项内容</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<input type="hidden" id="optionVId" name="optionVId" value="${optionVId}"/>
+		<input type="hidden" id="surveyOptionId" name="surveyOptionId" value="${surveyOptionId}"/>
+		<input type="hidden" id="optionsid" name="optionsid" class="span3 form-control" value="<#if page.optionsid==''>${optionVId}</#if><#if page.optionsid!=''>${page.optionsid?if_exists}</#if>"/>
+				
+		<div class="control-group">
+			<label class="control-label">选项名称</label>
+			<div class="controls">
+				<input type="text" id="extOptionname" name="extOptionname" class="span3 form-control" value="${page.extOptionname?if_exists}"/>
+			</div>
+		</div>
+		<#--
+		<div class="control-group">
+			<label class="control-label">选项图片</label>
+			<div class="controls">
+				<input type="text" id="extOptionpicture" name="extOptionpicture" class="span3 form-control" value="${page.extOptionpicture?if_exists}"/>
+				<a class="btn blue" href="javascript:void(0);" onclick="toEditModel('attachPictureController.do?tableDialog&fun=selectPictureBack2',$('#pictureModel2'))">
+					图片库 <i class="icon-search"></i>
+				</a>
+				<div id="uploadThumb2" class="btn green" style="padding:0px !important;">本地选取</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">数据类型</label>
+			<div class="controls">
+				<input type="text" id="extDatatype" name="extDatatype" class="span3 form-control" value="${page.extDatatype?if_exists}"/>
+			</div>
+		</div>
+		-->
+		<div class="control-group">
+			<label class="control-label">排序</label>
+			<div class="controls">
+				<input type="text" id="extSort" name="extSort" class="span1 form-control" value="${page.extSort!'0'}"/>
+				<span class="help-inline">(数字越大越靠前)</span>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="formSubmitJump('surveyOptionExtController.do?save', 'form_sample')" class="btn btn-primary" value="提交">  
+    <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+</div>
+<div id="pictureModel2" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800"></div>
+<script>
+<#--
+function selectPictureBack2(){
+	var result = $("input[name='path']:checked").val();
+	$("#extOptionpicture").val(result);
+	$('#pictureModel2').modal('hide');
+}
+-->
+function formSubmitJump(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				lmAlert(obj.msg);
+				jump(toUrl);
+			}else{
+				lmAlert("提交处理失败!");
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		}
+	});
+}
+function jump(tourl){
+	$.ajax({
+		type:'post',
+		url:tourl,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editOption').modal('hide');
+			$('#optionDiv').empty();
+			$('#optionDiv').append(msg);
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	});
+}
+<#--
+var uploaderThumb2 = WebUploader.create({
+	
+	// 选完文件后，是否自动上传。
+    auto: true,
+    
+    // swf文件路径
+    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+    // 文件接收服务端。
+    server: 'controller.jsp?action=uploadimage',
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#uploadThumb2',
+
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+    }
+});
+
+//当有文件添加进来的时候
+uploaderThumb2.on( 'uploadSuccess', function( file,Object ) {
+	$("#extOptionpicture").val(Object.url);
+});
+$(function (){
+	$("#extOptionpicture").livetip();
+});
+-->
+</script>

@@ -1,0 +1,113 @@
+
+<!-- BEGIN CHART PORTLETS-->
+<style type="text/css">
+	.unstyled a {
+		color:#077AC7;
+		font-size:15px;
+		text-decoration: none;
+		<!--background-color:#077AC7;-->
+	}
+</style>
+<script type="text/javascript">
+	$(".unstyled a").bind("hover",function(){
+		
+	});
+</script>
+<script>
+	var myDate = new Date();
+	var year = myDate.getFullYear();
+	var month = myDate.getMonth()+1;
+	jQuery(document).ready(function() {
+		var liy = document.getElementById('year');
+		var lim = document.getElementById('month');
+		//年
+		for(var i=0;i<10;i++){
+			liy.innerHTML += "<a style='margin:0px 10px 0px 10px' onclick='yearStat("+(year-i)+")'>"+(year-i)+"年</a>";
+		}
+		//月
+		for(var i=1;i<13;i++){
+			lim.innerHTML += "<a style='margin:0px 10px 0px 10px' onclick='monthStat("+i+")'>"+i+"月</a>";
+		}
+	});
+	/* 获取数据报表 */
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'metroUserController.do?loadStat',
+		data:{'year':year,'month':month},
+		success:function(data){
+			$('#statistics').empty();
+			$('#statistics').append(data);
+		}
+	});
+	/* 按年统计*/
+	function yearStat(year1){
+		$('#yearhidden').attr('value',year1);
+		var month1 = $('#monthhidden').val();
+		if(month1==""){
+			month1 = "0";
+		}
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'metroUserController.do?loadStat',
+			data:{'year':year1,'month':month1},
+			success:function(data){
+				$('#statistics').empty();
+				$('#statistics').append(data);
+			}
+		});
+	}
+	/* 按月统计*/
+	function monthStat(month1){
+		$('#monthhidden').attr('value',month1);
+		var year1 = $('#yearhidden').val();
+		if(year1==""){
+			year1 = "0";
+		}
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'metroUserController.do?loadStat',
+			data:{'year':year1,'month':month1},
+			success:function(data){
+				$('#statistics').empty();
+				$('#statistics').append(data);
+			}
+		});
+		
+	}
+	
+</script>
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN STACK CHART CONTROLS PORTLET-->
+		<div class="portlet box yellow">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>工作报表</div>
+				
+			</div>
+			<input type="hidden" id="yearhidden" >
+			<input type="hidden" id="monthhidden" >
+			
+			<div class="portlet-body">
+					<ul class="unstyled">
+						<li id="year" style="margin-bottom:10px;border-bottom:1px dashed #ddd;">
+							<span style="font-weight:bold;font-size:16px;margin-left:20px;">年份：</span>
+							<a id="y1" onclick="yearStat('0')">全部</a>
+						</li>
+						<li id="month" style="margin-bottom:-1px;margin-bottom:10px;border-bottom:1px dashed #ddd;">
+							<span style="font-weight:bold;font-size:16px;margin-left:20px">月份：</span>
+							<a id="m1" onclick="monthStat('0')">全部</a>
+						</li>
+						
+					</ul>
+				 <div id="statistics"></div>
+			 	
+			</div>
+		</div>
+		<!-- END STACK CHART CONTROLS PORTLET-->
+	</div>
+</div>
+
+

@@ -1,0 +1,51 @@
+<#if pageCount gt 1>
+<div class="span12">
+	<div class="dataTables_paginate paging_bootstrap pagination">
+		<ul>
+			<#if pageNo == 1>
+				<li class="prev disabled"><a href="javaScript:void(0)">首页</a></li>
+				<li class="prev disabled"><a href="javaScript:void(0)">← <span class="hidden-480">上一页</span></a></li>
+			<#else>
+				<li class="prev"><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl?if_exists}', 'searchSub_form')">首页</a></li>
+				<li class="prev"><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl?if_exists}&pageNo=${pageNo-1}', 'searchSub_form')">← <span class="hidden-480">上一页</span></a></li>
+			</#if>
+			
+			<#if (pageNo-2) gt 1>
+				<#list (pageNo-2)..(pageNo-1) as i>
+					<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${i}', 'searchSub_form')">${i}</a></li>
+				</#list>
+			<#elseif (pageNo) !=1>
+				<#list 1..(pageNo-1) as i>
+					<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${i}', 'searchSub_form')">${i}</a></li>
+				</#list>
+			</#if>
+			
+			<li class="active"><a href="javaScript:void(0)">${pageNo}</a></li>
+			
+			<#if (pageNo+3) lt pageCount>
+				<#list (pageNo+1)..(pageNo+2) as i>
+					<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${i}', 'searchSub_form')">${i}</a></li>
+				</#list>
+			<#elseif (pageNo) !=pageCount>
+				<#list (pageNo+1)..pageCount as i>
+					<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${i}', 'searchSub_form')">${i}</a></li>
+				</#list>
+			</#if>
+			
+			<#if (pageNo+3) lt pageCount>
+				<li><a href="javaScript:void(0)">...</a></li>
+				<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${pageCount-1}', 'searchSub_form')">${pageCount-1}</a></li>
+				<li><a href="javaScript:void(0)" onclick="toSearchSub('${actionUrl}&pageNo=${pageCount}', 'searchSub_form')">${pageCount}</a></li>
+			</#if>
+	
+			<#if pageNo == pageCount>
+				<li class="next disabled"><a href="javaScript:void(0)"><span class="hidden-480">下一页</span> → </a></li>
+				<li class="next disabled"><a href="javaScript:void(0)">尾页</a></li>
+			<#else>
+				<li class="next"><a href="javaScript:toSearchSub('${actionUrl}&pageNo=${pageNo+1}', 'searchSub_form')" onclick=""><span class="hidden-480">下一页</span> → </a></li>
+				<li class="next"><a href="javaScript:toSearchSub('${actionUrl}&pageNo=${pageCount}', 'searchSub_form')" onclick="">尾页</a></li>
+			</#if>
+		</ul>
+	</div>
+</div><input type="hidden" id="pageNo" value="${pageNo}"/>
+</#if>

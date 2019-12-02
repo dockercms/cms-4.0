@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title><#assign navTag =newTag("navTag")> <#assign navTagList
+	=navTag("{'name':'${catalogF.id}'}")> <#if navTagList?exists> <#list
+	navTagList as navTag> <#if catalogF.id==navTag.id> ${navTag.name}
+	</#if> </#list> </#if></title>
+<meta name="Description" content="${site.siteName}" />
+<meta name="Keywords" content="${site.siteName}" />
+<meta name="sogou_site_verification" content="duAkVpAYyr" />
+<!-- 首页样式、公用样式、js (线上已有)↓↓↓ -->
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/region.css" />
+<link href="/css/list.css" rel="stylesheet" type="text/css" />
+
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<script type="text/javascript" src="/js/indexnew.js"></script>
+<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+
+<!-- 内容页js -->
+<script src="/js/page.js"></script>
+<script type="text/javascript">
+		function choose(id){
+
+		var title=$("#title_"+id+"").val();	
+		var thumb=$("#thumb_"+id+"").val(); 
+		var url=$("#url_"+id+"").val(); 
+		var hisval=title+","+thumb+","+url+"|";
+		if(!$.cookie("history")){
+		 $.cookie("history",hisval,{ expires: 7 });	
+		 }else{
+		  var oldval=$.cookie("history");
+		  if(oldval.indexOf(hisval)==-1){
+		   var newold=oldval+hisval;
+		   $.cookie("history",newold,{ expires: 7 });	
+		   }
+		   
+		  var cooike=$.cookie("history").split("|");
+		   var num="";
+		  if(cooike.length>6){
+		    cooike.splice(0,1);
+		 
+		    for(var i=0;i<cooike.length-1;i++){
+		      var value=cooike[i]+"|";
+		      num=num+value;
+		       
+		    }
+		    $.cookie("history",num,{ expires: 7 });
+		  }
+		   
+		}
+	 }	
+				 
+	$(function(){ 
+	if($.cookie("history")){
+		var historycookies=$.cookie("history").split("|");
+		var list="";
+		$("#historys").show();
+		for(var i=0;i<historycookies.length-1;i++){
+			var outval=historycookies[i].split(",");
+		
+			list+="<li><a href=\""+outval[2]+"\"><div class=\"imgCon\"><img  src=\""+outval[1]+"\"></div><div class=\"imgText\">"+outval[0]+"</div></a></li>"
+				}
+	    $("#News1").html(list);
+  	}
+  });	
+ 
+ function select(){
+ var url=window.location.href;
+ var linkArry=$("#second.screening-con").find("a");
+	 linkArry.each(function(){
+	 var  winurl=window.location.protocol+"//"+window.location.host+$(this).attr("href");
+		 if(winurl==url){
+		  $(this).css("color","#05780a");
+		  }
+	 });
+ 
+ }
+ /*  var parid=$(this).siblings("#childid").val();
+  $("#"+parid).siblings("a").css("color","red"); */
+
+</script>
+
+<!-- 我是分割线 -->
+
+<!-- 内容页样式-必须放到首页样式以下 -->
+<link rel="stylesheet" href="/css/page.css">
+
+</head>
+<body onload="select()">
+	<!-- 头部暂时引用↓↓↓↓↓ -->
+	<#include "/wwwroot/${sitePath}/template/common/index_nav.html"> <#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+	<!-- 头部暂时引用↑↑↑↑↑↑↑ -->
+
+	<!-- 商品列表筛选start -->
+	<div class="wrapper">
+		<div class="guideNav w1190 mtauto">
+			<a href="/">首页</a> <span>></span> <#assign navTag =newTag("navTag")>
+			<#assign navTagList =navTag("{'name':'${catalogF.id}'}")> <#if
+			navTagList?exists> <#list navTagList as navTag> <a
+				href="${navTag.url!'javascript:void(0);'}">${navTag.name}></a>
+			</#list> </#if>
+
+
+
+
+		</div>
+
+		<div class="screeningBox">
+			<div class="screening-con">
+				<dl>
+					<!-- 一级 -->
+
+					<dt>
+						<#assign catalog
+					=catalogTag("{'levels':'self','name':'4028818d518b5f0e01518b75758d000b'}")>
+					<#if catalog?exists>
+						<em> <a  href="${catalog.url!'javascript:void(0);'}" style="color:#05780a;">全部类别</a> </em>
+						</#if>
+					</dt>
+
+					<dd></dd>
+				</dl>
+			</div>
+
+
+			<#assign name ="catalogTag"> <#assign catalogList
+			=catalogTag("{'name':'4028818d518b5f0e01518b75758d000b','levels':'child'}")>
+			<#if catalogList?exists> <#list catalogList as catList>
+			<div id="second" class="screening-con"
+				style="border-top:1px solid #dddddd;">
+				<dl>
+					<!-- 二级 -->
+					<dt style="padding-left: 0px">
+						<em><a id="parent_${catList.id}"
+							style="background: #05780a;color: #fff;text-align: center;"
+							href="${catList.url!'javascript:void(0);'}">${catList.name!''}:</a><input
+							type="hidden" id="${catList.id!''}" value= /> </em>
+
+					</dt>
+					<dd>
+						<!-- 三级 -->
+						<div class="screening-list" id="mydiv">
+							<#assign name ="catalogTag"> <#assign catalogListchild
+							=catalogTag("{'name':'${catList.id!''}','levels':'child'}")> <#if
+							catalogListchild?exists> <#list catalogListchild as catchild> <em><a
+								id="child_${catchild.id}"
+								href="${catchild.url!'javascript:void(0);'}">${catchild.name!''}</a>&nbsp;&nbsp;
+								<input type="hidden" id="childid"
+								value="${catchild.contentCat.id!''}" /> </em> </#list> </#if>
+
+						</div>
+					</dd>
+				</dl>
+			</div>
+			</#list> </#if>
+		</div>
+
+		<div class="information clearfix">
+			<div class="goods-left">
+				<#assign articleTag =newTag("articleTag")> <#assign articleList
+				=articleTag("{'name':'${catalogidF}','page':true,
+				'pageindex':'${pageindexF}','level':'all'}")> <#if
+				articleList?exists && articleList?size gt 0>
+				<ul class="clearfix productList goods-productList"
+					style="display: block;">
+
+					<#list articleList as article>
+					<li class="hot_51"><input type="hidden"
+						id="thumb_${article.id}" value="${article.thumb!''}" /> <input
+						type="hidden" id="url_${article.id}" value="${article.url!''}" />
+						<input type="hidden" id="title_${article.id}"
+						value="${article.title!''}" /> <a
+						href="${article.url!'javascript:void(0);'}"
+						onclick="choose('${article.id}')">
+							<div class="imgCon">
+								<img src="${article.thumb}">
+							</div>
+							<div class="imgText">${article.title}</div> </a>
+					</li> </#list> <#else> 无数据 </#if>
+
+
+
+				</ul>
+				${pagebar}
+
+			</div>
+
+
+
+
+
+			<div class="infor-left goods-right">
+				<div class="imgActivity_r infor-box" id="historys"
+					style="display: none;">
+					<strong class="infor-title">浏览历史</strong>
+					<ul class="clearfix infor-productList" id="News1">
+
+
+
+					</ul>
+				</div>
+
+
+				<div class="imgActivity_r infor-box">
+					<strong class="infor-title">推荐商品</strong>
+					<ul class="infor-productList" id="News0">
+						<#assign articleTag =newTag("articleTag")> <#assign articleList
+						=articleTag("{'name':'${catalogidF}','count':'5','level':'all','order':'top'}")>
+						<#if articleList?exists && articleList?size gt 0> <#list
+						articleList as article>
+						<li><a href="${article.url!'javascript:void(0);'}">
+								<div class="imgCon">
+									<img src="	${article.thumb}">
+								</div>
+								<div class="imgText">${article.title}</div> </a>
+						</li> </#list> <#else> 无数据 </#if>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<!-- 商品列表筛选end -->
+
+	<!-- 尾部 -->
+
+	<!-- 新版底部 start -->
+
+	<div class="footer f-tac"><#include "/wwwroot/${sitePath}/template/common/footer.html"></div>
+
+</body>
+</html>
+
+
+
+

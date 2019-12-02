@@ -1,0 +1,75 @@
+<div class="toolbar">
+<div id="site_nav">
+<div id="site_nav_left2">
+<p class="site_p2">
+<a href="/" class="cu">首页</a>|
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+    <#assign channelTag =newTag("defaultCatTag")>
+        <#assign channel =channelTag()>
+            <#if site.isSwitch=='0'||channel?seq_contains("31")>
+<#assign catalog =catalogTag("{'levels':'self','name':'31'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+<#if site.isSwitch=='0'||channel?seq_contains("86")>
+<#assign catalog =catalogTag("{'levels':'self','name':'86'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("402881864e42154b014e421acfbd0003")>
+<#assign catalog =catalogTag("{'levels':'self','name':'402881864e42154b014e421acfbd0003'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("28")>
+<#assign catalog =catalogTag("{'levels':'self','name':'28'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("27")>
+<#assign catalog =catalogTag("{'levels':'self','name':'27'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("402881914f6d2c89014f6d6032d2003e")>
+<#assign catalog =catalogTag("{'levels':'self','name':'402881914f6d2c89014f6d6032d2003e'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("79")>
+<#assign catalog =catalogTag("{'levels':'self','name':'79'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("76")>
+<#assign catalog =catalogTag("{'levels':'self','name':'76'}")>
+<#if catalog?exists>
+    <a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+            <#if site.isSwitch=='0'||channel?seq_contains("81")>
+<#assign catalog =catalogTag("{'levels':'self','name':'81'}")>
+<#if catalog?exists>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</#if>
+</#if>
+
+</p>
+</div>
+<div id="div1"></div>
+<div class="div_login" id="divLogin" style="width:200px; padding-left:913px; padding-top:13px;"></div>
+
+<div id="site_nav_right2">
+</div>
+</div>
+</div>
+
+

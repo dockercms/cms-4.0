@@ -1,0 +1,119 @@
+<link href="../plug-in/swfupload/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../plug-in/swfupload/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="../plug-in/swfupload/resize/handlers.js"></script>
+<script type="text/javascript">
+		var swfu;
+		var initSWFUload = function () {
+			swfu = new SWFUpload({
+				// Backend Settings
+				upload_url: "/uploadfile",
+				post_params: {"PHPSESSID": " "},
+
+				// File Upload Settings
+				file_size_limit : "10 MB",
+				file_types : "*.*",			// or you could use something like: "*.doc;*.wpd;*.pdf",
+				file_types_description : "所有文件",
+				file_upload_limit : 0,
+
+				// Event Handler Settings - these functions as defined in Handlers.js
+				//  The handlers are not part of SWFUpload but are part of my website and control how
+				//  my website reacts to the SWFUpload events.
+				swfupload_preload_handler : preLoad,
+				swfupload_load_failed_handler : loadFailed,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+
+				// Button Settings
+				button_image_url : "../plug-in/swfupload/SmallSpyGlassWithTransperancy_17x18.png",
+				button_placeholder_id : "spanButtonPlaceholder",
+				button_width: 180,
+				button_height: 18,
+				button_text : '<span class="button">浏览文件<span class="buttonSmall">(10 MB Max)</span></span>',
+				button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+				button_text_top_padding: 0,
+				button_text_left_padding: 18,
+				button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+				button_cursor: SWFUpload.CURSOR.HAND,
+				
+				// Flash Settings
+				flash_url : "../plug-in/swfupload/swfupload/swfupload.swf",
+				flash9_url : "../plug-in/swfupload/swfupload/swfupload_fp9.swf",
+
+				custom_settings : {
+					upload_target : "divFileProgressContainer",
+					thumbnail_height: 400,
+					thumbnail_width: 400,
+					thumbnail_quality: 100
+				},
+				
+				// Debug Settings
+				debug: false
+			});
+		};
+	</script>
+
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>swf示例</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">名称</label>
+							<div class="controls">
+								<input type="text" id="name" name="name" class="span6 m-wrap" value="${page.name?if_exists}"/>
+								<span class="help-inline">填写名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">路径</label>
+							<div class="controls">
+								<input type="text" id="myPath" name="path" class="span6 m-wrap" value="${page.path?if_exists}"/>
+								<span class="help-inline">填写路径</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">排序</label>
+							<div class="controls">
+								<input type="text" id="sort" name="sort" class="span6 m-wrap" value="${page.sort?if_exists}"/>
+								<span class="help-inline">填写排序</span>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">文件</label>
+							<div class="controls">
+								<!--上传代码HTML BEGIN-->
+								<div style="width: 180px; height: 18px; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;">
+									<span id="spanButtonPlaceholder"></span>
+								</div>
+								<div id="divFileProgressContainer" style="height: 75px;"></div>
+								<div id="thumbnails">
+								</div>
+								<!--上传代码HTML end-->
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('swfdemoController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

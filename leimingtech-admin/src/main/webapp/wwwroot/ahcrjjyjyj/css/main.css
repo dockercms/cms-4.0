@@ -1,0 +1,79 @@
+.list2 {
+	background-image: url(/images/listbg.gif);
+	background-repeat: repeat-x;
+	background-position: 0px bottom;
+	line-height: 30px;
+	font-size: 14px;
+	color: #004497;
+}
+.list2 a {margin-left:5px;width:540px;display:inline-block;color: #004497;WHITE-SPACE: nowrap;overflow:hidden;TEXT-OVERFLOW: ellipsis;float:left;word-wrap:normal;height:30px;margin-right:16px;
+}
+
+
+.zw {font-size: 14px;padding:10px 25px;
+	line-height: 30px;  }
+.title3 {
+	font-family: "黑体";
+	font-size: 24px;
+	color: #004499;
+	line-height: 42px;
+}
+.title3 a {
+	font-family: "黑体";
+	font-size: 24px;
+	color: #004499;
+	line-height: 42px;
+}
+.nav2 a,.nav2{color:#004B97;font-size:14px;}
+
+
+.area{width:300px;}
+.focus-box{clear:both;}
+#focusImage img{text-align:left;}
+.focusImage{padding:1px;float:left;text-align:left}
+.focusImage-inner{width:365px;position:relative;}
+.focusImage-content li{display:none;}
+.focusImage-content li.current{display:block;}
+.focusImage-content img{display:inline-block;height:240px;width:365px;text-align:left;float:left;}
+.focusImage-title{line-height:28px;height:28px;position:absolute;width:365px;bottom:0;left:0;text-align:left;}
+.focusImage-title-bg{background:#000;filter:alpha(opacity=70);opacity:0.7;position:absolute;z-index:5;height:28px;width:100%;}
+.focusImage-title h2{padding:0 0 0 10px;font-size:12px;font-weight:bold;z-index:10;position:absolute;margin-top:0px;}
+#focusImage a{color:#FFF;}
+.focusImage-title a,.focusImage-title a:visited,.focusImage-title a:hover{color:#FFF;}
+.focusImage-slide{position:absolute;z-index:15;right:10px;bottom:7px;}
+.focusImage-slide li{background:#88857F;display:inline-block;color:#FFF;cursor:pointer;float:left;padding:0 5px;margin-right:1px;line-height:15px;height:15px;}
+.focusImage-slide li.current{background:#FF7E00;}
+
+.list556 li{
+	border-bottom:1px #cccccc dotted;
+	background: url(/images/dd_ls.gif) no-repeat;
+	font-size: 14px;
+	line-height: 30px;
+         padding-left:15px;
+	background-position: 5px center;
+}
+.list556 a{float:left;OVERFLOW: hidden; WIDTH: 556px; LINE-HEIGHT: 30px; BACKGROUND-REPEAT: repeat-x; HEIGHT: 30px; WHITE-SPACE: nowrap;overflow:hidden;TEXT-OVERFLOW: ellipsis;word-wrap:normal;
+color:#004497}
+.list756 li{
+	border-bottom:1px #cccccc dotted;
+	background: url(/images/dd_ls.gif) no-repeat;
+	font-size: 14px;
+	line-height: 30px;
+         padding-left:15px;
+	background-position: 5px center;
+}
+.list756 a{float:left;OVERFLOW: hidden; WIDTH: 756px; LINE-HEIGHT: 30px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 30px; TEXT-OVERFLOW: ellipsis;color:#004497}
+
+#fontZoom table{width:100%;align:center}
+
+.picture_list{
+	width: 670px;
+	height: 389px;
+}
+.picture_list li{
+	float: left;
+	width: 195px;
+	height: 200px;
+	padding-left: 27px;
+}
+

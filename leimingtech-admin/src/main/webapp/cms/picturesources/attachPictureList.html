@@ -1,0 +1,118 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN GALLERY MANAGER PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>图片库</div>
+				
+				<div class="actions">
+					<!-- <button id="sample_editable_1_new" class="btn blue" onclick="toEditModel('attachPictureController.do?tableDialog&ischecks=true&requestCode=backpath0')">
+						图片库多选 <i class="icon-search"></i>
+					</button>
+					<button id="sample_editable_1_new" class="btn blue" onclick="toEditModel('attachPictureController.do?tableDialog')">
+						图片库单选 <i class="icon-search"></i>
+					</button> -->
+					<button id="sample_editable_1_new" class="btn blue btn-sm" onclick="toEditModel('attachPictureController.do?addPageModel')">
+						新增图片<i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<!-- BEGIN GALLERY MANAGER PANEL-->
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class=" span4">
+								<label >
+									图片名：
+									<input name="localname" class="form-control span9" type="text" value="${searchMap["localname"]?if_exists[0]}">
+								</label>
+							</div>
+							<#--
+							<div class=" span4">
+								<label>
+									返回路径：
+									<input name="backpath0" id="backpath0" class="form-control span9" type="text" value="">
+								</label>
+							</div>
+							<div class="span4" id="mytable">
+								<label>
+									返回路径：
+									<input name="backpath1" id="backpath1" class="form-control span9" type="text" value="">
+								</label>
+							</div>
+							-->
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('attachPictureController.do?table', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- END GALLERY MANAGER PANEL-->
+				<hr class="clearfix" />
+				<!-- BEGIN GALLERY MANAGER LISTING-->
+				
+				<#if pageList?exists>
+					<div class="row-fluid">
+				   <#list pageList as page>
+					   <#if page_index gt 3 && page_index%4==0>
+					   </div><div class="row-fluid">
+					   </#if>
+						<div class="span3">
+							<div class="item">
+								<a class="fancybox-button" data-rel="fancybox-button" title="${page.localname}" href="${page.localpath}">
+									<div class="zoom">
+										<img src="${page.thumbnailpath}" alt="${page.localname}" width="100%" />                    
+										<div class="zoom-icon"></div>
+									</div>
+								</a>
+								<div class="details">
+									<a href="javaScript:void(0)" onclick="toEditModel('attachPictureController.do?updatePageModel&id=${page.id?if_exists}')" class="icon"><i class="icon-pencil"></i></a>
+									<a href="javaScript:void(0)" onclick="del('attachPictureController.do?del', '${page.id?if_exists}')" class="icon"><i class="icon-remove"></i></a>    
+								</div>
+							</div>
+							<label class="radio" style="overflow-x: hidden;"><input type="radio" value="${page.localpath}" name="path"/>${page.localname}</label>
+						</div>
+					</#list>
+					</div>
+				</#if>
+				<!-- END GALLERY MANAGER LISTING-->
+				
+				<!-- BEGIN GALLERY MANAGER PAGINATION-->
+				<#include "/lmPage/common/page.html">
+				<!-- END GALLERY MANAGER PAGINATION-->
+			</div>
+		</div>
+		<!-- END GALLERY MANAGER PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="650">
+</div>
+<script type="text/javascript">
+jQuery(function($) {
+	App.init();
+	Gallery.init();
+	$("#backpath0,#backpath1").livetip();
+});
+function selectPictureBack(requestCode){
+	switch (requestCode) {
+		case "backpath0":
+			var pathInputs = $("input[name='path']:checked");
+			if (pathInputs.length > 0) {
+				var result = "";
+				for ( var i = 0; i < pathInputs.length; i++) {
+					result = result + $(pathInputs[i]).val() + ",";
+				}
+				$("#backpath0").val(result);
+			}
+			break;
+		default:
+			var result = $("input[name='path']:checked").val();
+			$("#backpath1").val(result);
+			break;
+		}
+		$('#editModel').modal('hide');
+	}
+</script>

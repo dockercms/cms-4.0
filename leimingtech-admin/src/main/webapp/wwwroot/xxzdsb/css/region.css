@@ -1,0 +1,22 @@
+/*送货地址*/
+.topAdd{ float: left; color:#666; margin-left: 10px; z-index: 1000; cursor: pointer; background:url(../images/topAdd_city_bg.png) no-repeat left center; padding-left: 18px;}
+.topAdd_dd{ display: inline-block; background:url(../images/topAdd_city_right_bg.png) no-repeat right center; padding-right: 15px;}
+.topAddBg{ position: fixed; width: 100%; overflow: hidden; left: 0; top: 0; z-index: 10000; *padding-top: 30px;}
+
+.topAdd .topAddBg{ display: none;}
+.topAddBlock .topAddBg{ display: block;}
+.topAdddClose{ display: block; width: 20px; height: 20px; background:url(../images/topclose.png) no-repeat center center; position: absolute; right:10px; top: 10px;}
+.topAdddClose:hover{ background:url(../images/topclose_hover.png) no-repeat center center;}
+
+.topAddBgColor{ width: 100%; height: 100%; background: #000; opacity: 0.4; filter:alpha(opacity=40); position: absolute; left: 0; top: 0; z-index: 1000;}
+.topAddList{ background: #05780A; opacity: 0.9; filter:alpha(opacity=90); position: relative; z-index: 9999; width: 570px; margin: 30px auto; padding: 15px 35px 25px 35px;}
+.topAddLeftImg{ width: 207px; height: 229px; background: url(../images/topadd_left_bg.png) no-repeat; position: absolute; left: -182px; top: 85px;}
+.topAddRightImg{ width: 151px; height: 123px; background: url(../images/topadd_right_bg.png) no-repeat; position: absolute; right: -171px; bottom: 0px;}
+.topAddListCon{}
+.topAddList dl{ border-bottom: 1px solid rgba(255,255,255,.4); overflow: hidden; padding: 4px 0px;}
+.topAddList dl dt{ color: #fff; float: left; width: 80px; font-size: 14px;}
+.topAddList dl dt a{ color: #fff; display: inline-block; margin-right: 8px; padding: 0 10px;}
+.topAddList dl dt a:hover{ color:#fff; background: #fff; color: #05780A;}
+.topAddList dl dd{ float: left; width: 490px; line-height: 24px;}
+.topAddList dl dd a{ color: #fff; margin-right: 8px; padding: 0 3px; float: left; white-space:nowrap;}
+.topAddList dl dd a:hover{ color:#fff; background: #fff; color: #05780A;}

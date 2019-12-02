@@ -1,0 +1,198 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->   
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>
+					<span class="hidden-480">API设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li><a href="#portlet_tab5" data-toggle="tab">银联API</a></li>
+						<li><a href="#portlet_tab4" data-toggle="tab">阿里API</a></li>
+						<li><a href="#portlet_tab3" data-toggle="tab">地图API</a></li>
+						<li><a href="#portlet_tab2" data-toggle="tab">新浪API</a></li>
+						<li class="active"><a href="#portlet_tab1" data-toggle="tab">腾讯API</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+							<form id="tencentAPI_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">腾讯App Key：</label>
+									<div class="controls">
+										<input type="text" id="tencentAppKey" name="tencentAppKey" class="span6 m-wrap" value="${tencentAppKey}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">腾讯App Secret：</label>
+									<div class="controls">
+										<input type="text" id="tencentAppSecret" name="tencentAppSecret" class="span6 m-wrap" value="${tencentAppSecret}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">腾讯授权回调页：</label>
+									<div class="controls">
+										<input name="tencentReturnUrl" id="tencentReturnUrl" type="text" class="span6 m-wrap" value="${tencentReturnUrl}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?APISave', 'tencentAPI_form');" class="btn blue"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->  
+						</div>
+						<div class="tab-pane " id="portlet_tab2">
+							<!-- BEGIN FORM-->
+							<form id="sinaAPI_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">新浪App Key：</label>
+									<div class="controls">
+										<input type="text" id="sinaAppKey" name="sinaAppKey" class="span6 m-wrap" value="${sinaAppKey}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">新浪App Secret：</label>
+									<div class="controls">
+										<input type="text" id="sinaAppSecret" name="sinaAppSecret" class="span6 m-wrap" value="${sinaAppSecret}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">新浪授权回调页：</label>
+									<div class="controls">
+										<input name="sinaReturnUrl" id="sinaReturnUrl" type="text" class="span6 m-wrap" value="${sinaReturnUrl}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<!--<a href="javascript:void(0);" onclick="testMobile('configSettingController.do?testSMS');" class="btn blue"><i class="icon-search"></i>测试</a>-->
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?APISave', 'sinaAPI_form');" class="btn yellow"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+						<div class="tab-pane " id="portlet_tab3">
+							<!-- BEGIN FORM-->
+							<form id="mapAPI_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">地图App Key：</label>
+									<div class="controls">
+										<input type="text" id="mapAppKey" name="mapAppKey" class="span6 m-wrap" value="${mapAppKey}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">地图App Secret：</label>
+									<div class="controls">
+										<input type="text" id="mapAppSecret" name="mapAppSecret" class="span6 m-wrap" value="${mapAppSecret}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">授权回调页：</label>
+									<div class="controls">
+										<input name="mapReturnUrl" id="mapReturnUrl" type="text" class="span6 m-wrap" value="${mapReturnUrl}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<!--<a href="javascript:void(0);" onclick="testMobile('configSettingController.do?testSMS');" class="btn blue"><i class="icon-search"></i>测试</a>-->
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?APISave', 'mapAPI_form');" class="btn green"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+						
+						<div class="tab-pane " id="portlet_tab4">
+							<!-- BEGIN FORM-->
+							<form id="aliyAPI_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">阿里App Key：</label>
+									<div class="controls">
+										<input type="text" id="aliyAppKey" name="aliyAppKey" class="span6 m-wrap" value="${aliyAppKey}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">阿里App Secret：</label>
+									<div class="controls">
+										<input type="text" id="aliyAppSecret" name="aliyAppSecret" class="span6 m-wrap" value="${aliyAppSecret}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">授权回调页：</label>
+									<div class="controls">
+										<input name="aliyReturnUrl" id="aliyReturnUrl" type="text" class="span6 m-wrap" value="${aliyReturnUrl}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<!--<a href="javascript:void(0);" onclick="testMobile('configSettingController.do?testSMS');" class="btn blue"><i class="icon-search"></i>测试</a>-->
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?APISave', 'aliyAPI_form');" class="btn purple"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+						
+						<div class="tab-pane " id="portlet_tab5">
+							<!-- BEGIN FORM-->
+							<form id="unionPayAPI_form" class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label">银联App Key：</label>
+									<div class="controls">
+										<input type="text" id="unionPayAppKey" name="unionPayAppKey" class="span6 m-wrap" value="${unionPayAppKey}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">银联App Secret：</label>
+									<div class="controls">
+										<input type="text" id="unionPayAppSecret" name="unionPayAppSecret" class="span6 m-wrap" value="${unionPayAppSecret}"/>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">授权回调页：</label>
+									<div class="controls">
+										<input name="unionPayReturnUrl" id="unionPayReturnUrl" type="text" class="span6 m-wrap" value="${unionPayReturnUrl}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<!--<a href="javascript:void(0);" onclick="testMobile('configSettingController.do?testSMS');" class="btn blue"><i class="icon-search"></i>测试</a>-->
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?APISave', 'unionPayAPI_form');" class="btn black"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT--> 
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+<!--[if lt IE 9]>
+<script src="media/js/excanvas.min.js"></script>
+<script src="media/js/respond.min.js"></script>  
+<![endif]-->   
+<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+<!-- END CORE PLUGINS -->
+<script src="media/js/app.js"></script>     
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	});
+</script>

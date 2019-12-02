@@ -1,0 +1,209 @@
+<link rel="stylesheet" type="text/css" href="js/webuploader/css/webuploader.css">
+<script src="js/webuploader/webuploader.js"></script>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	</button>
+	<h4 class="modal-title">
+		<#if title?if_exists >
+			${title}
+		<#else>
+			资源上传
+		</#if>
+		<#if isSingle >
+			<span style="font-size:12px;color:red;">(单文件上传模式)</span>
+		</#if>
+	</h4>
+</div>
+<div class="modal-body dialogUpload">
+	<!--用来存放添加的文件-->
+	<div id="fileList" class="uploader-list">
+	</div>
+	<div id="filePicker">
+		<img title="点击添加" src="js/webuploader/img/continuetoadd.png" >
+		点击添加
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="statusBar">
+        <div class="uploadInfo">
+			文件名:<span class="fileName"></span>
+			&nbsp;&nbsp;<span class="percentage">0%</span>
+        </div>
+       	<div class="errorInfo">
+       	</div>
+    </div>
+	<input type="button" id="uploadBtn" class="btn btn-primary green" value="开始上传">
+	<input type="button" id="closeDialog" class="btn red" value="关闭" data-dismiss="modal">
+</div>
+<script>
+	var BASE_URL = "/";
+		var $ = jQuery,
+		$list = $('#fileList'),
+		// 优化retina, 在retina下这个值是2
+		ratio = window.devicePixelRatio || 1,
+		// 缩略图大小
+		thumbnailWidth = 100 * ratio,
+		thumbnailHeight = 100 * ratio,
+		// Web Uploader实例
+		uploader;
+		var isSingle="${isSingle}";// 是否只允许单文件上传
+		var isPureUploadPicture="${isPureUploadPicture}";// 是否只允许上传纯图片
+		var responseDomId="${responseDomId}";//文件上传后,接收文件上传成功后所形成的网络路径dom元素Id
+		var netPaths="";//文件上传成功的网络路径
+	// 文件上传
+	jQuery(function() {
+		// 初始化Web Uploader
+		var extensions='gif,jpg,jpeg,bmp,png';
+		var mimeTypes='image/gif,image/jpg,image/jpeg,image/bmp,image/png';
+		var multiple=true; 
+		if(isSingle&&isSingle=="true"){
+			multiple=false;
+		}
+		if(isPureUploadPicture&&isPureUploadPicture=="false"){
+			var extensions='gif,jpg,jpeg,bmp,png,txt';
+		}
+		uploader = WebUploader.create({
+			// 取消自动上传。
+			auto: false,
+			// swf文件路径
+			swf: BASE_URL + '/js/Uploader.swf',
+			// 文件接收服务端。
+			server: 'wechatFileUploadController.do?fileUpload&timer='+new Date().getTime()+"&saveFolder=${saveFolder}",
+			// 选择文件的按钮。内部根据当前运行是创建，可能是input元素，也可能是flash.
+			pick: {
+				id:'#filePicker',
+				multiple:multiple
+			},
+			// 只允许选择文件，可选。
+			accept: {
+				title: 'Images',
+				extensions: extensions,
+				mimeTypes: mimeTypes
+			}
+		});
+		// 当有文件添加进来的时候
+		var filePicker=$("#filePicker").clone(true);
+		uploader.on('fileQueued',function(file) {
+			if(isSingle){
+				$("#filePicker").hide(100);
+			}
+			var tempToolBar=$('<div><div class="file-panel" style="height: 25px;"><span class="cancel" >删除</span><span class="rotateRight" >向右旋转</span><span class="rotateLeft" >向左旋转</span></div><div>');
+			var $li = $('<div id="' + file.id + '" class="file-item thumbnail">' + tempToolBar.html() + '<p class="imgWrap"><img width="100%" height="auto"><p>' + '<div class="info">' + file.name + '</div>' + '</div>'),
+			$img = $li.find('img');
+			$list.append($li);
+			// 创建缩略图
+			uploader.makeThumb(file,function(error, src) {
+				if (error) {
+					$img.replaceWith('<span>不能预览</span>');
+					return;
+				}
+				$img.attr('src', src);
+				$li.on( 'click', 'span', function() {
+					var index = $(this).index(),
+				         deg;
+				    $wrap = $(this).parents(".file-item").find('p.imgWrap');
+				    if(!file.rotation){
+				    	file.rotation=0;
+				    }
+				    switch ( index ) {
+				        case 0:
+				        	uploader.removeFile( file.id , true );
+				        	if(isSingle){
+								$("#filePicker").show();
+							}
+				            return;
+				        case 1:
+				            file.rotation += 90;
+				            break;
+				
+				        case 2:
+				            file.rotation -= 90;
+				            break;
+				    }
+				    //图片旋转
+				    if ( supportTransition ) {
+				        deg = 'rotate(' + file.rotation + 'deg)';
+				        $wrap.css({
+				            '-webkit-transform': deg,
+				            '-mos-transform': deg,
+				            '-o-transform': deg,
+				            'transform': deg
+				        });
+				    } else {
+				        $wrap.css( 'filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation='+ (~~((file.rotation/90)%4 + 4)%4) +')');
+				    }
+				});
+			},
+			thumbnailWidth, thumbnailHeight);
+		});
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on('uploadProgress',function(file, percentage) {
+			var $li = $('#' + file.id),
+			$percent = $li.find('.progress .progressValue');
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<p class="progress"><span class="progressValue"></span></p>').appendTo($li).find('.progressValue');
+			}
+			$percent.css('width', percentage * 100 + '%');
+			$(".statusBar .uploadInfo .fileName").html(file.name);
+			$(".statusBar .uploadInfo .percentage").html(percentage * 100+ '%');
+		});
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+		uploader.on('uploadSuccess',function(file,response) {
+			$('#' + file.id).addClass('upload-state-done');
+			var netPath=response.path;
+			netPaths+=netPath+",";
+		});
+		// 文件上传失败，现实上传出错。
+		uploader.on('uploadError',function(file) {
+			var $li = $('#' + file.id),
+			$error = $li.find('div.error');
+			// 避免重复创建
+			if (!$error.length) {
+				$error = $('<div class="error"></div>').appendTo($li);
+			}
+			$error.text('上传失败');
+			$(".statusBar .uploadInfo .errorInfo").html(file.name+"上传失败!");
+		});
+		// 完成上传完了，成功或者失败，先删除进度条。
+		uploader.on('uploadComplete',function(file) {
+			$('#' + file.id).find('.progress').remove();
+		});
+		//开始上传文件
+		uploader.on('startUpload',function() {
+			$(".statusBar").show();
+		});
+		//文件上传完成
+		uploader.on('uploadFinished',function() {
+			var  errorFile  =uploader.getFiles('error');
+			if(errorFile&&errorFile.length>0){
+				for(var i=0;i<errorFile.length;i++){
+					var f=errorFile[i];
+					$(".statusBar .uploadInfo .errorInfo").html(f.name+"上传失败!");
+				}
+			}else{
+				var len=netPaths.length;
+				if(len>1){
+					netPaths=netPaths.toString().substring(0,len-1);
+				}
+				if(responseDomId){
+					$("#"+responseDomId).val(netPaths);
+					$("#closeDialog").click();
+				}
+			}
+		});
+		var supportTransition = (function(){
+	        var s = document.createElement('p').style,
+	            r = 'transition' in s ||
+	                    'WebkitTransition' in s ||
+	                    'MozTransition' in s ||
+	                    'msTransition' in s ||
+	                    'OTransition' in s;
+	        s = null;
+	        return r;
+	    })();
+		$("#uploadBtn").click(function(){
+			uploader.upload();
+		});
+	});
+</script>

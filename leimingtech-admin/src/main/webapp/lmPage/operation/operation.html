@@ -1,0 +1,57 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">功能</h4>
+		</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				<input type="hidden" id="id" name="functionid" value="${functionid?if_exists}"/>
+				        <div class="control-group">
+							<label class="control-label">功能名称</label>
+							<div class="controls">
+								<input type="text" id="operationname" name="operationname" class="form-control span3" data-rule-required="true" value="${page.operationname?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">功能地址</label>
+							<div class="controls">
+								<input type="text" id="operationurl" name="operationurl" class="form-control span3" data-rule-required="true" value="${page.operationurl?if_exists}"/>
+							</div>
+						</div>
+						<!--
+					   <div class="control-group">
+							<label class="control-label">图标名称</label>
+							<div class="controls">
+								<select name="iconid">
+								<#if iconlist?exists>
+									<#list iconlist as icon>
+									<option value="${icon.id}" <#if page.iconid?if_exists && page.iconid=icon.id>selected="selected"</#if>>${icon.iconName}</option>
+									</#list>
+								</#if>
+								</select>
+						</div>
+					   </div>
+						
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<input type="text" id="status" name="status" class="form-control span3" value="${page.status?if_exists}"/>
+							</div>
+						</div>
+						-->
+			</form>
+			<!-- END FORM-->       
+		</div>
+		<div class="modal-footer">  
+            <input  type="button" onclick="formSubmitModelSub('operationController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">  
+            <input type="button" class="btn" value="取消" data-dismiss="modal">  
+        </div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+</script>

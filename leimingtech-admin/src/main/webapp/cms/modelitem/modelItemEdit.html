@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title"><#if page.id!=''>修改<#else>添加</#if>字段</h4>
+</div>
+<div class="modal-body form">
+	<!-- BEGIN FORM-->
+	<form id="form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<input type="hidden" id="dataType" name="dataType" value="${page.dataType?if_exists}"/>
+		<input type="hidden" id="modelId" name="modelId" value="${page.modelId?if_exists}"/>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>名称</label>
+			<div class="controls">
+				<input type="text" id="itemLabel" name="itemLabel" data-rule-required="true" class="form-control span3" value="${page.itemLabel?if_exists}"/>
+				<span class="help-inline"></span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>变量名</label>
+			<div class="controls">
+				<input type="text" id="field" name="field" data-rule-required="true" class="form-control span3" value="${page.field?if_exists}"/>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" onclick="formSubmitModel('modelItemController.do?save', 'form');" class="btn blue">提交</button>
+	<button type="reset" class="btn" data-dismiss="modal">关闭</button>                            
+</div>

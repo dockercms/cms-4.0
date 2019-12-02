@@ -1,0 +1,57 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>教育局</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">创建人</label>
+							<div class="controls">
+								<input type="text" id="createuser" name="createuser" class="span6 m-wrap" value="${page.createuser?if_exists}"/>
+								<span class="help-inline">填写创建人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">双日期</label>
+							<div class="controls">
+								<input type="text" id="modifyuser" name="modifyuser" class="Wdate" onfocus="WdatePicker({doubleCalendar:true,readOnly:true,dateFmt:'yyyy-MM-dd'})" value="${page.modifyuser?if_exists}"/>
+								<span class="help-inline">双日期</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">开始时间</label>
+							<div class="controls">
+									<input class="Wdate" readonly onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="createdate" name="createdate" value="${page.createdate?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">结束时间</label>
+							<div class="controls">
+									<input onfocus="WdatePicker({readOnly:true})" type="text" class="Wdate" id="modifytime" name="modifytime" value=""/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="test();" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- END FOOTER -->
+<!-- END PAGE LEVEL STYLES -->    
+<script>
+	function test(){
+		alert("时间控件使用 页面datepicker.html");
+	}
+</script>
+<!-- END JAVASCRIPTS -->  

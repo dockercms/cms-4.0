@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.leimingtech.lmcms</groupId>
+		<artifactId>leimingtech</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>com.leimingtech.lmcms</groupId>
+	<artifactId>leimingtech-weibo</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>leimingtech-weibo</name>
+	<description>leimingtech-weibo</description>
+
+	<properties>
+		<cgform-entity.version>0.0.1</cgform-entity.version>
+		<sdk4j.version>0.0.1</sdk4j.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.leimingtech.lmcms</groupId>
+			<artifactId>leimingtech-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>sdk4j</groupId>
+			<artifactId>sdk4j</artifactId>
+			<version>${sdk4j.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/sdk4j-0.0.1.jar
+			</systemPath>
+		</dependency>
+	</dependencies>
+		
+	<build>
+        <finalName>leimingtech-weibo</finalName>
+    </build>
+</project>

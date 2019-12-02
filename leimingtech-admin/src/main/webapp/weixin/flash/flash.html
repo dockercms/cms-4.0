@@ -1,0 +1,145 @@
+<link href="../plug-in/swfupload/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../plug-in/swfupload/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="../plug-in/swfupload/resize/handlers.js"></script>
+<script type="text/javascript">
+		var swfu;
+		var initSWFUload = function () {
+			swfu = new SWFUpload({
+				// Backend Settings
+				upload_url: "/uploadfile",
+				post_params: {"PHPSESSID": " "},
+
+				// File Upload Settings
+				file_size_limit : "10 MB",
+				file_types : "*.*",			// or you could use something like: "*.doc;*.wpd;*.pdf",
+				file_types_description : "所有文件",
+				file_upload_limit : 0,
+
+				// Event Handler Settings - these functions as defined in Handlers.js
+				//  The handlers are not part of SWFUpload but are part of my website and control how
+				//  my website reacts to the SWFUpload events.
+				swfupload_preload_handler : preLoad,
+				swfupload_load_failed_handler : loadFailed,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+
+				// Button Settings
+				button_image_url : "../plug-in/swfupload/SmallSpyGlassWithTransperancy_17x18.png",
+				button_placeholder_id : "spanButtonPlaceholder",
+				button_width: 180,
+				button_height: 18,
+				button_text : '<span class="button">浏览文件<span class="buttonSmall">(10 MB Max)</span></span>',
+				button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+				button_text_top_padding: 0,
+				button_text_left_padding: 18,
+				button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+				button_cursor: SWFUpload.CURSOR.HAND,
+				
+				// Flash Settings
+				flash_url : "../plug-in/swfupload/swfupload/swfupload.swf",
+				flash9_url : "../plug-in/swfupload/swfupload/swfupload_fp9.swf",
+
+				custom_settings : {
+					upload_target : "divFileProgressContainer",
+					thumbnail_height: 400,
+					thumbnail_width: 400,
+					thumbnail_quality: 100
+				},
+				
+				// Debug Settings
+				debug: false
+			});
+		};
+		
+		function uploadSuccess(file, serverData) {
+			try {
+				var progress = new FileProgress(file,  this.customSettings.upload_target);
+				if (serverData!=null) {
+					var rsarr = serverData.split("|");
+					var rsinfo = rsarr[1];
+					var rsfile = rsarr[3];
+					var filename2 = file.name;
+					var imgpath = rsinfo.substring(rsinfo.indexOf('/upload/'))+rsfile+file.type;
+					document.getElementById("myPath").value = imgpath;
+					document.getElementById("imgshow").src = imgpath;
+					progress.setStatus("上传完成.");
+					progress.toggleCancel(false);
+				} else {
+					addImage("../plug-in/swfupload/error.gif");
+					progress.setStatus("出错啦.");
+					progress.toggleCancel(false);
+					alert(serverData);
+		
+				}
+		
+		
+			} catch (ex) {
+				this.debug(ex);
+			}
+		}
+	</script>
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>幻灯片</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				<input type="hidden" id="token" name="token" value="${page.token?if_exists}"/>
+				<div class="control-group">
+					<label class="control-label">幻灯片描述</label>
+					<div class="controls">
+						<input type="text" id="info" name="info" class="span6 m-wrap" value="${page.info?if_exists}"/>
+						<span class="help-inline">30个字简短分类描述，可为空</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">幻灯片图片</label>
+					<div class="controls">
+						<#if page.img?exists>
+							<img id="imgshow" src="${page.img}" alt="" style="height:100px;"/>
+						<#else>
+							<img id="imgshow"  src="media/lmImages/AAAAAA&text=no+image.gif" alt=""  style="height:100px;" />
+						</#if>
+						<input type="hidden" id="myPath" name="img" class="span6 m-wrap" value="${page.img?if_exists}"/>
+						<span class="help-inline">建议图片(宽720高400)</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">幻灯片外链地址</label>
+					<div class="controls">
+						<input type="text"  name="url" class="span6 m-wrap" value="${page.url?if_exists}"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">文件</label>
+					<div class="controls">
+						<!--上传代码HTML BEGIN-->
+						<div style="width: 180px; height: 18px; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;">
+							<span id="spanButtonPlaceholder"></span>
+						</div>
+						<div id="divFileProgressContainer" style="height: 75px;"></div>
+						<div id="thumbnails">
+						</div>
+						<!--上传代码HTML end-->
+					</div>
+				</div>
+						
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('flashController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>

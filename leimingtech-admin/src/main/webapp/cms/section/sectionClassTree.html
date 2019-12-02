@@ -1,0 +1,62 @@
+<li>
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+	<div class="sidebar-toggler hidden-phone"></div>
+	<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+</li>
+<li class="start">
+	<a href="javaScript:void(0);" onclick="changePage('sectionController.do?sectionList&catalogid=-1')">
+	<i class="icon-folder-close"></i> 
+	<span class="title">首页</span>
+	<span class="selected"></span>
+	</a>
+</li>
+<#if list?exists>
+	<#list list as function>
+		<#if (function.contentCats?size >0) >  
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('sectionController.do?sectionList&catalogid=${function.id?if_exists}')">
+				
+				<#if function_index==0>
+					<i class="icon-folder-close icon-folder-open"></i> 
+				<#else>
+					<i class="icon-folder-close"></i>
+				</#if>
+				
+				<span class="title">${function.name?if_exists}</span>
+				
+				<#if function_index==0>
+					<span class="arrow open"></span>
+				<#else>
+					<span class="arrow"></span>
+				</#if>
+				<span class="selected"></span>
+				</a>
+				<ul class="sub-menu">
+					<#assign list=function.contentCats/>
+						<#include "/cms/section/sectionClassTree2.html">
+				</ul>
+			</li>
+		<#else>
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('sectionController.do?sectionList&catalogid=${function.id?if_exists}')">
+				<#if function_index==0>
+					<i class="icon-folder-close icon-folder-open"></i> 
+				<#else>
+					<i class="icon-folder-close"></i>
+				</#if>
+				<span class="title">${function.name?if_exists}</span>
+				<span class="selected"></span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>
+<script>
+jQuery(document).ready(function() {
+	   App.handleSidebarMenu(); // handles main menu
+});
+$(function (){
+	changePage('sectionController.do?sectionList&catalogid=-1');
+});
+</script>
+<script type="text/javascript" src="js/section.js"></script>

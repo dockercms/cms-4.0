@@ -1,0 +1,156 @@
+<link href="../plug-in/swfupload/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../plug-in/swfupload/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="../plug-in/swfupload/resize/handlers.js"></script>
+<script type="text/javascript">
+	var swfu;
+	var initSWFUload = function () {
+		swfu = new SWFUpload({
+			// Backend Settings
+			upload_url: "/uploadpic",
+			post_params: {"PHPSESSID": " "},
+
+			// File Upload Settings
+			file_size_limit : "10 MB",
+			file_types : "*.jpg;*.png",
+			file_types_description : "JPG Images; PNG Image",
+			file_upload_limit : 0,
+
+			// Event Handler Settings - these functions as defined in Handlers.js
+			//  The handlers are not part of SWFUpload but are part of my website and control how
+			//  my website reacts to the SWFUpload events.
+			swfupload_preload_handler : preLoad,
+			swfupload_load_failed_handler : loadFailed,
+			file_queue_error_handler : fileQueueError,
+			file_dialog_complete_handler : fileDialogComplete,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			upload_complete_handler : uploadComplete,
+
+			// Button Settings
+			button_image_url : "../plug-in/swfupload/SmallSpyGlassWithTransperancy_17x18.png",
+			button_placeholder_id : "spanButtonPlaceholder",
+			button_width: 160,
+			button_height: 18,
+			button_text : '<span class="button">浏览<span class="buttonSmall">(文件最大不超过10MB)</span></span>',
+			button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+			button_text_top_padding: 0,
+			button_text_left_padding: 18,
+			button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+			button_cursor: SWFUpload.CURSOR.HAND,
+			
+			// Flash Settings
+			flash_url : "../plug-in/swfupload/swfupload/swfupload.swf",
+			flash9_url : "../plug-in/swfupload/swfupload/swfupload_fp9.swf",
+
+			custom_settings : {
+				upload_target : "divFileProgressContainer",
+				thumbnail_height: 400,
+				thumbnail_width: 400,
+				thumbnail_quality: 100
+			},
+			
+			// Debug Settings
+			debug: false
+		});
+	};
+</script>
+
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>微调研</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">微调研名称</label>
+							<div class="controls">
+								<input type="text" id="researchName" name="researchName" class="span6 m-wrap" value="${page.researchName?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">关键词设置</label>
+							<div class="controls">
+								<input type="text" id="researchKeyword" name="researchKeyword" class="span6 m-wrap" value="${page.researchKeyword?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">简介</label>
+							<div class="controls">
+								<input type="text" id="researchAbstract" name="researchAbstract" class="span6 m-wrap" value="${page.researchAbstract?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">创建时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="researchCreatetime" name="researchCreatetime" value="${page.researchCreatetime?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">截止日期</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="researchEndtime" name="researchEndtime" value="${page.researchEndtime?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Logo地址</label>
+							<div class="controls">
+								<input type="text" id="myPath" name="researchLogourl" class="span6 m-wrap" value="${page.researchLogourl?if_exists}" readonly="readonly"/>
+								<!--上传代码HTML BEGIN-->
+								<span id="spanButtonPlaceholder"></span>
+								<div id="divFileProgressContainer"></div>
+								<div id="thumbnails" style="display:none">
+								</div>
+								<!--上传代码HTML end-->
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">提交成功提示</label>
+							<div class="controls">
+								<input type="text" id="researchSuccess" name="researchSuccess" class="span6 m-wrap" value="${page.researchSuccess?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">提交失败提示</label>
+							<div class="controls">
+								<input type="text" id="researchFail" name="researchFail" class="span6 m-wrap" value="${page.researchFail?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">图文详细页内容</label>
+							<div class="controls">
+								<input type="text" id="researchParticular" name="researchParticular" class="span6 m-wrap" value="${page.researchParticular?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxEsearchController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

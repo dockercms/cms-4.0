@@ -1,0 +1,58 @@
+#nav { padding-left: 120px; height: 40px; }
+#nav ul { margin: 0; padding:0; list-style-type: none; }
+#nav li { float: left;	margin-right: 5px; }
+#nav li a { display: block; padding-left: 15px; font: bold 14px Verdana; color: #fff; text-decoration: none; }
+#nav li a strong {	display: block;	padding-right: 15px; line-height: 40px; *line-height: 40px; }
+#nav li a.navon, #nav li a:hover { background: #fff url("/zfxxgk/images/navon.gif") left 0 no-repeat; color: #004d61; }
+#nav li a.navon strong, #nav li a:hover strong { background: #fff url("/zfxxgk/images/navon.gif") right 0 no-repeat; color: #004d61; }
+body,td,th {
+	font-size: 12px;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+}
+a{color:#2b4a80;text-decoration: none;}
+.blue {
+	font-weight: bold;
+	color: #00439a;
+}
+.blue a {
+	color: #00439a;
+	text-decoration: none;
+}
+.blue a:hover {
+	color: #ff8d28;
+	text-decoration: none;
+}
+.list {
+	background-image: url(/zfxxgk/images/listbg.gif);
+	background-repeat: repeat-x;
+	background-position: 0px bottom;
+	line-height: 24px;
+	color: #333333;
+
+}
+.list a {
+	color: #333333;
+	text-decoration: none;OVERFLOW: hidden; WIDTH: 400px;WHITE-SPACE: nowrap;TEXT-OVERFLOW: ellipsis
+}
+.list a:hover {
+	color: #ff8d28;
+	text-decoration: none;
+}
+.copy {
+	color: #2b4a80;
+	line-height: 21px;
+}
+.list100 a{OVERFLOW: hidden; WIDTH: 356px; LINE-HEIGHT: 24px; BACKGROUND-REPEAT: repeat-x; WHITE-SPACE: nowrap; HEIGHT: 24px; TEXT-OVERFLOW: ellipsis
+}
+
+.blue3 {	color: #004499;
+}
+.l4 {	font-size: 14px;
+	line-height: 30px;
+}
+.title3 {	font-family: "黑体";
+	font-size: 24px;
+	color: #004499;
+	line-height: 42px;
+}

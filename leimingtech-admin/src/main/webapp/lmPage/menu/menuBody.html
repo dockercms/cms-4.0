@@ -1,0 +1,27 @@
+<div class="portlet box blue">
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-sitemap"></i>菜单管理</div>
+	</div>
+	<div class="portlet-body fuelux">
+		<ul class="tree" id="tree_2">
+			<li>
+				<a href="#" data-role="branch" class="tree-toggle" data-toggle="branch" data-value="">菜单</a>
+				<#if list?exists>
+  					<#include "/lmPage/menu/menuBranchIn.html">
+				</#if>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<script>
+
+$("#tree_2").on("nodeselect.tree.data-api", "[data-role=leaf]", function (e) {
+    var id = e.node.value;
+    changeDivBody('menuController.do?menuTable&id=' + id, 'divBody');
+});
+$("#tree_2").on("openbranch.tree", "[data-role=branch]", function (e) {
+    var id = e.node.value;
+    changeDivBody('menuController.do?menuTable&id=' + id, 'divBody');
+});
+</script>

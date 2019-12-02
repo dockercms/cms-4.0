@@ -1,0 +1,156 @@
+@charset "utf-8";
+/*====链接样式====*/
+a {text-decoration:none; color:#000;}
+.grid_18 a:visited, .grid_7 a:visited { color:purple;}
+
+/*====通用样式====*/
+.center { text-align:center;}
+.text_right{ text-align:right;}
+.bArea,.sArea{overflow:hidden;zoom:1;}
+.bArea,.header { width:950px;}
+.header,.nav {margin-bottom:8px;}
+.bold { font-weight:bold;}
+.clearboth { clear:both;}
+.mb8 { margin-bottom:8px}
+
+.search { width:260px;}
+.search .keyWords { width:170px}
+.grid_18 li, .grid_7 li { font-size:12px; line-height:24px; height:24px; background:url(../img/bg_sp_text.gif) no-repeat left -193px; padding-left:22px;}
+.mr10 { margin-right:10px;}
+.grid_18 img, .grid_7 img { padding:2px; border:1px solid #e0e0e0;}
+
+.mode-flash-1 { height:100%; overflow:hidden;}
+.mode-flash-1 img { width:390px; height:265px; border:none; padding:1px;}
+.graybg { background:#f2f2f2;}
+.mode-flash-1 .thumb {float:right; width:314px;}
+.mode-flash-1 .thumb li{ background:url(../img/bg_sp_text.gif) no-repeat left -85px; margin-top:4px; height:79px; padding:4px 20px 0; color:#676767; line-height:20px; cursor:pointer;}
+.mode-flash-1 .thumb a { display:block; width:100%; height:100%;}
+.mode-flash-1 .thumb a:link, .mode-flash-1 .thumb a:visited { color:#676767;}
+.mode-flash-1 .thumb a:hover { text-decoration:none; color:#fff;}
+.mode-flash-1 .thumb li span { font-weight:bold; line-height:30px; color:#000;}
+.mode-flash-1 .thumb li.cur { background:url(../img/bg_sp_text.gif) no-repeat left top; color:#fff;}
+.mode-flash-1 .thumb li.cur a:link, .mode-flash-1 .thumb li.cur a:visited { color:#fff;}
+.mode-flash-1 .thumb li.cur font.red { color:#000 !important;}
+.mode-flash-1 .big-pic {width:392px; height:267px; float:left}
+
+.lsubWidth { width:332px; border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; border-bottom:1px solid #d3d3d3;}
+.catetitle { border-top:1px solid #d3d3d3; border-bottom:1px solid #d3d3d3; padding:1px;}
+h4 { background:url(../img/bg_sp_grad.gif) repeat-x left -40px; font-size:14px; padding-top:5px; height:22px; line-height:22px; padding-left:10px;}
+h4 a:visited, h4 a:hover { color:#000;}
+.arrow { display:inline-block; width:11px; height:11px; background:url(../img/bg_sp_text.gif) left -180px; margin-right:5px;}
+.catecon { padding:6px 10px 5px; height:100%; overflow:hidden;}
+.title { font-weight:bold; text-indent:0; padding-bottom:5px;}
+.layout1 img { float:left; margin-right:10px; width:88px; height:60px;}
+.dashline { height:0; line-height:0; font-size:0; border-bottom:1px dashed #d0d0d0; clear:both; padding-top:10px; margin-bottom:5px; overflow:hidden}
+.cjcidian li { float:left; background:none; width:120px; padding-left:10px;}
+.grayli a { color:#656565;}
+.graymore { width:130px; text-align:right; padding-right:10px; float:right;}
+.graymore a { font-size:12px; font-weight:normal;}
+.graymore a:link, .graymore a:visited { color:#848484;}
+.graymore a:hover { color:#c00;}
+
+.rsubWidth { width:366px; padding-top:4px;}
+.headline { background:url(../img/bg_sp_grad.gif) repeat-x left -140px; margin-bottom:3px}
+h3 { background:#fff; margin-left:10px; padding:0 6px; width:62px; height:16px; line-height:16px; margin-bottom:0}
+h3 a:visited, h3 a:hover{ color:#000;}
+.headmore { float:right; width:130px; text-align:right; padding-right:10px; }
+.headmore a { background:none; font-size:12px; font-weight:normal; font-family:"simsun";}
+.headmore a:link, .headmore a:visited { color:#000;}
+.headmore a:hover { color:#c00;}
+.rsubWidth ul { padding:7px 0;}
+.rsubWidth ul li { font-size:14px; height:26px; line-height:26px;}
+.orange { color:#e94c18}
+.lsubWidth .title { padding-top:7px; font-size:14px;}
+.rsubWidth .dashline { padding-top:0; margin-bottom:0}
+
+.box { border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; border-bottom:1px solid #d3d3d3; height:100%; overflow:hidden; margin-bottom:8px;}
+.abs { color:#8e8e8e;}
+.nocamera li { background:none; padding-left:0;}
+.dashi, .jiemudan { height:100%; overflow:hidden;}
+.dashi li { float:left; width:130px;}
+h2 {background:url(../img/bg_sp_text.gif) no-repeat left -380px; height:23px; line-height:23px; margin-left:4px; padding-left:10px;}
+h2 a:visited, h2 a:hover { color:#000;}
+.jiemudan { padding-left:7px; padding-bottom:7px;}
+.jiemudan a { float:left; background:url(../img/bg_sp_text.gif) no-repeat left -428px #fff; border:1px solid #cdcdcd; margin-right:7px; padding-right:5px; padding-left:25px; padding-top:1px; margin-top:4px; line-height:18px; height:18px; word-wrap:normal; word-break:keep-all; }
+.jiemudan a:hover { background:url(../img/bg_sp_text.gif) no-repeat left -408px #fff; border:1px solid #ffa24d; text-decoration:none;}
+
+h5 { height:29px; background:url(../img/bg_sp_grad.gif) repeat-x left -70px; font-size:16px; font-weight:normal; font-family:"simhei";}
+h5 a { position:relative; display:block; width:103px; height:30px; line-height:30px; background:url(../img/bg_sp_text.gif) no-repeat left -226px; padding-left:17px; padding-top:2px; margin-left:8px; _line-height:26px; _height:26px; _padding-top:3px;}
+.grid_18 h5 a:link, .grid_18 h5 a:visited { color:#666;}
+h5 a:hover { color:#666; text-decoration:none;}
+h5 em { font-style:normal; position:absolute; left:1em; top:0.1em; color:#FFF; cursor:pointer;}
+.layout2 { width:280px; float:left; padding:10px;}
+.layout2 img { width:270px; height:190px; margin-bottom:8px;}
+.layout3, .layout4 { width:406px; float:right; background:url(../img/bg_sp_text.gif) no-repeat -320px -450px; height:100%; overflow:hidden; padding-top:10px; _width:400px; }
+.layout3 img, .layout4 img, .layout5 img, .layout6 img { width:105px; height:75px;}
+.each3 { float:left; width:114px; margin-left:18px; padding-bottom:10px; _display:inline;}
+.each3 p.title { font-weight:normal; padding-bottom:0;}
+.each3 img { margin-bottom:5px;}
+.layout3 ul { padding:0 18px;}
+.layout3 div.dashline, .layout6 div.dashline { margin:0 18px 5px; padding-top:0;}
+.graytime span { color:#656565; float:right; font-size:12px;}
+.attention { width:280px; height:95px; background:url(../img/bg_sp_text.gif) no-repeat left -270px; margin-bottom:10px;}
+.attention p { padding:5px 0 0 8px;}
+.layout4 img { float:left; margin-left:18px;}
+.layout4 ul { float:left; padding-left:10px; padding-top:5px;}
+.layout4 div.dashline{ margin:0 18px 6px; padding-top:6px;}
+.adleft img, .adright1 img, .adright2 img { padding:0; border:none;}
+.adleft img { width:658px; height:80px; margin-bottom:8px;}
+.smallbox { width:348px; float:left; border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; border-bottom:1px solid #d3d3d3; height:100%; overflow:hidden; margin-bottom:8px;}
+.smallbox h5 { width:346px;}
+.layout5 { padding:10px;}
+.layout5 img { float:left; margin-right:10px; _display:inline}
+.layout6 { padding-top:10px;}
+.layout6 ul li { float:left; width:314px; margin-left:18px; _display:inline}
+.layout6 div.dashline { *margin-top:-8px;}
+.layout6 .each3 { margin-left:24px}
+
+#tab-title-11 li {background:none;padding-left:0;height:29px;font-size:16px;float:left;}
+#tab-title-11 a {width:86px;background:url(../img/bg_sp_text.gif) no-repeat -225px -226px;}
+#tab-title-11 a.tabSwitch {background-position:0 -226px;}
+#tab-title-11 a em {color:#333;display:none}
+#tab-title-11 a.tabSwitch em {color:#fff;display:inline}
+
+h6 { background:url(../img/bg_sp_grad.gif) repeat-x left -105px; padding-top:5px; height:24px; line-height:24px; font-size:14px; border-bottom:1px solid #d3d3d3; border-top:1px solid #d3d3d3; padding-left:10px;}
+h6 a:visited { color:#000;}
+.rank { background:url(../img/bg_sp_text.gif) no-repeat left -450px; padding-right:10px; padding-bottom:5px;}
+.rank li { background:none; height:28px; padding-left:35px;}
+.rank li.rankfirst { height:55px; padding-top:5px;}
+.rankfirst a { color:#d62823; font-weight:bold;}
+.rankfirst img { width:60px; height:40px; float:left; margin:0 10px;}
+.adright1 img { width:282px; height:80px;}
+.jiemubiao { background:#fff; width:240px; padding:8px 10px 0; margin-top:10px; border-top:1px solid #e7e7e7; border-left:1px solid #e7e7e7; border-right:1px solid #e7e7e7; overflow:auto;}
+.jiemubiao li { background:url(../img/bg_sp_text.gif) no-repeat left -780px; margin-bottom:4px; padding-left:15px;}
+.jiemubiao li.biaotou { background:#fff; border:1px solid #ffb107; font-weight:bold;}
+.jiemubiao li.evenrow { background-position:left -810px;}
+.jiemubiao li span.playtime { float:left; width:110px; text-align:center;}
+.jiemubiao li span.playname { float:right; width:95px; text-align:center;}
+.graycorner { height:31px; background:url(../img/bg_sp_text.gif) no-repeat 201px -849px #fff; margin-left:4px; margin-right:4px; margin-bottom:8px;}
+.adright2 img { width:282px; height:122px;}
+.jiemian { padding:10px 12px;}
+.jiemian img { border:1px solid #fff; width:242px; height:178px; padding:0;}
+.jiemian ul { padding:6px 0;}
+.jiemian ul li { background:none; height:auto; padding-left:0;}
+.lightorange { color:#f69300; font-weight:bold;}
+.contactinfo { background:url(../img/bg_sp_text.gif) no-repeat left -890px; height:120px;}
+.contactinfo p { padding-bottom:5px; padding-top:55px; padding-left:97px; text-indent:0;}
+
+.header_mid img, .copyright_div2 img { border:none; padding:0;}
+.videocdsearch .grayborder_bgdiv { border-left:none; border-right:none; border-bottom:none; margin:0; background:#f2f2f2; padding:15px 8px 21px;}
+.videocdsearch .grayborder_bgdiv a { line-height:22px; display:inline-block; height:22px;}
+.videocdsearch .grayborder_bgdiv .videoicon { width:26px;}
+.videocdsearch input.inputbg_button { background:url(../img/bg_sp_text.gif) no-repeat -180px -230px; width:44px; height:20px;}
+.videocdsearch input.inputbg { height:18px; border:1px solid #b2cce7;}
+.cidianbiaoti { background:url(../img/bg_sp_grad.gif) repeat-x left -40px;}
+.videocdsearch .font14 a:link, font14 a:visited { color:#000;}
+.copyright_div1 { margin-top:0;}
+
+#boxID li {background-image:none;}
+.mF_games_tb_wrap {margin:16px 0 16px 20px; display:inline; width:210px;}
+.mF_games_tb_wrap .mF_games_tb .txt li, .mF_games_tb_wrap .mF_games_tb .pic li { padding-left:0}
+.mF_games_tb_wrap img { border:none; padding:0}
+.mF_games_tb_wrap .mF_games_tb .txt li a { padding-left:0; text-align:center}
+
+.jieshao { height:281px; padding:15px 20px}
+.jieshao p { line-height:25px}
+

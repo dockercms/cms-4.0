@@ -1,0 +1,44 @@
+<#include '/platform/doc/header.html' />
+<!--正文-->
+<div id="main">
+	<div class="menu">
+<#include '/platform/doc/menu.html' />
+	</div>
+	<div class="right_list">
+		<h1>${docInfo.name}API</h1>
+		<p class="api_intro">${docInfo.description!'描述空'}</p>
+		<h2>API列表</h2>
+		<#if docList?exists>
+			<ul class="list">
+				<#list docList as doc>
+					<li>
+						<div class="api_func"><a href="${contextpath}/docs/docAct.do?docapi&id=${doc.id}&platform=${platform!''}">${doc.tag!''}</a></div>
+						<span>${doc.name}</span>
+					</li>
+				</#list>
+			</ul>
+		</#if>
+		<#if docEnRefList?exists && docEnRefList?size gt 0>
+		<h2>数据结构列表</h2>
+		<ul class="list">
+			<#list docEnRefList as docEnRef>
+			<#assign docEn =docEnRef.docEn>
+				<li>
+					<div class="api_func"><a href="docAct.do?getEntityInfo&entityName=${docEn.code}&platform=${platform!''}">${docEn.code}</a></div>
+					<span>${docEn.name}</span>
+				</li>
+			</#list>
+		</ul>
+		</#if>
+	</div>
+</div>
+
+<!--正文结束-->
+</body>
+</html>
+
+
+
+
+
+

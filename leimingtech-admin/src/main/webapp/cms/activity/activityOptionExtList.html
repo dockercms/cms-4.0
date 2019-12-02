@@ -1,0 +1,128 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">详细记录</h4>
+</div>
+<div class="modal-body">
+	<table width="100%" border="0" cellspacing="5" cellpadding="0">
+
+		<#list activityOptionList as optionext> <#if
+		optionext.dateType=='radio'>
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br /></td>
+		</tr>
+		<tr>
+			<td height="30" colspan="2" align="left"><#list
+				optionext.optionalValue?split("\n") as option_value> <input
+				type="radio" value="${option_value}" disabled="disabled"
+				id="${optionext.optionids}" name="extradio" /> ${option_value}
+				</#list></td>
+		</tr>
+		</#if> <#if optionext.dateType=='checkbox'>
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+		<tr>
+			<td height="30" colspan="2" align="left"><#list
+				optionext.optionalValue?split("\n") as option_value> <input
+				type="checkbox" value="${option_value}" disabled="disabled"<#list
+				activityOptionExtList as aoe> <#if
+				optionext.optionids==aoe.optiondids> <#list
+				aoe.extCheckbox?split(",") as checkname> <#if checkname?trim ==
+				option_value?trim> checked </#if> </#list> <#break> </#if> </#list>
+				/> ${option_value} </#list></td>
+		</tr>
+		</#if> <#if optionext.dateType=='text'>
+
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+		<tr>
+
+			<td height="30" colspan="2" align="left"><#list
+				activityOptionExtList as aoe> <#if
+				optionext.optionids==aoe.optiondids> ${aoe.extText} <#break> </#if>
+				</#list></td>
+		</tr>
+
+		</#if> <#if optionext.dateType=='textarea'>
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+
+		<tr>
+			<td height="30" colspan="2" align="left"><#list
+				activityOptionExtList as aoe> <#if
+				optionext.optionids==aoe.optiondids> ${aoe.extText} <#break> </#if>
+				</#list></td>
+		</tr>
+		</#if> <#if optionext.dateType=='img'>
+
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+		<tr>
+			<td height="30" colspan="2" align="left"><#list
+				activityOptionExtList as aoe> <#if
+				optionext.optionids==aoe.optiondids> <img src="${aoe.extPicture}"
+				width="200px" height="100px" /> <#break> </#if> </#list></td>
+		</tr>
+		</#if> <#if optionext.dateType=='file'>
+
+
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+		<tr>
+			<td height="30" colspan="2" align="left"><#list
+				activityOptionExtList as aoe> <#if
+				optionext.optionids==aoe.optiondids> <a href="${aoe.extFile}">${aoe.extFile}</a>
+				<#break> </#if> </#list></td>
+		</tr>
+		</#if> <#if optionext.dateType=='select'>
+
+		<tr>
+			<td height="30" colspan="2" align="left"><span
+				style="color: blue">${optionext.optionName}</span><br />
+			</td>
+		</tr>
+
+		<tr>
+			<td height="30" colspan="2" align="left"><select
+				disabled="disabled"> <#list activityOptionExtList as aoe>
+					<#if optionext.optionids==aoe.optiondids>
+					<option value="${optionext.extSelect}">${aoe.extSelect}</option>
+
+					<#break> </#if> </#list>
+
+
+			</select>
+			</td>
+		</tr>
+		</#if> </#list>
+	</table>
+</div>
+<div class="modal-footer">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+	$(function() {
+
+		<#list activityOptionExtList as aoe>
+		$("#${aoe.optiondids}").attr("checked", true);
+		</#list>
+
+	});
+</script>

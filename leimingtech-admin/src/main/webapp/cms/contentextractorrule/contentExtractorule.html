@@ -1,0 +1,198 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">一键抓取规则管理</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="contentExtractorule_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${contentExtractorule.id?if_exists}"/>
+		<div class="control-group">
+			<label class="control-label">网址名称</label>
+			<div class="controls">
+				<input type="text" id="websitename" name="websitename" class="span3 form-control" data-rule-required="true" value="${contentExtractorule.websitename?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">网页域名关键字片段</label>
+			<div class="controls">
+				<textarea id="urikeywordsfragment" name="urikeywordsfragment" class="span3 tooltips form-control" data-rule-required="true">${contentExtractorule.urikeywordsfragment?if_exists}</textarea>
+				<br>(域名关键字从网址起始位置开始依次用逗号隔开,抓取时域名关键字将同时起作用)
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">抓取方案</label>
+			<div class="controls">
+				<select name="scheme" id="scheme" class="form-control span3">
+					<option value="主体标签Id"
+						<#if contentExtractorule.scheme=="主体标签Id">
+							selected="selected"
+						</#if>
+					>主体标签Id</option>
+					<option value="主体标签Class"
+						<#if contentExtractorule.scheme=="主体标签Class">
+							selected="selected"
+						</#if>
+					>主体标签Class</option>
+					<option value="自定义主体标签属性"
+						<#if contentExtractorule.scheme=="自定义主体标签属性">
+							selected="selected"
+						</#if>
+					>自定义主体标签属性</option>
+					<option value="网页注释抓取"
+						<#if contentExtractorule.scheme=="网页注释抓取">
+							selected="selected"
+						</#if>
+					>网页注释抓取</option>
+	            </select>
+			</div>
+		</div>
+		<div class="control-group" id="newsBodyTag">
+			<label class="control-label">网页主题内容标签</label>
+			<div class="controls">
+				<input type="text" id="nesbodytag" name="nesbodytag" class="span3 form-control"  data-rule-required="true" value="${contentExtractorule.nesbodytag?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="newsBodyClass" >
+			<label class="control-label">网页主题内容标签Class属性</label>
+			<div class="controls">
+				<input type="text" id="newsbodyclass" name="newsbodyclass" class="span3 form-control" value="${contentExtractorule.newsbodyclass?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="newsBodyId" >
+			<label class="control-label">网页主题内容标签Id属性</label>
+			<div class="controls">
+				<input type="text" id="newsbodyid" name="newsbodyid" class="span3 form-control" value="${contentExtractorule.newsbodyid?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="beginTag" >
+			<label class="control-label">开始标签</label>
+			<div class="controls" >
+				<input type="text" id="begintag" name="begintag" class="span3 form-control" value="${contentExtractorule.begintag?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="endTag">
+			<label class="control-label">结束标签</label>
+			<div class="controls">
+				<input type="text" id="endtag" name="endtag" class="span3 form-control" value="${contentExtractorule.endtag?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="attrName">
+			<label class="control-label">自定义属性名</label>
+			<div class="controls">
+				<input type="text" id="attrname" name="attrname" class="span3 form-control" value="${contentExtractorule.attrname?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group" id="attrValue">
+			<label class="control-label">自定义属性值</label>
+			<div class="controls">
+				<input type="text" id="attrvalue" name="attrvalue" class="span3 form-control" value="${contentExtractorule.attrvalue?if_exists}"/>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('contentExtractoruleController.do?save', 'contentExtractorule_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+$(function(){
+	var scheme=$("#scheme");
+	
+	var newsBodyTag=$("#newsBodyTag");
+	var newsBodyClass=$("#newsBodyClass");
+	var newsBodyId=$("#newsBodyId");
+	
+	var beginTag=$("#beginTag");
+	var endTag=$("#endTag");
+	
+	var attrName=$("#attrName");
+	var attrValue=$("#attrValue");
+	
+	var newsBodyClassValue=newsBodyClass.find(":input:text").first().val();
+	var newsBodyIdValue=newsBodyId.find(":input:text").first().val();
+	var beginTagValue=beginTag.find(":input:text").first().val();
+	var endTagValue=endTag.find(":input:text").first().val();
+	var attrNameValue=attrName.find(":input:text").first().val();
+	var attrValueValue=attrValue.find(":input:text").first().val();
+	
+	scheme.change(changeScheme);
+	
+	function changeScheme(){
+		var schemeVal=scheme.val();
+		switch(schemeVal){
+			case "主体标签Id"://主体标签Id
+					newsBodyTag.stop().show();
+					newsBodyClass.stop().hide();
+					newsBodyId.stop().show();
+					newsBodyClass.find(":input:text").removeAttr("data-rule-required").val("");
+					newsBodyId.find(":input:text").attr("data-rule-required","true").val(newsBodyIdValue);
+					
+					beginTag.stop().hide();
+					endTag.stop().hide();
+					beginTag.find(":input:text").removeAttr("data-rule-required").val("");
+					endTag.find(":input:text").removeAttr("data-rule-required").val("");
+					
+					attrName.stop().hide();
+					attrValue.stop().hide();
+					attrName.find(":input:text").removeAttr("data-rule-required").val("");
+					attrValue.find(":input:text").removeAttr("data-rule-required").val("");
+				break;
+			case "主体标签Class"://主体标签Class
+					newsBodyTag.stop().show();
+					newsBodyClass.stop().show();
+					newsBodyId.stop().hide();
+					newsBodyId.find(":input:text").removeAttr("data-rule-required").val("");
+					newsBodyClass.find(":input:text").attr("data-rule-required","true").val(newsBodyClassValue);
+					
+					beginTag.stop().hide();
+					endTag.stop().hide();
+					beginTag.find(":input:text").removeAttr("data-rule-required").val("");
+					endTag.find(":input:text").removeAttr("data-rule-required").val("");
+					
+					attrName.stop().hide();
+					attrValue.stop().hide();
+					attrName.find(":input:text").removeAttr("data-rule-required").val("");
+					attrValue.find(":input:text").removeAttr("data-rule-required").val("");
+				break;
+			case "自定义主体标签属性"://自定义主体标签属性
+					newsBodyTag.stop().show();
+					newsBodyClass.stop().hide();
+					newsBodyId.stop().hide();
+					newsBodyId.find(":input:text").removeAttr("data-rule-required").val("");
+					newsBodyClass.find(":input:text").removeAttr("data-rule-required","true").val("");
+					
+					beginTag.stop().hide();
+					endTag.stop().hide();
+					beginTag.find(":input:text").removeAttr("data-rule-required").val("");
+					endTag.find(":input:text").removeAttr("data-rule-required").val("");
+					
+					attrName.stop().show();
+					attrValue.stop().show();
+					attrName.find(":input:text").attr("data-rule-required","true").val(attrNameValue);
+					attrValue.find(":input:text").attr("data-rule-required","true").val(attrValueValue);
+				break;
+			case "网页注释抓取"://网页注释抓取
+					newsBodyTag.stop().show();
+					newsBodyClass.stop().hide();
+					newsBodyId.stop().hide();
+					newsBodyClass.find(":input:text").removeAttr("data-rule-required").val("");
+					newsBodyId.find(":input:text").removeAttr("data-rule-required").val("");
+					
+					beginTag.stop().show();
+					endTag.stop().show();
+					beginTag.find(":input:text").attr("data-rule-required","true").val(beginTagValue);
+					endTag.find(":input:text").attr("data-rule-required","true").val(endTagValue);
+					
+					attrName.stop().hide();
+					attrValue.stop().hide();
+					attrName.find(":input:text").removeAttr("data-rule-required").val("");
+					attrValue.find(":input:text").removeAttr("data-rule-required").val("");
+				break;
+		}
+		App.init();
+   		$("#contentExtractorule_form").myValidate();
+	}
+	changeScheme();
+});
+</script>

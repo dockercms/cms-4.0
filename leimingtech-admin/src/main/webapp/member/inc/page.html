@@ -1,0 +1,78 @@
+<div class="page">
+	共${countNum}条&nbsp;${pageNo}/${pageCount}页
+	<#if pageNo==1>
+		<a href="javaScript:void(0)">首页</a>
+		<a href="javaScript:void(0)">上一页</a>
+	<#else>
+		<a href="javascript:void(0)" onclick="memberSearch('${searchUrl}','memberSearchForm')">首页</a>
+		<a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${pageNo-1}','memberSearchForm')">上一页</a>
+	</#if>
+	
+	<#if (pageNo-2) gt 1>
+		<#list (pageNo-2)..(pageNo-1) as i>
+			<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${i}','memberSearchForm')">${i}</a></span></td>
+		</#list>
+	<#elseif (pageNo) !=1>
+		<#list 1..(pageNo-1) as i>
+			<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${i}','memberSearchForm')">${i}</a></span></td>
+		</#list>
+	</#if>
+	
+	<td style="color:red;"><span><a class="selectpage" href="javaScript:void(0)">${pageNo}</a></span></td>
+	
+	<#if (pageNo+3) lt pageCount>
+		<#list (pageNo+1)..(pageNo+2) as i>
+			<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${i}','memberSearchForm')">${i}</a></span></td>
+		</#list>
+	<#elseif (pageNo) !=pageCount>
+		<#list (pageNo+1)..pageCount as i>
+			<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${i}','memberSearchForm')">${i}</a></span></td>
+		</#list>
+	</#if>
+	
+	<#if (pageNo+3) lt pageCount>
+		<td><span><a href="javaScript:void(0)">...</a></span></td>
+		<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${pageCount-1}','memberSearchForm')">${pageCount-1}</a></span></td>
+		<td><span><a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${pageCount}','memberSearchForm')">${pageCount}</a></span></td>
+	</#if>
+	
+	<#if pageNo==pageCount>
+		<a href="javaScript:void(0)">下一页</a>
+		<a href="javaScript:void(0)">尾页</a>
+	<#else>
+		<a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${pageNo+1}','memberSearchForm')">下一页</a>
+		<a href="javascript:void(0)" onclick="memberSearch('${searchUrl}&pageIndex=${pageCount}','memberSearchForm')">尾页</a>
+	</#if>
+	<input value="" id="gopage" type="text" style="width:25px;padding:2px 4px;text-align: center;"/>
+	<a onclick="goPage()" href="javascript:void(0)">GO</a>
+</div>
+<script type="text/javascript">
+	var pageCount="${pageCount}";
+	var pageNo="${pageNo}";
+	var action="${searchUrl}";
+	function goPage(){
+		var pageIndex=$("#gopage").val();
+		if(!pageIndex){
+			alert("请您输入你想去往的页数！");
+			$("#gopage").focus();
+			return ;
+		}
+		
+		if(pageCount<pageIndex){
+			alert("您输入的页数已经超出！");
+			$("#gopage").focus();
+			return ;
+		}
+		if(1>pageIndex){
+			alert("您输入的页数不能为负数！");
+			$("#gopage").focus();
+			return ;
+		}
+		
+		if(pageNo==pageIndex){
+			return ;
+		}
+		memberSearch(action+"&pageIndex="+pageIndex,"memberSearchForm");
+		
+	}
+</script>

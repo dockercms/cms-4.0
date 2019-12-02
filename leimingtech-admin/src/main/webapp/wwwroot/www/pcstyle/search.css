@@ -1,0 +1,78 @@
+/***
+ * @website
+ * http://www.jzread.com
+ * @QQ£º568245346
+ * @author£ºjsjlsf
+ * @e-mail: jsjlsf@163.com
+ */
+ .clearbox{clear:both;}
+.s{ width:1000px; height:55px;margin:0 auto; padding-top:50px;}
+.logo{ width:145px; height:35px; float:left; padding-top:15px;}
+.wei{ width:315px; height:26px; float:left; padding-top:25px; color:#333}
+.wei a{ color:#333}
+.wei a:hover{ color:#c00}
+
+.clear{clear:both; width:1000px; height:0px; font-size:0px;margin:0 auto;}
+.h20{clear:both;margin:0;padding:0;height:20px;font-size:0}
+
+.content1{ width:998px; border:1px solid #DEDEDE;margin:0 auto;}
+.content1_title{width:978px; padding-left:20px; height:35px; line-height:35px; border-top:3px solid #2389F8; border-bottom:1px solid #DEDEDE; background:#FCFCFC; float:left;}
+.new1{ width:958px; border-bottom:1px dashed #DEDEDE; float:left;}
+.new1_a{ width:958px; margin-left:20px; padding-top:15px; padding-bottom:5px; float:left;}
+.new1_a span{font-size:20px; font-style:italic; color:#2389F8;}
+.new1_a a{color:#000000;font-size:20px;}
+.new1_a a:hover,.new1_a a:active{ text-decoration: underline; color:#FF0000;}
+.new1_b{ width:958px; line-height:22px; margin-left:20px; color:#666666; float:left;}
+.new1_c{ width:958px; margin-left:20px; padding-top:10px; padding-bottom:5px; color:#666666;  float:left;}
+ 
+ 
+ 
+ 
+ /* ·ÖÒ³ÑùÊ½*/
+.list_page {
+	margin: 15px 5px; width:958px; text-align:center; padding-top:10px; padding-bottom:10px; float:left;
+}
+.list_page a{
+	padding: 6px 6px 4px;
+	border: 1px solid #CCCDD1;
+	background: #FEFFFA;
+	text-align: center;
+	display: inline;
+	font-size: 14px;
+	}
+.list_page b{
+	padding: 6px 6px 4px;
+	border: 1px solid #CCCDD1;
+	background: #2389F8;
+	text-align: center;
+	display: inline;
+	font-size: 14px;
+	color:#FFFFFF;
+	}
+.list_page a:hover{
+	border: 1px solid #CCCDD1;
+	background: #fff;
+	text-align: center;
+	text-decoration: none;
+	font-size:14px;
+	color:#333333;
+	}
+.pageLink a:link{ color:#333333;} 
+.pageLink a:active{ color:#333333;} 
+.pageLink a:hover{ color:#333333; text-decoration:underline;}
+.pageLink a:visited{ color:#333333;}
+ .Area{
+	clear: both; 
+	margin: 0px auto; 
+	width: 960px;
+	height: auto; 
+	background-color:#FFFFFF;
+}
+.fArea{ clear:both; float:left;width: 1000px; HEIGHT: auto;}
+.fa{float:left;width: 1000px; text-align:center; line-height:25px; padding-top:10px; padding-bottom:15px;}
+
+
+
+
+
+

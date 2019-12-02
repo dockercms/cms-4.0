@@ -1,0 +1,37 @@
+<#if commentList?exists && (commentList?size>0)>
+<dl class="rmpl">
+	<#list commentList as comment>
+		<dt>
+			<span>${comment.commentaryperson!'匿名网友'}</span> 于${comment.commentarytime?string('yyyy-MM-dd HH:mm:ss')} 评论道:
+		</dt>
+		<dd>${comment.content}</dd>
+		<dd class="line"></dd>
+	</#list>
+	<#--<div class="pagebar">
+		共${countNum}条记录${pageNo}/${pageCount}页 
+		<#if pageNo==1>
+			&nbsp;<a disabled="disabled">首页</a> <a disabled="disabled">上一页</a>
+		<#else>
+			&nbsp;<a href="commentaryTagAct.do?commentList&contentId=${contentId}">首页</a> <a href="commentaryTagAct.do?commentList&contentId=${contentId}&pageIndex=${pageNo-1}">上一页</a>
+		</#if>
+		
+		<#if pageNo==pageCount>
+			&nbsp;<a disabled="disabled">下一页</a> <a disabled="disabled">尾页</a>
+		<#else>
+			&nbsp;<a href="commentaryTagAct.do?commentList&contentId=${contentId}&pageIndex=${pageNo+1}">下一页</a> <a href="commentaryTagAct.do?commentList&contentId=${contentId}&pageIndex=${pageCount}">尾页</a>
+		</#if>
+		&nbsp;第<select
+			onChange="location='commentaryTagAct.do?commentList&contentId=${contentId}&pageIndex='+this.value+''">
+			<#list 1..pageCount as i>
+			<option value="${i}" <#if pageNo==i>selected="selected"</#if>>${i}</option>
+			</#list>
+		</select>页
+	</div>-->
+</dl>
+<#else>
+<dl class="rmpl">
+<dt>
+	<span>暂无相关评论！</span>
+</dt>
+</dl>
+</#if>

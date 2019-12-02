@@ -1,0 +1,14 @@
+<#if docTypeList?exists && docTypeList?size gt 0 >
+	<#list docTypeList as docType>
+		<h3><a href="${contextpath}/docs/docAct.do?type&id=${docType.id}&platform=${platform!''}" alt="${docType.name}类" title="${docType.name}类">${docType.name}类</a></h3>
+		<#assign docTag =newTag("docTag")>
+		<#assign docListT =docTag("{'typeid':'${docType.id}','platform':'${platform}'}")>
+		<#if docListT?exists && docListT?size gt 0>
+			<ul>
+				<#list docListT as doc>
+					<li><a href="<#if doc.type='标签'>${contextpath}/docs/docAct.do?doctag&id=${doc.id}&platform=${platform!''}<#else>${contextpath}/docs/docAct.do?docapiList&id=${doc.id}&platform=${platform!''}</#if>" alt="${doc.name}${docType.name}" title="${doc.name}${docType.name}">${doc.name}${docType.name}</a></li>
+				</#list>
+			</ul>
+		</#if>
+	</#list>
+</#if>

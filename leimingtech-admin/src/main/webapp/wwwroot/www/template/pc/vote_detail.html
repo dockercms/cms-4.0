@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${contentF.title!''}</title>
+<link rel="stylesheet" type="text/css" href="/pcstyle/main.css"/>
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<script type="text/javascript" src="/pcstyle/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/front.js"></script>
+ <style>
+ #keyword2{height:22px;background:url(../images/img/bg-search.png) no-repeat;
+width:214px;border:1px solid #0A89B1;
+        }
+</style>
+</head>
+<script>
+	var contextpath='${contextpath}';
+	function changepic(obj, img) {
+		obj.src = img;
+	}
+</script>
+	
+<body>
+<#include "wwwroot/${sitePath}/template/pc/section/menu.html">
+	<div class="div_mid">
+		<div class="div_main">
+			<div class="div_midleft">
+			<style type="text/css">
+.clear { clear: both; }
+.clear-10 { clear: both; height: 10px; }
+.LanMu01-1 /*标题背景*/ { background-image: url(/images/title1-1.gif); width: 23px; height: 30px; float: left; }
+.LanMu01-2 { background-image: url(/images/title1-2.gif); width: 100%; height: 30px; }
+.LanMu01-2 a { font-size: 12px; }
+.LanMu01-2 span { line-height: 30px; float: left;   font-size: 21px;margin-top:10px;font-weight: bold; color: #2b4099; }
+#s_commentsize { float:none; margin: 0px; padding:0px; }
+.LanMu01-2 em { float: right; padding-right: 1%; font-size: 12px; line-height: 28px; font-family: Arial,Tahoma,"hiragino sans gb",Helvetica;color:#122E67;font-style: normal;}
+.LanMu01-3 { background-image: url(/images/title1-3.gif); width: 10px; height: 30px; float: right; }
+.hundred100 { width: 100%; }
+.rim06 { border: 1px solid #d8d8d8; background: #fcfcfc; margin-bottom:20px;}
+.pinglun /*评论*/ { width: 100%; font-size: 12px; }
+.pinglun h1 { line-height: 30px; float: left; font-weight: bold; font-size: 14px; }
+.pinglun h2 { line-height: 30px; float: right; font-size: 12px; }
+.pinglun em { color: #F00; line-height: 30px; font-size: 12px; }
+.pinglun a { font-size: 12px; }
+.pltable { width: 95%; margin: auto; }
+
+</style>
+			<div style="width:1000px; margin: 0 auto; margin-top: 10px;">
+			<div class="rim06">
+			<div class="pinglun">
+			<div class="LanMu01-2">
+				<div class="LanMu01-1"></div>
+				<span>${contentF.title}</span> 
+				<div class="LanMu01-3"></div>
+			</div>
+			<div class="clear-10"></div>
+			<div class="pltable">
+					<div id='votecontent'></div>
+						<script type="text/javascript">
+						$(function() {
+							Cms.voteList("votecontent", "${contentidF}");
+						});
+					</script>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+	</div>
+	</div>
+	<div class="footer">
+<#include "wwwroot/${sitePath}/template/pc/section/footer.html">
+</div>
+</body>
+</html>

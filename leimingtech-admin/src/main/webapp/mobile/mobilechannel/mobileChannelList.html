@@ -1,0 +1,29 @@
+<div class="row-fluid">
+	<div class="span4">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-sitemap"></i>频道管理</div>
+			</div>
+			<div class="portlet-body fuelux" id="tree_3">
+			</div>
+		</div>
+	</div>
+	<div class="span8">
+	<div class="portlet box blue" id="divBody">
+			<#include "/mobile/mobilechannel/mobileChannel.html">
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="600">
+</div>
+<script>
+$(function (){
+	$("#tree_3").jstree({"types" : {"default" : { "icon" : "fa fa-folder icon-success icon-lg" }},
+	    "plugins": ["types"],"core" : {"themes" : { "responsive": false},  "check_callback" : true,'data': ${jstreeData}}});
+	$("#tree_3").coffee({click:{'.jstree-anchor':function (){
+		var id=$(this).parent().attr("id");
+		changeDivBody('mobileChannelController.do?table&id=' + id, 'divBody');
+	}}
+	});
+});
+</script>

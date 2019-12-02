@@ -1,0 +1,57 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">投诉举报</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="complaintsReport_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${complaintsReport.id?if_exists}"/>
+		<div class="control-group">
+			<label class="control-label">姓名</label>
+			<div class="controls">
+				<input type="text" id="name" name="name" class="span3 form-control" data-rule-required="true" value="${complaintsReport.name?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">电子邮箱</label>
+			<div class="controls">
+				<input type="text" id="email" name="email" class="span3 form-control" data-rule-required="true" value="${complaintsReport.email?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">联系电话</label>
+			<div class="controls">
+				<input type="text" id="telephone" name="telephone" class="span3 form-control" value="${complaintsReport.telephone?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">工作单位</label>
+			<div class="controls">
+				<input type="text" id="workUnit" name="workUnit" class="span3 form-control" value="${complaintsReport.workUnit?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">内容</label>
+			<div class="controls">
+				<input type="text" id="count" name="count" class="span3 form-control" value="${complaintsReport.count?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">站点Id</label>
+			<div class="controls">
+				<input type="text" id="siteid" name="siteid" class="span3 form-control" value="${complaintsReport.siteid?if_exists}"/>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('complaintsReportController.do?save', 'complaintsReport_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#complaintsReport_form").myValidate();
+});
+</script>

@@ -1,0 +1,76 @@
+<#--<div class="div_menu">
+  <div class="div_main">
+    <ul>
+      <li><a href="#" class="s">首　页</a></li>
+      <li><a href="#" class="s">关于我们</a></li>
+      <li><a href="#" class="s">新闻资讯</a></li>
+      <li><a href="#" class="s">招商引资</a></li>
+      <li onmouseover="this.className='l3 active_cat'" onmouseout="this.className='l3'"><a href="#" class="s">产业天地</a>
+        <div class="l2">
+          <ul>
+            <li><a href="#">产业天地</a></li>
+            <li><a href="#">产业天地</a></li>
+            <li><a href="#">产业天地</a></li>
+            <li><a href="#">产业天地</a></li>
+            <li><a href="#">产业天地</a></li>
+          </ul>
+        </div>
+      </li>
+      <li onmouseover="this.className='l3 active_cat'" onmouseout="this.className='l3'"><a href="#" class="m mact">生物技术协会</a>
+        <div class="l2">
+          <ul>
+            <li><a href="#">招商引资</a></li>
+            <li><a href="#">产业天地</a></li>
+            <li><a href="#">生物技术协会</a></li>
+            <li><a href="#">数据资源与公共服务</a></li>
+            <li><a href="#">宋涛谈生技</a></li>
+          </ul>
+        </div>
+      </li>
+      <li onmouseover="this.className='l3 active_cat'" onmouseout="this.className='l3'"><a href="#" class="l">数据资源与公共服务</a>
+        <div class="l2">
+          <ul>
+            <li><a href="#">数据资源</a></li>
+            <li><a href="#">数据资源</a></li>
+            <li><a href="#">数据资源</a></li>
+            <li><a href="#">数据资源</a></li>
+            <li><a href="#">数据资源</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#" class="m">宋涛谈生技</a></li>
+    </ul>
+  </div>
+</div>
+<div class="clear"></div>-->
+
+<div class="div_menu">
+  <div class="div_main">
+    <ul>
+      <li><a href="#" class="s">首　页</a></li>
+		<#assign name ="catalogTag">
+		<#assign catalogTag =newTag("${name}")>
+		<#assign catalogList =catalogTag("{'level':'root','count':'7'}")>
+		<#if catalogList?exists>
+			<#list catalogList as catalog>
+				<li onmouseover="this.className='l3 active_cat'" onmouseout="this.className='l3'">
+					<a href="#" <#if catalog_index==5>class="l"<#elseif catalog_index==4||catalog_index==6>class="m"<#else>class="s"</#if> >${catalog.name}</a>
+		          	<#assign name ="catalogTag">
+					<#assign catalogTag =newTag("${name}")>
+					<#assign catalogList =catalogTag("{'name':'${catalog.id}'}")>
+					<#if catalogList?exists>
+					 	<div class="l2">
+				          <ul>
+								<#list catalogList as catalog>
+						            <li><a href="#">${catalog.name}</a></li>
+					            </#list>
+				          </ul>
+			        	</div>
+					</#if>
+				</li>
+			</#list>
+		</#if>
+    </ul>
+  </div>
+</div>
+<div class="clear"></div>

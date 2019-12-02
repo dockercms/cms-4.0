@@ -1,0 +1,26 @@
+<#if list?exists>
+	<#list list as function>
+		<#if (function.contentCats?size >0) >  
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('sectionController.do?sectionList&catalogid=${function.id?if_exists}')">
+				<i class="icon-folder-close"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="arrow "></span>
+				<span class="selected"></span>
+				</a>
+				<ul class="sub-menu">
+					<#assign list=function.contentCats/>
+						<#include "/cms/section/sectionClassTree2.html">
+				</ul>
+			</li>
+		<#else>
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('sectionController.do?sectionList&catalogid=${function.id?if_exists}')">
+				<i class="icon-folder-close"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="selected"></span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>

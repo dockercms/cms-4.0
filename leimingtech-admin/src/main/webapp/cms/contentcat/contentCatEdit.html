@@ -1,0 +1,447 @@
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+<!-- BEGIN SAMPLE FORM PORTLET-->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">编辑</h4>
+</div>
+<div class="modal-body">
+<!-- BEGIN FORM-->
+<form id="form_sample_2" class="form-horizontal">
+    <div class="alert alert-error hide">
+        <button class="close" data-dismiss="alert"></button>
+        有未填写项或错误项. 请检查后再提交.
+    </div>
+    <div class="alert alert-success hide">
+        <button class="close" data-dismiss="alert"></button>
+        表单验证成功!
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>栏目名称</label>
+
+                <div class="controls">
+                    <input type="text" id="name" name="name" data-rule-required="true" class="form-control"
+                           value="${contentCat?if_exists.name}" onchange="pyChange()"/>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label" style="width:120px;">英文名</label>
+
+                <div class="controls" style="margin-left:140px;">
+                    <input type="text" id="alias" name="alias" class="form-control"
+                           value="${contentCat?if_exists.alias}"/>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">栏目拼音</label>
+
+                <div class="controls">
+                    <input type="text" id="contentcatSpell" name="contentcatSpell" class="form-control"
+                           value="${contentCat?if_exists.contentcatSpell}"/>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label" style="width:120px;">栏目缩写</label>
+
+                <div class="controls" style="margin-left:140px;">
+                    <input type="text" id="contentcatAbbreviation" readonly="readonly" name="contentcatAbbreviation"
+                           class="form-control" value="${contentCat?if_exists.contentcatAbbreviation}"/>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">栏目首页模板</label>
+
+                <div class="controls">
+                    <input type="text" id="templateshowindex" name="indexTemplate" class="form-control span9"
+                           value="${contentCat?if_exists.indexTemplate}"/>
+                    <button class="btn purple" type="button"
+                            onclick="toEditModel('templateController.do?tableDialog&model=index')">选择模板
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label"><span class="required">*</span>列表页模板</label>
+
+                <div class="controls">
+                    <input type="text" id="templateshowlist" name="listModel" class="form-control span9"
+                           data-rule-required="true" value="${contentCat?if_exists.listModel}"/>
+                    <button class="btn purple" type="button"
+                            onclick="toEditModel('templateController.do?tableDialog&model=list')">选择模板
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">RSS模板</label>
+
+                <div class="controls">
+                    <input type="text" id="templateshowRss" name="rssTemplate" class="form-control span9"
+                           value="${contentCat?if_exists.rssTemplate}"/>
+                    <button class="btn purple" type="button"
+                            onclick="toEditModel('templateController.do?tableDialog&model=Rss')">选择模板
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">&nbsp;</label>
+
+                <div class="controls">
+                    <#include "/cms/contentcat/template.html"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+
+                <label class="control-label">工作流</label>
+
+                <div class="controls">
+                    <select name="workflowid" id="workflowid" class="form-control">
+                        <option value="0">---请选择工作流---</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group"
+            <#if contentCat.contentCat?exists && contentCat.contentCat.id?exists && contentCat.contentCat.id!=''>
+                style="display: none;"
+            </#if>
+            >
+            <label class="control-label">是否是单页栏目</label>
+
+            <div class="controls">
+                <label class="radio">
+                    <input type="radio" id="isLeaf2" name="isLeaf" value="1"
+                    <#if contentCat.isLeaf==1>checked</#if>
+                    />是
+                </label>
+                <label class="radio">
+                    <input type="radio" id="isLeaf1" name="isLeaf" value="0"
+                    <#if contentCat.isLeaf==0||contentCat.isshow=="">checked</#if>
+                    />否
+                </label>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">扩展字段</label>
+
+                <div class="controls">
+                    <select name="jsonid" id="jsonid" class="form-control">
+                        <option value="-1">--添加扩展字段--</option>
+                        <#list modelManageList as modelManages>
+                            <option value="${modelManages.id}"
+                            <#if modelManage.id==modelManages.id> selected = "selected"</#if>
+                            >${modelManages.modelName}</option>
+                        </#list>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">是否允许评论</label>
+
+                <div class="controls">
+                    <label class="radio">
+                        <input type="radio" id="iscomment1" name="iscomment" value="1"
+                        <#if contentCat.iscomment=="1"||contentCat.iscomment=="">checked</#if>
+                        />是
+                    </label>
+                    <label class="radio">
+                        <input type="radio" id="iscomment2" name="iscomment" value="0"
+                        <#if contentCat.iscomment=="0">checked</#if>
+                        />否
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">是否允许用户投稿</label>
+
+                <div class="controls">
+                    <label class="radio">
+                        <input type="radio" id="iscontribute1" name="iscontribute" value="1"
+                        <#if contentCat.iscontribute=="1">checked</#if>
+                        />是
+                    </label>
+                    <label class="radio">
+                        <input type="radio" id="iscontribute2" name="iscontribute" value="0"
+                        <#if contentCat.iscontribute=="0"||contentCat.iscontribute=="">checked</#if>
+                        />否
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">列表页每页信息数</label>
+    
+                <div class="controls">
+                    <input type="text" id="pagesize" name="pagesize" class="form-control span3"
+                           value="${contentCat.pagesize!'10'}"/>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+    		<div class="control-group">
+	            <label class="control-label">排序</label>
+	    
+	            <div class="controls">
+	                <input type="text" id="sort" name="sort" class="form-control span3" data-rule-number="true"
+	                       value="${contentCat.sort!'0'}"/>
+	                <span class="help-inline">(数字越大越靠前)</span>
+	            </div>
+	        </div>
+            
+        </div>
+    </div>
+    
+    <div class="row-fluid">
+    	<div class="span6">
+	        <div class="control-group">
+                <label class="control-label">是否显示</label>
+    
+                <div class="controls">
+                    <label class="radio">
+                        <input type="radio" id="isshow1" name="isshow" value="1"
+                        <#if contentCat.isshow=="1"||contentCat.isshow=="">checked</#if>
+                        />是
+                    </label>
+                    <label class="radio">
+                        <input type="radio" id="isshow2" name="isshow" value="0"
+                        <#if contentCat.isshow=="0">checked</#if>
+                        />否
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+    <h3 class="form-section">栏目SEO配置</h3>
+    <div class="row-fluid">
+    	<div class="span12">
+			<div class="control-group">
+			    <label class="control-label">标题</label>
+			    <div class="controls">
+			        <input type="text" id="contentcatTitle" name="contentcatTitle" class="form-control span10" value="${contentCat?if_exists.contentcatTitle}"/>
+			        <span class="help-inline"></span>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+    	<div class="span12">
+			<div class="control-group">
+			    <label class="control-label">关键词</label>
+			    <div class="controls">
+			        <input type="text" id="keywords" name="keywords" class="form-control span10" value="${contentCat?if_exists.keywords}"/>
+			        <span class="help-inline"></span>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+    	<div class="span12">
+			<div class="control-group">
+			    <label class="control-label">描述</label>
+			    <div class="controls">
+			        <textarea id="description" name="description" rows="4" class="form-control span10">${contentCat?if_exists.description}</textarea>
+			    </div>
+			</div>
+		</div>
+	</div>
+<!-- <div class="control-group pull-left" style="width:450px;">
+<label class="control-label">水印方案</label>
+<div class="controls">
+<select id="watermark" name="watermark" class="form-control span2">
+    <option value="" onclick="">默认</option>
+</select>
+</div>
+</div> -->
+    
+    <input type="hidden" id="id" name="id" value="${contentCat?if_exists.id}"/>
+    <input type="hidden" id="id" name="contentCat.id" value="${contentCat?if_exists.contentCat?if_exists.id}"/>
+</form>
+<!-- END FORM-->
+</div>
+<div class="modal-footer">
+    <input type="button"
+           onclick="formSubmitModel2Div('contentCatController.do?update', 'form_sample_2', 'divBody', 'contentCatController.do?Table&id=${selectId}');"
+           class="btn btn-primary" value="提交">
+    <input type="button" class="btn" value="取消" data-dismiss="modal">
+</div>
+<!-- END SAMPLE FORM PORTLET-->
+
+<script>
+    //校验
+    jQuery(document).ready(function () {
+        // initiate layout and plugins
+        App.init();
+        $("#form_sample_2").myValidate();
+    });
+    //清空所在行内容页模板
+    function delet(a) {
+        $("#templateshow" + a).val("");
+    }
+    function formSubmitModel2Div(urlStr, formName, returnUrl, selectId) {
+        if (!$('#' + formName).valid()) {
+            return false;
+        }
+        $.ajax({
+            type: 'post',
+            url: urlStr,
+            data: $('#' + formName).serialize()+"&alert=true",
+            success: function (msg) {
+                var obj = JSON.parse(eval(msg));
+                if (obj.isSuccess) {
+                    $('#editModel1').modal('hide');
+                    lazyChangePage(obj.toUrl);
+                }
+                lmAlert(obj.msg);
+            },
+            error: function () {
+                lmAlert("提交通讯失败!");
+            }
+        })
+    }
+    $(document).ready(function () {
+        var city = $("#workflowid");
+        var urlstr = "workFlowController.do?flowOpinions";
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: urlstr,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                //city.empty();
+                $.each(obj.flowOpinions, function (i, n) {
+                    if (n.id == "${contentCat.workflowid}") {
+                        $("<option value=" + n.id + " selected='selected'>" + n.name + "</option>").appendTo(city);
+                    } else {
+                        $("<option value=" + n.id + ">" + n.name + "</option>").appendTo(city);
+                    }
+                });
+            }
+        });
+    });
+    //获取名称拼音
+    function pyChange() {
+        $.ajax({
+            type: "POST",
+            url: "contentCatController.do?pyChange&name=" + encodeURI(encodeURI($("#name").val())),
+            dataType: "text",
+            success: function (data) {
+                var obj = JSON.parse(eval(data));
+                $("#contentcatSpell").val(obj.quanpin);
+                $("#contentcatAbbreviation").val(obj.acronym);
+            }
+        });
+    }
+    //ztree属性下拉树选择
+    var setting = {
+        check: {
+            enable: false
+        },
+        view: {
+            dblClickExpand: false,
+            showLine: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick
+        }
+    };
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo2");
+        zTree.expandNode(treeNode);
+        var nodes = zTree.getSelectedNodes()[0].name;
+        var nodesId = zTree.getSelectedNodes()[0].id;
+        $('#mobileChannel').attr('value', nodes);
+        $('#funVal2').attr('value', nodesId);
+    }
+    var zNodes = new Array();
+    $.ajax({
+        type: 'post',
+        async: false,
+        url: 'contentsController.do?loadmobile',
+        data: 'data=0',
+        success: function (data) {
+            zNodes = data;
+        }
+    })
+    var json = JSON.parse(zNodes);
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDemo2"), setting, json);
+
+    });
+    function showMenu() {
+        var cityObj = $("#mobileChannel");
+        var cityOffset = $("#mobileChannel").offset();
+        $("#menuContent2").css({left: "0px", top: cityObj.outerHeight() + "px"}).slideDown("fast");
+        $("body").bind("mousedown", onBodyDown);
+
+        //$('#attributeSpecial').hide();
+    }
+    function hideMenu() {
+        $("#menuContent2").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "mobileChannel" || event.target.id == "menuContent2" || $(event.target).parents("#menuContent2").length > 0)) {
+            hideMenu();
+            //$('#attributeSpecial').show();
+        }
+    }
+</script>

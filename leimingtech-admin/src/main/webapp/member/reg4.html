@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <title>网站标题</title>
+    <meta name="keywords" content="keyword ..." />
+    <meta name="Description" content="description ..." />
+    <!--<link href="favicon.ico" rel="shortcut icon" />-->
+    <link href="css/global.css" rel="stylesheet" type="text/css" />
+    <link href="css/reg.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header">
+  <div class="headertop">
+   <div class="l">您好，欢迎访问<strong>人力资源市场网</strong>！<span>|</span>今天是&nbsp;<strong>2011</strong>&nbsp;年&nbsp;<strong>08</strong>&nbsp;月&nbsp;<strong>26</strong>&nbsp;日<span>|</span>上午&nbsp;<strong>10:29</strong>&nbsp;</div>
+   <div class="r"><a href="#"><img src="member/pic/header_menu01.gif" alt="" title="" />关于我们</a><a href="#"><img src="pic/header_menu02.gif" alt="" title="" />联系我们</a><a href="#"><img src="pic/header_menu03.gif" alt="" title="" />切换用户</a><a href="#"><img src="member/pic/header_menu04.gif" alt="" title="" />退出系统</a></div>
+  </div>
+  <h1 id="logo"><a href="#">中国人力资源市场网</a><strong>注册</strong></h1>
+  <!--<div class="ver">
+    <p>系统版本号：V3.0</p>
+    <p><strong>北京斯通威尔钻探机械有限公司</strong><a href="#">查看登录记录</a></p>
+  </div>-->
+</div>
+<div id="stepcontent">
+<div class="inner">
+  <ul>
+   <li class="current">01.注册</li><li class="current">02.完善基本信息</li><li class="last select">03.完成</li>
+  </ul>
+  </div>
+</div>
+<div id="maincontent">
+<div id="regsuccess">
+  <p>恭喜您已经完成了注册并且填写了一份简历，您的简历完整度为：<span>★★★☆☆</span><a href="#" class="a1">（返回继续完善）</a>。</p>
+  <p>您现在就可以<a href="#">投递简历</a>了。</p>
+  <p>您也可以返回<a href="#">个人面板</a>查看更多功能，祝您求职愉快！</p>
+ <!--  <div class="btns"><input type="button" class="btn1" /><input type="button" class="btn2" /></div> -->
+ <input type="button" class="btn2" value="返回首页" onclick="xx()"/>
+</div>
+</div>
+<div id="footer">
+  <div class="menu"><a href="#">联系我们</a>|<a href="#">关于我们</a></div>
+  <p>网站主办：人力资源和社会保障部 人力资源市场司&nbsp;&nbsp;&nbsp;&nbsp;网站承办：人力资源和社会保障部中国人力资源市场网</p>
+  <p>联系地址：北京市东城区和平里滨河路一号&nbsp;&nbsp;邮编：100013</p>
+  <p>京ICP备05036988号</p>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	function xx(){
+		window.location.href="registerController.do?loginin";
+	}
+</script>

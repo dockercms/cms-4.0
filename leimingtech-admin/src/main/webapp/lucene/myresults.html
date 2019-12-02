@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:line-height="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="/css/CHINAiback.css" rel="stylesheet" type="text/css">
+	<title>
+		${keyword}_耳机爱好者俱乐部搜索
+	</title>
+	<link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
+	<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+	<link href="/pcstyle/global.css" rel="stylesheet" type="text/css" />
+	<link href="/pcstyle/reg.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/pcstyle/js/jquery-1.4.2.min.js"></script>
+</head>
+<body style="background: white">
+<!--导航开始-->
+<#include "/wwwroot/${sitePath}/template/pc/section/index_nav.html"><!-- 导航 -->
+	<!--导航结束-->
+	<div>
+		<div id="maincontent">
+			<div class="l" style="margin-top: 20px; clear: both;">
+				<div class="menulist">
+					<#if pageList?exists>
+						<#list pageList as page>
+							<dl>
+								<dt>
+									<a href="${page.url?if_exists}" target="_blank">${page.title?if_exists}</a>
+								</dt>
+								<dd>
+									<p>
+										发布时间: ${page.publishdate?if_exists}<br>最佳答案:
+										${page.description?if_exists}...
+										<#if page.content?exists>
+											<br/>
+											${page.content}
+										</#if>
+									</p>
+								</dd>
+							</dl>
+						</#list>
+						<#if pageList?size gt 0>
+							<div class="clear"></div>
+							<#include "lucene/myfrontpage.html"><!-- 分页条 -->
+				</div>
+				<#else>
+					暂无相关搜索结果！
+					</#if>
+					</#if>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!--===========================页脚==================================-->
+		<#include "/wwwroot/${sitePath}/template/pc/section/footer.html">
+			<!--===========================页脚==================================-->
+</body>
+</html>

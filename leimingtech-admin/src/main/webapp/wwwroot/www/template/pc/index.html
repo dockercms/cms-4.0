@@ -1,0 +1,1521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${site.siteName}</title>
+<meta name="keywords" content="${site.siteName}" />
+<meta name="description" content="${site.siteName}" />
+<meta property="qc:admins" content="0222315653536451516745306375" />
+<link rel="stylesheet" type="text/css" href="/pcstyle/main.css"/>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<script language='JavaScript' type='text/javascript'>
+var contextpath='${contextpath}';
+</script>
+<SCRIPT src="/pcstyle/js/jquery-1.4.2.min.js"></SCRIPT>
+<script src="/pcstyle/jquery.min.js" type="text/javascript"></script>
+<script src="/pcstyle/ad.js" type="text/javascript"></script>
+<script type="text/javascript" src="/pcstyle/RevealTrans.js"></script>
+<script type="text/javascript" src="/pcstyle/js/lmfront.js"></script>
+<script type="text/javascript">
+function Changed() {
+                document.getElementById("select").click();
+                             }
+</script>
+<script>
+function toSearch1(urlStr) {
+/*  去掉字符前后的空格正则表达式*/
+		var keyword=document.getElementById("keyword1").value;
+		var key=keyword.replace(/\s+/g,"")
+		var keyWord1 = encodeURI(key);
+		keyWord1 = encodeURI(keyWord1);
+		window.location = urlStr + "&keyword=" + keyWord1+"&siteid="+${site.id};
+	}
+	$(function() {
+	   $(".left_line").css("background-color","#f4f4f4");
+		$(".right_line").mousemove(function(){
+		 $(".right_line").css("background-color","#f4f4f4");
+		 $(".left_line").css("background-color","#fff");
+		}); 
+
+		$(".left_line").mousemove(function(){
+		 $(".left_line").css("background-color","#f4f4f4");
+		 $(".right_line").css("background-color","#fff");
+		}); 
+		var urlStr = "${contextpath}/front/surveyLogController.do?isLogin";
+		$.ajax({
+			type : 'post',
+			url : urlStr,
+			data : 'data=0',
+			dataType : 'text',
+			success : function(msg) {
+				$('#divLogin').empty();
+				$('#divLogin').append(msg);
+			}
+		});
+	});
+</script>
+<script>
+var _hmt  = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?428510de6398e5ed526cc8e926b21c0a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+<body onLoad="Changed()">
+
+<#assign advTag =newTag("advTag")>
+<#assign advList =advTag("{'name':'1','count':'1'}")>
+<#if advList?exists && advList?size gt 0>
+<div class="w1000"  id="start"  style="display:none">
+<!-- 广告位：首页-全屏下压 开始-->
+	<#list advList as adv>
+		<#if adv_index == 0>
+<script language='JavaScript' type='text/javascript'>
+	function dis_afocus(){ 
+		$('#adBig_afocus').slideUp(3000,function(){
+			$('').slideDown(3000);
+		});
+	}
+	var lar_afocus=3000;
+	window.setTimeout(dis_afocus,lar_afocus);
+	advDisplayAdd('${adv.id!''}');
+</script>
+<div id='adimage_afocus' align='center' >
+	<div id='adBig_afocus' style='clear:both;overflow:hidden'>
+		<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if> onclick="advClickAdd('${adv.id!''}')" alt="${adv.urlpoint!''}" title="${adv.urlpoint!''}" <#if adv.urltarget==0>target='_blank'</#if>>
+			<img  src="${adv.imgUrl!''}"  width="${adv.iweight!''}"  height="${adv.iheight!''}" border='0' />
+		</a>
+	</div>
+</div>			
+		</#if>
+	</#list>
+<!-- 广告位：首页-全屏下压 结束-->
+</div>
+
+<script type="text/javascript">
+$(function (){
+checkCookie();
+});
+function getCookie(c_name)
+{
+if (document.cookie.length>0)
+  {
+  c_start=document.cookie.indexOf(c_name + "=")
+  if (c_start!=-1)
+    { 
+    c_start=c_start + c_name.length+1 
+    c_end=document.cookie.indexOf(";",c_start)
+    if (c_end==-1) c_end=document.cookie.length
+    return unescape(document.cookie.substring(c_start,c_end))
+    } 
+  }
+return ""
+}
+function getsec(str)
+{  
+   var str1=str.substring(1,str.length)*1; 
+   var str2=str.substring(0,1); 
+   if (str2=="s")
+   { 
+        return str1*1000; 
+   }
+   else if (str2=="h")
+   { 
+       return str1*60*60*1000; 
+   }
+   else if (str2=="d")
+   { 
+       return str1*24*60*60*1000; 
+   } 
+} 
+
+function setCookie(name,value,time)
+{ 
+    var strsec = getsec(time); 
+    var exp = new Date(); 
+    exp.setTime(exp.getTime() + strsec*1); 
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
+
+function checkCookie()
+{
+username=getCookie('username')
+if (username!=null && username!="")
+  {
+   
+  }
+else 
+  {
+   $("#start").css("display","block");
+    setCookie("username","start","h5");
+  }
+}
+</script>
+</#if>
+
+<#assign advTag =newTag("advTag")>
+<#assign advList =advTag("{'name':'2','count':'1'}")>
+<#if advList?exists && advList?size gt 0>
+<div class="w1000" >
+<!-- 广告位：首页-顶部通栏 开始-->
+<#list advList as adv>
+	<#if adv_index == 0>
+	<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img width="998" height="60" src="${adv.imgUrl!''}"/>
+	</a>
+<script language='JavaScript' type='text/javascript'>
+	advDisplayAdd('${adv.id!''}');
+</script>
+	</#if>
+</#list>
+<!-- 广告位：首页-顶部通栏 结束-->
+</div>
+</#if>
+<div class="layout header" id="top_ad">
+	<#assign advTag =newTag("advTag")> 
+	<#assign advList=advTag("{'name':'402881965238ba38015238edc836001c','count':'1'}")>
+	<#if advList?exists && advList?size gt 0> 
+	<#list advList as adv> 
+	<#if adv_index == 0>
+<div class="logo">
+	<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> ><img src="${adv.imgUrl}" border="0" style="width:177px; height:45px;"></a>
+</div>
+	</#if>
+	</#list> 
+	</#if>
+<div class="infoArea" style="width:170px;">
+<div class="weatherInfo"><iframe  width="160" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="No" style="float:left"></iframe>
+
+</div>
+
+<div class="dateInfo" id="time_line"></div>
+</div>
+
+<div class="div_login" id="divLogin"  style="width: 840px;line-height: 50px;height:50px"></div>
+<div class="searchArea">
+<div class="home">
+<ul>
+<!-- <li><a onClick="window.external.addFavorite('/')" title="华东网">加入收藏</a> </li>
+ --></ul>
+</div>
+<div class="serachBox">
+<form action="/e/search/index.php" method="post" id="unify_search">
+<input type="hidden" name="show" value="title" />
+<input type="hidden" name="tempid" value="1" />
+<div class="div_search">
+        <table align="right" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="217"><input id="keyword1" value="${keyword?if_exists}" name="keyword" autocomplete="off" style="margin-top:12px;"></td>
+            <td>
+            <!-- <a href="javaScript:void(0)"  ><img src="/pcstyle/images/btn-search.png" 
+            width="24" height="22" onmouseover="changepic(this,'/pcstyle/images/go.png')" 
+            onmouseout="changepic(this,'/pcstyle/images/btn-search.png')" /></a> -->
+<input id="" style="margin-top:12px;" class="btnSearch" onclick="toSearch1('${contextpath}/front/frontController.do?search');" >
+            </td>
+          </tr>
+        </table>
+      </div>
+</form>
+</div>
+</div>
+</div>
+
+<!--导航开始-->
+<div class="nav">
+<div class="layout_nav">
+<#include "/wwwroot/${sitePath}/template/pc/section/index_nav.html"><!-- 导航 -->
+</div>
+</div>
+<!--导航结束-->
+<!--头部结束-->
+<!--广告-->
+<div class="he5"></div>
+<div class="layout">
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba38015238fc10af0025','count':'3'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+	
+<div class="w326 fl h60" style="margin-left: 7px">
+<!-- 广告位：首页-2L按钮1-->
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="326" height="60" border="0">
+</a>
+</div>
+</#list>
+</#if>
+</div>
+
+<!--广告文字结束-->
+
+<div id="menu">
+<div id="select" class="totop"  style="width:100px;"><img src="pcstyle/images/tra_2.gif"><span>关闭板块</span></div>
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<ul id="list" style="display:block;">
+<#assign catalog =catalogTag("{'levels':'self','name':'31'}")>
+<#if catalog?exists>
+<li id="red_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'86'}")>
+<#if catalog?exists>
+<li id="yellow_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'65'}")>
+<#if catalog?exists>
+<li id="green_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'28'}")>
+<#if catalog?exists>
+<li id="blue_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'27'}")>
+<#if catalog?exists>
+<li id="black_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'76'}")>
+<#if catalog?exists>
+<li id="blue_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+<#assign catalog =catalogTag("{'levels':'self','name':'79'}")>
+<#if catalog?exists>
+<li id="blue_m" class="menu_def"><a target="_self" onClick="resetPosition('#main_news')" href="${catalog.url!'javascript:void(0);'}">${catalog.name!''}<img src="pcstyle/images/tra_1.gif"></a></li>
+</#if>
+</ul>
+<div id="totop" class="totop" style="display:block;"><a target="_self" onClick="resetPosition('#top_ad')" href="javascript:void(0);"><img src="pcstyle/images/tra_3.gif"><span>返回顶部</span></a></div>
+<a id="totop_pic" style="display:none;" onClick="resetPosition('#top_ad')" href="javascript:void(0);"><img style="margin-top:3px;" src="pcstyle/images/top_arrow.gif"></a>
+</div>
+
+<div class="h12"></div>
+<div id="mainbody">
+<!--主体开始  雷铭新闻-->
+<div class="layout" id="main_news">
+<div class="headlines fl">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881864e42154b014e42181bee0001','count':'4','levels':'all','order':'top'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index==0>
+          <h1><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></h1>
+		</#if>	
+
+		
+		<#if article_index!=0>
+                                     【<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>】&nbsp;
+		</#if>
+                                   
+		</#list>
+	</#if>
+
+</div>
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152390935830031','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+<div class="w320 fr h60">
+<!-- 广告位：首页-按钮A 位置-->
+	<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+    <img src="${adv.imgUrl}" width="313" height="60" border="0">
+    </a>
+</div>
+</#list>
+</#if>
+
+</div>
+<div class="h15"></div>
+<!--左侧栏特效结束-->
+<!--第一版-->
+<div class="layout">
+<div class="layoutLeft mr20" style="display:inline;">
+<!-- 头图-->
+<div class="top_pic">
+<!--单图滑动幻灯片-->
+<div class="huandengpian" id="toutu" >
+<div class="leftLoop">
+<div class="bd">
+<ul class="picList1">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'5','order':'top'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li>
+			<div class="pic"><a href="${article.url!'javascript:void(0);'}" target="_blank">
+			<img  data-original="${article.thumb}" src="${article.thumb}" border=0 width=313 height=210></a>
+			</div>
+			<div class="title"><a href="${article.url!'javascript:void(0);'}" target="_blank"> ${article.title}</a></div>
+			</li>
+		</#list>
+	</#if>
+
+</ul>
+</div>
+<div class="hd">
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+<li>5</li>
+</ul>
+</div>
+<div id="fx_d"> <a class="next"></a> <a class="prev"></a></div>
+</div>
+</div>
+<!--单图幻灯结束-->
+</div>
+<!-- 民生-->
+<div class="minsheng">
+<div class="headerTwo">
+<div class="dian png_bg"></div>
+<a href="news/shehui/" target="_blank"><h2><font></font></h2></a>
+<script type="text/javascript">
+	function message(urlStr){
+		$.ajax({
+				type:'post',
+				url:urlStr,
+				data:'data=0',
+				dataType:'text',
+				success : function(msg) {
+					var obj = JSON.parse(eval(msg));
+					var board=obj.board;
+					if(board==null){
+						alert("留言板不存在");
+					}else if(board.isOpen==0){
+						alert("没有开放留言");
+					}else if(board.messageLogin==1){
+						
+						location.href='${contextpath}/member/loginAct.do?login'
+					}else{
+						location.href='${contextpath}/front/messageBoardFrontController.do?newsGuestBook&boardId=40288190545a7a5701545ad8543e0019'
+					} 
+				},
+				error : function() {
+					alert("提交失败")
+	            }
+			});
+	}
+
+</script>
+<span class="png_bg"><a href="javascript:void(0)" target=" _blank" onclick="message('${contextpath}/front/messageBoardFrontController.do?messageBoard&boardId=40288190545a7a5701545ad8543e0019')">我要留言</a></span> </div>
+<div class="h12"></div>
+<div class="iconList">
+<ul>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'民生','count':'5','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<li class="ellip_div" style="width:300px;">
+		<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+		</li>
+
+		</#list>
+	</#if>
+	<li class="ellip_div" style="width:300px;">我喜歡你，還是以第一印象那樣的喜歡</li>
+	<li class="ellip_div" style="width:300px;">我很傻，我很笨，我有爱我的你</li>
+	<li class="ellip_div" style="width:300px;">我希望我幸福，但我害怕，我幸福了，就会忘记你</li>
+	<li class="ellip_div" style="width:300px;">就算不可以见面,我也会把你的名字放在心里</li>
+	<li class="ellip_div" style="width:300px;">阳光甚好因为你说突然想我</li>
+</ul>
+</div>
+</div>
+<div class="h20"></div>
+<!-- 新闻爆料-->
+<div class="minsheng huashan">
+<div class="headerTwo">
+<div class="dian png_bg"></div>
+<a href="baoliao/" target="_blank"><h2><font></font></h2></a>
+<span class="png_bg"><a  target="_blank">我要爆料</a></span></div>
+<!---->
+<div class="hs_con mt6">
+	
+	
+	<!-- <#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'81','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index == 0>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></h3>
+			<div class="hs_pic">
+				<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0></a>
+				<p><a href="${article.url!'javascript:void(0);'}" target="_blank">       				${article.digest}</a></p>
+			</div>
+			</#if>
+		</#list>
+	</#if> -->
+	
+	<!-- <h3>广州南沙碧桂园豪庭小区，物业无证收费</h3>
+			<div class="hs_pic">
+				<img  src="" border=0>
+				<p>广州南沙碧桂园豪庭小区，物业无证收费，业主不交费不能进出，业主已报警，目前小区门口聚集约200人。</p> -->
+		<ul>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">今年3月17日晚23时左右在海南凌水县英州镇雅居乐新工地宿舍侧门发生一起上门打架斗殴事件</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">北海市海城区中海油涠洲岛项目发生煤气泄漏事故</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">奚女士来电反映在解放桥西侧100米有一辆出租车撞进了路中间的护栏</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">23岁小伙遇车祸离世 捐献器官拯救8条生命</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">南京惨烈车祸：你想要哪种真相</li>
+			
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">女子车祸后短信被警察发现 牵出一起卖淫案</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">车祸瞬间，先找见自己的脸在哪里。。。。。</li>
+			<li class="ellip_div" style="width:300px;font-size: 14px;line-height: 32px;">你的车有没有？这个功能车祸少死一半</li>
+		</ul>
+	</div>
+	
+</div>
+
+
+<!-- 华山结束-->
+</div>
+<div class="layoutMiddle mr20" style="display:inline;">
+<div class="yaowen" id="tabbox">
+<div class="headerThree">
+<ul class="tabs" id="tabs2">
+<!--国内 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'31'}")>
+<#if catalog?exists>
+	<li class="left_line right_line">
+	<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+	</li>
+	</#if>
+<!--国际 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'86'}")>
+<#if catalog?exists>
+	<li class="right_line">
+	<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+	</li>
+</#if>
+</ul>
+</div>
+<div class="list_con">
+<div class="he5"></div>
+<div class="tab_conbox" id="tab_conbox2">
+<!--1-->
+<div class="iconList" id="picdiv">
+<ul>
+<!-- 国内 -->
+	<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'31','count':'14','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<#if article_index==0>
+		      <li class="yw16b ellip_div" style="width:300px;"><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+			<#if article_index==7>
+		      <li class="yw16b ellip_div" style="width:300px;"><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+		   <#if article_index!=0>
+			<li  class="ellip_div" style="width:300px;"><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+</ul>
+
+<div class="he5"></div>
+</div>
+<div id="picdiv" style="display:none;">
+<div class="picCentre">
+<!-- 国际 -->
+	<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'86','count':'8','levels':'all','isGetImage':'true'}")>
+	<#if articleList?exists && articleList?size gt 0>
+	
+		<#list articleList as article>
+<div class="picList">
+		<a href="${article.url!'javascript:void(0);'}" target="_blank"><img data-original="${article.thumb}"  border=0 class="lazy" src="${article.thumb}"></a><h4>
+		<a href="${article.url!'javascript:void(0);'}" target="_blank"> ${article.title}</a></h4>
+</div>
+
+		</#list>
+		
+	</#if>
+</div>
+</div>
+<!--2-->
+</div>
+</div>
+<!--内容区结束-->
+</div>
+<div class="h15"></div>
+<!--要闻第二部分-->
+<div class="yaowen" id="tabbox">
+<div class="headerThree">
+<ul class="tabs" id="tabs3">
+<!-- 国内国际 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'31'}")>
+<#if catalog?exists>
+<li class="left_line right_line">
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</li>
+</#if>
+<!-- 图览天下 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'42'}")>
+<#if catalog?exists>
+<li class="right_line">
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</li>
+</#if>
+</ul>
+</div>
+<div class="list_con">
+<div class="tab_conbox" id="tab_conbox3">
+<!--1-->
+<div class="iconList" id="picdiv" >
+<ul>
+<!--奇闻 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'32','count':'7','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li class="ellip_div" style="width:300px;"><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+		</#list>
+	</#if>
+</ul>
+</div>
+<!--2-->
+<div id="picdiv" style="display:none;">
+<div class="picCentre">
+<!-- 图览天下 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'42','count':'4','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+<div class="picList">
+		<a href="${article.url!'javascript:void(0);'}" target="_blank"><img data-original="${article.thumb}"  border=0 class="lazy" src="${article.thumb}"></a><h4>
+		<a href="${article.url!'javascript:void(0);'}" target="_blank"> ${article.title}</a></h4>
+</div>
+		</#list>
+	</#if>
+</div>
+<div class="h9"></div>
+</div>
+
+<!--2-->
+</div>
+</div>
+<!--内容区结束-->
+</div>
+<!--要闻第二部结束-->
+</div>
+<!--中间部分结束-->
+<div class="layoutRight right_gray">
+<!--置顶开始-->
+<div class="headerTwo">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'31'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">本期热点</a>
+</h2>
+</#if>
+<!-- <span><a href="e/DoInfo/ChangeClass.php?mid=8" target="_blank"><FONT color=red>免费发布生活信息</FONT></a></span>
+ --></div>
+<div class="zw iconList">
+ <ul>
+ <!-- 显示国内置顶新闻,如果标题有颜色会变色 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'31','count':'5','weight':'90-100'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+           <li class="ellip_div" style="width:282px;">
+			   <a href="${article.url!'javascript:void(0);'}" target="_blank">
+				   <span style="color:${article.color!''}" >${article.title}</span>
+			   </a></li>
+
+		</#list>
+	</#if>
+</ul>
+</div>
+<!--置顶结束-->
+<div class="h9"></div>
+<!--策划开始-->
+<div class="headerTwo">
+<!-- 八卦 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'402881914e0a8fed014e0ab02e9e012e'}")>
+<#if catalog?exists>
+<h2 >
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a></h2>
+</#if>
+<!-- <span><a href="e/DoInfo/AddInfo.php?mid=1&classid=140" target="_blank"><FONT color=red>我要策划</FONT></a>
+ --></span></div>
+<div class="h12"></div>
+<div class="ranking" id="ranking">
+<ul class="ch_12b">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881914e0a8fed014e0ab02e9e012e','count':'5','level':'all','isGetImage':'true'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index==0>
+		<li>
+			<a href="/yule/bagua/2013-12-25/2473.html" target="_blank">
+				<div class="di fwn ellip_div"  style="display:none;width:290px;"  >
+					<img src="pcstyle/images/icon_1.gif" /><span>${article.title}</span>
+				</div>
+				<div class="gao" style="display:block;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="30" rowspan="2"><img src="pcstyle/images/icon_01.gif"></td>
+							<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+							<td style="padding-left:8px;line-height:21px; height:21px;width:160px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td>
+						</tr>
+						<tr>
+							<td class="chzy" >
+							<a href="${article.url}" target="_blank"> ${article.digest?substring(0,11)}(点击图片进入下一</a>
+							<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</li>
+		</#if>
+		<#if article_index == 1>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:282px;" ><img src="pcstyle/images/icon_2.gif"><span>${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_02.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank"  class="ellip_div" style="width:50px;">       				${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>
+	
+	<#if article_index == 2>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:282px;" ><img src="pcstyle/images/icon_2.gif"><span>${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_03.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,8)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank"  class="ellip_div" style="width:50px;">       				${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>		
+		</#list>
+		</#if>
+</ul>
+</div>
+<div class="h9"></div>
+<!--策划内容结束-->
+<!--互动开始-->
+<div class="headerTwo">
+<!-- 社会 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'49'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a></h2>
+</#if>
+</div>
+<!--单图滑动幻灯片-->
+<div class="huandengpian hudong" id="hudong">
+<div class="leftLoop">
+<div class="bd">
+<ul class="picList1">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'49','count':'3','level':'all','isGetImage':'true','order':'top'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li>
+			<div class="pic"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0></a></div>
+			<div class="title"><a href="${article.url}" target="_blank">${article.title}</a></div>
+			</li>
+	    </#list>
+	</#if>
+</ul>
+</div>
+<div class="hd hd1">
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+</div>
+<div id="fx_hudong"> <a class="next"></a> <a class="prev"></a> </div>
+</div>
+</div>
+<!--单图幻灯结束-->
+<!--互动第二部分-->
+
+<div class="iconList hd_con">
+<ul>
+	<!-- 奇闻 -->
+	<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'49','count':'4','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+        <li class="ellip_div" style="width:280px;"><a href="${article.url}" target="_blank">${article.title}</a></li>
+		</#list>
+	</#if>
+
+</ul>
+
+</div>
+
+<!--互动结束-->
+</div>
+</div>
+<div class="h12"></div>
+<!--视频-->
+<div class="layout">
+<div class="headerOne">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'27'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a></h2>
+</#if>
+</div>
+<div class="sp_con">
+<ul>	
+<!-- 精彩视频 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'87','count':'6','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li class="sp_pic fl">
+				<a href="${article.url}" target="_blank">
+				<img  data-original="${article.thumb}" border=0  class="lazy" src="${article.thumb}">
+				</a>
+				<a href="${article.url}" target="_blank">
+<div class="sp_button png_bg"></div></a>
+				<h4><a href="${article.url}" target="_blank">${article.title}</a></h4>
+			</li>
+		</#list>
+	</#if>
+
+</ul>
+</div>
+</div>
+<!--视频结束-->
+<!--first end-->
+<div class="h12"></div>
+<!--ad-->
+<div class="layout">
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152391135ce0036','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+	
+<div class="w660 fl h60" >
+<!-- 广告位：首页-5L横幅-->
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="600" height="60" border="0">
+</a>
+</div>
+</#list>
+</#if>
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152391f78ce0040','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+<div class="w320 fr h60">
+<!-- 广告位：首页-6L按钮-->
+
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="313" height="60" border="0">
+</a>
+
+</div>
+</#list>
+</#if>
+</div>
+<!--ad end-->
+<div class="h12"></div>
+<!--second-->
+<div class="layout" id="yule_news">
+<!--ent-->
+<div class="leftArea mr20">
+<div class="headerOne styleOne">
+<!-- 娱乐 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'54'}")>
+<#if catalog?exists>
+<h2>
+<a>${catalog.name}</a></h2>
+</#if>
+ </div>
+<div class="ent_con">
+<div class="ent_left">
+<!--单图滑动幻灯片-->
+<div class="huandengpian hudong" id="yule">
+<div class="leftLoop leftLoop_yule">
+<div class="bd">
+<ul class="picList1">
+<!-- 综艺 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'65','count':'3','levels':'all','isGetImage':'true'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li>
+				<div class="pic">
+					<a href="${article.url}" target="_blank">
+					<img  data-original="${article.thumb}" src="${article.thumb}" border=0></a>
+				</div>
+				<div class="title"><a href="${article.url}" target="_blank"> ${article.title}</a></div>
+			</li>
+		</#list>
+	</#if>
+
+</ul>
+</div>
+<div class="hd hd1">
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+</ul>
+</div>
+<div id="fx_ent"> <a class="next"></a> <a class="prev"></a> </div>
+</div>
+</div>
+<!--单图幻灯结束-->
+</div>
+<div class="ent_right">
+<!-- 演出 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881864e42154b014e422144cc0005','count':'5','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index == 0>
+           <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+			</#if>
+		<#if article_index == 1 ||article_index == 2||article_index == 3||article_index == 4>
+【<a href="${article.url}" target="_blank">${article.title}</a>】&nbsp;
+			</#if>
+		</#list>
+	</#if>
+<div class="iconList lineTop">
+<ul>
+<!--影视-->
+		<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881864e42154b014e421acfbd0003','count':'4','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index != 0>
+			<li><a href="${article.url}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+</div>
+</div>
+</div>
+</div>
+<!--ent end-->
+<!-- talk -->
+<div class="rightArea right_gray">
+<div class="fangtan">
+<div class="headerTwo">
+<!-- 明星 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'64'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+
+</div>
+<!-- 访谈内容开始-->
+<div class="h12"></div>
+<!--访谈内容-->
+<div class="ranking" id="ranking">
+<ul>
+<!-- 明星 -->
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'64','count':'5','level':'all','isGetImage':'true'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index==0>
+		<li>
+			<a href="${article.url}" target="_blank">
+				<div class="di fwn ellip_div"  style="display:none; width: 290px;">
+					<img src="pcstyle/images/icon_1.gif" /><span style="width:282px;" class="ellip_div"><span>${article.title}</span>
+				</div>
+				<div class="gao" style="display:block">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="30" rowspan="2"><img src="pcstyle/images/icon_01.gif"></td>
+							<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+							<td style="padding-left:8px;line-height:21px; height:21px; width:160px;overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td>
+						</tr>
+						<tr>
+							<td class="chzy" >
+							<a href="${article.url}" target="_blank"> ${article.digest?substring(0,11)}(点击图片进入下一</a>
+							<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</li>
+		</#if>
+		<#if article_index == 1>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:290px;"><img src="pcstyle/images/icon_2.gif"><span>${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_02.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank">       				${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>
+	
+	<#if article_index == 2>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:290px;"><img src="pcstyle/images/icon_3.gif"><span >${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_03.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank">       				${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>
+	
+<#if article_index == 3>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:290px;"><img src="pcstyle/images/icon_4.gif"><span  class="ellip_div">${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_04.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank">       				${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>
+		<#if article_index == 4>
+		<li>
+			<a href="${article.url}" target="_blank">
+			<div class="di ellip_div" style="width:290px;"><img src="pcstyle/images/icon_5.gif"><span>${article.title}</span></div>
+			<div class="gao">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+			<td width="30" rowspan="2"><img src="pcstyle/images/icon_05.gif"></td>
+			<td width="100" height="68" rowspan="2"><a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0  width="100" height="68"></a></td> 
+			<td style="padding-left:8px;line-height:21px; height:21px; overflow:hidden;"><a href="${article.url}" target="_blank">${article.title?substring(0,11)}</a></td></tr>
+			<tr>
+			<td class="chzy">
+			<a href="${article.url}" target="_blank"> ${article.digest?substring(0,11)}</a>
+			<a href="${article.url}" target="_blank"><img src="pcstyle/images/more.gif"></a>
+			</td>
+			</tr>
+			</table>
+			</div>
+			</a>
+			</li>
+		</#if>
+		</#list>
+	</#if>
+	
+</ul>
+</div>
+<!--访谈内容结束-->
+</div>
+</div>
+<!-- talk end -->
+</div>
+
+<div class="rg">
+<div class="rg_left" ></div>
+</div>
+
+<div class="layout">
+
+
+
+<!--实用信息完成-->
+</div>
+<!--second end-->
+<div class="h12"></div>
+<!--ad-->
+
+<div class="layout">
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152392369ef0045','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+	
+<div class="w660 fl h60" >
+<!-- 广告位：首页-5L横幅-->
+	<img src="${adv.imgUrl}" width="600" height="60" border="0">
+</div>
+</#list>
+</#if>
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba38015239258ec4004a','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+<div class="w320 fr h60">
+<!-- 广告位：首页-6L按钮-->
+
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="313" height="60" border="0">
+</a>
+
+</div>
+</#list>
+</#if>
+</div>
+
+<!--ad end-->
+<div class="h12"></div>
+<!--third-->
+<div class="layout" id="lvyou_news">
+<div class="layoutLeft mr20">
+<!--旅游-->
+<div class="oneThird">
+	<div class="headerOne styleThree">
+<!-- 旅游 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'59'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+	</div>
+	<div class="picCentre">
+	<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'59','count':'4','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index == 0>
+			<a href="${article.url}" target="_blank"><img  data-original="${article.thumb}" class="lazy" border=0 src="${article.thumb}"></a>
+			<h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+			<p><a href="${article.url}" target="_blank">${article.digest}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index !=0>
+			<li><a href="${article.url}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+	</div>
+</div>
+<!--旅游结束-->
+</div>
+<div class="layoutMiddle mr20">
+	<!--美食-->
+	<div class="oneThird">
+		<div class="headerOne styleFour">
+		<!--美食 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'61'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+		</div>
+		<div class="picCentre">
+			<#assign articleTag =newTag("articleTag")>
+			<#assign articleList =articleTag("{'name':'61','count':'4','levels':'all'}")>
+			<#if articleList?exists && articleList?size gt 0>
+				<#list articleList as article>
+					<#if article_index == 0>
+			<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" class="lazy" border=0 src="${article.thumb!''}"></a>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></h3>
+			<p><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.digest}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index !=0>
+			<li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+		</div>
+</div>
+	<!--美食结束-->
+</div>
+<div class="layoutRight">
+<!--文化-->
+<div class="oneThird">
+<div class="headerOne styleFive">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'55'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if></span>
+</div>
+<div class="picCentre">
+    <#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'55','count':'4','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<#if article_index == 0>
+			<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" class="lazy" border=0 src="${article.thumb}"></a>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a></h3>
+			<p><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.digest!''}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index!=0>
+			<li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+    </div>
+</div>
+<!--文化结束-->
+</div>
+</div>
+<!--third end-->
+<div class="h12"></div>
+<!--ad-->
+<div class="layout">
+	
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152392adac8004f','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+	
+<div class="w660 fl h60" >
+<!-- 广告位：首页-5L横幅-->
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="600" height="60" border="0">
+</a>
+</div>
+</#list>
+</#if>
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152392bd39e0052','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+<div class="w320 fr h60">
+<!-- 广告位：首页-6L按钮-->
+
+<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" width="313" height="60" border="0">
+</a>
+
+</div>
+</#list>
+</#if>
+</div>
+<!--ad end-->
+<div class="h12"></div>
+
+<!--fouth-->
+<div class="layout">
+<div class="leftArea">
+<div class="layoutLeft mr20">
+<!--军事-->
+<div class="oneThird" id="junshi_news">
+
+<div class="picCentre">
+
+</div>
+
+</div>
+<!--军事结束-->
+<div class="h12"></div>
+<!--房产-->
+<div class="oneThird">
+<div class="headerOne styleFour">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'50'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+</div>
+<div class="picCentre">
+    <#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'50','count':'4','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		 <#if article_index == 0>
+			<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" class="lazy" border=0 src="${article.thumb}"></a>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a></h3>
+			<p><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.digest!''}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index !=0>
+			<li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+</div>
+</div>
+<!--房产结束-->
+</div>
+<div class="layoutMiddle">
+<!--财经-->
+<div class="oneThird">
+<div class="picCentre">
+</div>
+
+</div>
+<!--财经结束-->
+<div class="h12"></div>
+<!--汽车-->
+<div class="oneThird">
+<div class="headerOne styleOne">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'51'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+</div>
+<div class="picCentre">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'51','count':'4','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index == 0>
+			<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb!''}" class="lazy" border=0 src="${article.thumb!''}"></a>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></h3>
+			<p><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.digest!''}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index !=0>
+			<li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+		</ul>
+</div>
+</div>
+<!--汽车结束-->
+</div>
+</div>
+<div class="rightArea">
+<div class="layoutRight">
+<!--互联网-->
+<div class="oneThird">
+<div class="picCentre">
+<!---->
+<div class="picList">
+</div>
+
+</div>
+</div>
+<!--互联网结束-->
+<!--IT结束-->
+<div class="h12"></div>
+<!--分类信息-->
+<div class="oneThird">
+<div class="headerOne lineBottom">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'402881914e0a8fed014e0ad3812b0130'}")>
+<#if catalog?exists>
+<h2>
+<a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+</h2>
+</#if>
+<span></span></div>
+<div class="picCentre">
+<ul>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881914e0a8fed014e0ad3812b0130','count':'4','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<#if article_index == 0>
+			<a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}"  class="lazy" border=0 src="${article.thumb}"></a>
+			<h3><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></h3>
+			<p><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.digest}</a></p>
+			<div class="lineTop"></div>
+			</#if>
+	     </div>
+	   <div class="iconList">
+		<ul>
+		<#if article_index !=0>
+			<li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+			</#if>
+		</#list>
+	</#if>
+</ul>
+</div>
+</div>
+<!--分类信息结束-->
+</div>
+</div>
+</div>
+<!--fouth end-->
+
+<div class="h12"></div>
+<!--fifth-->
+<!--多图滑动幻灯片-->
+<div class="layout" id="pic_news">
+<div class="effect">
+<div class="leftLoop_x">
+<div class="hd"> <span>精彩图片</span>
+<ul>
+<li>1</li>
+<li>2</li>
+<li>3</li>
+<li>4</li>
+<li>5</li>
+<li>6</li>
+<li>7</li>
+</ul>
+</div>
+<div class="bd">
+<ul class="picList">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'10','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<li>
+	        <div class="pic"><a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" src="${article.thumb}" border=0></a></div>
+	        <div class="title"><a href="${article.url!'javascript:void(0);'}" target="_blank"> ${article.title}</a></div>
+        </li>
+		</#list>
+	</#if>
+</ul>
+<div class="left_zz"></div>
+<div class="right_zz"></div>
+</div>
+<div id="fx_s"> <a class="next"></a> <a class="prev"></a> </div>
+</div>
+</div>
+</div>
+
+<!--fifth end-->
+</div>
+<div class="h12"></div>
+<div class="layout">
+<div class="link box">
+<#include "/wwwroot/${sitePath}/template/pc/section/friendLink.html"><!-- 友情链接 -->
+</div>
+</div>
+<div class="h12"></div>
+<div class="w1000">
+<div class="bot_scroll box1" style="border-top:#3192d8 1px solid;"> <a class="next"></a> <a class="prev"></a>
+<div class="bd">
+<ul>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881914e097b8c014e0a114bf5000c','count':'10','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+<li><a href="${article.url!'javascript:void(0);'}" target="_blank"><img  data-original="${article.thumb}" class="lazy" src="${article.thumb}" border="0"></a></li>
+		</#list>
+	</#if>
+
+</ul>
+</div>
+</div>
+</div>
+<div class="h12"></div>
+<!--footer-->
+<div class="footer">
+	<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+
+</div>
+<!--footer end-->
+
+
+<div class="t_line sxtq" style=" display: none">
+<span class="mycity_cs" id="mycity_0">--</span>
+<span style="cursor:pointer;margin-left:10px;color:#003368;" id="ordercity"></span>
+<br>
+<span id="mycity_1" style="display: none;"></span>
+<span id="mycity_5">--</span><br>
+<span id="mycity_2">--</span><br>
+<span id="mycity_3">--</span><br>
+<span id="mycity_4">--</span>
+</div>
+<script src="/pcstyle/base-min.js" type="text/javascript"></script>
+<script src="/pcstyle/plugin-mod.min.js" type="text/javascript"></script>
+</body>
+</html>

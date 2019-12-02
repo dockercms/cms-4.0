@@ -1,0 +1,81 @@
+/***
+ * @website
+ * http://www.jzread.com
+ * @QQ£º568245346
+ * @author£ºjsjlsf
+ * @e-mail: jsjlsf@163.com
+ */
+.clear{clear:both;margin:0;padding:0;height:0;font-size:0}
+.h20{clear:both;margin:0;padding:0;height:20px;font-size:0}
+.hidden{display:none}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+.wrap1000{margin:0 auto;width:1000px;overflow:hidden;}
+/*imgs_index.htm*/
+.wrap373,.wrap618,.addmargin{margin-top:8px;background:#F4F4F4;border:1px solid #C8C8C8;overflow:hidden}
+.imgs_tit{background:url(newimg/new_imgstu.jpg) no-repeat}
+.wrap373{float:right;width:373px;height:332px;overflow:hidden;}
+.imgs_tit{height:48px;padding:0 8px 0 25px;line-height:40px;overflow:hidden}
+.imgs_tit h2{float:left;font-size:14px}
+.imgs_tit span{float:right}
+.imgs_tit a{margin-right:8px}
+.imgs_list{margin-top:-18px}
+.imgs_list a{float:left;width:162px;height:128px;margin:18px 7px 0 14px;text-align:center;line-height:1.6;overflow:hidden}
+.imgs_list a:hover{outline:1px solid red;outline-offset:5px}
+.imgs_list img{margin:0 auto 4px;width:160px;height:105px}
+.imgs_list img,.imgs_ones img,.imgs_twos img,.imgs_threes img{display:block;border:1px solid #CDCDCD}
+.imgs_ones{margin:0 auto;width:348px;line-height:1.8}
+.imgs_ones img{width:346px;height:185px}
+.imgs_ones h3{height:25px;line-height:27px;overflow:hidden}
+.imgs_ones p{height:42px;overflow:hidden}
+.h286{height:286px}
+.wrap618{float:left;width:618px}
+.wrap618 .imgs_list{margin-top:-12px}
+.wrap618 .imgs_list a{width:132px;height:112px;margin:10px 3px 0 16px}
+.wrap618 .imgs_list img{width:130px;height:88px}
+.addmargin{padding-bottom:10px;*zoom:1}
+.imgs_twos,.imgs_threes li{text-align:center;float:left;overflow:hidden;width:250px;height:250px;position:relative;margin-left:6px;display:inline}
+.imgs_twos img{width:248px;height:248px}
+.imgs_twos h5,.imgs_threes h5{background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#6E000000,endColorstr=#6E000000)}
+.imgs_twos h5,.imgs_threes h5{position:absolute;left:1px;bottom:1px;height:25px;padding:0 5px;width:236px;display:block;font-weight:normal;line-height:26px;overflow:hidden}
+.imgs_twos a,.imgs_twos a:hover,.imgs_threes a,.imgs_threes a:hover{color:#fff}
+.imgs_threes{margin-top:-15px;float:left;width:700px}
+.imgs_threes li{margin-top:15px;width:175px;height:122px}
+.imgs_threes img{width:173px;height:120px}
+.imgs_threes h5{width:155px}
+.bigimgs_twos,.imgs_fours a{text-align:center;float:left;line-height:2.0;overflow:hidden;width:252px;height:397px;margin-left:6px;padding:2px;background:#fff;border:1px solid #CDCDCD}
+.bigimgs_twos img,.imgs_fours img{display:block;margin:0 auto 4px}
+.bigimgs_twos img{width:250px;height:366px}
+.bigwidths{width:998px}
+.wrap998{width:998px;margin:8px auto 0;overflow:hidden;}
+.bigwidths li{margin:15px 7px 0 16px}
+/* focus */
+#focus,#focus ul li,#focus img{width:615px;height:332px;overflow:hidden}
+#focus{position:relative;float:left;border:1px solid #ccc;margin-top:8px}
+#focus ul{height:332px;position:absolute}
+#focus ul li{float:left;position:relative;background:#000}
+#focus img{float:left;display:block}
+#focus .btnBg,#input_tit{position:absolute;width:615px;height:38px;left:0;bottom:0}
+#focus .btnBg{background:#000}
+#focus .btn{position:absolute;width:595px;height:18px;padding:10px 5px;right:0;bottom:0;text-align:right}
+#focus .btn span{display:inline-block; _display:inline; _zoom:1;width:25px;height:18px;margin-left:5px;cursor:pointer;background:#fff;text-align:center;line-height:19px;overflow:hidden}
+#focus .preNext,#per_page,#next_page{width:45px;height:100px;position:absolute;background:url(newimg/sprite.png) no-repeat 0 0;cursor:pointer}
+#focus .preNext{top:90px}
+#focus .pre{left:0}
+#focus .next{right:0;background-position:right top}
+
+
+
+#fo,#fo ul li,#fo img{width:615px;height:332px;overflow:hidden}
+#fo{position:relative;float:left;border:1px solid #ccc;margin-top:8px}
+#fo ul{height:332px;position:absolute}
+#fo ul li{float:left;position:relative;background:#000}
+#fo img{float:left;display:block}
+#fo .btnBg,#input_tit{position:absolute;width:615px;height:38px;left:0;bottom:0}
+#fo .btnBg{background:#000}
+#fo .btn{position:absolute;width:595px;height:18px;padding:10px 5px;right:0;bottom:0;text-align:right}
+#fo .btn span{display:inline-block; _display:inline; _zoom:1;width:25px;height:18px;margin-left:5px;cursor:pointer;background:#fff;text-align:center;line-height:19px;overflow:hidden}
+#fo .preNext,#per_page,#next_page{width:45px;height:100px;position:absolute;background:url(newimg/sprite.png) no-repeat 0 0;cursor:pointer}
+#fo .preNext{top:90px}
+#fo .pre{left:0}
+#fo .next{right:0;background-position:right top}
+#input_tit{font-size:14px;padding-left:15px;width:436px;line-height:38px;overflow:hidden;color:#fff}

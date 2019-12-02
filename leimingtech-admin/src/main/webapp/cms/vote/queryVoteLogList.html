@@ -1,0 +1,30 @@
+		
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">详细记录</h4>
+	</div>
+	<div class="modal-body">
+		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+			
+			<#list vote.voteOptionList as voteOption>
+				<tr>
+					<td height="30" colspan="2" align="left">
+						<input type="<#if vote.votetype='20'>checkbox<#else>radio</#if>" disabled name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+						<span style="color: #1c77ba;" >${voteOption.optionname}</span>
+					</td>
+				</tr>
+			</#list>
+		</table>
+	</div>
+	<div class="modal-footer">  
+        <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+    </div>
+<script>
+	$(function(){
+	
+			<#list voteLogDataList as vld>
+				$("#${vld.optionid}").attr("checked",true);
+			</#list>
+		
+	});
+</script>

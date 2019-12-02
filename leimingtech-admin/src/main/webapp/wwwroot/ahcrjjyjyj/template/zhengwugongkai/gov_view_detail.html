@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://www.ahciq.gov.cn/system/2014/05/22/000011614.shtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>${contentF.title!''}-${catalogF.name} </title>
+<script>
+	var newsid = 11614;
+</script>
+<link rel="stylesheet" href="zfxxgk/css/zwmain.css"
+	type="text/css">
+<style>
+.Tip {
+	width: 500;
+	z-index: 999;
+}
+
+.Tip table {
+	width: 100%;
+	font-size: 12px;
+}
+
+td {
+	font-size: 13px;
+}
+
+a {
+	text-decoration: none
+}
+
+.white,.white a {
+	color: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.font9 {
+	background-image: url(zfxxgk/images/left_off.jpg);
+	padding-left: 60px
+}
+
+.font9,.font9 a,.font9red,.font9red a {
+	font-size: 13px;
+	line-height: 35px;
+	overflow: hidden;
+	text-decoration: none
+}
+
+.font9 a {
+	color: black
+}
+
+.font9red a {
+	color: #B9000A;
+	font-weight: bold
+}
+
+.font9red {
+	background-image: url(/zfxxgk/images/left_on.jpg);
+	padding-left: 60px
+}
+
+.font10,.font10 td,.font10 a {
+	font-size: 13px;
+}
+</style>
+<script>
+	var lmid = 0;
+</script>
+</head>
+
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/head_gov.html" >
+	<table width="1000" border="0" align="center" cellpadding="20"
+		cellspacing="0" bgcolor="#fcfcfc">
+		<tbody>
+			<tr>
+				<td><table width="100%" cellpadding="5" cellspacing="1"
+						bgcolor="#eeeeee" style="margin-bottom:10px;">
+						
+						<tbody>
+							<tr>
+								<td width="50%" bgcolor="#FFFFFF"><strong>索 引 号:</strong>
+									002992525/201405-00020</td>
+								<td width="50%" bgcolor="#FFFFFF"><strong>内容分类:</strong>
+									</td>
+							</tr>
+							<tr>
+								<td bgcolor="#FFFFFF"><strong>文 号:</strong></td>
+								<td bgcolor="#FFFFFF">
+									<strong>发文日期:</strong> 
+									<#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd HH:mm:ss')}</#if>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" bgcolor="#FFFFFF"><strong>名 称:</strong>
+									${contentF.title!''}</td>
+							</tr>
+							<tr>
+								<td colspan="2" bgcolor="#FFFFFF"><strong>关 键 词:</strong> ${contentF.tags!''}
+									</td>
+							</tr>
+						</tbody>
+						
+					</table>
+					<table width="100%" border="0" cellpadding="5" cellspacing="1"
+						bgcolor="#eeeeee">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF"><table width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											
+											<tr>
+												<td><table width="100%" border="0" cellspacing="0"
+														cellpadding="10">
+														<tbody>
+															<tr>
+																<td class="l4">
+																	<p>${articleDataF.content!''}</p>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+	<#include "/wwwroot/${sitePath}/template/common/foot_gov.html" >
+</body>
+</html>

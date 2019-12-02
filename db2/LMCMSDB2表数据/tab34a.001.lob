@@ -1,0 +1,582 @@
+1{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18",
+    "title": "新闻 频道栏名称",
+    "type": "news",
+    "items": [
+        {
+            "id": "18-1",
+            "title": "头条",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "/front/slideMobileApi.do?loadSlideList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "18-2",
+            "title": "热点",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "/front/slideMobileApi.do?loadSlideList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "18-3",
+            "title": "时事",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "可以为空",
+            "type": "news"
+        },
+        {
+            "id": "频道id",
+            "title": "频道名",
+            "listUrl": "频道列表地址",
+            "topUrl": "频道头图列表地址",
+            "type": "频道类型，可以为空"
+        }
+    ]
+    
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18-1 频道id",
+    "title": "头条 频道名称",
+    "type": "news 频道类型",
+    "pageSize": "每页条数",
+    "pageCount": "页数",
+    "items": [
+        {
+            "id": "1",
+            "title": "北京今日持续高温。",
+            "content": "北京今日持续高温,预计最近几天持续升温，气象部门提醒广大市民出行注意防暑。。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news",
+            "contentMark": "独家"
+        },
+        {
+            "id": "2",
+            "title": "习近平出访",
+            "content": "习近平与23日下午出访美国，美国国务卿接待一行。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "/front/slideMobileApi.do?loadSlideList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "3",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP",
+            "type": "news",
+            "contentMark": "热点"
+        },
+        {
+            "id": "4",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "news",
+            "contentMark": "热点"
+        },
+        {
+            "id": "4",
+            "title": "图片频道北京房价宏观调控",
+            "content": "图片频道北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "pic",
+            "contentMark": "独家"
+        },
+        {
+            "id": "新闻id",
+            "title": "新闻短标题",
+            "content": "新闻摘要",
+            "listUrl": "详细页跳转地址",
+            "topUrl": "幻灯片缩略图地址：地址1|地址2|地址3, 最多可以有三个地址，根据新闻类型展示不同的样式",
+            "listImage": "列表缩略图地址：地址",
+            "type": "新闻类型：news|pic|video",
+            "invitationCount": "评论数",
+            "pubDate": "发布时间",
+            "source": "来源",
+            "contentMark": "内容标记： |独家|热点",
+            "contentType": "内容分类/类型(1文章2组图3链接4视频6投票8调查)"
+        }
+    ]
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18-1 频道id",
+    "title": "头条 频道名称",
+    "type": "news 频道类型",
+    "items": [
+        {
+            "id": "1",
+            "title": "北京今日持续高温。",
+            "content": "北京今日持续高温,预计最近几天持续升温，气象部门提醒广大市民出行注意防暑。。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "2",
+            "title": "习近平出访",
+            "content": "习近平与23日下午出访美国，美国国务卿接待一行。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "/front/slideMobileApi.do?loadSlideList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "3",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP",
+            "type": "news"
+        },
+        {
+            "id": "4",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "news"
+        },
+        {
+            "id": "4",
+            "title": "图片频道北京房价宏观调控",
+            "content": "图片频道北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "pic"
+        },
+        {
+            "id": "新闻id",
+            "title": "新闻短标题",
+            "listUrl": "详细页跳转地址",
+            "topUrl": "缩略图地址：地址1|地址2|地址3, 最多可以有三个地址，根据新闻类型展示不同的样式",
+            "type": "新闻类型：news|pic|video"
+        }
+    ]
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18-1 内容id",
+    "type": "news 内容类型",
+    "pageSize": "每页条数",
+    "pageCount": "页数",
+    "items": [
+        {
+            "id": "1",
+            "title": "北京今日持续高温。",
+            "content": "北京持续高温中，详情。。。",
+            "listUrl": "/front/PIC1.JSP",
+            "pubDate": "2014-07-1710: 30: 00",
+            "type": "1"
+        },
+        {
+            "id": "2",
+            "title": "习近平出访",
+            "content": "习近平与23日下午出访美国，美国国务卿接待一行。。。",
+            "listUrl": "/front/PIC2.JSP",
+            "pubDate": "2014-07-1710: 30: 00",
+            "type": "0"
+        },
+        {
+            "id": "3",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控",
+            "pubDate": "2014-07-1710: 30: 00",
+            "listUrl": "/front/PIC3.JSP",
+            "type": "0"
+        }，
+        {
+            "id": "评论id",
+            "title": "评论标题",
+            "content": "内容摘要"，
+            "listUrl": "详细页跳转地址",
+            "pubDate": "评论时间",
+            "type": "评论类型：0-所有|1-我的|2-精彩"
+        }
+    ]
+}{
+    "resultMsg": "登陆成功",
+    "resultCode": "1",
+    "userId": "用户id",
+    "faceImg": "头像image",
+    "userName": "12332112"
+}{
+    "resultMsg": "评论成功",
+    "resultCode": "1",
+    "listUrl": "/front/commentMobileApi/loadCommentList.do?mobileChannelId=&userId=&pageSize=&pageNo=&all=y | 评论列表"
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "userId": "1",
+    "userName": "mac",
+    "faceImg": "/upload/xxx.png"
+}{
+    "resultMsg": "成功",
+    "resultCode": "1"
+}{
+    "resultMsg": "注册成功",
+    "resultCode": "1",
+    "userId": "用户id",
+    "userName": "12332112",
+    "faceImg": "头像image",
+}{
+    "resultMsg": "发帖成功",
+    "resultCode": "1",
+    "listUrl": "/front/commentMobileApi.do?loadCommentList&mobileChannelId=&pageSize=&pageNo=&all=y | 跟帖列表"
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18-1 内容id",
+    "type": "news 内容类型",
+    "pageSize": "每页条数",
+    "pageCount": "页数",
+    "items": [
+        {
+            "id": "1",
+            "content": "北京持续高温中，详情。。。",
+            "listUrl": "/front/PIC1.JSP",
+            "pubDate": "2014-07-1710: 30: 00",
+            "pictureAll": "/upload/faceImg",
+            "type": "1"
+        },
+        {
+            "id": "2",
+            "content": "习近平与23日下午出访美国，美国国务卿接待一行。。。",
+            "listUrl": "/front/PIC2.JSP",
+            "pubDate": "2014-07-1710: 30: 00",
+            "pictureAll": "/upload/faceImg",
+            "type": "0"
+        },
+        {
+            "id": "3",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控",
+            "pubDate": "2014-07-1710: 30: 00",
+            "listUrl": "/front/PIC3.JSP",
+            "pictureAll": "/upload/faceImg",
+            "type": "0"
+        },
+        {
+            "id": "跟帖id",
+            "content": "跟帖内容",
+            "listUrl": "详细页跳转地址",
+            "pubDate": "跟帖时间",
+            "pictureAll": "跟帖人头像",
+            "type": "跟帖类型：0-所有|1-我的|2-精彩"
+        }
+    ]
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "id": "18-1 频道id",
+    "title": "头条 频道名称",
+    "type": "news 频道类型",
+    "pageSize": "每页条数",
+    "pageCount": "页数",
+    "items": [
+        {
+            "id": "1",
+            "title": "北京今日持续高温。",
+            "content": "北京今日持续高温,预计最近几天持续升温，气象部门提醒广大市民出行注意防暑。。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "2",
+            "title": "习近平出访",
+            "content": "习近平与23日下午出访美国，美国国务卿接待一行。。。",
+            "listUrl": "/front/contentMobileApi.do?loadContentList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "topUrl": "/front/slideMobileApi.do?loadSlideList&mobileChannelId=&pageSize=&pageNo=&all=y",
+            "type": "news"
+        },
+        {
+            "id": "3",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP",
+            "type": "news"
+        },
+        {
+            "id": "4",
+            "title": "北京房价宏观调控",
+            "content": "北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "news"
+        },
+        {
+            "id": "4",
+            "title": "图片频道北京房价宏观调控",
+            "content": "图片频道北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，北京房价宏观调控，",
+            "listUrl": "/front/PIC1.JSP|/front/PIC2.JSP|/front/PIC3.JSP",
+            "type": "pic"
+        },
+        {
+            "id": "新闻id",
+            "title": "新闻短标题",
+            "content": "新闻摘要",
+            "listUrl": "详细页跳转地址",
+            "topUrl": "缩略图地址：地址1|地址2|地址3, 最多可以有三个地址，根据新闻类型展示不同的样式",
+            "type": "新闻类型：news|pic|video",
+            "comentNum": "评论数",
+            "pubDate": "发布时间",
+            "source": "来源"
+        }
+    ]
+}{
+    "content": "通知内容    ",
+    "listUrl": "详细页",
+    "pubDate": "推送时间"
+}{
+    "resultMsg": "成功",
+    "resultCode": "1",
+    "pageSize": "每页条数",
+    "pageCount": "页数",
+    "items": [
+        {
+            "content": "通知内容1    ",
+            "listUrl": "详细页1",
+            "pubDate": "推送时间1"
+        },
+        {
+            "content": "通知内容2    ",
+            "listUrl": "详细页2",
+            "pubDate": "推送时间2"
+        },
+        {
+            "content": "通知内容3    ",
+            "listUrl": "详细页3",
+            "pubDate": "推送时间3"
+        }
+    ]
+}{
+    "pageCount": "1",
+    "pageSize": "20",
+    "resultCode": "1",
+    "resultMsg": "成功",
+    "items": [
+        {
+            "commentCount": "1",
+            "content": "asdadasdasdsa",
+            "id": "12",
+            "listUrl": "wwwroot/www/newsDeatil.htm?size=14",
+            "pubDate": "2014-08-03 17:41:33",
+            "source": "",
+            "title": "三张图片",
+            "topUrl": "http://localhost/upload/image/20140803/1407058152457051327.jpg,http://localhost/upload/image/20140803/1407058152457051327.jpg,http://localhost/upload/image/20140803/1407058152457051327.jpg",
+            "type": "news"
+        },
+        {
+            "commentCount": "0",
+            "content": "<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->",
+            "id": "10",
+            "listUrl": "wwwroot/www/newsDeatil.htm?size=14",
+            "pubDate": "2014-07-21 15:19:22",
+            "source": "收",
+            "title": "一张图片新闻",
+            "topUrl": "http://localhost/upload/image/20140803/1407058152457051327.jpg",
+            "type": "news"
+        },
+        {
+            "commentCount": "0",
+            "content": "测试啦    ",
+            "id": "9",
+            "listUrl": "wwwroot/www/newsDeatil.htm?size=14",
+            "pubDate": "2014-07-16 13:56:22",
+            "source": "收到",
+            "title": "新发布文章2",
+            "topUrl": "http://localhost/upload/image/20140803/1407058152457051327.jpg,http://localhost/upload/image/20140803/1407058152457051327.jpg",
+            "type": "news"
+        },
+        {
+            "commentCount": "0",
+            "content": "我饿得问问",
+            "id": "11",
+            "listUrl": "wwwroot/www/newsDeatil.htm?size=14",
+            "source": "",
+            "title": "527测试组图",
+            "topUrl": "",
+            "type": "pic"
+        },
+        {
+            "commentCount": "0",
+            "content": "",
+            "id": "13",
+            "listUrl": "wwwroot/www/newsDeatil.htm?size=14",
+            "source": "本",
+            "title": "bug236",
+            "topUrl": "",
+            "type": "news"
+        },
+        {
+            "id": "新闻id",
+            "title": "新闻短标题",
+            "content": "新闻摘要",
+            "listUrl": "详细页跳转地址",
+            "topUrl": "缩略图地址：地址1|地址2|地址3, 最多可以有三个地址，根据新闻类型展示不同的样式",
+            "type": "新闻类型：news|pic|video",
+            "commentCount": "评论数",
+            "pubDate": "发布时间",
+            "source": "来源"
+        }
+    ]
+}{
+    "pageCount": 4,
+    "pageSize": 2,
+    "list": [
+        {
+            "id": 10,
+            "imgUrl": "http://localhost:9090/upload/image/20140821/1408592672429004687.jpg",
+        },
+        {
+            "id": 9,
+            "imgUrl": "http://upload.cmstop.cn/2014/0730/1406727580158.png",
+        }
+    ]
+}{
+    "id": 2,
+    "imgUrl": "http://localhost/upload/image/20140821/1408592436887019716.jpg",
+    "imgHeight": 0,
+    "imgWidth": 0
+}{
+    "pageCount": 1,
+    "pageSize": 10,
+    "list": [
+        {
+            "id": 3,
+            "isInside": 0,
+            "imgUrl": "",
+            "connectUrl": "",
+            "advertisementCode": "1212"
+        },
+        {
+            "id": 2,
+            "isInside": 1,
+            "imgUrl": "11",
+            "connectUrl": "11",
+            "advertisementCode": ""
+        },
+        {
+            "id": 1,
+            "isInside": 0,
+            "imgUrl": "",
+            "connectUrl": "",
+            "advertisementCode": "3333"
+        }
+    ]
+}成功{
+    "id": 3,
+    "version": "6.2.10",
+    "account": "系统升级",
+    "sysType": "iPad",
+    "downUrl": "www.hao.com"
+}{
+    "id": 1,
+    "isInside": 0,
+    "imgUrl": "",
+    "connectUrl": "",
+    "advertisementCode": "3333"
+}"成功"{
+    "resultCode": "1",
+    "resultMsg": "收藏成功",
+    "resultCode": "0",
+    "resultMsg": "取消收藏"
+}{
+    "items": [
+        {
+            "commentCount": "0",
+            "content": "你觉得地铁多少钱合适   你觉得地铁多少钱合适",
+            "id": "269",
+            "invitationCount": "0",
+            "listUrl": "/mobile_269.shtml",
+            "pubDate": "2014-12-29 14:24:04",
+            "title": "你觉得地铁多少钱合适",
+            "topUrl": "",
+            "type": "news"
+        },
+        {
+            "commentCount": "评论条数",
+            "content": "内容",
+            "id": "投票id",
+            "invitationCount": "跟帖条数",
+            "listUrl": "详细页",
+            "pubDate": "发布时间",
+            "title": "标题",
+            "topUrl": "",
+            "type": "类型"
+        }
+    ],
+    "pageCount": "1",
+    "pageSize": "20",
+    "resultCode": "1",
+    "resultMsg": "成功"
+}{
+    "resultCode": "1",
+    "resultMsg": "邮件已发送，请登录test01@163.com查看"
+}{
+    "resultCode": "1",
+    "resultMsg": "投稿成功",
+    "resultCode": "0",
+    "resultMsg": "请登录之后投稿",
+}{
+    "resultCode": "1",
+    "resultMsg": "成功",
+    "pageCount":"",
+    "pageSize":"",
+    "items": [
+        {
+            "id": "1",
+            "listImage": "/upload/image/20150112/1421031512809048869.jpg",
+            "listUrl": "/front/simpleSpecialApi/loadSimpleSpecialContent.do?simpleSpecialId=1&pageSize=10&pageNo=1",
+            "title": "NBA"
+        },
+        {
+            "id": "专题id",
+            "listImage": "专题缩略图",
+            "listUrl": "专题详情",
+            "title": "NBA"
+        }
+    ]
+}{
+    "id": "1,专题id",
+    "pageCount": "1",
+    "pageSize": "10",
+    "resultCode": "1",
+    "resultMsg": "成功",
+    "title": "NBA,专题名称",
+    "content": "专题摘要内容",
+    "type": "news",
+    "items": [
+        {
+            "content": "亚航失联客机为何坠海：或为恐怖雷暴云团所致",
+            "contentMark": "rd",
+            "contentType": "1",
+            "id": "289",
+            "invitationCount": "0",
+            "listImage": "/upload/image/20150105/1420427241371044194.jpg",
+            "listUrl": "/mobile/mobile_289.shtml",
+            "pubDate": "2015-01-21 11:24:43",
+            "source": "原创",
+            "title": "亚航失联客机为何坠海：或为恐怖雷暴云团所致",
+            "type": "news"
+        },
+        {
+            "content": "女子飞机上打电话拒关机 指责乘务员小题大做",
+            "contentType": "1",
+            "id": "288",
+            "invitationCount": "0",
+            "listImage": "/upload/image/20150112/1421031512809048869.jpg",
+            "listUrl": "/mobile/mobile_288.shtml",
+            "pubDate": "2015-01-05 11:33:24",
+            "source": "本站原创",
+            "title": "女子飞机上打电话拒关机 指责乘务员小题大做",
+            "type": "news"
+        },
+        {
+            "id": "新闻id",
+            "title": "新闻短标题",
+            "content": "新闻摘要",
+            "listUrl": "详细页跳转地址",
+            "listImage": "缩略图地址",
+            "type": "内容分类/类型(1文章2组图3链接4视频6投票8调查)",
+            "invitationCount": "评论数",
+            "pubDate": "发布时间",
+            "contentMark": "内容标记： |独家|热点"
+        }
+    ]
+}

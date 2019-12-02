@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<title>登录</title>
+<meta name="Description" content="" />
+<meta name="Keywords" content="" />
+<script type="text/javascript" src="/wapStyle/js/2015/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="/wapStyle/js/2015/jquery.hammer.js"></script>
+<link href="/wapStyle/css/swiper.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script src="/wapStyle/js/swiper.js"></script>
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/yuxi.css" />
+<script type="text/javascript" src="/wapStyle/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="/wapStyle/js/yuxi.js"></script>
+<link href="/wapStyle/css/scrollbar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/wapStyle/js/iscroll.js"></script>
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/iscroll.css" />
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/common.css">
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/app.css">
+<script type="text/javascript" src="/wapStyle/js/2015/myScroll.js"></script>
+<style> 
+.tit{height: 50px;line-height:50px;background:#eee;border-bottom:1px solid #d6d6d6;}
+.a{float:left;height: 50px;line-height:40px;}
+.p1{height:50px;width:40px;margin:0 auto;} 
+.ul1{list-style-type:none}
+.ul1 li{margin:10px 0;}
+.ul1 li input{height:30px;width:98%;border:1px solid #09F;font-size:18px;padding-left:2%;line-height:30px;border-radius:6px;}
+.ul2{list-style-type:none}
+.ul2 li{margin:0 10px;float:left;text-align:center;height:40px;width:130px}
+.ul2 li input{height:100%;width:100%;background:#09F;border:0px solid #09F;color:white;font-size:18px;border-radius:6px;}
+</style> 
+</head>
+<body>
+	<div id="page">
+		<div data-role="header" data-position="fixed" class="tit" >
+        <a href="javascript:goBack();"  data-ajax=false data-role='none' class="top_back a"><img src="/wapStyle/images/4shizheng_03.png"></a>
+        <h1  class="p1">登录</h1>
+        </div>
+		<div style="width:300px;margin:0 auto;text-algin:center;"> 
+		<ul class="ul1">
+		<li><input type="text" id="username" value="${username}" placeholder="用户名"/>	 </li>
+		<li><input type="password" id="password" placeholder="密码"/></li>
+		</ul>
+		<ul class="ul2">
+		<li><input onclick="login();" type="button" value="登录"/></td></li>
+		<li><input onclick="location.href='${contextpath}/front/login.do?toRegister'"  type="button"  value="注册"/></li>
+		</ul>
+        </div>
+	</div>
+	<script type="text/javascript">
+	 function login(){
+	    var username =$("#username").val();
+	    var password =$("#password").val();
+	    var loginType="";
+	    $.ajax({
+				url:"${contextPath}/front/loginMobileApi/login.do?username="+username+"&password="+password+"&logintype="+loginType,
+				///front/loginMobileApi/login.do?username=hechen&password=123&loginType=
+				type:"POST",
+				dataType:"JSON",
+				success:function (result){//------ajax请求成功----------
+					 if(result.resultCode==1){//------登录成功--------------
+					    var storage = window.localStorage;
+						storage.removeItem("yuxiuser");
+						storage.removeItem("uid");
+						storage.setItem("yuxiuser",username);
+						storage.setItem("uid",result.userId);
+					
+						alert("登录成功，将要返回至首页！");
+						window.location.href="/wap_index.shtml";//------返回到首页------
+					 }else{                   //-------登录失败------
+					    alert(result.resultMsg);
+					 }
+				},
+				error:function(e){
+				},
+				complete:function (){
+				}
+	     });
+	 }
+</script>
+</body>
+</html>

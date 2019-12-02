@@ -1,0 +1,100 @@
+
+				 <div class="portlet-body">
+					<table class="table table-bordered table-striped table-hover" id="caseListTable">
+						<thead>
+							<tr style="background-color:#cccccc">
+								<th>日期</th>
+								<th>发稿量</th>
+								<th class="hidden-480">评论量</th>
+								<th>访问量</th>
+							</tr>
+						</thead>
+						<tbody id="tbody1">
+							
+						</tbody>
+					</table>
+				</div>
+<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="media/js/jquery.flot.js"></script>
+<script src="media/js/jquery.flot.resize.js"></script>
+<script src="media/js/jquery.flot.pie.js"></script>
+<script src="media/js/jquery.flot.stack.js"></script>
+<script src="media/js/jquery.flot.crosshair.js"></script>
+<script src="media/js/jquery.flot.time.js"></script>
+<script src="media/js/jquery.flot.time.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script>
+	
+/* 获取数据报表 */
+	var chartJSON = new Array();
+	var searchYear = ${searchYear};
+	var searchMonth = ${searchMonth};
+	
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'metroUserController.do?loadDataStat',
+		data:{'searchYear':searchYear,'searchMonth':searchMonth},
+		success:function(data){
+			chartJSON = data;
+		}
+	});
+	var json = JSON.parse(chartJSON);
+	/* 加载报表数据绘图 */
+	jQuery(document).ready(function() {   
+		var tbody = document.getElementById('tbody1');
+		for (var i = 0; i < json.length; i += 1){
+			if(searchYear==0){
+				if(searchMonth!="0"){
+					tbody.innerHTML += "<tr><td>"+json[i].date+"年"+searchMonth+"月</td><td>"+json[i].count+"</td><td class='hidden-480'>"+json[i].count1+"</td><td>"+json[i].pv+"</td></tr>";
+				}else{
+					tbody.innerHTML += "<tr><td>"+json[i].date+"年</td><td>"+json[i].count+"</td><td class='hidden-480'>"+json[i].count1+"</td><td>"+json[i].pv+"</td></tr>";
+				}
+				
+			}else{
+				if(searchMonth!="0"){
+					tbody.innerHTML += "<tr><td>"+searchYear+"年"+searchMonth+"月"+json[i].date+"日</td><td>"+json[i].count+"</td><td class='hidden-480'>"+json[i].count1+"</td><td>"+json[i].pv+"</td></tr>";
+				}else{
+					tbody.innerHTML += "<tr><td>"+searchYear+"年"+json[i].date+"月</td><td>"+json[i].count+"</td><td class='hidden-480'>"+json[i].count1+"</td><td>"+json[i].pv+"</td></tr>";
+				}
+			}
+	     }
+	  
+	      $("#chart_5").bind("plothover", function (event, pos, item) {
+	    	 	if(item) {
+					var x = item.datapoint[0],
+						y = item.datapoint[1];
+	
+					var val = "";
+					if(searchYear=="0"){
+			 			x= x + "年";
+					}else{
+			 			if(searchMonth!="0"){
+			 				x= ${searchYear}+"年"+${searchMonth}+"月"+x+"日";
+			 			}else{
+				 			x= ${searchYear}+"年"+x+"月";
+			 			}
+	    	 		}
+	    	 		var info = "";
+				if(item.seriesIndex==0){
+					info="发稿量"
+				}else if(item.seriesIndex==1){
+					info="访问量"
+				}else if(item.seriesIndex==2){
+					info="评论量"
+				}
+					$("#tooltip").html("       "+x + ","+info+":" + y)
+						.css({top: item.pageY+5, left: item.pageX+5})
+						.fadeIn(200);
+				} else {
+					$("#tooltip").hide();
+				}
+			});
+	});
+</script>

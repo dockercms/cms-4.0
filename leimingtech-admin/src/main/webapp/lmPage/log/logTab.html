@@ -1,0 +1,116 @@
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>日志列表</div>
+				<div class="tools">
+					<!--<button class="btn dropdown-toggle" data-toggle="dropdown">工具 <i class="icon-angle-down"></i></button>
+					<ul class="dropdown-menu pull-right">
+						<li><a href="#">打印</a></li>
+						<li><a href="#">保存为PDF</a></li>
+						<li><a href="#">导出Excel</a></li>
+					</ul>-->
+					
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				   <div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="span4">
+									<label>日志类型:
+										<select name="loglevel" id="loglevel" class="form-control span7">
+											<option value="">选择日志类型</option>
+											<option value="1" <#if loglevels?if_exists && loglevels ==1>selected="selected"</#if>>登陆</option>
+											<option value="2" <#if loglevels?if_exists && loglevels ==2>selected="selected"</#if>>退出</option>
+											<option value="3" <#if loglevels?if_exists && loglevels ==3>selected="selected"</#if>>插入</option>
+											<option value="4" <#if loglevels?if_exists && loglevels ==4>selected="selected"</#if>>删除</option>
+											<option value="5" <#if loglevels?if_exists && loglevels ==5>selected="selected"</#if>>更新</option>
+											<option value="6" <#if loglevels?if_exists && loglevels ==6>selected="selected"</#if>>上传</option>
+											<option value="7" <#if loglevels?if_exists && loglevels ==7>selected="selected"</#if>>其他</option>
+						               </select>
+									</label>
+							</div>
+							<div class="span4">
+								<label>日志内容:
+									<input name="logcontent" class="form-control span7" type="text" value="${searchMap["logcontent"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="span4">
+								<label>操作人IP:
+										<input name="note" class="form-control span7" type="text" value="${searchMap["note"]?if_exists[0]}">
+								</label>
+							</div>
+						</div>
+							<div class="clearfix">
+								<div class="span4">
+									<label>浏览器类型:
+										<input name="broswer" class="form-control span7" type="text" value="${searchMap["broswer"]?if_exists[0]}">
+									</label>
+								</div>
+								<div class="pull-right">
+									<button type="button" class="btn yellow btn-sm" onclick="toSearch('logsController.do?log', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+									<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+								</div>
+							</div>
+					</form>
+			   </div>
+				
+				<table class="table table-bordered" id="sample_1">
+					<thead>
+						<tr>
+							<!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
+							<th width="40" style="text-align:center;">序号</th>
+							<th>日志信息</th>
+							<th width="29" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if logList?exists>
+					  <#list logList as logs>
+						<tr>
+							<td rowspan="2" style="vertical-align: middle;text-align: center;">${(pageNo-1)*pageSize+logs_index?if_exists+1}</td>
+							<td>
+								<#if logs.TSUser?exists>
+								[${logs.TSUser.TSDepart.departname}]
+								<#if logs.TSUser.realName?exists && logs.TSUser.realName!=''>
+								${logs.TSUser.realName}
+								<#else>
+								${logs.TSUser.userName}
+								</#if>
+								：
+								</#if>
+								${logs.logcontent?if_exists}
+							</td>
+							<td rowspan="2" style="vertical-align: middle;text-align:center">
+								<input type="button" class="delbtn" onclick="del('logsController.do?del', '${logs.id?if_exists}')"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="border-top: none;padding: 0px 8px 0px 0px;text-align: right;">
+							${logs.broswer?if_exists}
+							&nbsp;&nbsp;&nbsp;&nbsp;${logs.note?if_exists}
+							&nbsp;&nbsp;&nbsp;&nbsp;${logs.operatetime?if_exists}
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

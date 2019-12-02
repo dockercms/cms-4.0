@@ -1,0 +1,658 @@
+<#include "/cms/commons/header.html">
+<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>
+<!-- 上传 -->
+<link href="../plug-in/swfupload/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../plug-in/swfupload/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="../plug-in/swfupload/resize/handlers.js"></script>
+<!-- 富文本编辑器 -->
+<script type="text/javascript" src="plug-in/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="plug-in/tools/ckeditorTool.js"></script>
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+<!-- biaochi -->
+<link rel="stylesheet"
+	href="/statics/themes/default/js/biaochi/css/biaochi.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+<script type="text/javascript" src="media/js/jquery.tagsinput.min.js"></script>
+<!-- Tags标签CSS -->
+<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />  <!-- a -->
+<!-- 颜色选择器 -->
+<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
+<script type="text/javascript" src="media/js/bootstrap-colorpicker.js"></script> 
+<!-- 时间 -->
+<link href="/plug-in/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/plug-in/My97DatePicker/WdatePicker.js"></script>
+
+<div class="row-fluid" onclick="colorChange()">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>&nbsp;${contentCat.name}&nbsp;>&nbsp;专题</div>
+			<div class="tools">
+				<button id="sample_editable_1_back" class="btn gray" onclick="changePage('contentsController.do?table&tab=alone&contentCatId=${contentCat.id}')">
+					 <i class="fa fa-pencil"></i>返回内容
+				</button>
+				<a href="javascript:;" class="collapse"></a>
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCat.id}"/>
+				<input type="hidden" id="modelsId" name="modelsId" value="${modelsId}"/>
+				<input type="hidden" id="modelId" name="modelId" value="${modelManage.id}"/>
+				<input type="hidden" id="contentsId" name="contentsId" value="${contents.id?if_exists}"/>
+				
+						<div class="alert alert-error hide">
+							<button class="close" data-dismiss="alert"></button>
+							有未填写项或错误项. 请检查后再提交.
+						</div>
+						<div class="alert alert-success hide">
+							<button class="close" data-dismiss="alert"></button>
+							表单验证成功!
+						</div>
+						<div class="control-group">
+							<label class="control-label"><span class="required">*</span>标题</label>
+							<div class="controls">
+							    <input type="text" id="title" name="title" data-rule-required="true" onclick="colorChange()" class="span6 m-wrap" value="${contents.title?if_exists}" />
+								<div data-color-format="rgba" data-color="#666666" class="input-append color colorpicker-default">
+									<input type="hidden" readonly="" value="#666666" class="m-wrap" id="color1">
+									<span class="add-on"><i style="background-color: rgb(201, 186, 50);"></i></span>
+								</div>
+								<#if contents.subtitle=="">
+									<input type="checkbox" onclick="$('#h1').val(this.checked)" onchange="changeVal()"/><span class="help-inline">副题</span>
+									<input type="hidden" id="h1" name="h1" value="false" >
+								</#if>
+								<#if contents.subtitle!="">
+									<input type="checkbox" checked onclick="$('#h1').val(this.checked)" onchange="changeVal()"/><span class="help-inline">副题</span>
+									<input type="hidden" id="h1" name="h1" value="true" >
+								</#if>
+							</div>
+						</div>
+						<div class="control-group" style="display:none" id="subdiv">
+							<label class="control-label">短标题</label>
+							<div class="controls">
+								<input type="text" id="subtitle" name="subtitle" class="span6 m-wrap" value="${contents.subtitle?if_exists}"/>
+								<span class="help-inline">填写短标题</span>
+							</div>
+						</div>
+
+						<!--start-->
+						
+						<div class="control-group">
+							<label class="control-label">Tags标签</label>
+							<div class="controls">
+								<select  class="chosen span6" multiple="multiple" tabindex="6" id="tags" name="tags" value="${contents.tags?if_exists}">
+									<option value=""></option>
+									<#if contentTagList?exists>
+									 <#list contentTagList as tag> 	
+									 	<option value="${tag.tagName}">${tag.tagName}</option>
+									 </#list> 
+									<#else>
+										<#list contentTagLists as tags> 	
+										<#--	<#if "${tags.tagName}"=="${contents.tags?if_exists}">  -->
+									<#--	<#if "${tags.tagName}"?contains("${contents.tags?if_exists}")>  -->
+										<#if tags.tagName?contains(contents.tags)>
+									 			<option value="${tags.tagName}"  selected="selected" >${tags.tagName}</option>
+									 		<#else>
+									 			<option value="${tags.tagName}">${tags.tagName}</option>
+									 		</#if>	
+									   </#list> 
+									
+									</#if>
+								</select>
+							</div>
+						</div>
+						<div class="control-group" style="display:none">
+							<label class="control-label">发布人</label>
+							<div class="controls">
+								<input type="text" id="publishedby" name="publishedby" class="span6 m-wrap" value="<#if page.publishedby=="">${markpeople}</#if><#if page.publishedby!="">${contents.publishedby?if_exists}</#if>"/>
+								<span class="help-inline">填写发布人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">摘要</label>
+							<div class="controls">
+								<textarea id="digest" name="digest" class="span6 m-wrap" rows="2" style="width:600px">${contents.digest?if_exists}</textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">缩略图</label>
+							<div class="controls">
+								<div class="left" id="mytable">
+								<input type="text" id="thumb" name="thumb" class="span6 m-wrap " value="${contents.thumb?if_exists}"/>
+								
+								<span class="help-inline">
+									<a id="sample_editable_1_new" class="btn blue" href="javascript:toEditModel('attachPictureController.do?tableDialog')" style="text-decoration: none">
+										图片库 <i class="icon-search"></i>
+									</a>
+								</span>
+								<span class="help-inline">
+									<a id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('attachPictureController.do?addPageModel')" style="text-decoration: none">
+										上传 <i class="icon-plus"></i>
+									</a>
+								</span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">目录名称</label>
+							<div class="controls">
+								<input type="text" id="catalogname" name="catalogname" class="span6 m-wrap" value="${page.catalogname?if_exists}"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">专题列表页模板</label>
+							<div class="controls">
+								<input type="text" id="specialListmodel" name="specialListmodel" class="span6 m-wrap tooltips" value="${page.specialListmodel?if_exists}" data-original-title="专题的内容模块可以有更多链接，链接向独立的页面展示该模块的更多内容列表，每个专题可以独立设置一个模板文件" data-trigger="hover"/>
+								<a id="sample_editable_1_new" class="btn blue" onclick="" style="text-decoration: none">
+									选择
+								</a>
+								<a id="sample_editable_1_new" class="btn gray" onclick="clearModel()" style="text-decoration: none">
+									重置
+								</a>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">专题列表页信息数</label>
+							<div class="controls">
+								<input type="text" id="specialListnews" name="specialListnews" class="span6 m-wrap tooltips" value="${page.specialListnews?if_exists}" data-original-title="更多内容列表每页显示多少条信息" data-trigger="hover"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">专题列表显示页数</label>
+							<div class="controls">
+								<input type="text" id="specialListpages" name="specialListpages" class="span6 m-wrap tooltips" value="${page.specialListpages?if_exists}" data-original-title="更多内容列表最多展示多少页内容，0 为不限制；超出限制页的内容将不可见" data-trigger="hover"/>
+								<span class="help-inline"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">更新截止日期</label>
+							<div class="controls">
+								<input class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly size="20" type="text" id="specialEndtime" name="specialEndtime" value="${page.specialEndtime?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">权重</label>
+							<div class="controls">
+								<input type="text" id="weight" name="weight" class="span1 m-wrap" value="${contents.weight?if_exists}"/>
+								
+								<div class="biaoche" id="biaochex">
+									<div class="ui-draggable" id="biaochex_left"
+										style="left: 84px;"></div>
+									<div class="biaoche-h">
+										<div class="hov"
+											style="position: absolute; left: 367px; top: 1px; background: none repeat scroll 0% 0% rgb(255, 102, 0); width: 7px; height: 6px; cursor: pointer; margin-top: 2px;"
+											msg="60：上首页图片速读、视频新闻、活动">
+											<div class="bubble"
+												style="display: none; top: 36px; right: -6px;">
+												<div class="corner tl"></div>
+												<div class="corner tr"></div>
+												<div class="corner bl"></div>
+												<div class="corner br"></div>
+												<div class="top"></div>
+												<div class="cnt">60：上首页频道滚动列表</div>
+												<div class="bot"></div>
+												<div class="point NE"></div>
+											</div>
+										</div>
+									</div>
+									<div class="biaoche-h">
+										<div class="hov"
+											style="position: absolute; left: 487px; top: 1px; background: none repeat scroll 0% 0% rgb(255, 102, 0); width: 7px; height: 6px; cursor: pointer; margin-top: 2px;"
+											msg="80：上首页图片速读、视频新闻、活动">
+											<div class="bubble"
+												style="display: none; top: 36px; right: -7px;">
+												<div class="corner tl"></div>
+												<div class="corner tr"></div>
+												<div class="corner bl"></div>
+												<div class="corner br"></div>
+												<div class="top"></div>
+												<div class="cnt">80：专栏首页推荐文章</div>
+												<div class="bot"></div>
+												<div class="point NE"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="control-group pull-left">
+								<label class="control-label">上线</label>
+								<div class="controls">
+									<input type="text" value="${contents.published?if_exists}" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="published">
+								</div>
+							</div>
+							<div class="control-group pull-left">
+								<label class="control-label">下线</label>
+								<div class="controls">
+									<input type="text" value="${contents.noted?if_exists}" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="noted">
+								</div>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="control-group pull-left">
+								<label class="control-label">相关</label>
+								<div class="controls">
+									<input type="text" id="correlation" style="width:200px" name="correlation" class="span1 m-wrap" value="${contents.correlation?if_exists}"/>
+									<button id="sample_editable_1_back" class="btn gray" onclick="">
+										 <i class="fa fa-pencil"></i>搜索
+									</button>
+								</div>
+							</div>
+							<div class="control-group pull-left">
+								<label class="control-label">属性</label>
+								<div class="controls">
+									<input id="attribute" name="attribute" style="width:193px" type="text" class="span6 m-wrap" readonly value="${contents.attribute?if_exists}" style="width:120px;" onclick="showMenu();" />
+									<span class="help-inline"></span>
+								</div>
+							</div>
+							<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+								<ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;">
+								</ul>
+								
+							</div>
+							<div class="right" style="display:none">
+								<input type="button" value="获取选中的值" id="button"/>
+								<input type="text" id="funVal" name="funVal"/>
+								<ul class="info">
+									<li class="title"><h2>1、setting 配置信息说明</h2>
+										<ul class="list">
+										<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+										<li><p>父子关联关系：<br/>
+												被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+												<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+												取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+												<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+												<ul id="code" class="log" style="height:20px;"></ul></p>
+										</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<!--
+								<input type="radio" id="status1" name="status" value="1" <#if contents.status=="1" || contents.status=="">checked</#if>><span class="help-inline">发布</span>&nbsp;
+								<input type="radio" id="status2" name="status" value="2" <#if contents.status=="2">checked</#if>><span class="help-inline">送审</span>&nbsp;
+								<input type="radio" id="status3" name="status" value="3" <#if contents.status=="3">checked</#if>><span class="help-inline">草稿</span>&nbsp;
+								<input type="radio" id="status4" name="status" value="4" <#if contents.status=="4">checked</#if>><span class="help-inline">退稿</span>&nbsp;
+								!-->
+								<#if contents.status=="">
+									<input type="radio" id="status2" name="status" value="20" checked><span class="help-inline">送审</span>&nbsp;
+									<input type="radio" id="status3" name="status" value="10"><span class="help-inline">草稿</span>&nbsp;
+								</#if>
+								<#if contents.status!="">
+									<#if contents.status=="10">
+										草稿
+									</#if>
+									<#if contents.status=="20">
+										待审
+									</#if>
+									<#if contents.status=="30">
+										已审
+									</#if>
+									<#if contents.status=="40">
+										退稿
+									</#if>
+								</#if>		
+							</div>
+						</div>
+						<#--拓展字段-->
+					<#include "/cms/commons/contentExtField.html">
+				<div class="form-actions">
+					<button type="button" onclick="checkForm()" class="btn blue">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800"></div>
+<div id="showModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="1000"></div>
+<script>
+function selectPictureBack(requestCode){
+	var result = $("input[name='path']:checked").val();
+	$("#thumb").val(result);
+	$('#editModel').modal('hide');
+}
+	//表单校验
+	function checkForm(){
+		if($('#form_sample_2').valid()){
+			formSubmitModel('specialController.do?save', 'form_sample_2');
+	  	}
+	}
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+
+jQuery(document).ready(function() {       
+			liveTip();
+		   App.init();
+		   FormComponents.init();
+		   $("#form_sample_2").myValidate();
+		});
+<!--tootip图片预览 样式及js start-->
+
+<!-- 弹出相关搜索框start -->
+
+function showModel(urlStr){
+	initSWFUload = null;
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#showModel').empty();
+			$('#showModel').append(msg);
+			$('#showModel').modal('show');
+			if(initSWFUload){
+				initSWFUload();
+			}
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+
+
+
+
+<!-- 弹出相关搜索框end  -->
+
+
+function liveTip(){
+		var $liveTip = $('<div id="livetip"></div>').hide().appendTo('body');
+	$('#mytable').bind('mouseover mouseout mousemove',
+	function(event) {
+		var $link = $(event.target).closest('input');
+		if (!$link.length) {
+			return;
+		}
+		var link = $link[0];
+		if(!link.value){
+			return;
+		}
+		if (event.type == 'mouseover'|| event.type == 'mousemove') {
+			$liveTip.css({
+				top : event.pageY + 12,
+				left : event.pageX + 12
+			});
+		};
+		if (event.type == 'mouseover') {
+			$liveTip.html('<div><img src=' + link.value + ' width=150 /></div>').show();
+		};
+		if (event.type == 'mouseout') {
+			$liveTip.hide();
+		};
+	});
+}
+
+
+<!--tootip图片预览 样式及js end-->
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+//显示、隐藏副题
+function changeVal(){
+	if(document.getElementById('h1').value=='true'){
+		document.getElementById('subdiv').style.display = 'block';
+	}else{
+		document.getElementById('subdiv').style.display = 'none';
+	}
+}
+$(function(){
+	<#if (modelItemList?size != 0)>
+		<#list modelItemList as modelItem>
+			<#if modelItem.dataType=="2">
+				//给class为only的文本框绑定keypress(键盘按下)事件
+				$("#${modelItem_index}").bind("keypress",filterInt);
+				//给class为onlyInt的文本框绑定blur(失焦)事件	
+				$("#${modelItem_index}").bind("blur",checkInt);
+			</#if>
+		</#list>
+	</#if>
+	<#if (modelExtList?size != 0)>
+		<#list modelExtList as modelExt>
+			<#if modelExt.data_type=="2">
+				//给class为only的文本框绑定keypress(键盘按下)事件
+				$("#${modelExt_index}").bind("keypress",filterInt);
+				//给class为onlyInt的文本框绑定blur(失焦)事件	
+				$("#${modelExt_index}").bind("blur",checkInt);
+			</#if>
+		</#list>
+	</#if>
+	//判断是否有副题
+	<#if contents.subtitle!="">
+		document.getElementById('subdiv').style.display = 'block';
+	</#if>
+	//标尺
+	var options={};
+		options.axis = "x";
+		var s="left";
+		$("#biaoche"+options.axis+"_left").css(s,$("#weight").val()*6+6+"px");
+				$("#biaoche"+options.axis+"_left").draggable({//移动游标 采用JQuery中的UI插件
+					containment: '#biaoche'+options.axis,
+					axis: options.axis,
+					grid:[2,2],
+					start: function() {
+					},
+					drag: function() {
+							divT=$("#biaoche"+options.axis+"_left").css(s);
+							divT=parseInt(((parseInt(divT)-4)/6));
+							if(divT>100) divT=100;
+							else if(divT<0) divT=0;
+							$("#weight").val(divT);
+					}
+				});	 
+				$("#biaoche"+options.axis+"").click(function(e){//点击你所选中的刻度 
+					if(options.axis=="y"){
+						y=e.originalEvent.y||e.originalEvent.layerY+parseInt($("#biaoche"+options.axis+"").
+								css(s))-Math.max(document.documentElement.scrollTop,document.body.scrollTop)||0;
+						py=parseInt($("#biaoche"+options.axis+"").
+								css(s))-Math.max(document.documentElement.scrollTop,document.body.scrollTop);
+					}
+					else if(options.axis=="x"){
+						if(e.originalTarget){
+							if(e.originalTarget.id=="biaoche"+options.axis+"_left"){
+								return;
+							}
+						}else{
+							if(e.currentTarget.id=="biaoche"+options.axis+"_left"){
+								return;
+							}
+						}
+						y=e.originalEvent.x||e.originalEvent.layerX+parseInt($("#biaoche"+options.axis+"").
+								css(s))-Math.max(document.documentElement.scrollLeft,document.body.scrollLeft)||0;
+						py=parseInt($("#biaoche"+options.axis+"").
+								css(s))-Math.max(document.documentElement.scrollLeft,document.body.scrollLeft);
+					}
+					t=Math.ceil((y-py-10)/6);
+					if(t>100) t=100;
+					else if(t<0) t=0;
+					$("#biaoche"+options.axis+"_left").css(s,t*6+6+"px");
+					$("#weight").val(t);
+				});
+				
+			return false;
+});
+$.each($('.biaoche-h'),function(){
+		var _this = $(this),
+			hov = $('.hov', _this);
+		hov.hover(function(){
+				$(this).children('.bubble').css('display','block');
+			},
+			function(){
+				$(this).children('.bubble').css('display','none');
+			}
+		);
+	});
+
+//控制从键盘只能输入整型数据(int型),但此函数无法阻止用户粘贴和拖放
+function filterInt(evt){   
+    evt = evt || window.event;   
+    var b = evt.keyCode || evt.which;   
+  
+    return(b>=48&&b<=57)||b==8;   //0到9的键值为48到57,BackSpace的键值为8
+}      
+
+//防止用户粘贴和拖放非整型数据(当文本框失焦时检测数据,如果数据为非整型就将其清掉)
+function checkInt(event){
+	var patrn=/[^0123456789]/;
+	if(patrn.exec(this.value)){
+	alert("输入不合法，请重新输入！");
+	this.value="";
+	this.focus();
+	}
+}
+function JHshNumberText(a)
+{ 
+var fa="";
+if(a.value.substring(0,1)=="-")
+      fa="-";
+
+var str=(a.value.replace(/[^0-9.]/g,'')).replace(/[.][0-9]*[.]/, '.');
+
+if (str.substring(0,1)==".")
+   str="0"+str;
+   a.value=fa+str;
+
+}
+//ztree属性下拉树选择
+var setting = {
+			check: {
+				enable: true
+			},
+			view: {
+				dblClickExpand: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeClick: beforeClick,
+				onCheck: onCheck
+			}
+		};
+
+		var code;
+		function setCheck() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			py = $("#py").attr("checked")? "p":"",
+			sy = $("#sy").attr("checked")? "s":"",
+			pn = $("#pn").attr("checked")? "p":"",
+			sn = $("#sn").attr("checked")? "s":"",
+			type = { "Y":py + sy, "N":pn + sn};
+			zTree.setting.check.chkboxType = type;
+			showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+		}
+		function showCode(str) {
+			if (!code) code = $("#code");
+			code.empty();
+			code.append("<li>"+str+"</li>");
+		}
+
+		function beforeClick(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.checkNode(treeNode, !treeNode.checked, null, true);
+			return false;
+		}
+		
+		function onCheck(e, treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = zTree.getCheckedNodes(true),
+			v = "";
+			for (var i=0, l=nodes.length; i<l; i++) {
+				v += nodes[i].name + ",";
+			}
+			if (v.length > 0 ) v = v.substring(0, v.length-1);
+			var cityObj = $("#attribute");
+			cityObj.attr("value", v);
+		}
+
+		function showMenu() {
+			var cityObj = $("#attribute");
+			var cityOffset = $("#attribute").offset();
+			$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+			$("body").bind("mousedown", onBodyDown);
+		}
+		function hideMenu() {
+			$("#menuContent").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDown);
+		}
+		function onBodyDown(event) {
+			if (!(event.target.id == "menuBtn" || event.target.id == "attribute" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+				hideMenu();
+			}
+		}
+		var zNodes = new Array();
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'custormController.do?loadAttr&contentsId=${contents.id?if_exists}',
+			data:'data=0',
+			success:function(data){
+				 zNodes = data;
+			}
+		})
+		var json = JSON.parse(zNodes);
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting,json);
+			setCheck();
+			$("#py").bind("change", setCheck);
+			$("#sy").bind("change", setCheck);
+			$("#pn").bind("change", setCheck);
+			$("#sn").bind("change", setCheck);
+			$('#treeDemo').click(function(){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+				var checkCount = checked.length;
+				var v="";
+				for(var i=0;i<checkCount;i++){
+					v+=checked[i].id+",";//获取的是值
+					//v+=checked[i].name+",";//获取的是名称
+				}
+				$('#funVal').attr("value",v);
+			});
+		});
+	//颜色、tab等初始化
+	jQuery(document).ready(function() {       
+	   App.init();
+	   FormComponents.init();
+	});
+	//颜色选择器(标题)
+	function colorChange(){
+		document.getElementById('title').style.color = $('#color1').val();
+	}
+	//重置自定义模板值
+	function clearModel(){
+		$("#customModel").attr("value","");
+	}
+</script>
+<!--tootip图片预览 样式及js begin-->
+<style type="text/css">
+	#livetip {
+		position: absolute;
+		background-color: #cfc;
+		padding: 4px;
+		border: 2px solid #9c9;
+		border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+	}
+</style>
+<#include "/cms/commons/footer.html">

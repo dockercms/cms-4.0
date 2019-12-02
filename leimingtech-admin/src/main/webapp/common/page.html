@@ -1,0 +1,55 @@
+<div class="page">
+	共<font color="#ff0000">${countNum}</font>条&nbsp;<font color="#ff0000">${pageNo}/${pageCount}</font>页
+	<#if pageNo==1>
+		
+		<font color="#999" style="padding-left: 15px">首页</font>
+		<font color="#999" style="padding-left: 15px">上一页</font>
+	<#else>
+		<a href="javascript:void(0)" onclick="pageSearch('${searchUrl}')" style="padding-left: 15px">首页</a>
+		<a href="javascript:void(0)" onclick="pageSearch('${searchUrl}&pageNo=${pageNo-1}')" style="padding-left: 15px">上一页</a>
+	</#if>
+	
+	<#if pageNo==pageCount>
+		<font color="#999" style="padding-left: 15px">下一页</font>
+		<font color="#999" style="padding-left: 15px">尾页</font>
+	<#else>
+		<a href="javascript:void(0)" onclick="pageSearch('${searchUrl}&pageNo=${pageNo+1}')" style="padding-left: 15px">下一页</a>
+		<a href="javascript:void(0)" onclick="pageSearch('${searchUrl}&pageNo=${pageCount}')" style="padding-left: 15px">尾页</a>
+	</#if>
+	<span style="padding-left: 15px">跳转到:<input value="" id="gopage" type="text" style="width:40px;padding:2px 4px;text-align: center;margin-left: 10px"/></span>
+	<input type="button"onclick="goPage()" value="GO">
+</div>
+<script type="text/javascript">
+	var pageCount="${pageCount}";
+	var pageNo="${pageNo}";
+	var action="${searchUrl}";
+	function goPage(){
+	
+		var pageNo=$("#gopage").val();
+	
+		
+		if(!pageNo){
+			alert("请您输入你想去往的页数！");
+			$("#gopage").focus();
+			return ;
+		}
+		
+		if(pageCount<pageNo){
+			alert("您输入的页数已经超出！");
+			$("#gopage").focus();
+			return ;
+		}
+		if(1>pageNo){
+			alert("您输入的页数不能为负数！");
+			$("#gopage").focus();
+			return ;
+		}
+		
+		 if(pageNo==pageNo){
+			pageSearch(action+"&pageNo="+pageNo);
+		} 
+		
+		
+		
+	}
+</script>

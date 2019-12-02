@@ -1,0 +1,67 @@
+/* lmcms-toolbar */
+.lmcms-toolbar{position:fixed;z-index:99999;margin:0;padding:0}
+.lmcms-toolbar div,a{margin:0;padding:0}
+.lmcms-toolbar a{color:#06c;text-decoration:none}
+.lmcms-toolbar-btn{background-image:url(images/lm-toolbox-boxico2.png);display:block;height:40px;margin:0 auto 8px;position:relative;top:20px;width:40px}
+.lmcms-toolbar-btn:hover{background-image:url(images/lm-toolbox-box-hover.png)}
+.lmcms-toolbar div{position:relative}
+.lmcms-toolbar .lmcms-toolbar-body{padding-bottom:20px;top:-20px;width:60px}
+.lmcms-toolbar-body .lmcms-toolbar-bg{background-color:#036;height:100%;left:5px;position:absolute;width:48px}
+.lmcms-toolbar-foot{background:none repeat scroll 0 0 #036;height:16px;left:5px;top:-20px;width:48px}
+.lmcms-toolbar-ico1{background-position:-10px -4px}
+.lmcms-toolbar-ico1:hover{background-position:-7px -4px}
+.lmcms-toolbar-ico2{background-position:-59px -3px}
+.lmcms-toolbar-ico2:hover{background-position:-141px -4px}
+.lmcms-toolbar-ico3{background-position:-58px -56px}
+.lmcms-toolbar-ico3:hover{background-position:-233px -4px}
+.lmcms-toolbar-ico4{background-position:-14px -56px}
+.lmcms-toolbar-ico4:hover{background-position:-186px -4px}
+.lmcms-toolbar-ico5{background-position:-179px -7px}
+.lmcms-toolbar-ico5:hover{background-position:-95px -4px}
+.lmcms-toolbar-ico6{background-position:-182px -59px}
+.lmcms-toolbar-ico6:hover{background-position:-52px -4px}
+.lmcms-toolbar-ico7{background-position:-8px 40px}
+.lmcms-toolbar-ico7:hover{background-position:-277px -3px}
+.lmcms-toolbar-logo{background:url(images/lm-toolbox-boxico2.png) no-repeat scroll -110px top transparent;height:70px;position:relative;width:60px;z-index:999999}
+.lmcms-toolbar-shadow-radius{background:url(images/lm-toolbox-boxico.png) no-repeat scroll -152px -62px transparent;float:left;height:10px;top:-4px;width:48px}
+.lmcms-toolbar-size-switch-drop{margin:4px 6px 0 8px}
+.lmcms-toolbar-size-switch-drop,.lmcms-toolbar-size-switch-close{background:url(images/lm-toolbox-boxico.png) no-repeat scroll 0 0 transparent;display:block;float:left;height:16px;width:16px}
+.lmcms-toolbar-size-switch-drop:hover{background-position:-147px -20px}
+.lmcms-toolbar-min-status{background-position:-117px -4px}
+.lmcms-toolbar-min-status:hover{background-position:-117px -20px}
+.lmcms-toolbar-open-status{background-position:-147px -4px}
+.lmcms-toolbar-size-switch-close{background-position:-176px 0}
+.lmcms-toolbar-size-switch-close:hover{background-position:-176px -16px}
+/* lmcms-messagebox */
+.lmcms-messagebox{position:fixed;z-index:99999}
+.lmcms-messagebox .lmcms-messagebox-body-content{background:#FFF;margin:0 6px;overflow:hidden}
+.lmcms-messagebox .lmcms-messagebox-foot-center{background-color:#0062AB;height:8px;margin:0 5px}
+.lmcms-messagebox .lmcms-messagebox-head-content{background-position:0 -189px;margin:0 10px}
+.lmcms-messagebox a{color:#06c;text-decoration:none}
+.lmcms-messagebox div,a{margin:0;padding:0}
+.lmcms-messagebox-body{background:#0062AB}
+.lmcms-messagebox-body-statusbar{background-image:url("images/lm-toolbox-bar.png");height:40px;width:100%}
+.lmcms-messagebox-body-statusbar-ok{color:#FFF;background:url("images/lm-toolbox-boxico.png") no-repeat scroll -202px top transparent;border-width:0;display:block;height:32px;width:72px;position:relative;float:right}
+.lmcms-messagebox-body-statusbar-cancel{background:url("images/lm-toolbox-boxico.png") no-repeat scroll -202px -34px transparent;color:#666;height:32px;width:72px;top:5px;line-height:30px;position:relative;float:right}
+.lmcms-messagebox-foot-left{background-position:-99px -78px;left:0}
+.lmcms-messagebox-foot-left,.lmcms-messagebox-foot-right{background-image:url(images/lm-toolbox-boxico.png);bottom:0;height:8px;overflow:hidden;position:absolute;width:5px}
+.lmcms-messagebox-foot-right{background-position:-142px -78px;right:0}
+.lmcms-messagebox-head{height:32px;overflow:hidden}
+.lmcms-messagebox-head .lmcms-messagebox-head-ico{background:url(images/lm-toolbox-boxico2.png) -127px -69px;float:left;width:28px}
+.lmcms-messagebox-head .lmcms-messagebox-head-title{background:url(images/lm-toolbox-boxico2.png) -227px -40px no-repeat}
+.lmcms-messagebox-head .lmcms-messagebox-size-control{background:none;position:absolute;right:0;top:6px;width:95px}
+.lmcms-messagebox-head div{background-image:url(images/lm-toolbox-bar.png);height:32px}
+.lmcms-messagebox-head-closepanel{background-position:-60px -35px}
+.lmcms-messagebox-head-closepanel:hover{background-position:-60px -6px}
+.lmcms-messagebox-head-fullsize{background-position:-34px -35px}
+.lmcms-messagebox-head-left{background-position:0 -157px;left:0}
+.lmcms-messagebox-head-left,.lmcms-messagebox-head-right{position:absolute;top:0;width:10px}
+
+.lmcms-messagebox-head-maxsize{background-position:-30px -35px}
+.lmcms-messagebox-head-maxsize:hover{background-position:-30px -6px}
+.lmcms-messagebox-head-minsize{background-position:0 -35px}
+.lmcms-messagebox-head-minsize:hover{background-position:1px -6px}
+
+.lmcms-messagebox-head-right{background-position:-10px -157px;right:0}
+.lmcms-messagebox-head-title h2{color:#FFF;float:left;font-size:1em;line-height:35px;margin:0;padding:0}
+.lmcms-messagebox-size-control a{background-image:url(images/lm-toolbox-boxico.png);float:left;height:22px;width:28px}

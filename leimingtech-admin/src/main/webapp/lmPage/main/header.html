@@ -1,0 +1,182 @@
+	<!-- BEGIN HEADER -->
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+		<!-- BEGIN TOP NAVIGATION BAR -->
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<!-- BEGIN LOGO -->
+				<a class="brand" href="${contextpath}/loginAction.do?login">
+					<img src="media/image/logo.png" alt="logo"/>
+				</a>
+				<!-- END LOGO -->
+				
+				<!-- BEGIN HORIZANTAL MENU -->
+				<div class="navbar hor-menu hidden-phone hidden-tablet">
+					<div class="navbar-inner">
+						<ul class="nav">
+							<li class="active">
+								<a href="${contextpath}/loginAction.do?login">
+								首页
+								<span class="selected"></span>
+								</a>
+							</li>
+							${horezantalMenu?if_exists}
+							<!--<li class="active">
+								<a href="index.html">
+								Dashboard
+								<span class="selected"></span>
+								</a>
+							</li>
+							<li>
+								<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
+								Sections
+								<span class="arrow"></span>     
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Section 1</a></li>
+									<li><a href="#">Section 2</a></li>
+									<li><a href="#">Section 3</a></li>
+									<li><a href="#">Section 4</a></li>
+									<li><a href="#">Section 5</a></li>
+								</ul>
+								<b class="caret-out"></b>                        
+							</li>
+							<li>
+								<a href="">Tables</a>
+							</li>
+							<li>
+								<a data-toggle="dropdown" class="dropdown-toggle" href="">Extra
+								<span class="arrow"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="index.html">About Us</a></li>
+									<li><a href="index.html">Services</a></li>
+									<li><a href="index.html">Pricing</a></li>
+									<li><a href="index.html">FAQs</a></li>
+									<li><a href="index.html">Gallery</a></li>
+									<li><a href="index.html">Registration</a></li>
+								</ul>
+								<b class="caret-out"></b>                        
+							</li>-->
+						</ul>
+					</div>
+				</div>
+				<!-- END HORIZANTAL MENU -->
+				
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+					<img src="media/image/menu-toggler.png" alt="" />
+				</a>
+				<!-- END RESPONSIVE MENU TOGGLER -->            
+				<!-- BEGIN TOP NAVIGATION MENU -->              
+				<ul class="nav pull-right">
+					<!-- BEGIN NOTIFICATION DROPDOWN -->   
+					<!-- <li class="dropdown" id="header_notification_bar">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-warning-sign"></i>
+						<span class="badge">14</span>
+						</a>
+						<ul class="dropdown-menu extended notification">
+							<li>
+								<p>你有14个新通知</p>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-success"><i class="icon-plus"></i></span>
+									新用户注册
+								<span class="time">Just now</span>
+								</a>
+							</li>
+							<li class="external">
+								<a href="#">查看所有通知 <i class="m-icon-swapright"></i></a>
+							</li>
+						</ul>
+					</li> -->
+					<!-- END NOTIFICATION DROPDOWN -->
+					<!-- BEGIN INBOX DROPDOWN -->
+					<#--<li class="dropdown" id="header_inbox_bar">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-envelope"></i>
+						<span class="badge">12</span>
+						</a>
+						<ul class="dropdown-menu extended inbox">
+							<li>
+								<p>你有12个消息</p>
+							</li>
+							<li>
+								<a href="inbox.html?a=view">
+								<span class="photo"><img src="media/image/avatar2.jpg" alt="" /></span>
+								<span class="subject">
+								<span class="from">李四</span>
+								<span class="time">刚刚</span>
+								</span>
+								<span class="message">
+								周日会议定在
+								A座会客室...
+								</span>  
+								</a>
+							</li>
+							<li class="external">
+								<a href="inbox.html">查看所有消息  <i class="m-icon-swapright"></i></a>
+							</li>
+						</ul>
+					</li>-->
+					<!-- END INBOX DROPDOWN -->
+					<!-- BEGIN TODO DROPDOWN -->
+					<#--<li class="dropdown" id="header_task_bar">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-tasks"></i>
+						<span class="badge">5</span>
+						</a>
+						<ul class="dropdown-menu extended tasks">
+							<li>
+								<p>你有5个任务</p>
+							</li>
+							<li>
+								<a href="#">
+								<span class="task">
+								<span class="desc">采购新版本 v1.2</span>
+								<span class="percent">30%</span>
+								</span>
+								<span class="progress progress-success ">
+								<span style="width: 30%;" class="bar"></span>
+								</span>
+								</a>
+							</li>
+							<li class="external">
+								<a href="#">查看所有任务 <i class="m-icon-swapright"></i></a>
+							</li>
+						</ul>
+					</li>-->
+					<!-- END TODO DROPDOWN -->
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown user" style="color:#ddd;line-height:34px">站点切换→</li>
+					<li class="dropdown user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<!-- <img alt="" src="media/image/avatar1_small.jpg" /> -->
+						<img style="height:20px;widows:20px" alt="" id="current_user_img" src="${headPortrait}" />
+						<span class="username" id="current_realName"> ${realName}</span>
+						<input type="hidden" value="${userName}" id="nowLoginUserName">
+						<i class="icon-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu" style="min-width:100px;">
+							<#if siteList?exists>
+				  				<#list siteList as s>
+				  					<li <#if s.id==siteid>class="site_select"</#if> ><a href="loginAction.do?login&toSite=${s.id}"><i class="icon-home"></i> ${s.siteName}</a></li>
+				  				</#list>
+							</#if>
+							<!--<li><a href="extra_profile.html"><i class="icon-user"></i>我的资料</a></li>
+							<li><a href="page_calendar.html"><i class="icon-calendar"></i> 日程表</a></li>
+							<li><a href="inbox.html"><i class="icon-envelope"></i> 消息(13)</a></li>
+							<li><a href="#"><i class="icon-tasks"></i> 任务(12)</a></li>
+							<li class="divider"></li>
+							<li><a href="extra_lock.html"><i class="icon-lock"></i>锁定</a></li>!-->
+							<li><a href="loginAction.do?logout"><i class="icon-signout"></i> 退出登录</a></li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+				<!-- END TOP NAVIGATION MENU --> 
+			</div>
+		</div>
+		<!-- END TOP NAVIGATION BAR -->
+	</div>

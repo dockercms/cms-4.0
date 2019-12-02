@@ -1,0 +1,68 @@
+		
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">详细记录</h4>
+	</div>
+	<div class="modal-body">
+		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+			
+			<#list survey.optionList as option>
+				<tr>
+					<td height="30" colspan="2" align="left">
+					<span style="color: #1c77ba;">${option_index+1}、${option.optionname}</span>
+					</td>
+				</tr>
+				<#if option.dataType=='radio'>
+					<tr>
+						<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="radio" disabled name="itemIds"  value="${ext.id}" id="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+							</#list>
+						</td>
+					</tr>
+				</#if>
+				<#if option.dataType=='checkbox'>
+					<tr>
+						<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="checkbox" disabled name="itemIds" value="${ext.id}" id="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+							</#list>
+						</td>
+					</tr>
+				</#if>
+				<#if option.dataType=='text'>
+					<tr>
+						<td height="30" colspan="2" align="left">
+							<#list surveyLogExtList as sle>
+								<#if option.id==sle.optionid>${sle.ext}</#if>
+								<#if option.id!=sle.optionid></#if>
+							</#list>
+						</td>
+					</tr>
+				</#if>
+				<#if option.dataType=='textarea'>
+					<tr>
+						<td height="30" colspan="2" align="left">
+							<#list surveyLogExtList as sle>
+								<#if option.id==sle.optionid>${sle.ext}</#if>
+								<#if option.id!=sle.optionid>&nbsp;</#if>
+							</#list>
+						</td>
+					</tr>
+				</#if>
+				<input name=subIds type="hidden" value="${option.id}" />
+			</#list>
+		</table>
+	</div>
+	<div class="modal-footer">  
+        <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+    </div>
+<script>
+	$(function(){
+		
+				<#list surveyLogDataList as sld>
+					$("#${sld.optionextid}").attr("checked",true);
+				</#list>
+			
+	});
+</script>

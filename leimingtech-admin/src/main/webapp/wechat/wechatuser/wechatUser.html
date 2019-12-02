@@ -1,0 +1,280 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">微信号管理</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="wechatUser_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id"
+			value="${wechatUser.id?if_exists}" />
+		<div class="control-group">
+			<label class="control-label">公众号名称</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="name" name="name" class="span3 form-control"
+					data-rule-required="true" value="${wechatUser.name?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">公众号原始id</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="originalid" name="originalid"
+					class="span3 form-control" data-rule-required="true"
+					value="${wechatUser.originalid?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">微信号</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="wechatid" name="wechatid"
+					class="span3 form-control" data-rule-required="true"
+					value="${wechatUser.wechatid?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group" title="用于自定义菜单等高级功能">
+			<label class="control-label">AppID</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="appid" name="appid"
+					class="span3 form-control" data-rule-required="true"
+					value="${wechatUser.appid?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group" title="用于自定义菜单等高级功能">
+			<label class="control-label">AppSecret</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="appsecret" name="appsecret"
+					class="span6 form-control" data-rule-required="true"
+					value="${wechatUser.appsecret?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group" title="access_token并不固定,系统会自动的刷新该参数">
+			<label class="control-label">当前access_token</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="accessToken" name="appsecret"
+					readonly="readonly"	class="span6 form-control" data-rule-required="true"
+					value="${wechatUser.accessToken?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">头像</label>
+			<div class="controls">
+				<input type="text" id="headerpic" readonly="readonly" name="headerpic"
+					 class="span4 form-control"
+					value="${wechatUser.headerpic?if_exists}" /> <a
+					href="javascript:showUploadFilePage('上传公众号头像',true,false,'${wechatHeaderpicSaveFolder}','headerpic')"><i
+					class="icon-search m-icon-white"></i>上传头像</a>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">二维码</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><input type="text" id="qrpath" readonly="readonly" name="qrpath"
+					data-rule-required="true" class="span4 form-control"
+					value="${wechatUser.qrpath?if_exists}" /> <a
+					href="javascript:showUploadFilePage('上传公众号二维码',true,false,'${wechatQRSaveFolder}','qrpath')"><i
+					class="icon-search m-icon-white"></i>上传二维码</a>
+			</div>
+		</div>
+		<div class="control-group" title="加密消息的AesEncodingKey">
+			<label class="control-label">AesEncodingKey</label>
+			<div class="controls">
+				<input type="text" id="aeskey" name="aeskey"
+				 readonly="readonly"	class="span6 form-control" 
+					value="${wechatUser.aeskeyt?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">消息加密方式</label>
+			<div class="controls">
+				<select id="encode" name="encode" class="span3 form-control">
+					<#list wechatEncodeModes as wechatEncodeMode>
+						<option value="${wechatEncodeMode}"
+							<#if wechatEncodeMode==wechatUser.encode> 
+								selected="selected"
+							</#if> 
+							<#list wechatEncodeModeRemarkMap as wemrm> 
+								<#if wemrm.key==wechatEncodeMode>
+									title="${wemrm.value}" 
+								</#if> 
+							</#list> 
+						> 
+							<#list wechatEncodeModeChineseMap as wemcm> 
+									<#if wemcm.key==wechatEncodeMode> 
+										${wemcm.value} 
+									</#if>
+							 </#list>
+						 </option>
+					</#list>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">微信号类型</label>
+			<div class="controls">
+				<span style="color:red;"><B>*</B></span><select id="type" name="type" class="span3 form-control">
+					<#list wechatTypes as wechatType>
+						<option value="${wechatType}"
+							<#if wechatType==wechatUser.type> 
+								selected="selected" 
+							</#if> 
+							<#list wechatTypeRemarkMap as wtr> 
+								<#if wtr.key==wechatType>
+									title="${wtr.value}" 
+								</#if> 
+							</#list> 
+						> 
+							<#list wechatTypeChineseMap as wtc> 
+									<#if wtc.key==wechatType> 
+										${wtc.value} 
+									</#if>
+							 </#list>
+						 </option>
+					</#list>
+				</select>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">QQ号码</label>
+			<div class="controls">
+				<input type="text" id="qq" name="qq"
+					class="span3 form-control" 
+					value="${wechatUser.qq?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">公众号邮箱</label>
+			<div class="controls">
+				<input type="text" name="email"
+					class="span3 form-control"
+					value="${wechatUser.email?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">地区</label>
+			<div class="controls">
+				省：<input type="text" id="province" name="province"
+					class="span2 form-control" 
+					value="${wechatUser.province?if_exists}" />
+				市：<input type="text" id="city" name="city"
+					class="span2 form-control" 
+					value="${wechatUser.city?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">粉丝数</label>
+			<div class="controls">
+				<input type="text" id="fanscount" name="fanscount"
+					class="span3 form-control" 
+					value="${wechatUser.fanscount?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">是否启用微信卡券</label>
+			<div class="controls">
+				<label class="radio">
+					<span class="checked">
+						<input type="radio" id="isstartingusingcoupons" name="isstartingusingcoupons" value="0" 
+							<#if !wechatUser.isstartingusingcoupons>
+								 checked="checked"
+							</#if>
+						/>
+					</span>
+					关闭
+				</label>
+				<label class="radio">
+					<span>
+						<input type="radio" id="isstartingusingcoupons" name="isstartingusingcoupons" value="1" 
+							<#if wechatUser.isstartingusingcoupons>
+								 checked="checked"
+							</#if>
+						/>
+					</span>
+					开启
+				</label>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">是否启用附近图文</label>
+			<div class="controls">
+				<label class="radio">
+					<span class="checked">
+						<input type="radio" id="isshownearbynews" name="isshownearbynews" value="0" checked="checked" 
+							<#if !wechatUser.isshownearbynews>
+								 checked="checked"
+							</#if>
+						/>
+					</span>
+					关闭
+				</label>
+				<label class="radio">
+					<span>
+						<input type="radio" id="isshownearbynews" name="isshownearbynews" value="1"  
+							<#if wechatUser.isshownearbynews>
+								 checked="checked"
+							</#if>
+						/>
+					</span>
+					开启
+				</label>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">是否开启聊天(小黄鸡)</label>
+			<div class="controls">
+				<label class="radio">
+						<span class="checked">
+							<input type="radio" id="isopenchat" name="isopenchat" value="0" checked="checked"
+								<#if !wechatUser.isopenchat>
+									 checked="checked"
+								</#if>
+							/>
+						</span>
+					关闭
+				</label>
+				<label class="radio">
+					<span>
+						<input type="radio" id="isopenchat" name="isopenchat" value="1"  
+							<#if wechatUser.isopenchat>
+								 checked="checked"
+							</#if>
+						/>
+					</span>
+					开启
+				</label>
+			</div>
+		</div>
+		
+		<#if wechatUser.createtime?if_exists>
+			<div class="control-group">
+				<label class="control-label">创建时间</label>
+				<div class="controls">
+					<input type="text" readonly="readonly" class="span3 form-control"
+							value='${wechatUser.createtime?string("yyyy-MM-dd HH:mm:ss")}' />
+						
+				</div>
+			</div>
+		</#if>
+		<#if wechatUser.lastupdatetime?if_exists>
+			<div class="control-group">
+				<label class="control-label">创建时间</label>
+				<div class="controls">
+					<input type="text" readonly="readonly" class="span3 form-control"
+							value='${wechatUser.lastupdatetime?string("yyyy-MM-dd HH:mm:ss")}' />
+				</div>
+			</div>
+		</#if>
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button"
+		onclick="formSubmitModel('wechatUserController.do?save', 'wechatUser_form');"
+		class="btn btn-primary" value="提交"> <input type="button"
+		class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+	//校验
+	jQuery(document).ready(function() {
+		App.init();
+		$("#wechatUser_form").myValidate(null,false);
+	});
+</script>

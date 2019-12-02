@@ -1,0 +1,500 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">数据采集配置</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="horizontal-form acquisition_view">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<div class="row-fluid">
+			<div class="span7 ">
+				<div class="control-group">
+					<label class="control-label">采集名称</label>
+					<div class="controls">
+						<input type="text" id="acqName" data-rule-required="true" name="acqName" class="form-control span12" value="${page.acqName?if_exists}" >
+					</div>
+				</div>
+			</div>
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label">页面编码</label>
+					<div class="controls">
+						<input type="text" id="pageEncoding" name="pageEncoding" class="form-control span3" value="${page.pageEncoding!'GBK'}"/>
+						<span class="help-inline">GBK或UTF-8等编码</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span7 ">
+				<div class="control-group">
+					<label class="control-label">发布时间格式</label>
+					<div class="controls">
+						<input type="text" id="releasetimeFormat" name="releasetimeFormat" class="form-control span6" value="${page.releasetimeFormat!'yyyy-MM-dd HH:mm:ss'}" >
+						<span class="help-inline">例如yyyy-MM-dd HH:mm:ss</span>
+					</div>
+				</div>
+			</div>
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label">暂停时间</label>
+					<div class="controls">
+						<input type="text" id="pauseTime" name="pauseTime" class="span2 form-control" value="${page.pauseTime!'500'}"/>
+						<span class="help-inline">每采集一篇文章暂停时间。单位(毫秒)</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12 ">
+				<div class="control-group">
+					<h5 class="span2">是否采集图片：   </h5>
+					<div class="controls">
+						<label class="radio span1">
+							<input type="radio" name="imgAcqu"   <#if page.imgAcqu!=1>checked="checked"</#if> value="0" />否
+						</label>
+						<label class="radio span1">
+							<input type="radio" name="imgAcqu"   <#if page.imgAcqu==1>checked="checked"</#if> value="1" />是
+						</label>
+						<h6 class="help-inline">采集图片比较慢</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12 ">
+				<div class="control-group">
+					<label class="control-label">采集地址(一个地址一行)</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="planList" name="planList" >${page.planList?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span12 ">
+				<div class="control-group">
+					<label class="control-label">动态地址</label>
+					<div class="controls">
+						<input type="text" id="dynamicAddr" name="dynamicAddr" class="form-control span9" value="${page.dynamicAddr?if_exists}" >
+						<span class="help-inline">分页变量用[page]代替</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span6">
+				<div class="control-group">
+					<label class="control-label">页码 从</label>
+					<div class="controls">
+						<input type="text" id="dynamicStart" name="dynamicStart" class="form-control span12" value="${page.dynamicStart?if_exists}"/>
+					</div>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="control-group">
+					<label class="control-label">到</label>
+					<div class="controls">
+						<input type="text" id="dynamicEnd" name="dynamicEnd" class="form-control span12" value="${page.dynamicEnd?if_exists}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">内容地址补全url</label>
+			<div class="controls">
+				<input type="text" id="contentPrefix" name="contentPrefix" class="form-control span8" value="${page.contentPrefix?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">图片地址补全url</label>
+			<div class="controls">
+				<input type="text" id="imgPrefix" name="imgPrefix" class="form-control span8" value="${page.imgPrefix?if_exists}"/>
+			</div>
+		</div>
+		
+		<h4 class="form-section">内容地址集</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="linksetStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="linksetStart" name="linksetStart" >${page.linksetStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="linksetEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="linksetEnd" name="linksetEnd" >${page.linksetEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">内容地址</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="linkStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="linkStart" name="linkStart" >${page.linkStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="linkEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="linkEnd" name="linkEnd" >${page.linkEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">标题</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="firstName">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="titleStart" name="titleStart" >${page.titleStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="lastName">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="titleEnd" name="titleEnd" >${page.titleEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">关键字</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="keywordsStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="keywordsStart" name="keywordsStart" >${page.keywordsStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--/span-->
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="keywordsEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="keywordsEnd" name="keywordsEnd" >${page.keywordsEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--/span-->
+		</div>
+		
+		<h4 class="form-section">描述</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="descriptionStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="descriptionStart" name="descriptionStart" >${page.descriptionStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--/span-->
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="keywordsEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="descriptionEnd" name="descriptionEnd" >${page.descriptionEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">内容</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="contentStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="contentStart" name="contentStart" >${page.contentStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="contentEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="contentEnd" name="contentEnd" >${page.contentEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">发布时间</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="releasetimeStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="releasetimeStart" name="releasetimeStart" >${page.releasetimeStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="contentEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="releasetimeEnd" name="releasetimeEnd" >${page.releasetimeEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">浏览量动态访问地址</label>
+			<div class="controls">
+				<input type="text" id="viewLink" name="viewLink" class="form-control span8" value="${page.viewLink?if_exists}"/>
+			</div>
+		</div>
+		
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<div class="controls">
+						<input type="text" id="viewIdStart" name="viewIdStart" class="span10 form-control" value="${page.viewIdStart?if_exists}"/>
+						<span class="help-inline">前缀</span>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<div class="controls">
+						<input type="text" id="viewIdEnd" name="viewIdEnd" class="span10 form-control" value="${page.viewIdEnd?if_exists}"/>
+						<span class="help-inline">后缀</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">浏览量</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="authorStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="viewStart" name="viewStart" >${page.viewStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="authorEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="viewEnd" name="viewEnd" >${page.viewEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<h4 class="form-section">作者</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="authorStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="authorStart" name="authorStart" >${page.authorStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="authorEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="authorEnd" name="authorEnd" >${page.authorEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">来源</h4>
+		<div class="row-fluid">
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="originStart">开始HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="originStart" name="originStart" >${page.originStart?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span6 ">
+				<div class="control-group">
+					<label class="control-label" for="originEnd">结束HTML</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="3" id="originEnd" name="originEnd" >${page.originEnd?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4 class="form-section">内容替换</h4>
+		<#if acqReplace?exists && acqReplace?size gt 0>
+		<#list acqReplace as rep>
+		<div class="row-fluid">
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label" for="replaceOld">原内容</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="2" id="replaceOld" name="replaceOld" >${rep.replaceOld?if_exists}</textarea>
+						<input type="hidden" name="repid" value="${rep.id!''}"/>
+					</div>
+				</div>
+			</div>
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label" for="replaceNew">替换为</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="2" id="replaceNew" name="replaceNew" >${rep.replaceNew?if_exists}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span2 ">
+				<div class="control-group">
+					<label class="control-label" >&nbsp;</label>
+					<div class="controls">
+						<br/>
+						<#if rep_index == 0>
+						<a href="javascript:void(0);" class="add_View" title="添加">继续添加</a>
+						<#else>
+						<a href="javascript:void(0);" data="${rep.id!''}" class="del_View" title="删除">删除</a>
+						</#if>
+					</div>
+				</div>
+			</div>
+		</div>
+		</#list>
+		<#else>
+		<div class="row-fluid">
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label" for="replaceOld">原内容</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="2" id="replaceOld" name="replaceOld" ></textarea>
+						<input type="hidden" name="repid" value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="span5 ">
+				<div class="control-group">
+					<label class="control-label" for="replaceNew">替换为</label>
+					<div class="controls">
+						<textarea class="form-control span12" rows="2" id="replaceNew" name="replaceNew" ></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="span2 ">
+				<div class="control-group">
+					<label class="control-label" >&nbsp;</label>
+					<div class="controls">
+						<br/>
+						<a href="javascript:void(0);" class="add_View" title="添加">继续添加</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</#if>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" onclick="formSubmitModel('acquisitionController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+	<button type="reset" class="btn" data-dismiss="modal">关闭</button>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	   
+	   $(".acquisition_view").on("click",".del_View", function () { 
+		   var self=$(this);
+		   var repId=self.attr("data");
+		   if(repId){
+			   $.ajax({
+				   type:'get',
+				   url:'acquisitionreplaceController.do?del&id='+repId,
+				   success:function (data){
+					   var obj = JSON.parse(eval(data));
+					   if (obj.isSuccess) {
+						   self.parents(".row-fluid").eq(0).remove();
+						} else {
+							lmAlert(obj.msg);
+						}
+				   },
+				   error:function (){
+					   lmAlert("与服务器通讯失败");
+				   }
+			   });
+		   }else{
+			   self.parents(".row-fluid").eq(0).remove();
+		   }
+	   });
+	   $(".acquisition_view").on("click",".add_View", function () { 
+		var addView="<div class=\"row-fluid\">"+
+						"<div class=\"span5\">"+
+							"<div class=\"control-group\">"+
+								"<label class=\"control-label\" for=\"replaceOld\">原内容</label>"+
+								"<div class=\"controls\">"+
+									"<textarea class=\"form-control span12\" rows=\"2\" id=\"replaceOld\" name=\"replaceOld\" ></textarea>"+
+									"<input type=\"hidden\" name=\"repid\" value=\"\"/>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+						"<div class=\"span5\">"+
+							"<div class=\"control-group\">"+
+								"<label class=\"control-label\" for=\"replaceNew\">替换为</label>"+
+								"<div class=\"controls\">"+
+									"<textarea class=\"form-control span12\" rows=\"2\" id=\"replaceNew\" name=\"replaceNew\" ></textarea>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+						"<div class=\"span2\">"+
+							"<div class=\"control-group\">"+
+								"<label class=\"control-label\" >&nbsp;</label>"+
+								"<div class=\"controls\">"+
+									"<br/>"+
+									"<a href=\"javascript:void(0);\"  class=\"del_View\" title=\"删除\">删除</a>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+					"</div>"+
+					"";
+			$(".acquisition_view").append(addView);
+	   });
+	   
+});
+
+</script>

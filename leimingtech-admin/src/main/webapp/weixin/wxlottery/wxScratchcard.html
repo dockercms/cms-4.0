@@ -1,0 +1,189 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>刮刮乐</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				        <div class="control-group">
+							<label class="control-label">关键词</label>
+							<div class="controls">
+								<input type="text" id="keyword" name="keyword" class="span6 m-wrap" value="${page.keyword?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">活动名称</label>
+							<div class="controls">
+								<input type="text" id="title" name="title" class="span6 m-wrap" value="${page.title?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">兑奖信息</label>
+							<div class="controls">
+								<input type="text" id="txt" name="txt" class="span6 m-wrap" value="${page.txt?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">中奖提示信息</label>
+							<div class="controls">
+								<textarea id="sttxt" name="sttxt">${page.sttxt?if_exists}</textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">活动开始时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="statdate" name="statdate" value="${page.statdate?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">活动结束时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="enddate" name="enddate" value="${page.enddate?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">活动说明</label>
+							<div class="controls">
+								<textarea id="info" name="info" class="text">${page.info?if_exists}</textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">重复抽奖回复</label>
+							<div class="controls">
+								<input type="text" id="aginfo" name="aginfo" class="span6 m-wrap" value="${page.aginfo?if_exists}"/>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">活动结束内容</label>
+							<div class="controls">
+								<input type="text" id="endtite" name="endtite" class="span6 m-wrap" value="${page.endtite?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">活动结束说明</label>
+							<div class="controls">
+								<textarea id="endinfo" name="endinfo" class="text">${page.endinfo?if_exists}</textarea>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">一等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="fist" name="fist" class="span6 m-wrap" value="${page.fist?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">一等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="fistnums" name="fistnums" class="span6 m-wrap" value="${page.fistnums?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">二等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="second" name="second" class="span6 m-wrap" value="${page.second?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">二等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="secondnums" name="secondnums" class="span6 m-wrap" value="${page.secondnums?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">三等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="third" name="third" class="span6 m-wrap" value="${page.third?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">三等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="thirdnums" name="thirdnums" class="span6 m-wrap" value="${page.thirdnums?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">四等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="four" name="four" class="span6 m-wrap" value="${page.four?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">四等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="fournums" name="fournums" class="span6 m-wrap" value="${page.fournums?if_exists}"/>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">五等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="five" name="five" class="span6 m-wrap" value="${page.five?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">五等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="fivenums" name="fivenums" class="span6 m-wrap" value="${page.fivenums?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">六等奖奖品设置</label>
+							<div class="controls">
+								<input type="text" id="six" name="six" class="span6 m-wrap" value="${page.six?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">六等奖奖品数量</label>
+							<div class="controls">
+								<input type="text" id="sixnums" name="sixnums" class="span6 m-wrap" value="${page.sixnums?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">预计活动的人数</label>
+							<div class="controls">
+								<input type="text" id="allpeople" name="allpeople" class="span6 m-wrap" value="${page.allpeople?if_exists}"/>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">个人限制抽奖次数</label>
+							<div class="controls">
+								<input type="text" id="canrqnums" name="canrqnums" class="span6 m-wrap" value="${page.canrqnums?if_exists}"/>
+								<span class="help-inline">填写个人限制抽奖次数</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">抽奖页面是否显示奖品数量</label>
+							<div class="controls">
+							    <input id="dx" type="radio" name="displayjpnums" value="1" <#if page.displayjpnums?if_exists && page.displayjpnums =='1'>checked</#if> />显示
+							    <input id="ddx" type="radio" name="displayjpnums" value="0" <#if page.displayjpnums?if_exists && page.displayjpnums =='0'>checked</#if> />不显示
+							</div>
+						</div>
+						
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxLotteryController.do?savescratchcard', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

@@ -1,0 +1,491 @@
+
+<input type="hidden" id="catId" value="${catId}">
+<input type="hidden" id="classify" value="${classify}">
+<input type="hidden" id="catName" value="${catName}">
+<input type="hidden" id="classifyName" value="${classifyName}">
+<input type="hidden" id="type" value="${type}">
+<input type="hidden" id="startDate" value="'${startDate}">
+<input type="hidden" id="stopDate" value="'${stopDate}">
+<p style="text-align: center;">
+	<strong> ${startDate}～${stopDate} 移动端${catName}频道,${classifyName}模型,统计报表 </strong>
+</p>
+</div>
+<div id="chart_5" style="height: 350px; top: 50px; margin-bottom: 50px;"></div>
+<div class="btn-toolbar">
+
+	<div class="space5"></div>
+	<div class="btn-group graphControls">
+		<input type="button" class="btn" value="柱状图" /> <input type="button"
+															   class="btn" value="线状图" /><!-- <input type="button" class="btn"
+			value="梯形图" /> -->
+	</div>
+</div>
+</div>
+<!-- <div class="btn-group pull-left">
+		<a class="btn green" style="text-decoration: none" href="javascript:;" onclick="exportXlS()">
+			导出Excel  <i class="icon-share"></i>
+		</a>
+	</div> -->
+<div class="portlet-body">
+	<table class="table table-bordered table-striped table-hover"
+		   id="caseListTable">
+		<thead>
+		<tr style="background-color: #cccccc">
+
+			<#if type == "dateTime">
+				<th class="span7">日期</th> <#else>
+				<th class="span7">频道</th> </#if>
+			<th>发稿量</th>
+			<th>访问量</th>
+			<th>评论量</th>
+		</tr>
+		</thead>
+		<tbody id="tbody1">
+
+		</tbody>
+	</table>
+</div>
+<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.uniform.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="media/js/jquery.flot.js"></script>
+<script src="media/js/jquery.flot.resize.js"></script>
+<script src="media/js/jquery.flot.pie.js"></script>
+<script src="media/js/jquery.flot.stack.js"></script>
+<script src="media/js/jquery.flot.crosshair.js"></script>
+<script src="media/js/jquery.flot.time.js"></script>
+<script src="media/js/jquery.flot.time.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script>
+	function statistic (){
+		this.ctdate= new Array();
+		this.con=new Array();
+		this.com=new Array();
+		this.pv=new Array();
+		this.catId=new Array();
+		this.catName=new Array();
+	}
+	var stcat = new statistic();
+
+	var stdate = new statistic();
+	/* 获取数据报表 */
+	var chartJSON = new Array();
+	var catId = $("#catId").val();
+	var classify = $("#classify").val();
+	var type = $("#type").val();
+	var startDate = $("#startDate").val();
+	var stopDate = $("#stopDate").val();
+
+
+
+	$.ajax({
+		type : 'post',
+		async : false,
+		url : 'contentStatisticController.do?loadDataStatistic',
+		data : {
+			'catId' : catId,
+			'classify' : classify,
+			'type' : type,
+			'startDate' : startDate,
+			'stopDate' : stopDate
+		},
+		success : function(data) {
+			chartJSON = data;
+		}
+	});
+	var json = JSON.parse(chartJSON);
+	var jsonPv =null;
+	if(json[0] != 1){
+		jsonPv = json[0];
+	}else{
+		jsonPv = new Array();
+	}
+	var jsonCon = null;
+	if(json[1] != 2){
+		jsonCon = json[1];
+	}else{
+		jsonCon = new Array();
+	}
+	var jsonCom = null;
+	if( json[2] != 3){
+		jsonCom = json[2];
+	}else{
+		jsonCom = new Array();
+	}
+	/* 加载报表数据绘图 */
+
+	var pv ;
+	var com ;
+	var con ;
+	var catIds;
+	$.get("contentStatisticController.do?getListChannel", function(result) {
+		var data = eval('(' + result + ')');
+		data = eval('(' + data + ')');
+		catIds = data;
+	});
+	<#if type == "dateTime">
+		//求两个时间的天数差 日期格式为 YYYY-MM-dd
+	function daysBetween(DateOne,DateTwo)  {
+		var OneMonth = DateOne.substring(5,DateOne.lastIndexOf ('-'));
+		var OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf ('-')+1);
+		var OneYear = DateOne.substring(0,DateOne.indexOf ('-'));
+
+		var TwoMonth = DateTwo.substring(5,DateTwo.lastIndexOf ('-'));
+		var TwoDay = DateTwo.substring(DateTwo.length,DateTwo.lastIndexOf ('-')+1);
+		var TwoYear = DateTwo.substring(0,DateTwo.indexOf ('-'));
+
+		var cha=((Date.parse(OneMonth+'/'+OneDay+'/'+OneYear)- Date.parse(TwoMonth+'/'+TwoDay+'/'+TwoYear))/86400000);
+		return Math.abs(cha);
+	}
+
+	//判断每个月有多少天
+		function getDayNum(y,m){
+			var dayMax = 31;
+			var mNums = [1,3,5,7,8,10,12];
+			for(var i = 0 ;i < mNums.length; i++){
+				if(mNums[i] == m){
+					return dayMax;
+				}
+			}
+			if(m==2){
+				if(y % 400 == 0||y % 4 ==0 && y % 100 != 0){
+					return dayMax-2;
+				}else{
+					return dayMax-3;
+				}
+			}
+			return dayMax-1;
+		}
+
+	//获取最新日期至最大日期的集合(年月)
+	function getListYearMonth(DateOne,DateTwo){
+		var OneMonth = DateOne.substring(5,DateOne.lastIndexOf ('-'));
+		var OneDay = DateOne.substring(DateOne.length,DateOne.lastIndexOf ('-')+1)
+		var OneYear = DateOne.substring(0,DateOne.indexOf ('-'));
+		var array=new Array();
+		var day = OneDay;
+		var j = 0;
+		var daynums = daysBetween(DateOne,DateTwo);
+		for(var i = 0 ;i<=daynums;i++){
+			var mdayNumss= getDayNum(OneYear,OneMonth);
+			if(mdayNumss>day){
+				day = parseInt(day)+j;
+			}else{
+				OneMonth=parseInt(OneMonth)+1;
+				day=1;
+				if(OneMonth<=12){
+
+				}else{
+					OneYear=parseInt(OneYear)+1;
+					OneMonth=1;
+					day=1;
+				}
+			}
+
+			j=1;
+			var yyyy = OneYear+'/';
+			var MM ='';
+			//if(OneMonth.toString().length==1){
+			//	MM='0'+OneMonth+'/';
+			//}else{
+			MM=parseInt(OneMonth)+'/';
+			//}
+			//if(day.toString().length==1){
+			//	var dd = '0'+day;
+			//}else{
+			var dd = parseInt(day);
+			//}
+			array[i]=yyyy+MM+dd;
+			if(array[i]==DateTwo){
+				return array;
+			}
+		}
+		return array;
+	}
+
+	var list = getListYearMonth(startDate,stopDate);
+	for(var i = 0; i< list.length;i++){
+		pv =0;
+		com =0;
+		con =0;
+		for(var j = 0;j<jsonPv.length;j++){
+			if(jsonPv[j][0]==list[i]){
+				pv=jsonPv[j][1];
+			}
+		}
+		for(var j = 0;j<jsonCon.length;j++){
+			if(jsonCon[j][0]==list[i]){
+				con=jsonCon[j][1];
+			}
+		}
+		for(var j = 0;j<jsonCom.length;j++){
+			if(jsonCom[j][0]==list[i]){
+				com=jsonCom[j][1];
+			}
+		}
+
+		stdate.ctdate[i]=list[i];
+		stdate.con[i]=con;
+		stdate.pv[i]=pv;
+		stdate.com[i]=com;
+		$('#tbody1').append(
+				"<tr> <td>" + list[i] + "</td> <td>" + con
+				+ "</td> <td>" + pv + "</td> <td>" + com
+				+ "</td> </tr>");
+	}
+	<#else>
+
+	/*加载频道*/
+	function getChannes(){
+		$.get("contentStatisticController.do?getListChannel", function(result) {
+			var data = eval('(' + result + ')');
+			data = eval('(' + data + ')');
+			catIds = data;
+		});
+		//if(catIds.length >0){
+		//alert(catIds.length)
+		//}else{
+		//getChannes();
+		//}
+	}
+	getChannes();
+	for ( var i = 0; i < catIds.length; i++) {
+		pv =0;
+		com =0;
+		con =0;
+		for ( var j = 0; j < jsonPv.length; j++) {
+			if (jsonPv[j][0] == catIds[i].id) {
+				if(jsonPv[j][1]!=null){
+					pv = jsonPv[j][1];
+				}
+			}
+		}
+		for ( var j = 0; j < jsonCon.length; j++) {
+			if (jsonCon[j][0] == catIds[i].id) {
+				if(jsonCon[j][1]!=null){
+					con = jsonCon[j][1];
+				}
+			}
+		}
+		for ( var j = 0; j < jsonCom.length; j++) {
+			if (jsonCom[j][0] == catIds[i].id) {
+				if(jsonCom[j][1]!=null){
+					com = jsonCom[j][1];
+				}
+			}
+		}
+
+		stcat.catName[i]=catIds[i].name;
+		stcat.catId[i]=catIds[i].id;
+		stcat.con[i]=con;
+		stcat.pv[i]=pv;
+		stcat.com[i]=com;
+
+		$('#tbody1').append(
+				"<tr> <td>" + catIds[i].name + "</td> <td>" + con
+				+ "</td> <td>" + pv + "</td> <td>" + com
+				+ "</td> </tr>");
+	}
+
+	</#if>
+
+
+	jQuery(document).ready(function() {
+		// initiate layout and plugins
+		if (!jQuery.plot) {
+			return;
+		}
+		//alert(json);
+		//bars with controls
+		function chart5() {
+			var d1 = [];
+			var d2 = [];
+			var d3 = [];
+			if('dateTime'==$('#type').val()){
+				for (var i = 0; i < stdate.ctdate.length; i += 1){
+					d1.push([new Date(stdate.ctdate[i]).getTime() , stdate.con[i]]);
+					d2.push([new Date(stdate.ctdate[i]).getTime(), (stdate.pv[i]-stdate.con[i])]);
+					d3.push([new Date(stdate.ctdate[i]).getTime() , (stdate.com[i]-stdate.pv[i])]);
+					//alert(stdate.ctdate[i]);
+				}
+			}else{
+				for (var i = 0; i < stcat.catId.length; i += 1){
+					d1.push([stcat.catId[i] , stcat.con[i]]);
+					d2.push([stcat.catId[i] , (stcat.pv[i]-stcat.con[i])]);
+					d3.push([stcat.catId[i] , (stcat.com[i]-stcat.pv[i])]);
+					//alert(stdate.ctdate[i]);
+				}
+			}
+			function getticksize(){
+				if('dateTime'==$('#type').val()){
+					var datas =[5, 'day'];
+					return datas;
+				}else{
+					var datas=1;
+					return datas;
+				}
+			}
+			function gettimeformat(){
+				if('dateTime'==$('#type').val()){
+					var datas ="%M/%d";
+					return datas;
+				}else{
+					return null;
+				}
+			}
+			function getmode(){
+				if('dateTime'==$('#type').val()){
+					return "time";
+				}else{
+					//return stcat.catId;
+					return [];
+				}
+			}
+			function getBarWidth(){
+				if('dateTime'==$('#type').val()){
+					return 86400000;
+				}else{
+					return 1;
+				}
+			}
+			var stack = 0,
+					bars = false,
+					lines = true,
+					steps = false;
+
+			function plotWithOptions() {
+				$.plot($("#chart_5"), [{label: "发稿量", data:d1,color:"#ff6633"},{label: "访问量", data:d2,color:"#37b7f3"},{label: "评论量", data:d3,color:"#52e136"}], {
+					series: {
+						stack: stack,
+						lines: {
+							show: lines,
+							fill: false,
+							lineWidth:1,
+							fillColor: {
+								colors: [{
+									opacity: 0.01
+								}, {
+									opacity: 0.01
+								},{
+									opacity: 0.01
+								}
+								]
+							}
+						},
+
+						bars: {
+							show: bars,
+							fill: true,
+							barWidth: getBarWidth(),
+							lineWidth:1,
+							align: "center",
+							horizontal:false,
+							fillColor: {
+								colors: [{
+									opacity: 0.20
+								}, {
+									opacity: 0.20
+								},{
+									opacity: 0.20
+								}
+								]
+							}
+						},
+
+
+						shadowSize: 3
+					},
+
+					points: {
+						show: true
+					},
+					xaxis: {
+						mode: getmode(),
+						//timeformat:gettimeformat() ,
+						tickSize: getticksize(),
+						tickFormatter: function (val, axis) {
+							if('dateTime'==$('#type').val()){
+								var d = new Date(val);
+								return d.toLocaleDateString();
+							}else{
+								for(var i=0;i<stcat.catId.length;i++){
+									if(val==stcat.catId[i]){
+										return stcat.catName[i];
+									}
+								}
+								return '';
+							}
+						} ,
+					},
+					yaxis:{
+						show:true,
+					},
+					grid: {
+						show:true,
+						hoverable: true,
+						clickable: false,
+						tickColor: "#ddd",
+						borderWidth: 0
+					},
+
+				});
+			}
+
+
+			$(".graphControls input").click(function (e) {
+				e.preventDefault();
+				bars = $(this).val().indexOf("柱状图") != -1;
+				lines = $(this).val().indexOf("线状图") != -1;
+				steps = $(this).val().indexOf("梯形图") != -1;
+				plotWithOptions();
+			});
+			plotWithOptions();
+		}
+		chart5();
+		$("<div id='tooltip'></div>").css({
+			position: "absolute",
+			display: "block",
+			border: "1px solid #fdd",
+			padding: "2px",
+			"background-color": "#fee",
+			opacity: 0.80
+		}).appendTo("body");
+		$("#chart_5").bind("plothover", function (event, pos, item) {
+			if(item) {
+				var x = item.datapoint[0];
+				var xData = null;
+				if('dateTime'==$('#type').val()){
+					var xdate = new Date(x);
+					xData = xdate.toLocaleDateString();
+				}else{
+					for(var i=0;i<stcat.catId.length;i++){
+						if(stcat.catId[i]==x){
+							xData = stcat.catName[i];
+						}
+					}
+				}
+
+				var y = item.datapoint[1];
+
+				var val = "";
+				var info = "";
+				if(item.seriesIndex==0){
+					info="发稿量"
+				}else if(item.seriesIndex==1){
+					info="访问量"
+				}else if(item.seriesIndex==2){
+					info="评论量"
+				}
+				$("#tooltip").html("       "+ xData + ","+info+":" + y)
+						.css({top: item.pageY+5, left: item.pageX+5})
+						.fadeIn(200);
+			} else {
+				$("#tooltip").hide();
+			}
+		});
+	});
+</script>

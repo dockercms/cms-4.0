@@ -1,0 +1,29 @@
+<#assign name="catalogTag">
+<#assign catalogTag=newTag("${name}")>
+
+<table width="1000" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+  <tr>
+    <td><img src="/zfxxgk/images/top.jpg" width="1000" height="155"></td>
+  </tr>
+  <tr>
+    <td background="/zfxxgk/images/bg.jpg" height="39" valign="top"> 
+      <table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
+        <tbody><tr align="center" class="white"> 
+          <td width="70"><a href="http://www.ahciq.gov.cn/">首　页</a></td>
+            <#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbb5f36c0001'}")>
+         		 <#if catalog?exists>
+         		 <#assign catalogList=catalogTag("{'name':'${catalog.id}','levels':'child','count':'6'}")>
+	          	 <#if catalogList?exists>
+		          <#list catalogList as cat>
+		          	<td><a href="${cat.url!'javascript:void(0);'}">${cat.name}</a></td>
+          			<td width="10"><img src="/zfxxgk/images/bg_1.jpg" width="5" height="39"></td>
+		          </#list>
+	            </#if>
+              </#if>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+ </tbody>
+</table>

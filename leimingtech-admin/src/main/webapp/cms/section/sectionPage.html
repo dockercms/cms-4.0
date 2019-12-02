@@ -1,0 +1,24 @@
+<div class="span6">
+	<div class="dataTables_paginate paging_bootstrap pagination">
+		<ul>
+		
+			<#if pageNo == 1>
+				<li class="prev disabled"><a href="javaScript:void(0)">← <span class="hidden-480">上一页</span></a></li>
+			<#else>
+				<li class="prev"><a href="javaScript:void(0)" onclick="searchSection('${actionUrl?if_exists}&pageNo=${pageNo-1}', 'search_form','dashboard')">← <span class="hidden-480">上一页</span></a></li>
+			</#if>
+			<#list 1..pageCount as i>
+				<#if i == pageNo>
+				<li class="active"><a href="javaScript:void(0)">${i}</a></li>
+				<#else>
+				<li><a href="javaScript:void(0)" onclick="searchSection('${actionUrl}&pageNo=${i}', 'search_form','dashboard')">${i}</a></li>
+				</#if>
+			</#list>
+			<#if pageNo == pageCount>
+				<li class="next disabled"><a href="javaScript:void(0)"><span class="hidden-480">下一页</span> → </a></li>
+			<#else>
+				<li class="next"><a href="javaScript:void(0)" onclick="searchSection('${actionUrl}&pageNo=${pageNo+1}', 'search_form','dashboard')"><span class="hidden-480">下一页</span> → </a></li>
+			</#if>
+		</ul>
+	</div>
+</div>

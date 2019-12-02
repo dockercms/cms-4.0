@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<title>注册</title>
+<meta name="Description" content="" />
+<meta name="Keywords" content="" />
+<script type="text/javascript" src="/wapStyle/js/2015/jquery-2.0.2.js"></script>
+<script type="text/javascript" src="/wapStyle/js/2015/jquery.hammer.js"></script>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<link href="/wapStyle/css/swiper.css" rel="stylesheet" type="text/css" />
+<script src="/wapStyle/js/swiper.js"></script>
+
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/jquery.mmenu.all.css" />
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/yuxi.css" />
+
+<script type="text/javascript" src="/wapStyle/js/jquery.mmenu.js"></script>
+<script type="text/javascript" src="/wapStyle/js/yuxi.js"></script>
+
+<link href="/wapStyle/css/scrollbar.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/wapStyle/js/iscroll.js"></script>
+<link type="text/css" rel="stylesheet" href="/wapStyle/css/iscroll.css" />
+
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/common.css">
+<link rel="stylesheet" type="text/css" href="/wapStyle/css/2015/app.css">
+<script type="text/javascript" src="/wapStyle/js/2015/myScroll.js"></script>
+<style> 
+.ul1{list-style-type:none}
+.ul1 li{margin:10px 0;}
+.ul1 li input{height:30px;width:98%;border:1px solid #09F;font-size:18px;line-height:30px;padding-left:2%;border-radius:6px}
+.ul2{list-style-type:none}
+.ul2 li{margin:10px 0;}
+.ul2 li input{height:40px;width:100%;background:#09F;border:1px solid #09F;color:white;font-size:18px;border-radius:5px}
+.tit{height: 50px;line-height:50px;background:#eee;border-bottom:1px solid #d6d6d6;}
+.a{float:left;height: 50px;line-height:40px;}
+.p1{height:50px;width:40px;margin:0 auto;} 
+</style> 
+</head>
+<body>
+	<div id="page">
+		<div data-role="header" data-position="fixed" class="tit" >
+        <a href="javascript:goBack();"  data-ajax=false data-role='none' class="top_back a"><img src="/wapStyle/images/4shizheng_03.png"></a>
+        <h1  class="p1">注册</h1>
+        </div>
+		  <div style="width:300px;margin:0 auto;text-algin:center;"> 
+		  <ul class="ul1">
+		  <li><input id="username" name="" type="text" placeholder="用户名"/></li>
+		  <li><input id="email" name="" type="text" placeholder="Email"/></li>
+		  <li><input id="password" name="" type="password" placeholder="密码" /></li>
+		  <li><input id="rePassword" name="" type="password" placeholder="确认密码"/></li>
+		  </ul>
+		  <ul class="ul2">
+		  <li><input class="input" type="button" onclick="register();" value="注册" placeholder="用户名"/></li>
+		  </ul>
+		  </div>
+	</div>
+ <script type="text/javascript">
+	 
+	 function register(){
+	    var username =$("#username").val();
+	    var password =$("#password").val();
+	    var email =$("#email").val();
+	   
+	    $.ajax({
+				url:"${contextPath}/front/registerMobileApi/register.do?username="+username+"&password="+password+"&email="+email,
+				type:"POST",
+				dataType:"JSON",
+				success:function (result){
+				if(result.resultCode==1){ //注册成功
+				
+					window.location.href="${contextpath}/front/login.do?toLogin&username="+username;//------注册成功后立即登陆------
+				}else{
+				 	alert(result.resultMsg);
+				}
+				},
+				error:function(e){
+				
+				},
+				complete:function (){
+				
+				}
+	
+	     });
+  
+	 }
+</script>
+</body>
+</html>

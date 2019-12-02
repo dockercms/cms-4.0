@@ -1,0 +1,113 @@
+ <div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>模板管理</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('templateController.do?tableDialog')">
+						选择模板 <i class="icon-plus"></i>
+					</button>
+					<#--
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('templateController.do?uploadTemplate')">
+						上传模板 暂无<i class="icon-plus"></i>
+					</button>
+					-->
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('templateController.do?pageModel')">
+					新建文件夹 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+				
+					<form id="search_form">
+						<!--<input name="filename" type="text">-->
+						<!--<button type="button" class="btn blue" style="width:9%" onclick="toSearch('templateController.do?table', 'search_form');">搜索  <i class="m-icon-swapright m-icon-white"></i></button>-->
+						<div class="dataTables_filter span6">
+							<label >
+								<a href="javascript:;" onclick="changePage('templateController.do?templateList')">模板目录></a> ${navigation?if_exists}
+								返回的模板路径:
+								<input name="tempaltepath" class="form-control span6" id="tempaltepath" type="text">
+							</label>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr style="background-color:#CCCCFF;">
+							<th style="text-align:center;">模板名称</th>
+							<th width="130" style="text-align:center;">模板大小</th>
+							<th width="150" style="text-align:center;">最后修改时间</th>
+							<th width="40" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if list?exists>
+						  <#list list as page>
+							<tr class="odd gradeX">
+								<td class="center">
+								<#if page.isDirectory==true>
+									<i class="icon-folder-close"></i>&nbsp; <a href="javaScript:void(0);" onclick="changePage('templateController.do?templateList&filePath=${page.filePath?if_exists}')">${page.fileName}</a>
+								<#else>
+									<i class="icon-file-text"></i>&nbsp; ${page.fileName}
+								</#if>
+								</td>
+								<td class="center">
+										${page.size}
+								</td>
+								<td class="center">
+										${page.lastModifiedDate}
+								</td>
+								<td>
+									<#--
+									<#if page.isDirectory==false>
+									<a href="javaScript:void(0)" onclick="toEditModel('templateController.do?updatePageModel&filepath=${page.filePath?if_exists}')"修改</a>|
+									</#if>
+									-->
+									<input type='button' title='删除' class="delbtn"  onclick="del('templateController.do?del', '${page.filePath?if_exists}')"   />
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="900">
+</div>
+<script>
+function del(urlStr, filepath){
+	if(!confirm("是否删除该记录？")){
+		return;
+	}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'filepath=' + filepath,
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				alert(obj.msg);
+				changePage(toUrl);
+			}else{
+				alert("删除处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	});
+}
+</script>

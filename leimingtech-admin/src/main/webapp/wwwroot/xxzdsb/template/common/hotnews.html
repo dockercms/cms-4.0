@@ -1,0 +1,71 @@
+
+<div class="nj_hotText_v2">
+	<div class="nj_hotTextv2_title">
+		<strong>热门文章</strong>
+	</div>
+
+	<ul class="nj_hotText_ul" id="ulHotNews">
+		<#assign articleTag =newTag("articleTag")> <#assign articleList
+		=articleTag("{'name':'4028818d518b5f0e01518b74d4980009','count':'6','level':'all','order':'top'}")>
+		<#if articleList?exists && articleList?size gt 0> <#list articleList
+		as article>
+		<li><#if article.thumb?exists && article.thumb!="">
+			<div class="nj_hotTextv2_img">
+				<a href="${article.url!'javascript:void(0);'}" target="_blank"><img
+					src="${article.thumb}"> </a>
+			</div>
+			<div class="nj_hotTextv2_text">
+				<h2>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</h2>
+			</div> <span class="nj_hotTextv2_time"><#if
+				article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+
+			<#else>
+			<div class="nj_hotTextv2_text">
+				<h2>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</h2>
+			</div> <span class="nj_hotTextv2_time"><#if
+				article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+
+
+			</#if> </#list> <#else> 无数据 </#if></li>
+	</ul>
+</div>
+<div class="nj_hotText_v2">
+
+	<div class="nj_hotTextv2_title">
+		<strong>最新新闻资讯</strong>
+	</div>
+
+	<ul class="nj_hotText_ul" id="ulHotNews">
+		<#assign articleTag =newTag("articleTag")> <#assign articleList
+		=articleTag("{'name':'4028818d518b5f0e01518b74d4980009','count':'6','level':'all'}")>
+		<#if articleList?exists && articleList?size gt 0> <#list articleList
+		as article>
+		<li><#if article.thumb?exists && article.thumb!="">
+			<div class="nj_hotTextv2_img">
+				<a href="${article.url!'javascript:void(0);'}" target="_blank"><img
+					src="${article.thumb}"> </a>
+			</div>
+			<div class="nj_hotTextv2_text">
+				<h2>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</h2>
+			</div> <span class="nj_hotTextv2_time"><#if
+				article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+
+			<#else>
+			<div class="nj_hotTextv2_text">
+				<h2>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</h2>
+			</div> <span class="nj_hotTextv2_time"><#if
+				article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+
+
+			</#if> </#list> <#else> 无数据 </#if></li>
+	</ul>
+</div>
+<div class="clear"></div>

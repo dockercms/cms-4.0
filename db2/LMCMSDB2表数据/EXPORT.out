@@ -1,0 +1,803 @@
+
+*****  DB2MOVE  *****
+
+Action:  EXPORT
+
+Start time:  Mon Jan 18 17:04:26 2016
+
+
+Connecting to database LMCMS ... successful!  Server : DB2 Common Server V10.1.0
+
+Binding package automatically ... C:\PROGRA~1\IBM\SQLLIB\BND\DB2COMMON.BND ... successful!
+
+Binding package automatically ... C:\PROGRA~1\IBM\SQLLIB\BND\DB2MOVE.BND ... successful!
+
+
+***  Table "DB2ADMIN"."CMS_ACQUISITION":  ERROR 3107.  Check message file tab1.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACQUISITION_CONTENT":  ERROR 3107.  Check message file tab2.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACQUISITION_HISTORY":  ERROR 3107.  Check message file tab3.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACQUISITION_REPLACE":  ERROR 3107.  Check message file tab4.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACQUISITION_TEMP":  ERROR 3107.  Check message file tab5.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACTIVITY":  ERROR 3107.  Check message file tab6.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACTIVITY_OPTION":  ERROR 3107.  Check message file tab7.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACTIVITY_OPTIONCONTENT":  ERROR 3107.  Check message file tab8.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACTIVITY_OPTION_EXT":  ERROR 3107.  Check message file tab9.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ACTIVITY_PEOPLE":  ERROR 3107.  Check message file tab10.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ADVERTISING":  ERROR 3107.  Check message file tab11.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ADVERTISING_SPACE":  ERROR 3107.  Check message file tab12.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ATTACHMENT":  ERROR 3107.  Check message file tab13.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ATTACH_PICTURE":  ERROR 3107.  Check message file tab14.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_BASE_USER":  ERROR 3107.  Check message file tab15.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_BRANCH":  ERROR 3107.  Check message file tab16.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CLASSIFY":  ERROR -3015.  Check message file tab17.msg!
+***  SQLCODE:  -3015  -  SQLSTATE:       
+***  SQL3015N  处理期间发生 SQL 错误 "-668"。
+
+
+***  Table "DB2ADMIN"."CMS_CMSKEYWORD":  ERROR 3107.  Check message file tab18.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_COLLECT":  ERROR 3107.  Check message file tab19.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_COMMENTARY":  ERROR 3107.  Check message file tab20.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_COMPANY":  ERROR 3107.  Check message file tab21.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONFIG":  ERROR 3107.  Check message file tab22.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT":  ERROR 3107.  Check message file tab23.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_ACCESSORY":  ERROR 3107.  Check message file tab24.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_ARTICLE":  ERROR 3107.  Check message file tab25.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_CAT":  ERROR 3107.  Check message file tab26.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_CAT_PRIV":  ERROR 3107.  Check message file tab27.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_EXTRACTOR_RULE":  ERROR 3107.  Check message file tab28.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CONTENT_TAG":  ERROR 3107.  Check message file tab29.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_CUSTOM":  ERROR 3107.  Check message file tab30.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DEMO":  ERROR 3107.  Check message file tab31.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DEPART":  ERROR 3107.  Check message file tab32.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DIYMEN_CLASS":  ERROR 3107.  Check message file tab33.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC":  ERROR 3107.  Check message file tab34.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOCUMENT":  ERROR 3107.  Check message file tab35.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_ENTITY":  ERROR 3107.  Check message file tab36.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_ENTITY_PROPERTY":  ERROR 3107.  Check message file tab37.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_ENTITY_REF":  ERROR 3107.  Check message file tab38.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_PARAM":  ERROR 3107.  Check message file tab39.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_RETURNVALUE":  ERROR 3107.  Check message file tab40.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_DOC_TYPE":  ERROR 3107.  Check message file tab41.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_EMAIL_LOG":  ERROR 3107.  Check message file tab42.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FILENO":  ERROR 3107.  Check message file tab43.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FINANCE":  ERROR 3107.  Check message file tab44.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FINANCE_FILES":  ERROR 3107.  Check message file tab45.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FRIENDLINK":  ERROR 3107.  Check message file tab46.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FRIENDLINK_CTG":  ERROR 3107.  Check message file tab47.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_FUNCTION":  ERROR 3107.  Check message file tab48.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_GUESTBOOK":  ERROR 3107.  Check message file tab49.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ICON":  ERROR 3107.  Check message file tab50.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_INTERVIEW":  ERROR 3107.  Check message file tab51.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_INTERVIEW_GUEST":  ERROR 3107.  Check message file tab52.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_LINK":  ERROR 3107.  Check message file tab53.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_LOG":  ERROR 3107.  Check message file tab54.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_LOTTERY":  ERROR 3107.  Check message file tab55.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_LOTTERY_RECORD":  ERROR 3107.  Check message file tab56.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MAIL":  ERROR 3107.  Check message file tab57.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MEMBER":  ERROR 3107.  Check message file tab58.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MEMBERGROUPS":  ERROR 3107.  Check message file tab59.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MEMO":  ERROR 3107.  Check message file tab60.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MESSAGE":  ERROR 3107.  Check message file tab61.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MODEL":  ERROR 3107.  Check message file tab62.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MODELMANAGE":  ERROR 3107.  Check message file tab63.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MODEL_EXT":  ERROR 3107.  Check message file tab64.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MODEL_ITEM":  ERROR 3107.  Check message file tab65.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_MOOD":  ERROR 3107.  Check message file tab66.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_NOTE":  ERROR 3107.  Check message file tab67.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ONLINE":  ERROR 3107.  Check message file tab68.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_OPERATION":  ERROR 3107.  Check message file tab69.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_OPINTEMPLATE":  ERROR 3107.  Check message file tab70.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_PF_CONFIG":  ERROR 3107.  Check message file tab71.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_PICTUREALONE":  ERROR 3107.  Check message file tab72.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_PICTURE_GROUP":  ERROR 3107.  Check message file tab73.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_RELATE_CONTENT":  ERROR 3107.  Check message file tab74.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ROLE":  ERROR 3107.  Check message file tab75.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ROLE_FUNCTION":  ERROR 3107.  Check message file tab76.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ROLE_SITE":  ERROR 3107.  Check message file tab77.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_ROLE_USER":  ERROR 3107.  Check message file tab78.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SECTION":  ERROR 3107.  Check message file tab79.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SECTION_CLASS":  ERROR 3107.  Check message file tab80.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SECTION_CLASS_PRIV":  ERROR 3107.  Check message file tab81.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SECTION_DATA":  ERROR 3107.  Check message file tab82.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SENSITIVITY":  ERROR 3107.  Check message file tab83.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SITE":  ERROR 3107.  Check message file tab84.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SMS_LOG":  ERROR 3107.  Check message file tab85.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SOURCE":  ERROR 3107.  Check message file tab86.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SPECIAL":  ERROR 3107.  Check message file tab87.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_STUDENT":  ERROR 3107.  Check message file tab88.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY":  ERROR 3107.  Check message file tab89.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY_LOG":  ERROR 3107.  Check message file tab90.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY_LOG_DATA":  ERROR 3107.  Check message file tab91.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY_LOG_EXT":  ERROR 3107.  Check message file tab92.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY_OPTION":  ERROR 3107.  Check message file tab93.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_SURVEY_OPTION_EXT":  ERROR 3107.  Check message file tab94.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_TERRITORY":  ERROR 3107.  Check message file tab95.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_THIRD_LOGIN":  ERROR 3107.  Check message file tab96.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_TIMETASK":  ERROR 3107.  Check message file tab97.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_TYPE":  ERROR 3107.  Check message file tab98.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_TYPEGROUP":  ERROR 3107.  Check message file tab99.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_USER":  ERROR 3107.  Check message file tab100.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VERSION":  ERROR 3107.  Check message file tab101.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VIDEO":  ERROR 3107.  Check message file tab102.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VIDEO_ADV":  ERROR 3107.  Check message file tab103.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VIDEO_ALBURM":  ERROR 3107.  Check message file tab104.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VIDEO_ALBURM_ARTICLE":  ERROR 3107.  Check message file tab105.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VIDEO_SOURCES":  ERROR 3107.  Check message file tab106.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VOTE":  ERROR 3107.  Check message file tab107.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VOTE_LOG":  ERROR 3107.  Check message file tab108.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VOTE_LOG_DATA":  ERROR 3107.  Check message file tab109.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_VOTE_OPTION":  ERROR 3107.  Check message file tab110.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WAP_CONFIG":  ERROR 3107.  Check message file tab111.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WAP_EXPAND":  ERROR 3107.  Check message file tab112.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WATERMARK":  ERROR 3107.  Check message file tab113.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WEIBO":  ERROR 3107.  Check message file tab114.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WORKFLOW":  ERROR 3107.  Check message file tab115.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WORKFLOW_AUDITING":  ERROR 3107.  Check message file tab116.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CMS_WORKFLOW_STEP":  ERROR 3107.  Check message file tab117.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_ADVERTISEMEN_CONTENT":  ERROR 3107.  Check message file tab118.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_ADVERTISEMEN_LIST":  ERROR 3107.  Check message file tab119.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_ADVERTISEMEN_LIST_AND_MOBILE_CHANNEL":  ERROR 3107.  Check message file tab120.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_ADVERTISEMEN_STARTING":  ERROR 3107.  Check message file tab121.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_COMMENTS":  ERROR 3107.  Check message file tab122.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_CONTENT":  ERROR 3107.  Check message file tab123.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_CONTENT_ARTICLE":  ERROR 3107.  Check message file tab124.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_FEEDBACK":  ERROR 3107.  Check message file tab125.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_INVITATION":  ERROR 3107.  Check message file tab126.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_LINK":  ERROR 3107.  Check message file tab127.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_MESSAGE":  ERROR 3107.  Check message file tab128.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_MOBILE_CHANNEL":  ERROR 3107.  Check message file tab129.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_MOBILE_CHANNEL_PRIV":  ERROR 3107.  Check message file tab130.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_PICTUREALONE":  ERROR 3107.  Check message file tab131.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_PICTURE_CLASSIFY":  ERROR 3107.  Check message file tab132.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_PICTURE_GROUP":  ERROR 3107.  Check message file tab133.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_RELATE_CONTENT":  ERROR 3107.  Check message file tab134.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_SIMPLESPECIAL":  ERROR 3107.  Check message file tab135.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_SIMPLESPECIAL_CONTENT":  ERROR 3107.  Check message file tab136.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_SUGGEST":  ERROR 3107.  Check message file tab137.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_SURVEY":  ERROR 3107.  Check message file tab138.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_SYS_ISO_TOKEN":  ERROR 3107.  Check message file tab139.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_UPDATE_VERSION":  ERROR 3107.  Check message file tab140.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_VIDEO":  ERROR 3107.  Check message file tab141.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_VIDEO_CLASSIFY":  ERROR 3107.  Check message file tab142.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."CM_VOTE":  ERROR 3107.  Check message file tab143.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "SYSTOOLS"."HMON_ATM_INFO":  ERROR 3107.  Check message file tab144.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "SYSTOOLS"."HMON_COLLECTION":  ERROR 3107.  Check message file tab145.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "SYSTOOLS"."POLICY":  ERROR 3107.  Check message file tab146.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."SINA_CONTENT":  ERROR 3107.  Check message file tab147.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."T_CLASS":  ERROR 3107.  Check message file tab148.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."T_STU":  ERROR 3107.  Check message file tab149.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."T_TREE":  ERROR 3107.  Check message file tab150.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_BUTTON":  ERROR 3107.  Check message file tab151.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_CERT":  ERROR 3107.  Check message file tab152.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_CONFIG":  ERROR 3107.  Check message file tab153.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_CONFIGURE":  ERROR 3107.  Check message file tab154.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_CONTENT":  ERROR 3107.  Check message file tab155.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_PUSH":  ERROR 3107.  Check message file tab156.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+***  Table "DB2ADMIN"."WECHAT_USER":  ERROR 3107.  Check message file tab157.msg!
+***  SQL Warning!  SQLCODE is  3107
+***  SQL3107W  在 LOAD 处理期间至少遇到一条警告消息。
+
+
+Disconnecting from database ... successful!
+
+End time:  Mon Jan 18 17:05:05 2016

@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>${contentF.title!''}</title>
+<meta name="Description" content="${site.siteName} " />
+<meta name="Keywords" content="${site.siteName} " />
+<meta name="sogou_site_verification" content="duAkVpAYyr"/>
+<!-- 首页样式、公用样式、js (线上已有)↓↓↓ -->
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/css/region.css"/>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<link rel="stylesheet" href="/css/nj_v2.css">
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<script type="text/javascript" src="/js/indexnew.js"></script>
+
+<!-- 内容页js -->
+<script src="/js/page.js"></script>
+
+<!-- 我是分割线 -->
+
+<!-- 内容页样式-必须放到首页样式以下 -->
+<link rel="stylesheet" href="/css/page.css">
+</head>
+<body>
+<#include "/wwwroot/${sitePath}/template/common/index_nav.html">
+
+<div class="nj_content_v2">
+	<div class="nj_con_v2">
+		<div class="nj_nav_v2Box"></div>
+
+		<div class="njLeft">
+			<div class="guideNav mtauto">
+				<div class="guideNav-left">
+			    </div>
+			</div>
+			<div class="njText-box">
+				<h1 class="njText-title">
+					${contentF.title!''}	
+				</h1>
+				<div class="njText-about clearfix">
+					<span class="njText-time f-fl">
+						<#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+					<span class="njText-label f-fl">
+						<span>文章来源：</span>${contentF.sourceid!''}</span>
+				</div>
+				<div class="njText-article">
+					
+					<p><br/></p>${articleDataF.content!''}<p><br/></p>
+				</div>
+
+
+				
+				
+				<div class="njText-useful">
+					<!--<a href="javascript:;" class="njText-useful-btn">
+						<span>245</span>对我有用
+					</a>-->
+				</div>				
+				<!-- 点击之后 -->
+				<script>
+					$('.njText-useful-btn').on('click', function(){
+						$(this).addClass('on');
+					})
+				</script>
+				<!-- 点击之后 -->
+
+				<div class="njText-chain clearfix">
+					<!--<a class="njText-collection f-fl" href="javascript:;">259</a>-->
+
+					<script>
+						$('.njText-collection ').click(function(){
+							$(this).toggleClass('sc_on');
+						})
+					</script>
+					
+				</div>
+
+				
+			</div>
+		</div>
+		<!-- 热门新闻 -->
+		<div class="nj_right_v2 nj_rightTwo_v2">
+		<#include "/wwwroot/${sitePath}/template/common/hotnews.html">
+		</div>
+</div>
+</div>
+<!-- 新版底部 start -->
+
+<div class="footer f-tac">
+<#include "/wwwroot/${sitePath}/template/common/footer.html">
+</div>
+<!-- 新版底部 end -->
+</body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<title>${contentF.title!''}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link href="/mobilestyle/css/mobile_style.css" rel="stylesheet" type="text/css" />
+		<script src="/mobilestyle/js/jquery-1.10.1.min.js"></script>
+		<#setting number_format="#">
+		<script type="text/javascript">var contextpath='${contextpath}';var contentId='${contentidF}';$.get(contextpath + "/contentsMobileController.do?addPv&contentId="+contentId);</script>
+	</head>
+	<body class="survey_view">
+		<#if contentF.thumb?exists && contentF.thumb!=''><div class="survey_thumb"><img src="${contentF.thumb}.450_450.jpg"/></div></#if>
+		<div class="survey_title">${contentF.title!''}</div>
+		<span class="survey_publish_date"><#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+		<#if contentF.digest?exists && contentF.digest !=''>
+		<div class="survey_digest">
+			${contentF.digest!''}
+		</div>
+		</#if>
+		<div class="survey_content">
+		<#if surveyF.optionList?exists>
+		<#list surveyF.optionList as option>
+			${option_index+1}、${option.optionname}
+			<#if option.dataType=='radio'>
+			<br/>
+					<#list option.optionextList as ext>
+						<input type="radio"	name="itemIds_${option_index+1}" value="${option.id}" id="${ext.extid}"/>${ext_index+1}.&nbsp;${ext.extOptionname}
+					</#list>
+					<br/><br/>
+			</#if>
+			<#if option.dataType=='checkbox'>
+				<br/>
+					<#list option.optionextList as ext>
+						<input type="checkbox"	name="itemIds" value="${option.id}" id="${ext.extid}" />${ext_index+1}.&nbsp;${ext.extOptionname}
+					</#list>
+				<br/><br/>
+			</#if>
+			<#if option.dataType=='text'>
+					<br/><input name="reply" type="text" id="${option.id}" /><br/><br/>
+			</#if>
+			<#if option.dataType=='textarea'>
+					<br/><textarea name="reply" id="${option.id}" rows="3" style="width:70%;"></textarea><br/><br/>
+			</#if>
+			<input name=subIds type="hidden" value="${option.id}" />
+		</#list>
+			<div class="survey_footer">
+				<input class="submitBtn" type="button" value="提交答卷" />
+			</div>
+		<#else>
+			无选项
+		</#if>
+		</div>
+		<script type="text/javascript">
+			var storage = window.localStorage;
+			var is_survey=storage.getItem("${contentF.id!''}_${contentF.title}_is_survey");
+			
+			function getResult(){
+				$(".survey_content").show();
+				$(".survey_content").html("调查结果获取中...");
+				var url="${contextpath}/front/surveyLogController.do?surveyTag&surveyId=${surveyF.id!''}&contentId=${contentF.id}";
+				$.ajax({
+					type:'post',
+					url:url,
+					dataType:'text',
+					success:function(view){
+						$(".survey_content").html(view).show();
+					},
+					error:function(){
+						$(".survey_content").html("获取调查结果失败");
+					}
+				});
+			}
+			
+			if(is_survey && is_survey=='true'){
+				//显示结果
+				getResult();
+			}else{
+				$(".survey_content").show();
+				$(".submitBtn").click(function (){
+					var submitUrl="${contextpath}/front/surveyLogController.do?subSurvey&surveyId=${surveyF.id!''}";
+					
+					//勾选的值
+					var chestr="";
+					var str=document.getElementsByName("itemIds");
+					var objarray=str.length;
+					for(var i=0;i<objarray;i++){
+						if(str[i].checked == true){
+							chestr+=str[i].value+"_"+str[i].id+",";
+						}
+					}
+					var raArray=$("input[type='radio']");
+					for(var i=0;i<raArray.length;i++){
+						if(raArray[i].checked == true){
+							chestr+=raArray[i].value+"_"+raArray[i].id+",";
+						}
+					}
+					//填写的文本值
+					var input="";
+					var inputList = document.getElementsByName("reply");
+					for(var i=0;i<inputList.length;i++){
+						input+=inputList[i].id+"_"+inputList[i].value+",";
+					}
+					
+					$(".submitBtn").val("正在提交...").attr("disabled","disabled");
+					$.ajax({
+						type:'post',
+						url:submitUrl,
+						data:{'chestr':chestr,'input':input},
+						dataType:'text',
+						success:function(msg){
+							var obj = JSON.parse(eval(msg));
+							if(obj.isSuccess){
+								storage.setItem("${contentF.id!''}_${contentF.title}_is_survey","true");
+								getResult();
+							}else{
+								alert(obj.msg);
+							}
+						}
+					});
+				});
+			}
+		</script>
+	</body>
+</html>

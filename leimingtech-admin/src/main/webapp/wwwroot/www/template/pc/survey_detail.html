@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${contentF.title!''}</title>
+<link rel="stylesheet" type="text/css" href="/pcstyle/main.css"/>
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/pcstyle/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/front.js"></script>
+<style>
+ #keyword2{height:22px;background:url(../images/img/bg-search.png) no-repeat;
+width:214px;border:1px solid #0A89B1;
+        }
+</style>
+</head>
+<script>
+	function changepic(obj,img){
+		obj.src=img;
+	}
+</script>
+<body>
+<#include "wwwroot/${sitePath}/template/pc/section/menu.html">
+<div class="div_mid">
+	<div class="div_main">
+    	<div class="div_midleft">
+	     
+<!-- 评论样式 begin-->
+<style type="text/css">
+.clear { clear: both; }
+.clear-10 { clear: both; height: 10px; }
+.LanMu01-1 /*标题背景*/ { background-image: url(/images/title1-1.gif); width: 23px; height: 30px; float: left; }
+.LanMu01-2 { background-image: url(/images/title1-2.gif); width: 100%; height: 30px; }
+.LanMu01-2 a { font-size: 12px; }
+.LanMu01-2 span { line-height: 30px; float: left; font-size: 14px; font-weight: bold; color: #2b4099; }
+#s_commentsize { float:none; margin: 0px; padding:0px; }
+.LanMu01-2 em { float: right; padding-right: 1%; font-size: 12px; line-height: 28px; font-family: Arial,Tahoma,"hiragino sans gb",Helvetica;color:#122E67;font-style: normal;}
+.LanMu01-3 { background-image: url(/images/title1-3.gif); width: 10px; height: 30px; float: right; }
+.hundred100 { width: 100%; }
+.rim06 { border: 1px solid #d8d8d8; background: #fcfcfc; margin-bottom:20px}
+.pinglun /*评论*/ { width: 100%; font-size: 12px; }
+.pinglun h1 { line-height: 30px; float: left; font-weight: bold; font-size: 14px; }
+.pinglun h2 { line-height: 30px; float: right; font-size: 12px; }
+.pinglun em { color: #F00; line-height: 30px; font-size: 12px; }
+.pinglun a { font-size: 12px; }
+.pltable { width: 95%; margin: auto; height: 190px; }
+.cinput /*评论内容*/ { width: 90%; height: 80px; border: 1px solid #ccc; line-height: 24px; }
+.plcode /*评论验证码*/ { width: 100px; height: 26px; border: 1px solid #ccc; line-height: 26px; }
+.published /*表布按钮*/ { background: #ff7e0c; width: 80px; height: 30px; line-height: 30px; color: #fff; border: 0; cursor: pointer; text-align: center; }
+.plfl1 { float: left; text-align: right; width: 80px; line-height: 26px; }
+.plfr1 { float: left; }
+.plfl2 { float: left; text-align: right; margin-top: 10px; width: 80px; line-height: 26px; }
+.plfr2 { float: left; margin-top: 10px; }
+#commentList { line-height: 30px; float: right; margin-right: 5px; font-size: 12px; }
+#commentList a { font-size: 12px;color:#122E67;text-decoration: none; }
+#commentList a:hover { color:#c50b0e; }
+#commentListContainer { width: 97%; margin: auto; line-height: 24px; font-size: 12px; }
+dl.rmpl dt { margin: 5px 0 0 0; font-weight: normal;}
+dl.rmpl dd { margin: 0 0 5px 0; color: #8e8e8e; }
+dl.rmpl dd.line { border-bottom: 1px dotted #ccc; }
+dl.rmpl dt span { color: #d80c18; }
+
+
+/*--------------------2.1.新闻内容CSS--------------------*/
+.website/*所在位置*/{ line-height:30px; height:30px; border-bottom:1px solid #dddddd;}
+.pagesite/*第几页*/{ text-align:center; line-height:24px; height:24px; margin:10px auto;}
+.newsTex/*内容标题*/{ width:97%; margin:auto;}
+.newsTex h1{ font-size:28px; padding:20px 0; font-family:"微软雅黑","黑体"; text-align:center; line-height:30px;}
+.newsTex a{ text-decoration:none; color:#122e67; font-size:14px; cursor:pointer;}
+.newsTex a:hover{color:#c50b0e;}
+.msgbar{ line-height:30px; text-align:center; color:#999; font-size:12px;}
+.summary/*摘要*/{ border:1px solid #dddddd; background:#f8fbff; padding:8px 2px; width:98%; margin:10px auto; line-height:20px; font-size:12px; color:#727272;}
+.newsCon{ width:100%; line-height:24px;}
+.pagebar{height:30px;line-height:30px; text-align:center;}
+.pagebar a{ text-decoration:none; color:#122e67; font-size:14px; cursor:pointer;}
+.pagebar a:hover{color:#c50b0e;}
+.pagebar select{font-size: 100%;line-height: 30px;margin: 0px;padding: 0px;width:auto;height: auto;}
+.other{height:60px; text-align:center; border-top:#ccc 1px solid; padding-top:10px;}
+.other ul{float:left; margin-left:10px;}
+.other ul li{height:26px; line-height:26px; text-align:left; width:100%;}
+</style>
+
+	     <style type="text/css">
+table,caption,tbody,tfoot,thead,tr,th,td,b{margin:0;padding:0;border:0;outline:0;font-size:100%;background:transparent;}
+
+/*网络调查*/
+.survey{ padding-left:12px; padding-right:9px; padding-top:5px; line-height:24px; font-size:12px;}
+.survey table { border-collapse:collapse;border-spacing:0; }
+
+</style>
+<div style="width:1000px;margin: 0 auto; margin-top: 10px;">
+<div class="rim06">
+	<div class="LanMu01-2">
+		<div class="LanMu01-1"></div>
+		<title>${contentF.title}</title>
+		<div class="LanMu01-3"></div>
+	</div>
+	<div class="survey">
+		<#if contentF?exists && surveyF?exists>
+		<form id="surveyForm" >
+			<table width="100%" border="0" cellspacing="5" cellpadding="0">
+				<tr>
+					<td height="30" colspan="2" align="center">
+						<span style="font-size:22px">< ${contentF.title} ></span> 
+						<input type="hidden" name="surveyId" value="${contentF.id}" />
+					</td>
+				</tr>
+				<#if contentF.digest?exists && contentF.digest !=''>
+					<tr>
+						<td height="30" colspan="2" align="left">${contentF.digest}</td>
+					</tr>
+				</#if>
+				<#list surveyF.optionList as option>
+					<tr>
+						<td height="30" colspan="2" align="left">
+						<span style="color: #1c77ba;">${option_index+1}、${option.optionname}</span>
+						</td>
+					</tr>
+					<#if option.dataType=='radio'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="radio"	name="${option.id}" value="${ext.id}" id="${ext.id}"/>${ext_index+1}.${ext.extOptionname}
+							</#list>
+							</td>
+						</tr>
+					</#if>
+					<#if option.dataType=='checkbox'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="checkbox"	name="${option.id}" value="${ext.id}" id="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+							</#list>
+							</td>
+						</tr>
+					</#if>
+					<#if option.dataType=='text'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<input name="${option.id}"	type="text" id="${option.id}" /></td>
+						</tr>
+					</#if>
+					<input name=subIds type="hidden" value="${option.id}" />
+				</#list>
+				<tr>
+					<td height="35" colspan="2" align="center" valign="bottom">
+						<input id="surveybtn"	type="button" onclick="survey('${contextpath}/front/surveyLogController.do?subSurvey&surveyId=${surveyF.id}','surveyForm')" value="提 交" /> &nbsp; 
+						<a href="javascript:;" onclick="query1('${contextpath}/front/surveyLogController.do?surveyPcTag')">查看调查结果</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<br>
+		
+		<script type="text/javascript">
+			$(function (){
+				//$("#surveybtn").click(function (){
+				//	Cms.survey(function (data){
+				//		alert("提交的数据未处理");
+				//	});
+				//});
+			});
+			function survey(urlStr,surveyForm){
+				
+				
+					$.ajax({
+						type:'post',
+						url:urlStr,
+						data:$('#' + surveyForm).serialize(),
+						dataType:'text',
+						success:function(msg){
+							var obj = JSON.parse(eval(msg));
+							alert(obj.msg);
+						},error:function(){
+							alert("提交失败!");
+						}
+					});
+				}
+			
+			//查看结果
+			function query1(urlStr){
+				window.location = urlStr+"&surveyId=${surveyF.id}&contentId=${contentF.id}";
+			}
+		</script>
+		<#else>
+		<div>没有默认调查主题</div>
+		</#if>
+	</div>
+</div>
+		</div>
+	<div class="footer">
+<#include "wwwroot/${sitePath}/template/pc/section/footer.html">
+</div>
+</body>
+</html>
+
+
+

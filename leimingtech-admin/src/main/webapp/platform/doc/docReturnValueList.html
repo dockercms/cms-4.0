@@ -1,0 +1,92 @@
+ <div class="row-fluid">
+	<div class="span12">
+		<div class="portlet ">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>返回结果</div>
+				
+				<div class="actions">
+					<#if docid?exists>
+						<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="changePage('docController.do?doc&pid=${pid}')">
+							返回
+						</button>
+					</#if>
+					<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditModel('docReturnValueController.do?add&docid=${docid!''}')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class=" span4">
+								<label >
+									名称：
+									<input name="name" class="form-control span9" type="text" value="${searchMap["name"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('docReturnValueController.do?docReturnValue&docid=${docid!''}', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th style="width:40px;text-align:center">序号</th>
+							<th style="">名称</th>
+							<th style="width:150px">类型</th>
+							<#if !docType?exists || docType=="API">
+								<th style="width:80px;">是否必须</th>
+								<th style="width:80px">默认值</th>
+							</#if>
+							<th style="">描述</th>
+							<th style="width:40px;text-align:center">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if pageList?exists>
+						  <#list pageList as page>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+page_index?if_exists+1}</td>
+								<td >
+										${page.name}
+								</td>
+								<td >
+									<#if page.type=='List' && page.code?exists>
+										List&lt;${page.code}&gt;
+									<#else>
+										${page.type}
+									</#if>
+								</td>
+								<#if !docType?exists || docType=="API">
+									<td>
+										<#if page.isrequired==1>必填<#else>选填</#if>
+									</td>
+									<td>
+										${page.defaultValue}
+									</td>
+								</#if>
+								<td >
+										${page.description}
+								</td>
+								<td style="text-align:center;">
+									<input type='button' title='修改' class="editbtn"   onclick="toEditModel('docReturnValueController.do?update&id=${page.id?if_exists}')"/>
+									<input type='button' title='删除' class="delbtn"  onclick="del('docReturnValueController.do?del', '${page.id?if_exists}')"   />
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>

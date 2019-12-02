@@ -1,0 +1,102 @@
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<div class="row-fluid">
+<div class="span12">
+	<!-- BEGIN SAMPLE FORM PORTLET-->   
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>用户<#if user.id>修改<#else>录入</#if></div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="userFrom" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${user.id}"/>
+				<div class="control-group">
+					<label class="control-label">用户名</label>
+					<div class="controls">
+						<#if user.id>
+						<span class="help-inline">${user.userName}</span>
+						<#else>
+						<input type="text" id="userName" name="userName" class="span6 m-wrap" value="${user.userName}"/>
+						<span class="help-inline">填写用户名</span>
+						</#if>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">真实姓名</label>
+					<div class="controls">
+						<input type="text" id="realName" name="realName" class="span6 m-wrap" value="${user.realName}"/>
+						<span class="help-inline">填写真实姓名</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">密码</label>
+					<div class="controls">
+						<input type="password" id="password" name="password" class="span6 m-wrap" value="${user.password}"/>
+						<span class="help-inline">填写密码</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">确认密码</label>
+					<div class="controls">
+						<input type="password" id="title" name="title" class="span6 m-wrap" value="${user.title }"/>
+						<span class="help-inline">确认密码</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">部门</label>
+					<div class="controls">
+						<#if depart?exists>
+							${depart.departname?if_exists}
+							<input type="hidden" id="TSDepart.id" name="TSDepart.id" value="${depart.id}">
+						</#if>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">角色</label>
+					<div class="controls">
+						<select id="roleid" class="form-control" name="roleid">
+					        <#if roleList?exists>
+			  					<#list roleList as role>
+									<option value="${role.id}" <#if userRole==role.id > selected="selected"</#if> >${role.roleName?if_exists }</option>
+								</#list>
+							</#if>    
+					      </select>
+						<span class="help-inline">角色</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">手机号</label>
+					<div class="controls">
+						<input type="text" id="mobilePhone" name="mobilePhone" class="span6 m-wrap" value="${user.mobilePhone }"/>
+						<span class="help-inline">手机号</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">办公电话</label>
+					<div class="controls">
+						<input type="text" id="officePhone" name="officePhone" class="span6 m-wrap" value="${user.officePhone}"/>
+						<span class="help-inline">填写办公电话</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">常用邮箱</label>
+					<div class="controls">
+						<input type="text" id="email" name="email" class="span6 m-wrap" value="${user.email}"/>
+						<span class="help-inline">填写邮箱</span>
+					</div>
+				</div>
+				
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('departAction.do?treeSaveOrUpdateUser', 'userFrom');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+	</div>
+	<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>

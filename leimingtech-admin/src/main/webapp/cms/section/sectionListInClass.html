@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<link rel="stylesheet" type="text/css" href="media/css/search.css" />
+<div class="row-fluid">
+	<div id="menuBody"  class="span3">
+		<#if sectionList?exists && (sectionList?size > 0)>
+			<input type="button" class="btn green" value="生成以下区块" onclick="createSectionStatic('${catalog.id}')"/>
+		</#if>
+		<ul class="ver-inline-menu tabbable margin-bottom-25">
+			<#if sectionList?exists>
+				<#if (sectionList?size > 0)>
+			  		<#list sectionList as section>
+						<li <#if section_index==0> class="active"</#if> ><a data-toggle="tab" onclick="searchSectionData('sectionDataController.do?sectionDataList&sectionid=${section.id}','sectionDatebody')"><i class="icon-briefcase"></i>${section.name?if_exists}</a> <#if section_index==0><span class="after"></span></#if></li>
+				 	</#list> 
+				<#else>
+			 		<li class="active"><a href="javascript:void(0);" data-toggle="tab"><i class="icon-briefcase"></i><span style="color:red;">${catalog.name}</span>下还没有区块信息哦</a><span class="after"></span></li>
+			 	</#if>
+			<#else>
+				<li class="active"><a href="javascript:void(0);" data-toggle="tab"><i class="icon-briefcase"></i><span style="color:red;">${catalog.name}</span>下还没有区块信息哦</a><span class="after"></span></li>
+			</#if>
+		</ul>	
+	</div>
+	<div class="span9" id="sectionDatebody">
+		<#include "/cms/section/sectionDatebody.html">
+	</div>
+</div>

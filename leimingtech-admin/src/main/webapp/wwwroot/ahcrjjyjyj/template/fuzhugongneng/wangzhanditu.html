@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${site.siteName} - ${catalogF.name}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<script src="/js/jquery.js"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<!--[if lt IE 8]>
+		<script src="/js1/png.js"type="text/javascript"></script>
+		<script src="/js1/htmlfix.js"type="text/javascript"></script>
+		<![endif]-->
+</head>
+<script>
+	var lmid = 0;
+</script>
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/head.html">
+	<script language="JavaScript" type="text/JavaScript">
+		
+		window.onload = function(){
+		var contentid = $("#contentid").val();
+		
+		var urlStr = "${contextpath}/contentsController.do?addPv";
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:"contentId="+contentid,
+				success:function(msg){
+				}
+			});
+		}
+		
+		function fontZoom(size) {
+			document.getElementById('fontZoom').style.fontSize = size + 'px';
+			document.getElementById('fontZoom').style.lineHeight = size * 2
+					+ 'px';
+		}
+		var newsid = 5019;
+	</script>
+	<#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+	<div class="cl"></div>
+	<div class="container nav2" style="padding:15px 0;">
+		<a href='/'>首页</a> >> 
+		<#assign navTag=newTag("navTag")>
+		<#assign navTagList=navTag("{'name':'${catalogF.id}'}")>
+		<#if navTagList?exists>
+			<#list navTagList as navTag>
+				<a href="${navTag.url!'javascript:void(0);'}">${navTag.name}&gt;</a>
+			</#list>
+		</#if>
+	</div>
+	<div class="container" style="padding:15px 0;border:1px solid #D6E9F8">
+		<#assign articleTag=newTag("articleTag")>
+		<#assign articleList=articleTag("{'name':'${catalogidF}'}")>
+		<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<input type="hidden" id="contentid" name="contentid" value="${article.id}"/>
+ 					
+			<tr>
+				<td align="center" class="title3">${catalogF.name}</td>
+			</tr>
+			<tr>
+				<td align=center></td>
+			</tr>
+			<tr>
+				<td height="40" align="center" id="noline">
+					信息来源：${article.sourceid!''}&nbsp;&nbsp;&nbsp;&nbsp;作者：${article.author!''}&nbsp;&nbsp;&nbsp;&nbsp;时间:
+					<#if article.published?exists>${article.published?string('yyyy-MM-dd HH:mm:ss')}</#if>
+					&nbsp;&nbsp;&nbsp;&nbsp;点击：<span>${article.pv!''}</span>
+						【字体：<a href="javascript:fontZoom(22)" target="_self">大</a> <a
+						href="javascript:fontZoom(14)" target="_self">中</a> <a
+						href="javascript:fontZoom(12)" target="_self">小</a>】</td>
+				
+			</tr>
+			<tr>
+				<td align=center>
+					<table width="90%" border="0" cellspacing="0" cellpadding="0"
+						align="center">
+						<tr>
+							<td bgcolor="#D6E9F8" height="1"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td><table width="100%" border="0" cellspacing="0"
+						cellpadding="10">
+						<tr>
+							<td class="zw" id="fontZoom">
+								<table border="0" cellspacing="0" cellpadding="5" width="103%">
+									<tbody>
+									<#assign catalogList1=catalogTag("{'levels':'root','siteid':'${site.id}','count':'5'}")>
+										
+									<#if catalogList1?exists>
+									<#list catalogList1 as cat>
+										<TR bgColor=#ffffff>
+											
+												<td valign="top" align="center">
+													<a href="${cat.url!'javascript:void(0);'}" target="_blank">
+														<b><FONT color=#0021b0>${cat.name}</font></b>
+													</a>
+												</td>
+											<#assign cataChildList=catalogTag("{'name':'${cat.id}','levels':'child'}")>	
+											
+												<td valign="top" width="704">
+												<#if cataChildList?exists>
+												<#list cataChildList as catChild>
+													<#if !catChild_has_next>
+														<a href="${catChild.url!'javascript:void(0);'}" target="_blank">&nbsp;&nbsp;&nbsp;${catChild.name}&nbsp;&nbsp;&nbsp;</a>
+													<#else>
+														<a href="${catChild.url!'javascript:void(0);'}" target="_blank">&nbsp;&nbsp;&nbsp;${catChild.name}&nbsp;&nbsp;&nbsp;</a>|
+														
+													</#if>
+												</#list>
+												</#if>
+												</td>
+											
+									
+										</tr>
+										</#list>
+									</#if>	
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</table></td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="blue3" width="70%"></td>
+							<td align="center" class="blue3" width="30%">编辑：${article.editor!''}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</#list>
+		</#if>
+	</div>
+	<div class="cl"></div>
+	<#include "/wwwroot/${sitePath}/template/common/foot.html">
+</body>
+</html>

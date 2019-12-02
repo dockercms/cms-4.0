@@ -1,0 +1,51 @@
+<div id="rightcontent">
+<div id="reg_info">
+  <dl>
+   <dt>新增<span>(<label>*</label>为必填项)</span></dt>
+   <dd>
+   <form id="form_sample_2">
+  		 <div class="alert alert-error hide" style="display:none">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide" style="display:none">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+	     <ul>
+	       <li><label><span>*</span>标题：</label><input name="title" class="xiangying"  type="text"onFocus="this.value=''" onBlur="if(!value){value=defaultValue;}"  data-rule-required="true" data-msg-required="标题必填"/>
+	       </li>
+	       <li><label><span>*</span>内容：</label><input name="content" class="xiangying"  type="text"onFocus="this.value=''" onBlur="if(!value){value=defaultValue;}"  data-rule-required="true" data-msg-required="内容必填"/>
+	       </li>
+	       <li><label><span>*</span>留言人：</label><input name="messagePerson" class="xiangying"  type="text"onFocus="this.value=''" data-rule-required="true" data-msg-required="留言人必填"/>
+	       </li>
+	       <li><label><span>*</span>QQ：</label><input name="qq" class="xiangying"  type="text"onFocus="this.value=''"  data-rule-required="true" data-msg-required="QQ号必填" data-rule-number="true" data-rule-rangelength="7,11" data-msg-rangelength="请输入正确的QQ号"/>
+	       </li>
+	       <li><label><span>*</span>电话：</label><input name="telephone" class="xiangying"  type="text"onFocus="this.value=''"  data-rule-required="true" data-msg-required="电话号码必填" data-rule-number="true" data-rule-rangelength="11,11" data-msg-rangelength="请输入正确的电话号码"/>
+	       </li>
+	       <li><label><span>*</span>手机：</label><input name="cellphone" class="xiangying"  type="text"onFocus="this.value=''"  data-rule-required="true" data-rule-rangelength="11,11" data-rule-number="true" data-msg-required="手机号码必填" data-msg-rangelength="请输入正确的手机号"/>
+	       </li>
+	       <button type="button" onclick="test();" class="btn blue">保存</button>
+	     </ul>
+     </form>
+   </dd>
+ </dl>
+</div>
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	$("#form_sample_2").myValidate();	   
+	});
+	
+	function test(){
+		if($('#form_sample_2').valid()){
+	    	<!--$('#form_sample_2').submit();-->
+	    	formSubmitModel('commentaryFrontController.do?save', 'form_sample_2');
+	  	}
+	  	var form1 = $('#form_sample_2');
+        var error1 = $('.alert-error', form1);
+        var success1 = $('.alert-success', form1);
+	  	success1.hide();
+        error1.hide();
+	}
+</script>

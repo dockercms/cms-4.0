@@ -1,0 +1,20 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<title>${contentF.title!''}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script src="/js/jquery-1.10.1.min.js"></script>
+		<#setting number_format="#">
+		<script type="text/javascript">var contextpath='${contextpath}';var contentId='${contentidF}';$.get(contextpath + "/contentsMobileController.do?addPv&contentId="+contentId);</script>
+		<style type="text/css">
+			video{width:100%;height: auto;}	
+			img{max-width: 100%;}
+		</style>
+	</head>
+	<body style="line-height: 150%;">
+		<div style="font-size: 18px;margin-top: 15px;">${contentF.title!''}</div>
+		<span style="color: #BABABA;font-size: 10px;margin-top: 5px;display: block;">${contentF.sourceid!''}&nbsp;&nbsp;<#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+		<div><#if articleDataF?exists>${articleDataF.content!''} </#if></div>
+	</body>
+</html>

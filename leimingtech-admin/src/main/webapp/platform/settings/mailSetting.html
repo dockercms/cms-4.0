@@ -1,0 +1,119 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->   
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>
+					<span class="hidden-480">邮件设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#portlet_tab1" data-toggle="tab">邮件设置</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+							<form id="mailsetting_form" class="form-horizontal">
+								<!--<div class="control-group">
+									<label class="control-label">发送方法：</label>
+									<div class="controls">
+											<label class="radio line">
+												<input type="radio" name="qq_sendType" id="qq_sendType" value="${qq_sendtype}" checked/>
+												通过 SOCKET 连接 SMTP 服务器发送(支持 ESMTP 验证, 推荐方法)
+											</label>
+									</div>
+								</div>-->
+								<div class="control-group">
+									<label class="control-label">SMTP服务器：</label>
+									<div class="controls">
+										<input type="text" id="qq_smtpServer" name="qq_smtpServer" class="span6 m-wrap" value="${qq_smtpServer}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">邮箱：</label>
+									<div class="controls">
+										<input type="text" id="qq_mailUsername" name="qq_mailUsername" class="span6 m-wrap" value="${qq_mailUsername}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">密码：</label>
+									<div class="controls">
+										<input type="text" id="qq_mailPassword" name="qq_mailPassword" class="span6 m-wrap" value="${qq_mailPassword}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">是否验证：</label>
+									<div class="controls">
+										<label class="radio">
+											<input type="radio" name="qq_mailisCheck" value="true" <#if qq_mailisCheck=='true'>checked</#if>/>是
+								        </label>
+								        <label class="radio">
+								        	<input type="radio" name="qq_mailisCheck" value="false" <#if qq_mailisCheck=='false'>checked</#if>/>否
+								        </label>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">邮件签名：</label>
+									<div class="controls">
+										<textarea class="large m-wrap" name="qq_mailSingture" id="qq_mailSingture" rows="3">${qq_mailSingture}</textarea>
+									</div>
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label">测试邮箱：</label>
+									<div class="controls">
+										<input name="testmail" id="testmail" type="text" class="span6 m-wrap"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<a href="javascript:void(0);" onclick="test('configSettingController.do?testsend');" class="btn blue btn-sm"><i class="icon-search "></i>测试</a>
+									<a href="javascript:void(0);" onclick="formSubmit('configSettingController.do?mailSave', 'mailsetting_form');" class="btn blue btn-sm"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT--> 
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	});
+	
+	//测试方法
+	function test(urlStr){
+		var testmail = $('#testmail').val();
+		//alert(testmail);
+		if(testmail!=''){
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:'testmail=' + testmail,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						alert(obj.msg);
+					}else{
+						alert("发送失败!");
+					}
+				},
+				error:function(){
+					alert("提交通讯失败!");
+				}
+			});
+		}else{
+			alert('请填写测试邮箱！');
+		}
+	}
+</script>

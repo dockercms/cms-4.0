@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>留言</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link href="../member/css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../media/js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="../media/js/form-validation.js"></script>
+<script type="text/javascript" src="../media/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../media/js/messages_cn.js"></script>
+<script type="text/javascript" src="../js/frontFormValidate.js"></script>
+<script>
+	var contextpath="${contextpath}";
+	function changepic(obj, img) {
+		obj.src = img;
+	}
+	
+	
+	jQuery(document).ready(function() {  
+		var formvalidate = validateObj("liuyanform");
+		var rules = formvalidate.settings.rules;
+		var title = {required:true};
+		createJson(rules, "title", title);
+		var name = {required:true};
+		createJson(rules, "name", name);
+		var address = {required:true};
+		createJson(rules, "address", address);
+		var content = {required:true};
+		createJson(rules, "content", content);
+		//debugger;
+	});
+	
+</script>
+<script type="text/javascript">
+	function settab_xbingjs(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+
+	function settab_xbingjs1(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs1" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+
+	function settab_xbingjs2(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs2" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+	
+	function subliuyan(){
+		if($('#liuyanform').valid()){
+			$.ajax({
+				type:'post',
+				url:"messagesFrontController.do?savemessage",
+				data:$('#liuyanform').serialize(),
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						location.href="messagesFrontController.do?messageslistfront";
+					}
+				},
+				error:function(){
+					alert("提交通讯失败!");
+				}
+			});
+		}
+	}
+	
+	function resetform(){
+		$('#liuyanform')[0].reset();
+	}
+</script>
+</head>
+<body>
+	<#include "wwwroot/www/template/logoAndSearch.html"> 
+	<#include "wwwroot/www/template/nav.html">
+	<div class="clear"></div>
+	<div class="div_l2mid">
+		<div class="div_l2top"></div>
+		<div class="div_l2main">
+			<div class="div_l2left">
+				<div>
+					<img src="../wwwroot/www/images/img/l2-message.png"
+						width="175" height="49" />
+				</div>
+				<div>
+					<a href="#"><img
+						src="../wwwroot/www/images/img/img_locate.png" width="175"
+						height="32" /></a>
+				</div>
+				<div>
+					<img src="../wwwroot/www/images/img/img_800.png" width="175"
+						height="37" />
+				</div>
+				<div class="div_line1"></div>
+				<div>
+					<table cellspacing="3">
+						<tr>
+							<td>关注我们：</td>
+							<td><a href="#"><img
+									src="../wwwroot/www/images/img/ico_weibo.png" width="20"
+									height="20" /></a></td>
+							<td><a href="#"><img
+									src="../wwwroot/www/images/img/ico_qq.png" width="20"
+									height="20" /></a></td>
+							<td><a href="#"><img
+									src="../wwwroot/www/images/img/ico_rss.png" width="19"
+									height="20" /></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="div_l2right">
+				<div>
+					<img src="../wwwroot/www/images/img/s_message.jpg" width="781"
+						height="120" />
+				</div>
+				<div class="title">留言处理</div>
+				<div class="navi">
+					<a href="#">首页</a>--<a href="#" class="act">留言处理</a>
+				</div>
+				<div class="line2 clear"></div>
+				<div class="div_l2content">
+					<div class="div_messagebox">
+						<form id="liuyanform">
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">主题：</label>
+			                <div class="controls">
+			                    <input type="text" class="w" id="title" name="title" />
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">联系人：</label>
+			                <div class="controls">
+			                    <input type="text" class="w" id="name" name="name" />
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">联系电话：</label>
+			                <div class="controls">
+			                    <input type="text" class="w" id="phone" name="phone" />
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">联系地址：</label>
+			                <div class="controls">
+			                    <input type="text" class="w" id="address" name="address" />
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">邮箱：</label>
+			                <div class="controls">
+			                    <input type="text" class="w" id="email" name="email" />
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;">留言内容：</label>
+			                <div class="controls">
+			                    <textarea id="content" name="content" style="width:250px; height:120px;"></textarea>
+			                </div>
+						</div>
+						<div class="control-group" style="height:20px;"></div>
+						<div class="control-group">
+							<label class="control-label" style="float: left; width: 100px; text-align: right;"></label>
+			                <div class="controls">
+								<a href="javascript:void(0);" onclick="resetform();">重 置</a>
+								<a href="javascript:void(0);" onclick="subliuyan()">提 交</a>
+							</div>
+						</div>
+						
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<#include "wwwroot/www/template/friend_link.html">
+		</div>
+	</div>
+	<#include "wwwroot/www/template/footer.html">
+</body>
+</html>

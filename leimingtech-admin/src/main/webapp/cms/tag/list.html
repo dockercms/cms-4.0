@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="media/dgsw/css/main.css"/>
+</head>
+<script>
+	function changepic(obj,img){
+		obj.src=img;
+	}
+</script>
+<body>
+	<#include "cms/tag/logoAndSearch.html">
+	<#include "cms/tag/nav.html">
+    <div class="div_l2mid">
+    	<div class="div_l2top"></div>
+    	<div class="div_l2main">
+			<div class="div_l2left">
+            	<div><img src="media/dgsw/img/l2-zhaoshang.png" width="175" height="49" />
+                	<ul>
+                    	<li><a href="#"><span class="c">招商动态</span><span class="e">Business dynamic</span></a>
+                        	<ul>
+                            	<li><a href="#">工业厂房</a></li>
+                                <li><a href="#">工业厂房</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div><a href="#"><img src="media/dgsw/img/img_locate.png" width="175" height="32" /></a></div>
+                <div><img src="media/dgsw/img/img_800.png" width="175" height="37" /></div>
+                <div class="div_line1"></div>
+                <div>
+                	<table cellspacing="3">
+                    	<tr>
+                        	<td>关注我们：</td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_weibo.png" width="20" height="20" /></a></td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_qq.png" width="20" height="20" /></a></td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_rss.png" width="19" height="20" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+          	</div>
+            <div class="div_l2right">
+            	<div><img src="media/dgsw/img/s_banner4.jpg" width="781" height="120" /></div>
+              <div class="title">
+              	<#assign name ="catalogTag">
+				<#assign catalogTag =newTag("${name}")>
+            	<#assign catalog =catalogTag("{'level':'self','name':'${catalogid[0]}'}")>
+				<#if catalog>
+						${catalog.name}
+				</#if>
+              </div>
+                <div class="navi"><a href="#">首页</a>--<a href="#">关于我们</a>--<a href="#" class="act">招商政策</a></div>
+              	<div class="line2 clear"></div>
+                <div class="div_l2content">
+                	<ul class="zc">
+	                	<#assign name ="articleTag">
+						<#assign articleTag =newTag("${name}")>
+						<#assign articleList =articleTag("{'name':'${catalog.id}','page':true,'pagesize':'12','pageindex':'1','level':'all'}")>
+						<#if articleList>
+							<#list articleList as article>
+                    			<li>
+                    				<a href="/templatePreViewAction.do?detail&articleid=${article.id}" <#if article_index%2==0>class="bg"</#if> target="_blank" >
+                    					<span class="right">发布时间：<#if article.published>${article.published?string('yyyy-MM-dd')}</#if></span>
+                    					<span class="left">${article.title}</span>
+                					</a>
+            					</li>
+							</#list>
+						</#if>
+                    </ul>
+                  <div class="line3"></div>
+                    <table width="100%" style="margin-top:10px;">
+                    	<tr align="center">
+                        	<td width="140">&nbsp;</td>
+                            <td width="*"> </td>
+                            <td width="140">当前为第1页/共7页</td>
+                            <td width="42"><a href="#" class="page">首页</a></td>
+                            <td width="50"><a href="#" class="page">上一页</a></td>
+                            <td width="70"><a href="#">1</a> <a href="#">2</a> <a href="#">3</a>...<a href="#">6</a> <a href="#">7</a></td>
+                            <td width="50"><a href="#" class="page">下一页</a></td>
+                            <td width="42"><a href="#" class="page">末页</a></td>
+                        </tr>
+                    </table>
+                </div>
+   		  </div>
+            <div class="clear"></div>
+            <#include "cms/tag/friend_link.html">
+		</div>
+    </div>
+<#include "cms/tag/footer.html">
+<#include "cms/tag/fbtn.html">
+<#include "cms/tag/login.html">
+</body>
+</html>

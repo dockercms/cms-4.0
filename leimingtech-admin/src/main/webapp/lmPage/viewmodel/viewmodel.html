@@ -1,0 +1,101 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>界面模板</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">名称</label>
+							<div class="controls">
+								<input type="text" id="name" name="name" class="span6 m-wrap" value="${page.name?if_exists}"/>
+								<span class="help-inline">填写名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">显示顺序</label>
+							<div class="controls">
+								<input type="text" id="sorts" name="sorts" class="span6 m-wrap" value="${page.sorts?if_exists}"/>
+								<span class="help-inline">填写显示顺序</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模板路径</label>
+							<div class="controls">
+								<input type="text" id="localpath" name="localpath" class="span6 m-wrap" value="${page.localpath?if_exists}"/>
+								<span class="help-inline">填写模板路径</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">效果图片</label>
+							<div class="controls">
+								<input type="text" id="effectimg" name="effectimg" class="span6 m-wrap" value="${page.effectimg?if_exists}"/>
+								<span class="help-inline">填写效果图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模板序号</label>
+							<div class="controls">
+								<input type="text" id="serialnumber" name="serialnumber" class="span6 m-wrap" value="${page.serialnumber?if_exists}"/>
+								<span class="help-inline">填写模板序号</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模板类型</label>
+							<div class="controls">
+							<select id="select_model_type" class="span6 m-wrap" >
+								<option value="0">--请选择模板类型--</option>
+								<option value="index">首页模板</option>
+								<option value="list">列表页模板</option>
+								<option value="detail">详细页模板</option>
+							</select>
+							<input type="text" style="display:none;" id="type" name="type" value="${page.type?if_exists}"/>
+							<span class="help-inline">选择模板类型</span>
+							</div>
+							<script>
+							if($("#type").val()==""){
+								$('#select_model_type option').eq(0).attr("selected","selected");
+							}else{
+								$('#select_model_type').find('option[value="'+$("#type").val()+'"]').attr("selected","selected");
+							}
+							
+							$('#select_model_type').change(function(){
+								var i=$('#select_model_type').get(0).selectedIndex;
+								var val=$('#select_model_type option').eq(i).val();
+								$('#type').val(val);
+							});
+							</script>
+						</div>
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<input type="text" id="status" name="status" class="span6 m-wrap" value="${page.status?if_exists}"/>
+								<span class="help-inline">填写状态</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">token</label>
+							<div class="controls">
+								<input type="text" id="token" name="token" class="span6 m-wrap" value="${page.token?if_exists}"/>
+								<span class="help-inline">填写token</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('viewmodelController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

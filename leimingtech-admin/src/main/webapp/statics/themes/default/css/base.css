@@ -1,0 +1,78 @@
+﻿@charset "utf-8";
+/**
+* @xweibo component
+* @xweibo 输出挂件的公用样式设置
+*/
+
+/* reset css */
+body,p,ul,li,h5 {margin:0;padding:0;}
+body{font:12px/1.5 Tahoma, Geneva, sans-serif; word-wrap:break-word; word-break:break-all;}
+textarea{ font-family:Arial, Geneva, sans-serif; overflow-x:hidden; overflow-y:auto; resize:none;}
+input:focus,
+textarea:focus{ outline:none;}
+li{ list-style:none;}
+a {text-decoration:none;outline:none;}
+.hidden { display:none !important; }
+
+.weibo-main a:hover {text-decoration:underline;}
+img {border:none;}
+
+/* 导入背景图片 */
+.arrow-icon{background:url(../img/ico_tblog_arrow.gif) no-repeat;}
+
+/* 微博 */
+	/* 上下边框 */
+	.wrap-top,.wrap-bottom {display:block;margin:0 1px;height:1px;overflow:hidden;}
+	/* 上下箭头 */
+	.arrow-up,.arrow-down{display:block;padding-top:3px;height:7px;text-align:center;_font-size:0;}
+	.arrow-up img,
+	.arrow-down img { *display:block;  }
+	/* 微博标题 */
+	.weibo-title {height:30px;line-height:30px;overflow:hidden;_zoom:1}
+	.mimi-logo {float:left;margin:5px 0 0 10px;height:16px;width:20px;background:url(../img/logo_mini.png) no-repeat;_position:relative;_background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="css/bgimg/logo_mini.png", sizingMethod="scale");_display:inline;}
+	.weibo-title a.title {display:inline-block;margin-left:10px;}
+	
+	/* 微博用户 */
+	.weibo-head {margin:0 10px;padding-top:12px;overflow:hidden;_zoom:1}
+	.user-pic { float:left;margin:0 11px 0 0; }
+	.user-pic img {padding:1px;height:50px;width:50px;border:1px solid #C1C9CF;}
+	.location {margin-left:2px;}
+	
+	/* 微博列表 */
+	.weibo-main {margin:9px 9px 0;}
+	.weibo-list ul li {padding:8px 0;}
+	.weibo-list ul { padding-bottom:20px; }
+	.weibo-txt {padding-bottom:8px;} 
+	.weibo-txt .weibo-img { margin-top:8px;display:block; }
+	.weibo-info p {float:right;color:#c6c6c6;}
+	.weibo-info p a {margin:0 5px;}
+
+	.weibo-show, .weibo-topic, .weibo-follow, .weibo-list {overflow:hidden;}
+	.weibo-show h3, .weibo-follow h3, .weibo-topic h3 { margin:0;padding:0;font:700 14px/1.6 "宋体",arial; }
+	.weibo-show .weibo-list ul li,
+	.weibo-topic .weibo-list ul li,
+	.user-list ul li {background:url(../img/bottom_line.gif) 0 bottom repeat-x;overflow:hidden;_zoom:1;}
+	
+	.weibo-topic .weibo-txt, .weibo-topic .weibo-info {margin-left:74px;}
+	
+	.weibo-follow .weibo-list ul {overflow:hidden;_zoom:1;}
+	.weibo-follow .weibo-list ul li {float:left;margin-left:15px;width:54px;overflow:hidden;text-align:center;_display:inline;}
+	.weibo-follow .weibo-list ul li .user-pic {margin:0;}
+	.weibo-follow .weibo-list ul li .name {height:18px;width:4em;overflow:hidden;}
+	.weibo-follow .weibo-list ul li .follow {color:#44B1DA;}
+	.weibo-follow .weibo-list ul li span {color:#999;}
+	
+	/*推荐关注列表*/
+	.recom-list { overflow:hidden;_zoom:1; }
+	.recom-list ul { padding-bottom:15px;overflow:hidden;_zoom:1; }
+	.recom-list ul li { float:left;margin:20px 10px 0;_display:inline; }
+	.recom-list ul li .user-pic { float:none;margin-left:15px;width:54px;height:54px; }
+	.recom-list ul li .user-name { text-align:center; }
+	.recom-list ul li p { width:85px;height:36px;text-align:center;color:#707070;font-style:normal;overflow:hidden; }
+	.recom-list .btn-area { margin:10px auto;width:106px;overflow:hidden;  }
+	.weibo-follow .unlogin-tips { margin-top:10px; }
+	.recom-list .unlogin-tips { margin-bottom:15px; }
+	.weibo-follow .unlogin-tips p,
+	.recom-list .unlogin-tips p { text-align:center;  }
+	
+

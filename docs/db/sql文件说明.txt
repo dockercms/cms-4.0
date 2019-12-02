@@ -1,0 +1,35 @@
+1.clear.sql
+	这里面的主要是清除的没用表的数据(刚进入的初始状态)
+2. lm-cms-initial.sql
+	这里面是初始化的表和数据(刚进入的初始状态)  
+3.update.sql
+	这里面是项目开发中添加的表,和修改表的字段(如果控制台出现缺少字段的错误就从这个sql里面添加)
+
+(1和2达到的效果是一样的)
+
+
+不能删除的表数据
+cms_function,cms_user,cms_base_user,cms_depart,cms_role,cms_role_user,cms_role_function,cm_mobile_channel,cm_mobile_channel_priv,
+
+cms_advertising,cms_advertising_space,cms_attach_picture,cms_content_cat,cms_content_cat_priv,cms_content_extractor_rule,
+
+cms_doc,cms_doc_entity,cms_doc_entity_property,cms_doc_entity_ref,cms_doc_param,cms_doc_returnvalue,cms_doc_type,cms_friendlink,
+
+cms_friendlink_ctg,cms_function,cms_model,cms_role_site,cms_site,cms_type,cms_typegroup,cms_wap_config,cms_wap_expand
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,331 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="modal-header">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>内容</div>
+			
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">栏目ID</label>
+							<div class="controls">
+								<input type="text" id="catid" name="catid" class="span6 m-wrap" value="${page.catid?if_exists}"/>
+								<span class="help-inline">填写栏目ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模型ID</label>
+							<div class="controls">
+								<input type="text" id="modelid" name="modelid" class="span6 m-wrap" value="${page.modelid?if_exists}"/>
+								<span class="help-inline">填写模型ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题</label>
+							<div class="controls">
+								<input type="text" id="title" name="title" class="span6 m-wrap" value="${page.title?if_exists}"/>
+								<span class="help-inline">填写标题</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">短标题</label>
+							<div class="controls">
+								<input type="text" id="subtitle" name="subtitle" class="span6 m-wrap" value="${page.subtitle?if_exists}"/>
+								<span class="help-inline">填写短标题</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">颜色</label>
+							<div class="controls">
+								<input type="text" id="color" name="color" class="span6 m-wrap" value="${page.color?if_exists}"/>
+								<span class="help-inline">填写颜色</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">缩略图</label>
+							<div class="controls">
+								<input type="text" id="thumb" name="thumb" class="span6 m-wrap" value="${page.thumb?if_exists}"/>
+								<span class="help-inline">填写缩略图</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标签</label>
+							<div class="controls">
+								<input type="text" id="tags" name="tags" class="span6 m-wrap" value="${page.tags?if_exists}"/>
+								<span class="help-inline">填写标签</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">作者</label>
+							<div class="controls">
+								<input type="text" id="author" name="author" class="span6 m-wrap" value="${page.author?if_exists}"/>
+								<span class="help-inline">填写作者</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">编辑人</label>
+							<div class="controls">
+								<input type="text" id="editor" name="editor" class="span6 m-wrap" value="${page.editor?if_exists}"/>
+								<span class="help-inline">填写编辑人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">来源ID</label>
+							<div class="controls">
+								<input type="text" id="sourceid" name="sourceid" class="span6 m-wrap" value="${page.sourceid?if_exists}"/>
+								<span class="help-inline">填写来源ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">URL路径</label>
+							<div class="controls">
+								<input type="text" id="url" name="url" class="span6 m-wrap" value="${page.url?if_exists}"/>
+								<span class="help-inline">填写URL路径</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">宽度</label>
+							<div class="controls">
+								<input type="text" id="weight" name="weight" class="span6 m-wrap" value="${page.weight?if_exists}"/>
+								<span class="help-inline">填写宽度</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<input type="text" id="status" name="status" class="span6 m-wrap" value="${page.status?if_exists}"/>
+								<span class="help-inline">填写状态</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">创建时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="created" name="created" value="${page.created?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">创建人</label>
+							<div class="controls">
+								<input type="text" id="createdby" name="createdby" class="span6 m-wrap" value="${page.createdby?if_exists}"/>
+								<span class="help-inline">填写创建人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">发布时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="published" name="published" value="${page.published?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">发布人</label>
+							<div class="controls">
+								<input type="text" id="publishedby" name="publishedby" class="span6 m-wrap" value="${page.publishedby?if_exists}"/>
+								<span class="help-inline">填写发布人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">unpublished</label>
+							<div class="controls">
+								<input type="text" id="unpublished" name="unpublished" class="span6 m-wrap" value="${page.unpublished?if_exists}"/>
+								<span class="help-inline">填写unpublished</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">unpublishedby</label>
+							<div class="controls">
+								<input type="text" id="unpublishedby" name="unpublishedby" class="span6 m-wrap" value="${page.unpublishedby?if_exists}"/>
+								<span class="help-inline">填写unpublishedby</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">修改时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="modified" name="modified" value="${page.modified?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">修改人</label>
+							<div class="controls">
+								<input type="text" id="modifiedby" name="modifiedby" class="span6 m-wrap" value="${page.modifiedby?if_exists}"/>
+								<span class="help-inline">填写修改人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">检查时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="checked" name="checked" value="${page.checked?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">检查人</label>
+							<div class="controls">
+								<input type="text" id="checkedby" name="checkedby" class="span6 m-wrap" value="${page.checkedby?if_exists}"/>
+								<span class="help-inline">填写检查人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">锁定时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="locked" name="locked" value="${page.locked?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">锁定人</label>
+							<div class="controls">
+								<input type="text" id="lockedby" name="lockedby" class="span6 m-wrap" value="${page.lockedby?if_exists}"/>
+								<span class="help-inline">填写锁定人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">注解时间</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="noted" name="noted" value="${page.noted?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">注解人</label>
+							<div class="controls">
+								<input type="text" id="notedby" name="notedby" class="span6 m-wrap" value="${page.notedby?if_exists}"/>
+								<span class="help-inline">填写注解人</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">注解</label>
+							<div class="controls">
+								<input type="text" id="note" name="note" class="span6 m-wrap" value="${page.note?if_exists}"/>
+								<span class="help-inline">填写注解</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">工作流步骤</label>
+							<div class="controls">
+								<input type="text" id="workflowStep" name="workflowStep" class="span6 m-wrap" value="${page.workflowStep?if_exists}"/>
+								<span class="help-inline">填写工作流步骤</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">工作流角色ID</label>
+							<div class="controls">
+								<input type="text" id="workflowRoleid" name="workflowRoleid" class="span6 m-wrap" value="${page.workflowRoleid?if_exists}"/>
+								<span class="help-inline">填写工作流角色ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">是否投稿</label>
+							<div class="controls">
+								<input type="text" id="iscontribute" name="iscontribute" class="span6 m-wrap" value="${page.iscontribute?if_exists}"/>
+								<span class="help-inline">填写是否投稿</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">专栏ID</label>
+							<div class="controls">
+								<input type="text" id="spaceid" name="spaceid" class="span6 m-wrap" value="${page.spaceid?if_exists}"/>
+								<span class="help-inline">填写专栏ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">related</label>
+							<div class="controls">
+								<input type="text" id="related" name="related" class="span6 m-wrap" value="${page.related?if_exists}"/>
+								<span class="help-inline">填写related</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">浏览量</label>
+							<div class="controls">
+								<input type="text" id="pv" name="pv" class="span6 m-wrap" value="${page.pv?if_exists}"/>
+								<span class="help-inline">填写浏览量</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">是否允许评论</label>
+							<div class="controls">
+								<input type="text" id="allowcomment" name="allowcomment" class="span6 m-wrap" value="${page.allowcomment?if_exists}"/>
+								<span class="help-inline">填写是否允许评论</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">扩展字段json</label>
+							<div class="controls">
+								<input type="text" id="docextendjson" name="docextendjson" class="span6 m-wrap" value="${page.docextendjson?if_exists}"/>
+								<span class="help-inline">填写扩展字段json</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">扩张字段数</label>
+							<div class="controls">
+								<input type="text" id="extendcount" name="extendcount" class="span6 m-wrap" value="${page.extendcount?if_exists}"/>
+								<span class="help-inline">填写扩张字段数</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<input type="text" id="description" name="description" class="span6 m-wrap" value="${page.description?if_exists}"/>
+								<span class="help-inline">填写描述</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">备用字段1</label>
+							<div class="controls">
+								<input type="text" id="prop1" name="prop1" class="span6 m-wrap" value="${page.prop1?if_exists}"/>
+								<span class="help-inline">填写备用字段1</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">备用字段2</label>
+							<div class="controls">
+								<input type="text" id="prop2" name="prop2" class="span6 m-wrap" value="${page.prop2?if_exists}"/>
+								<span class="help-inline">填写备用字段2</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">备用字段3</label>
+							<div class="controls">
+								<input type="text" id="prop3" name="prop3" class="span6 m-wrap" value="${page.prop3?if_exists}"/>
+								<span class="help-inline">填写备用字段3</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">备用字段4</label>
+							<div class="controls">
+								<input type="text" id="prop4" name="prop4" class="span6 m-wrap" value="${page.prop4?if_exists}"/>
+								<span class="help-inline">填写备用字段4</span>
+							</div>
+						</div>
+				<div class="modal-footer">
+					<button type="button" onclick="formSubmitModel('contentsController.do?save', 'form');" class="btn btn-primary">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

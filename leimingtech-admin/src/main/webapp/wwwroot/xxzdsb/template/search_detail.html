@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://faneuro.cn/Goods_list_29.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<title>${contentF.title!''}</title>
+
+<meta name="Description" content="UPS,电源,电池,太阳能,发电,精密空调,EPS,高压直流 ">
+<meta name="Keywords" content="UPS,电源,电池,太阳能,发电,精密空调,EPS,高压直流 ">
+<!-- 首页样式、公用样式、js (线上已有)↓↓↓ -->
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/css/region.css"/>
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<script type="text/javascript" src="/js/indexnew.js"></script>
+ <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+
+<!-- 内容页js -->
+<script src="/js/page.js"></script>
+
+<!-- 我是分割线 -->
+<script type="text/javascript">
+
+$(function(){ 
+	if($.cookie("history")){
+		var historycookies=$.cookie("history").split("|");
+		var list="";
+		$("#historys").show();
+		for(var i=0;i<historycookies.length-1;i++){
+			var outval=historycookies[i].split(",");
+			
+			list+="<li><a href=\""+outval[2]+"\"><div class=\"imgCon\"><img  src=\""+outval[1]+"\"></div><div class=\"imgText\">"+outval[0]+"</div></a></li>"
+				}
+	    $("#News1").html(list);
+  	}
+  });	
+
+</script>
+
+<!-- 内容页样式-必须放到首页样式以下 -->
+<link rel="stylesheet" href="/css/page.css">
+</head>
+<body>
+<!-- 头部暂时引用↓↓↓↓↓ -->
+
+
+
+
+	<#include "/wwwroot/${sitePath}/template/common/index_nav.html">
+
+
+
+<!-- 头部暂时引用↑↑↑↑↑↑↑ -->
+<!-- 商品详情页start -->
+<div class="wrapper">
+	<div class="guideNav w1190 mtauto">
+		<a href="/">首页</a>
+		<span>&gt;</span>
+		<#assign navTag =newTag("navTag")>
+	<#assign navTagList =navTag("{'name':'${catalogF.id}'}")>
+	<#if navTagList?exists>
+		<#list navTagList as navTag>
+				
+			<a href="${navTag.url!'javascript:void(0);'}">${navTag.name!''}</a>
+	
+	    <span>&gt;</span>
+
+        </#list>
+        </#if> 
+				
+			<span class="on"> ${contentF.title!''}</span>
+		
+		
+	</div>
+
+	<div class="information clearfix">
+		<div class="infor-left">
+			<div class="imgActivity_r infor-box" id="historys" style="display: none;">
+				<strong class="infor-title"  >浏览历史</strong>
+				<ul class="clearfix infor-productList" id="News1">
+					
+					
+				</ul>
+			</div>
+			<div class="imgActivity_r infor-box">
+				<strong class="infor-title">推荐商品</strong>
+				<ul class="infor-productList" id="News0">
+					<#assign articleTag =newTag("articleTag")>
+				<#assign articleList =articleTag("{'name':'${catalogF.id}','count':'5','level':'all','order':'top'}")>
+				<#if articleList?exists && articleList?size gt 0>	
+					<#list articleList as article>						
+				<li>
+				<a href="${article.url!'javascript:void(0);'}">
+				<div class="imgCon"><img  src="${article.thumb}">
+				</div>
+				<div class="imgText">${article.title}</div></a>
+				</#list>
+				</#if>
+				</li>
+				</ul>
+			</div>
+		</div>
+		<div class="infor-right">
+			<ul class="infor-tab clearfix">
+				<li class="active"><a href="javascript:;">商品信息</a></li>			
+			</ul>
+			<div class="infor-tab-con" style="display: block;">
+				<div class="infor-introduce">
+				
+				</div>
+				<div class="infor-introduce">
+					<div class="introduce-title clearfix">
+						<strong>商品描述</strong>
+					</div>
+					<div class="introduce-con-show">
+						${articleDataF.content!''}
+					</div>
+				</div>
+				</div>	
+				</div>
+				</div>
+				</div>
+			
+
+
+<!-- 商品列表筛选end -->
+
+<!-- 尾部 -->
+
+
+
+<!-- 
+<div class="new-footer">
+	<div class="w1190 mtauto f-tal f-oh" style="text-align:center">
+    	<img src="ynccss/new-footer_img.png" />
+        
+    </div>
+</div>
+ -->
+
+<!-- 新版底部 start -->
+
+<div class="footer f-tac">
+<#include "/wwwroot/${sitePath}/template/common/footer.html">
+</div>
+
+
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,71 @@
+
+<table class="table table-striped table-bordered table-hover"
+	id="sample_1">
+	<tbody>
+		<tr>
+
+			<th style="text-align:center">项目</th>
+			<th width="100" style="text-align:center">启用</th>
+			<th width="35" style="text-align:center">必填</th>
+			<th width="60" style="text-align:center">前端显示</th>
+
+		</tr>
+
+		<#if activityOptionContentList?if_exists> <#list
+		activityOptionContentList as activityOptionContent>
+		<tr>
+			<#if activityOptionContent.isShow==1 &&
+			activityOptionContent.isEnabled==1>
+			<td>${activityOptionContent.optionName} <input type="hidden"
+				class="optionids" name="optionids"
+				value="${activityOptionContent.optionids}"></td>
+			<td><input type="hidden" name="isEnableds" value="1"> <input
+				type="checkbox" class="isEnableds" disabled="disabled"
+				checked="checked" /></td>
+			<td><input type="hidden" name="isRequired" value="1"> <input
+				type="checkbox" class="isRequired" disabled="disabled"
+				checked="checked" /></td>
+			<td><input type="hidden" name="isReceptionshow" value="1">
+				<input type="checkbox" class="isReceptionshow" disabled="disabled"
+				checked="checked" /></td> <#elseif activityOptionContent.isEnabled==1>
+			<td>${activityOptionContent.optionName} <input type="hidden"
+				class="optionids" name="optionids"
+				value="${activityOptionContent.optionids}"></td>
+			<td><input type="hidden" name="isEnableds"
+				value="${activityOptionContent.isEnableds!0}"> <input
+				type="checkbox" class="isEnableds"<#if
+				activityOptionContent.isEnableds=="1">checked</#if> /></td>
+			<td><input type="hidden" name="isRequired"
+				value="${activityOptionContent.isRequired!0}"> <input
+				type="checkbox" class="isRequired"<#if
+				activityOptionContent.isRequired=="1">checked</#if> /></td>
+			<td><input type="hidden" name="isReceptionshow"
+				value="${activityOptionContent.isReceptionshow!0}"> <input
+				type="checkbox" class="isReceptionshow"<#if
+				activityOptionContent.isReceptionshow=="1">checked</#if> /></td> </#if>
+		</tr>
+		</#list> </#if>
+	</tbody>
+</table>
+
+<script>
+	function jump(tourl) {
+		$.ajax({
+			type : 'post',
+			url : tourl,
+			data : 'data=0',
+			dataType : 'text',
+			success : function(msg) {
+				$('#editModel').modal('hide');
+				$('#optionDiv').empty();
+				$('#optionDiv').append(msg);
+			},
+			error : function() {
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	$("#sample_1").find(":input:checkbox").change(function() {
+		$(this).parent().find(":hidden").val(this.checked ? 1 : 0);
+	});
+</script>

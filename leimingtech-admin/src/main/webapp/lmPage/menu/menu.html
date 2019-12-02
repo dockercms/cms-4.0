@@ -1,0 +1,74 @@
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div id="menuBody" class="span4">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-sitemap"></i>菜单管理</div>
+			</div>
+			<div class="portlet-body fuelux" id="tree_3">
+			</div>
+		</div>
+	</div>
+	<div class="span8" id="divBody">
+		
+	</div>
+</div>
+
+<div id="editModel" class="modal hide fade" data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>
+<div id="toEditModelSub" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="600">
+</div>
+<script type="text/javascript">
+$(function (){
+	 changeDivBody('menuController.do?menuTable', 'divBody');
+	 $("#tree_3").jstree({"types" : {"default" : { "icon" : "fa fa-folder icon-success icon-lg" }},
+	    "plugins": ["types"],"core" : {"themes" : { "responsive": false},  "check_callback" : true,'data': ${jstreeData}}});
+	$("#tree_3").coffee({click:{'.jstree-anchor':function (){
+		var id=$(this).parent().attr("id");
+		changeDivBody('menuController.do?menuTable&id=' + id, 'divBody');
+	}}
+	});
+});
+
+function formSubmitFunction(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				$('#editModel').empty();
+				$('#editModel').modal('hide');
+				lmAlert(obj.msg);
+				lazyChangePage(obj.toUrl);
+			}else{
+				lmAlert(obj.msg);
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		}
+	});
+}
+
+function flushMenu(id){
+	$.ajax({
+		type:'post',
+		url:'menuController.do?flushMenu',
+		data:'id=' + id,
+		success:function(msg){
+			$('#menuBody').empty();
+			$('#menuBody').append(msg);
+		},
+		error:function(){
+			lmAlert("请求刷新菜单失败!");
+		}
+	})
+}
+</script>
+<!-- END PAGE CONTENT-->

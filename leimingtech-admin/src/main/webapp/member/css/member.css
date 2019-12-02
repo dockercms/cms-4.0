@@ -1,0 +1,50 @@
+﻿#maincontent{ width:975px; margin:20px auto 10px auto;}
+#leftcontent{ border:solid 1px #FED9B4; background-color:#FFFAF5; float:left; width:178px; overflow:hidden;}
+#leftcontent dl{ padding:15px;}
+#leftcontent dt{ padding:0px 0px 10px 0px; font-weight:bold; font-size:18px; color:#FD780F; line-height:25px;}
+#leftcontent li{ border-bottom:solid 1px #FCE0C4; padding:7px 0px 5px 0px; height:20px; line-height:20px;}
+#leftcontent li img{ float:left; margin:2px 8px 0px 0px; }
+#leftcontent li a{ font-size:14px; color:#595C5F;}
+#leftcontent li a:hover{ color:#FD780F;}
+#rightcontent{ padding:0px 0px 15px 0px; border:solid 1px #E6E5E5; width:784px; float:right; background-color:White;}
+#rightcontent .dl{ margin:15px 0px 0px 15px; display:inline; width:348px; padding:10px; float:left; border:solid 1px #E6E5E5;}
+#rightcontent .dl dt{ padding:0px 10px; height:28px; line-height:28px; overflow:hidden; background-color:#F7F7F7; font-size:14px; font-weight:bold; color:#FD780F;}
+#rightcontent .dl dd{ padding:5px 10px;}
+#rightcontent .dl dd p{ height:25px; line-height:25px; overflow:hidden;}
+#rightcontent .dl dd a{ color:#5E99D6;}
+#rightcontent .dl dd .a{ color:#FD780F; float:right;}
+#rightcontent .dl dd .span{color:#5E99D6; float:right;}
+#rightcontent .dl dd .span a{ margin:0px 2px;}
+#rightcontent .dl dd b{ color:#FD780F; font-weight:bold;}
+#rightcontent .top{ line-height:20px; padding:15px 15px 0px 15px;}
+#rightcontent .top strong{ font-weight:normal; color:#FD8311;}
+#rightcontent .top a{ color:#5E99D6;}
+#rightcontent .l{ padding:0px 0px 0px 14px; width:370px;  float:left;}
+#rightcontent .l dl{ display:inline-block; width:348px; overflow:hidden; margin:15px 0px 0px 0px; padding:10px;  border:solid 1px #E6E5E5;}
+#rightcontent .l dl dt{ padding:0px 10px; height:28px; line-height:28px; overflow:hidden; background-color:#F7F7F7; font-size:14px; font-weight:bold; color:#FD780F;}
+#rightcontent .l dd{ padding:5px 10px;}
+#rightcontent .l p{line-height:23px; height:23px; overflow:hidden; }
+#rightcontent .l h4{color:#FD780F;line-height:23px; height:23px; overflow:hidden; }
+#rightcontent .l b{ color:#FD780F; font-weight:normal;}
+#rightcontent .l a{ margin:0px 1px; color:#5E99D6;}
+#rightcontent .l span{color:#5E99D6;}
+#rightcontent .l .a{ font-weight:normal; float:right;}
+#rightcontent .l .span{ float:right;}
+#rightcontent .l label{ float:right;}
+#rightcontent .l .img{ padding:8px 0px 0px 5px; overflow:hidden; float:left; height:135px; width:97px; line-height:22px;}
+#rightcontent .l .img p{ line-height:22px; text-align:center; color:#FD9543;}
+#rightcontent .l .img a{ color:#FD9543; margin:0px 4px;}
+#rightcontent .l .img img{ width:97px; height:120px;}
+#rightcontent .l .info{ float:right; width:210px; overflow:hidden;padding:8px 0px 0px 0px;}
+#rightcontent .l .info p{ padding:1px 0px;}
+#rightcontent .l .info h3{ padding-bottom:5px; color:#FD9543; font-size:14px;}
+#rightcontent .l .info span{color:#FD9543;}
+#rightcontent .l  .link{ border-top:dotted 1px #E6E5E5;}
+#rightcontent .l  .link a{ margin:0px 3px;}
+#rightcontent .r{ width:370px; padding:15px 14px 0px 0px; float:right;}
+#rightcontent .r dl{ padding:10px;  border:solid 1px #E6E5E5;}
+#rightcontent .r dl dt{ padding:0px 10px; height:28px; line-height:28px; overflow:hidden; background-color:#F7F7F7; font-size:14px; font-weight:bold; color:#FD780F;}
+#rightcontent .r dl dd{ padding:5px 10px; padding:6px 10px;}
+#rightcontent .r li{ padding:10px 0px 11px 0px;border-bottom:dotted 1px #A6A6A6; height:60px; line-height:20px; overflow:hidden;}
+#rightcontent .r li p{ height:20px; line-height:20px; overflow:hidden;}
+#rightcontent .r li a{ color:#FD780F; font-weight:normal;}

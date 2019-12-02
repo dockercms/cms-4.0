@@ -1,0 +1,302 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">砸金蛋</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<#--
+        <div class="control-group">
+			<label class="control-label">关键词</label>
+			<div class="controls">
+				<input type="text" id="keyword" name="keyword" class="span3 form-control" value="${page.keyword?if_exists}"/>
+			</div>
+		</div>
+		-->
+		<div class="control-group">
+			<label class="control-label">活动名称</label>
+			<div class="controls">
+				<input type="text" id="title" name="title" class="span3 form-control" value="${page.title!'砸金蛋活动开始了'}"/>
+				<span class="help-inline">请不要多于50字!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">兑奖信息</label>
+			<div class="controls">
+				<input type="text" id="txt" name="txt" class="span3 form-control" value="${page.txt!'兑奖请联系我们，电话18950099999'}"/>
+				<span class="help-inline">请不要多于100字! 这个设定但用户输入兑奖时候的显示信息!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">中奖提示信息</label>
+			<div class="controls">
+				<textarea id="sttxt" class="span3" name="sttxt">${page.sttxt?if_exists}</textarea>
+				<span class="help-inline">中奖后,提示信息</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">活动时间</label>
+			<div class="controls">
+				<input class="form-control" readonly type="text" id="statdate" name="statdate" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="<#if page.statdate?exists>${page.statdate?if_exists}<#else>${statdate}</#if>"/>
+				至
+				<input class="form-control" readonly type="text" id="enddate" name="enddate" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="<#if page.enddate?exists>${page.enddate?if_exists}<#else>${enddate}</#if>"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">活动说明</label>
+			<div class="controls">
+				<textarea id="info" class="span3" name="info" class="text">${page.info!'亲，请点击进入砸金蛋抽奖活动页面，祝您好运哦！'}</textarea>
+				<span class="help-inline">换行请输入 &lt;br&gt;</span>
+			</div>
+		</div>
+		<#--
+		<div class="control-group">
+			<label class="control-label">重复抽奖回复</label>
+			<div class="controls">
+				<input type="text" id="aginfo" name="aginfo" class="span3 form-control" value="${page.aginfo?if_exists}"/>
+				<span class="help-inline">备注： 如果设置只允许抽一次奖的，请写：你已经玩过了，下次再来。 如果设置可多次抽奖，请写：亲，继续努力哦！</span>
+			</div>
+		</div>
+		-->
+		<div class="control-group">
+			<label class="control-label">活动开始图片</label>
+			<div class="controls">
+				<input type="text" id="starpicurl" name="starpicurl" class="span3 form-control" value="${page.starpicurl!'/images/activity-zadan-start.jpg'}"/>
+				<a class="btn blue" href="javascript:void(0);" onclick="toEditModelTwo('attachPictureController.do?tableDialog&requestCode=starpicurl')">
+					图片库 <i class="icon-search"></i>
+				</a>
+				<div id="uploadStarpicurl" class="btn green" style="padding:0px !important;">选取<i class="icon-upload-alt"></i></div>
+			</div>
+		</div>
+		
+		<br/>
+		<br/>
+		<div class="control-group">
+			<label class="control-label">活动结束公告主题</label>
+			<div class="controls">
+				<input type="text" id="endtite" name="endtite" class="span3 form-control" value="${page.endtite!'砸金蛋活动已经结束了'}"/>
+				<span class="help-inline">请不要多于50字!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">活动结束说明</label>
+			<div class="controls">
+				<textarea id="endinfo" class="span3" name="endinfo" class="text">${page.endinfo!'亲，活动已经结束，请继续关注我们的后续活动哦。'}</textarea>
+				<span class="help-inline">换行请输入 &lt;br&gt;</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">活动结束图片</label>
+			<div class="controls">
+				<input type="text" id="endpicurl" name="endpicurl" class="span3 form-control" value="${page.endpicurl!'/images/activity-zadan-end.jpg'}"/>
+				<a class="btn blue" href="javascript:void(0);" onclick="toEditModelTwo('attachPictureController.do?tableDialog&requestCode=endpicurl')">
+					图片库 <i class="icon-search"></i>
+				</a>
+				<div id="uploadEndpicurl" class="btn green" style="padding:0px !important;">选取<i class="icon-upload-alt"></i></div>
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<div class="control-group">
+			<label class="control-label">一等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="fist" name="fist" class="span3 form-control" value="${page.fist?if_exists}"/>
+				<span class="help-inline">请不要多于50字!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">一等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="fistnums" name="fistnums" class="span1 form-control" value="${page.fistnums!'0'}"/>
+				<span class="help-inline" style="color:red;">如果是100%中奖,请把一等奖的奖品数量[ 1000就代表前1000人都中奖 ]填写多点</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">二等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="second" name="second" class="span3 form-control" value="${page.second?if_exists}"/>
+				<span class="help-inline">请不要多于50字!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">二等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="secondnums" name="secondnums" class="span1 form-control" value="${page.secondnums!'0'}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">三等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="third" name="third" class="span3 form-control" value="${page.third?if_exists}"/>
+				<span class="help-inline">请不要多于50字!</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">三等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="thirdnums" name="thirdnums" class="span1 form-control" value="${page.thirdnums!'0'}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">四等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="four" name="four" class="span3 form-control" value="${page.four?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">四等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="fournums" name="fournums" class="span1 form-control" value="${page.fournums!''}"/>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">五等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="five" name="five" class="span3 form-control" value="${page.five?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">五等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="fivenums" name="fivenums" class="span1 form-control" value="${page.fivenums!'0'}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">六等奖奖品设置</label>
+			<div class="controls">
+				<input type="text" id="six" name="six" class="span3 form-control" value="${page.six?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">六等奖奖品数量</label>
+			<div class="controls">
+				<input type="text" id="sixnums" name="sixnums" class="span1 form-control" value="${page.sixnums!'0'}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">预计活动的人数</label>
+			<div class="controls">
+				<input type="text" id="allpeople" name="allpeople" class="span2 form-control" value="${page.allpeople!'1'}"/>
+				<span class="help-inline">预估活动人数直接影响抽奖概率：中奖概率 = 奖品总数/(预估活动人数*每人抽奖次数) <span style="color:red;">如果要确保任何时候都100%中奖建议设置为1人参加!并且奖项只设置一等奖.<span></span></span>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">个人限制抽奖次数</label>
+			<div class="controls">
+				<input type="text" id="canrqnums" name="canrqnums" class="span3 form-control" value="${page.canrqnums!'1'}"/>
+				<span class="help-inline">必须1-5之间的数字</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">抽奖页面是否显示奖品数量</label>
+			<div class="controls">
+			    <label class="radio"><input id="dx" type="radio" name="displayjpnums" value="1" <#if page.displayjpnums?if_exists && page.displayjpnums =='1'>checked</#if> />显示</label>
+			    <label class="radio"><input id="ddx" type="radio" name="displayjpnums" value="0" <#if page.displayjpnums !='1'>checked</#if> />不显示</label>
+			</div>
+		</div>
+	</form>		
+	<!-- END FORM-->       
+</div>
+<div class="modal-footer">		
+	<button type="button" onclick="formSubmitModel('wxLotteryController.do?savejindan', 'form_sample_2');" class="btn blue">提交</button>
+	<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+</div>
+<div id="showModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<script type="text/javascript">
+//校验
+jQuery(document).ready(function() {   
+   // initiate layout and plugins
+   App.init();
+   $("#form_sample_2").myValidate();
+   $("#starpicurl,#endpicurl").livetip({url_Suffix:''});
+});
+function selectPictureBack(requestCode){
+	switch (requestCode) {
+		case "starpicurl":
+			var result=$("input[name='path']:checked").val();
+			$("#starpicurl").val(result);
+			break;
+		case "endpicurl":
+			var result=$("input[name='path']:checked").val();
+			$("#endpicurl").val(result);
+			break;
+	}
+	$('#showModel').modal('hide');
+}
+	var uploaderThumb = WebUploader.create({
+		
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+	
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+	
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#uploadStarpicurl',
+	
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+	
+	//当有文件添加进来的时候
+	uploaderThumb.on( 'uploadSuccess', function( file,Object ) {
+		$("#starpicurl").val(Object.url);
+	});
+	
+var uploaderThumb = WebUploader.create({
+		
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+	
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+	
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#uploadEndpicurl',
+	
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+	
+	//当有文件添加进来的时候
+	uploaderThumb.on( 'uploadSuccess', function( file,Object ) {
+		$("#endpicurl").val(Object.url);
+	});
+function toEditModelTwo(url){
+	toEditModel(url,$('#showModel'));
+}
+</script>
+  

@@ -1,0 +1,156 @@
+<div id="reg_info">
+	<dl>
+		<dt>
+			个人基本资料<span>(<label>*</label>为必填项)
+			</span>
+		</dt>
+		<dd>
+			<form id="form">
+				<ul style="float: left;">
+					<li>
+						<label><span>*</span>用户名：</label>${page.username!''}
+					</li>
+					<li>
+						<label>性别：</label> 
+						<input type="radio" name="sex"<#if page.sex==1>checked</#if> value="1"/>男 
+						<input type="radio" name="sex"<#if page.sex==0>checked</#if> value="0"/>女
+					</li>
+					<li>
+						<label>出生日期：</label> 
+						<input name="birthday" type="text" class="Wdate"
+							onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"<#if
+							page.birthday??>value="${page.birthday?string('yyyy-MM-dd')}"</#if>/>
+					</li>
+					<li>
+						<label>地址：</label>
+						<input value="${page.address!''}" name="address" class="xiangying" type="text" />
+					</li>
+					<li>
+						<label><span>*</span>Email：</label>
+						<input name="email" value="${page.email!''}" class="xiangying" type="text" />
+					</li>
+					<li>
+						<label>QQ：</label>
+						<input value="${page.qq!''}" name="qq" class="xiangying" type="text" />
+					</li>
+					<li>
+						<label>手机：</label>
+						<input value="${page.cellphone!''}" name="cellphone" class="xiangying" type="text"  />
+					</li>
+					<li>
+						<label>电话：</label>
+						<input value="${page.telephone!''}" name="telephone" class="xiangying" />
+					</li>
+					<button type="button"
+						onclick="subpersonal('MemberAct.do?updateInfo', 'form');"
+						class="btn blue">保存</button>
+				</ul>
+				<div style="width: 200px; float: right; position: absolute; top:75px; right:0px;">
+					<img id="facesrc" src="${page.faceImg!'pic/uplodaimg.jpg'}" alt="最大200kb"
+						title="" /><br /> <span class="btn blue" id="mface" name="mface">更改头像</span>
+					<input type="hidden" id="faceImg" name="faceImg"
+						value="${page.faceImg!''}" />
+				</div>
+			</form>
+		</dd>
+	</dl>
+</div>
+<style>
+#mface{
+    display: block;
+    margin: 5px 0px !important;
+    height: 25px;
+    line-height: 25px;
+    padding: 0px 9px;
+    float: left;
+}
+#mface .webuploader-pick{padding:0px;}
+    
+</style>
+
+<script type="text/javascript">
+
+var aa = WebUploader.create({
+	// 选完文件后，是否自动上传。
+    auto: true,
+    // swf文件路径
+    swf: '${contextpath}/plug-in/ueditor/third-party/webuploader/Uploader.swf',
+    // 文件接收服务端。
+    server: '${contextpath}/controller.jsp?action=uploadimage',
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#mface',
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    //文件大小
+      //fileSingleSizeLimit:120*150,
+   // fileSingleSizeLimit: 1024*512,
+    // 只允许选择的文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+    },
+    duplicate: true
+});
+
+//上传成功
+aa.on( 'uploadSuccess', function( file,Object ) {
+	$("#facesrc").attr("src", Object.url);
+	$("#faceImg").val(Object.url);
+});
+
+aa.on("error",function(type){
+		if (type=="Q_TYPE_DENIED") {
+			alert("请选择支持的文件类型");
+		}
+	});
+
+/* headeruploaderimg.on( 'uploadProgress', function( file, percentage ) {
+    var $li = $( '#'+file.id ),
+        $percent = $li.find('.progress .progress-bar');
+
+    // 避免重复创建
+    if ( !$percent.length ) {
+        $percent = $('<div class="progress progress-striped active">' +
+          '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+          '</div>' +
+        '</div>').appendTo( $li ).find('.progress-bar');
+    }
+
+    $li.find('p.state').text('上传中');
+
+    $percent.css( 'width', percentage * 100 + '%' );
+});
+ */
+jQuery(document).ready(function() {  
+	var formvalidate = validateObj("form");
+	//var rules = formvalidate.settings.rules;
+	//createJson(rules, "address", address); 
+	//var cellphone = {required:true,isphone : true};
+	//createJson(rules, "cellphone", cellphone);
+	//var telephone = {required:true, istelephone : true};
+	//createJson(rules, "telephone", telephone);
+	//var address = {required:true};
+	//debugger;
+});
+
+function subpersonal(){
+	if($('#form').valid()){
+		$.ajax({
+			type:'post',
+			url:"MemberAct.do?updateInfo",
+			data:$('#form').serialize(),
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					location.href="MemberAct.do?personal";
+				}
+			},
+			error:function(){
+				alert("提交通讯失败!");
+			}
+		});
+	}
+};
+</script>

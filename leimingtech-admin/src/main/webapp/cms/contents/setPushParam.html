@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新建消息</title>
+<link rel="stylesheet" media="screen"
+	href="js/push/css/jquery-ui-1.8.21.custom.css">
+<link rel="stylesheet" media="screen" href="js/push/css/base.css">
+<link rel="stylesheet" media="screen" href="js/push/css/common.css">
+<link rel="stylesheet" media="screen" href="js/push/css/layout.css">
+
+<style>
+.customkv,.customrow,.customcheckbox {
+	margin: 10px;
+	padding-left: 63px;
+}
+
+.customExtra {
+	margin: 10px;
+}
+
+.chzn-select {
+	width: 400px;
+}
+
+.myspan,.iconDel {
+	display: inline-block;
+	padding-top: 11px;
+}
+
+.customkv,.customrow,.customcheckbox {
+	margin: 10px;
+	padding-left: 63px;
+}
+
+.customIconArea .row,.condition {
+	margin: 10px;
+}
+
+.customExtra label,.customkv label,.customrow label,.customcheckbox label,.customIconCheckboxRow label,.customSoundCheckboxRow label,.row label,.conditon label
+	{
+	display: inline;
+}
+
+.customrow label input,.customkv label input {
+	margin-left: 10px;
+}
+
+#extrakeyvalue,#ristrictSpeech,#customiconckb,#customsoundckb {
+	margin-right: 5px;
+}
+
+#addExtrakeyvalue {
+	margin-left: 70px;
+}
+
+.customkv,.customrow .tips3 {
+	margin-left: 10px;
+}
+
+#advanceSetting {
+	font-size: 14px;
+}
+
+.alertstylelabel {
+	display: inline;
+	margin: 10px 5px 10px 18px;
+}
+
+.chosen-container {
+	width: 220px;
+}
+
+.dimension,.op,.tagRelation,.activeselect,.opversion {
+	margin: 10px;
+	border: 1px solid #CAE1FF;
+	border-radius: 4px;
+	float: left;
+	display: inline;
+	font-size: 12px;
+	font-family: Helvetica;
+}
+
+.category {
+	margin: 10px 0px;
+	margin-left: -5px;
+}
+
+.groupcondition {
+	margin-left: 5px;
+	margin: 10px;
+}
+
+.groupcondition li {
+	list-style-type: disc;
+}
+
+.groupcondition li span {
+	text-decoration: none;
+	background-color: #CDC5BF;
+	border-radius: 3px;
+	color: black;
+	padding: 10px;
+}
+
+.gendercheckbox,.templateId,.deleteSegment {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.testtip {
+	color: red;
+}
+
+.temptip {
+	color: #8F8F8F;
+	font-size: 12px;
+}
+
+.templates {
+	margin: 10px;
+	width: 500px;
+	height: auto;
+	border: 1px solid #ADD8E6;
+}
+
+.iconDelDiv {
+	display: inline-block;
+	padding-top: 11px;
+	margin: 5px;
+}
+
+.iconDelDiv label {
+	display: -moz-inline-block;
+	cursor: pointer;
+	margin-left: 10px;
+	line-height: 15px;
+	vertical-align: middle;
+	text-align: left;
+	width: auto;
+}
+</style>
+</head>
+<body>
+	<input type="hidden" id="cmeId" name="cmeId" value="${cme.id?if_exists}"/>
+	<input type="hidden" id="cmeUrl" name="cmeUrl" value="${url?if_exists}"/>
+	<input type="hidden" id="filter" name="filter" value=""/>
+	<div class="container hasLeftSide">
+		<div class="mainContainer">
+			<div class="mod mod1">
+				<div class="mod-header">
+					<b class="return-btn"></b>
+					<h2>新建消息</h2>
+				</div>
+				<div class="mod-body" style="padding:0px 28px; overflow: auto;">
+
+					<div class="section hidden"
+						style="width: 1020px; text-align: center; display: none;"
+						id="push_type_area">
+						通知&nbsp;&nbsp;&nbsp;&nbsp;<span id="pushtype_slider"
+							class="fakeslider"><i class="left"></i><i class="right"></i><i
+							class="green">&nbsp;</i> </span>&nbsp;&nbsp;&nbsp;&nbsp;自定义消息<input
+							id="push_type" type="hidden" value="">
+					</div>
+
+					<div class="section">
+						<div class="formItem">
+							<label for="pushDes">消息描述 </label> <input id="pushDes"
+								type="text" name="" value="${cme.title}" placeholder="用于标识消息，方便管理和查找"
+								class="input"> <span class="tips3"
+								style="display: none;">消息描述不能为空</span>
+						</div>
+					</div>
+					<div id="messageInputArea">
+						<div class="section" style="min-height:380px;">
+							<div class="pushInput">
+
+								<div class="formItem">
+									<label for="pushTitle">标题</label> <input id="pushTitle"
+										type="text" name="" value="${cme.title}" placeholder="" class="input">
+									<span class="tips3" style="display: none;">标题不能为空</span>
+								</div>
+
+								<div class="formItem" style="width:400px;">
+									<label for="pushText">摘要</label>
+									<textarea id="pushText" class="textarea" name="">${cme.digest?if_exists}</textarea>
+									<br>
+									<div class="clearfix">
+										<span style="float:right;"><span style="color:red">*</span>90个汉字以内容&nbsp;&nbsp;</span><span
+											style="float:right;vertical-align:middle;margin-right:4px;"
+											id="pushWordCheck">还可以输入<b class="purple">180</b>个字符</span><span
+											id="pushTextTip" class="tips3"
+											style="margin-left: 70px; display: none;">内容不能为空</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="pushPreview">
+								<div>
+									<label style="width:auto">预览</label>
+								</div>
+								<div class="push-preview">
+									<div class="preTitle"></div>
+									<div class="preText">${cme.digest?if_exists}</div>
+								</div>
+							</div>
+							<div class="c"></div>
+						</div>
+
+						<div id="androidArea">
+							<div class="section">
+								<div class="formItem" id="PushTarget">
+									<label for="">推送目标</label> 
+										<input type="checkbox" name="pushToAndroid">
+										<input type="radio" name="pushToTarget" value="android">Android客户端
+										<input type="checkbox" name="pushToIOS">
+										<input type="radio" name="pushToTarget" value="ios">IOS客户端
+										
+								</div>
+								<div class="formItem">
+									<label for="">后续动作</label> 
+									<input value="openUrl" class="radioSel" type="radio" name="sendAfter">打开指定网页
+									<input value="openApp" class="radioSel" type="radio" name="sendAfter">打开应用
+									<input value="openActivity" class="radioSel" type="radio" name="sendAfter">
+									打开指定页面(Activity) <input value="openCustom" class="radioSel" type="radio" name="sendAfter">
+									自定义行为 <br>
+									<div class="openUrl_show tabshow" style="display: block;">
+										<input id="openUrl_val" type="text" name="" value="${url?if_exists}"
+											placeholder="请填写以http或者https开头的URL地址，例如：http://www.umeng.com"
+											class="input" style="width:550px;"> <br> <span
+											id="urlTip" class="tips3"
+											style="margin-top: 10px; display: none;">URL地址不正确</span>
+									</div>
+									<div class="openApp_show tabshow hidden"
+										style="padding: 0px; display: none;"></div>
+									<div class="openActivity_show tabshow" style="display: none;">
+										<input id="openActivity_val" type="text" name="" value=""
+											placeholder="请填写完整的包名和Activity名字。例如：com.umeng.MainActivity"
+											class="input" style="width:550px;"> <br> <span
+											id="activityTip" class="tips3"
+											style="margin-top: 10px; display: none;">Activity名不能为空</span>
+									</div>
+									<div class="openCustom_show tabshow" style="display: none;">
+										<textarea id="openCustom_val" class="textarea" name=""
+											placeholder="消息送达后，此处填写的内容将被传递给应用自己解析和后续处理"></textarea>
+										<div style="width:320px;text-align:right;" class="clearfix">
+											<span id="customTextTip" class="tips3"
+												style="float: left; display: none;">内容不能为空</span><span
+												id="customNumCheck">还可以输入<b class="purple">150</b>个字符</span>
+										</div>
+									</div>
+									<div>
+										<div class="customcheckbox">
+											<label><input type="checkbox" id="extrakeyvalue">自定义参数</label>
+											<div class="alert alert_info">说明：自定义参数最多只能添加5个(id、url被保留，请不要将其作为自定义参数key，以免设置的自定义参数值无效)。</div>
+										</div>
+										<button id="addExtrakeyvalue" disabled="true"
+											class="purplebtn addbtn" style="display:none;">添加自定义参数</button>
+										<span id="customkeyvalueerror" class="tips3"
+											style="display: none;">自定义参数与后续动作总字符数不可以超过300</span>
+									</div>
+									<br> <br> <label for="">提醒方式</label> <input value="1"
+										class="checkboxSel" type="checkbox" name="soundPrompt"
+										checked="checked">声音 <input value="1"
+										class="checkboxSel" type="checkbox" name="vibraPrompt"
+										checked="checked">振动 <input value="1"
+										class="checkboxSel" type="checkbox" name="lightPrompt"
+										checked="checked">呼吸灯 <br>
+									<div class="alert alert_info">说明：如果同一台设备在1分钟内收到超过1条通知，则不重复响铃和振动，且设备通知栏内只展示最新的通知。</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="section" id="customContentArea"
+						style="display:none;padding-left: 26px;">
+						<div class="formItem" style="width:420px;">
+							<label for="custom_content" style="width:70px;">自定义消息</label>
+							<textarea id="custom_content" class="textarea"
+								placeholder="消息送达后，此处填写的内容将被传递给应用自己解析和后续处理。友盟不对该内容进行展示和提醒。"></textarea>
+							<br>
+							<div class="clearfix">
+								<span style="float:right;margin-right:13px;"
+									id="customContentCheck">还可以输入<b class="purple">800</b>个字符</span><span
+									id="customContentTip" class="tips3"
+									style="margin-left: 82px; display: none;">内容不能为空</span>
+							</div>
+						</div>
+					</div>
+					<div class="section" id="messageExtra" style="display:none">
+						<div class="customExtra">
+							<label><input type="checkbox" id="extrakv">自定义参数</label>
+							<div class="alert alert_info" style="display:none">说明：自定义参数最多添加10个,自定义消息和自定义参数的字符总和不能超过800字符。</div>
+						</div>
+						<button id="addMessageExtra" disabled="true"
+							class="purplebtn addbtn" style="display:none;">添加自定义参数</button>
+						<span id="customkverror" class="tips3" style="display: none;">自定义参数与自定义消息总字符数和不可以超过800字符</span>
+					</div>
+
+
+
+
+					<div class="section" >
+						<div class="formItem">
+							<label>发送给</label> <input value="broadcast" class="radioSel"
+								type="radio" name="sendTo">所有人 
+								<input value="groupcast" class="radioSel" type="radio" name="sendTo">部分人 
+								<input value="unicast" class="radioSel" type="radio" name="sendTo">单播
+<!-- 								<input value="customizedcast" class="radioSel" type="radio" name="sendTo">用户ID（Alias） <br> -->
+							<div class="broadcast_show tabshow"></div>
+							<div class="groupcast_show tabshow" style="display: none;">
+<!-- 								<div style="padding:10px;"> -->
+<!-- 									<label style="width:88px;">筛选模版<i -->
+<!-- 										class="arrowicon up-arrow mytemplate" -->
+<!-- 										data-target="templateList" style="margin-left:10px;"></i> </label> -->
+<!-- 									<div id="templateList" class="templates" -->
+<!-- 										style="vertical-align:middle;">暂无可用模板</div> -->
+<!-- 								</div> -->
+								<div>
+									<ul class="groupcondition">
+										<li><span>基础维度</span>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+									</ul>
+									<div class="alert alert_info" style="margin-left:10px;">说明:1.最多选择4个过滤条件,且不可重复;2."标签"维度中的"AND"是指对所选标签对应人群取交集筛选，"OR"是指取并集筛选。</div>
+									<br>
+									<button id="addCondition" class="purplebtn addbtn"
+										style="margin-left:25px;">添加筛选条件</button>
+									&nbsp;&nbsp;
+
+								</div>
+								<br> <br> <span class="tips3 mutiSelTip"
+									style="display: none;">至少选择一个过滤条件</span>
+								<div class="saveOrCancel" style="margin:10px;">
+<!-- 									<button id="tosave">保存筛选条件</button> -->
+									<button id="showfilter">生成预览JSON串</button>
+								</div>
+							</div>
+
+							<div class="unicast_show tabshow" style="display: none;">
+								Device Token
+								<textarea id="deviceId" class="textarea" name=""
+									placeholder="友盟生成的用于标识设备的id，长度为44位，不能定制和修改。同一台设备上每个app对应的Device Token不一样。你可以在Debug模式下输出的logcat中看到对应的Device token。"></textarea>
+								<span class="tips2" style="display: none;">Device
+									Token不能为空</span> <br> <span style="margin-left:220px;">字符串之间用
+									"," 间隔, 最多可添加10个</span>
+							</div>
+							<div class="customizedcast_show tabshow" style="display: none;">
+								<div class="row">
+									<label
+										style="display:inline-block;width:90px;text-align:right;margin-right: 10px;">用户ID</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+										id="customizedcast_val" type="text" name="" value=""
+										placeholder="在SDK中通过Alias字段上传的用户ID" class="input"
+										style="width:380px;"> <span id="customizedcastTip"
+										class="tips3" style="display: none;">Alias不能为空</span>
+								</div>
+								<br>
+								<div class="row">
+									<label
+										style="display:inline-block;width:90px;text-align:right;margin-right: 10px;">Alias
+										type</label>&nbsp;&nbsp;&nbsp;&nbsp;<select id="alias_type_select"
+										class="chzn-select" data-placeholder="请选择别名类型"></select>&nbsp;<a
+										data-tooltip="Alias type是客户端代码调用SDK接口 addAlias(alias, alias_type) 来设置的"
+										class="icon help poptips"></a> <span id="aliasTypeTip"
+										class="tips3" style="display: none;">Type不能为空</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="section">
+						<div class="formItem">
+							<label for="">发送时间</label> <label style="width:auto;"><input
+								value="sendnow" type="radio" class="radioSel send"
+								name="sendTime">立即发送</label> <label style="width:auto;"><input
+								value="sendin" type="radio" class="radioSel send"
+								name="sendTime">定时发送</label>
+							<div class="sendin_show tabshow" style="display: none;">
+								<input type="text" id="sendTime" class="datetime input">
+								<span class="tips2" style="display: none;">发送时间不能为空</span>
+							</div>
+							<div class="sendnow_show tabshow" style="display: block;"></div>
+						</div>
+
+						<div class="formItem hidden" id="expireTimeArea"
+							style="display: block;">
+							<label for="">过期时间</label><a
+								data-tooltip="消息过期后，未收到过该消息的用户在联网后将不会再收到该消息"
+								class="icon help poptips"></a><input type="text"
+								class="input datetime" id="expireTime"> <span
+								class="tips2" style="display: none;">过期时间不能为空</span>
+							<div class="alert alert_info">说明：过期时间需要至少晚于发送时间30分钟</div>
+						</div>
+
+					</div>
+
+					<div class="section" style="display: none;">
+						<label style="width:88px;">高级设置<i
+							class="arrowicon down-arrow advance" data-target="advanceSetting"
+							style="margin-left:10px;"></i> </label>
+						<div id="advanceSetting" class="hidden" style="padding-left:70px;">
+							<div class="formItem">
+								<label style="display:inline;"><input type="checkbox"
+									id="ristrictSpeech">限制发送速度：</label>每秒最多发送<input
+									id="max_send_num" class="input" type="text" name="max_send_num"
+									style="width:100px;margin:0 10px;" disabled="disabled">条消息。(500-10000)
+								<span id="max_send_num_error" class="tips3"
+									style="display: none;">必须为500-10000之间的数字</span>
+							</div>
+
+
+							<div class="customIconArea formItem" id="customicon">
+								<div class="customIconCheckboxRow">
+									<label><input type="checkbox" id="customiconckb">自定义通知栏图标</label>
+								</div>
+								<div id="customIconShow" style="display:none">
+									<div class="row">
+										<label><input type="radio" name="icon_type"
+											checked="checked" value="1">应用内图标文件</label><label><input
+											type="radio" name="icon_type" value="2">上传图标文件</label><span
+											class="tips3" id="custom_icon_error" style="display: none;">必须至少选一个应用图标</span>
+										<div class="alert alert_info" style="font-size:10px">说明：图片大小控制在100k内,目前只支持jpg,png</div>
+									</div>
+									<div id="appiconarea">
+										<div class="row">
+											大图标文件名：<input type="text" name="largeIcon" id="largeIcon"
+												class="input" placeholder="位于drawable文件夹内，例如：um_icon"><span
+												class="tips3" style="display: none;">图标名称不能超过30字符</span>
+										</div>
+										<div class="row">
+											小图标文件名：<input type="text" name="icon" id="icon1"
+												class="input" placeholder="位于drawable文件夹内，例如：um_icon"><span
+												class="tips3" style="display: none;">图标名称不能超过30字符</span>
+										</div>
+									</div>
+									<div id="uploadiconarea" style="display:none;">
+										<div class="row">
+											大图标文件：
+											<div class="upload_btn">
+												<input type="hidden" name="largeIcon"><span>上传图片</span><input
+													type="file" name="uploadfile" value="上传图片" id="uploadfile">
+											</div>
+											<img id="blah" src="" style="display:none;"> <span
+												class="uploadfilename"></span>
+											<button class="upload purplebtn hidden" action="/uploadIcon">上传</button>
+											<button class="reupload purplebtn hidden"
+												action="/uploadIcon">重新上传</button>
+											<span class="tips3" id="isValid" style="display: none;">图片类型不合法</span>
+										</div>
+										<div class="row">
+											小图标文件名：<input type="text" name="icon" id="icon2"
+												class="input" placeholder="位于drawable文件夹内，例如：um_icon"><span
+												class="tips3" style="display: none;">图标名称不能超过30字符</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="customsound" class="customIconArea formItem">
+								<div class="customSoundCheckboxRow">
+									<label><input type="checkbox" id="customsoundckb">自定义声音</label>
+								</div>
+								<div class="row" style="display:none;" id="customsoundrow">
+									声音文件：<input type="text" name="sound" id="sound" class="input"
+										placeholder="位于raw文件夹内，例如：um_sound"><span
+										class="tips3" id="custom_sound_error" style="display: none;">声音文件不能为空</span>
+								</div>
+							</div>
+							<div class="formItem">
+								<label style="display:inline;" class="alertstylelabel">通知栏样式编号</label><input
+									type="text" class="digit" id="alertStyle"><a
+									data-tooltip="指定本条通知在通知栏中的展示样式,需要提前在APK中设置好对应的样式。只允许输入0-99间的整数"
+									class="icon help poptips"></a>
+							</div>
+
+						</div>
+
+					</div>
+
+					<button id="pageSubmit" class="purple-btn"
+						style="margin:30px auto;">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hidden" id="preshow"></div>
+	<div id="saveSegmentDialog" class="clearfix hidden pushDetail">
+		<div class="dialogcontent">
+			<div>
+				<div class="formline" style="margin-left:35px;margin-top:10px;">
+					<input type="text" class="input" id="templateName"
+						placeholder="筛选条件名称">
+				</div>
+				<div>
+					<span id="destnewtip" class="tips3"
+						style="margin-left: 35px; display: none;">名称不能为空</span>
+				</div>
+				<div class="formline" style="margin-left:35px;margin-top:10px;">
+					<label>&nbsp;</label>
+					<button type="submit" id="saveTemplate"
+						class="submit-btn addAppBtn">提交</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script src="js/push/analytics.js"></script>
+	<script>
+		var APPKEY = "${appKey}", APPPLATFORM = "android", IS_TEST = false;
+	</script>
+	<script>
+		// 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		// 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		// 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		// 	  })(window,document,'script','//www.google-analytics.com/analytics.','ga');
+
+		// 	  ga('create', 'UA-54456831-2', 'auto');
+		// 	  ga('send', 'pageview');
+	</script>
+	<script src="js/push/jquery.min.js" type="text/javascript"></script>
+	<script src="js/push/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="js/push/highcharts.min.js" type="text/javascript"></script>
+	<script src="js/push/modules.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		// 		$(document).ajaxComplete(function(e, xhr, settings) {
+		// 			if (xhr.status == 200) {
+		// 				var data = null;
+		// 				try {
+		// 					data = $.parseON(xhr.responseText);
+		// 					if (data && data.error == "timeout") {
+		// 						window.location.href = "/login";
+		// 					}
+		// 				} catch (e) {
+		// 					return;
+		// 				}
+		// 			}
+		// 		});
+
+		$('li.navItem').on('click', function() {
+			if ($(this).has("ul")) {
+				$('ul', this).show();
+			}
+		});
+		$(".return-btn").click(function() {
+			window.close();
+		});
+	</script>
+	<script src="js/push/chosen.jquery.js" type="text/javascript"></script>
+	<script src="js/push/addPush.js" type="text/javascript"></script>
+	<link rel="stylesheet" media="screen" href="js/push/css/chosen.css">
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+</html>

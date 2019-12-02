@@ -1,0 +1,87 @@
+<#include "member/head.html">
+<<script type="text/javascript">
+var ctx="${contextpath}";
+</script>
+<div id="center">
+	<div class="center_left"></div>
+	<div class="center_right">
+         <div class="title-style-1">
+           <h2></h2>
+         </div>
+         <form id="register_form" >
+			<div class="control-group">
+				<label class="control-label">用户名</label>
+                <div class="controls">
+                    <input id="username" name="username" class="txt succeed" type="text" />
+                </div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">邮箱</label>
+                <div class="controls">
+                    <input id="email" name="email" class="txt succeed" type="text" />
+                </div>
+			</div>
+            <div class="control-group"  >
+                <label class="control-label">密码</label>
+                <div class="controls">
+                    <input name="password" id="password" class="txt succeed" type="password" />
+                </div>
+            </div>
+            <div class="control-group" >
+                <label class="control-label">确认密码</label>
+                <div class="controls">
+                    <input name="confirm_password" id="confirm_password" class="txt succeed" type="password" />
+                </div>
+            </div>
+            <div class="control-group" style="height:60px;">
+                <label class="control-label">验证码</label>
+                <div class="controls" style="position:absolute;">
+                    <input name="valicode" id="valicode" class="txt valicode" type="text" />&nbsp;
+                    <span style="position: absolute; top: 32px; left: 0px;" class="help-inline" htmlfor="valicode"></span>
+                   	<img title="点击获取验证码" alt="点击获取验证码" id="randCodeImage" src="${contextpath}/randCodeImage" height="32" width="112">
+                 </div>
+            </div>
+            <div class="control-group" style="padding-top:30px;" >
+            	<label class="control-label" style="font-size: 12px;">
+            		<input type="checkbox" name="reg_agreement" id="reg_agreement" checked/>&nbsp;用户注册协议
+            	</label>
+            	<div class="controls">
+            		<input type="button" name="" value="注    册" class="input-submit-style-3" onclick="subform('registerAct.do?checkregister', 'register_form');"/>
+            	</div>
+            </div>
+            <div class="control-group" >
+            	<label class="control-label" style="font-size: 12px; float: right; text-align: right;">
+            		已有账号&nbsp;<a href="loginAct.do?login" style="background: none repeat scroll 0% 0% #FFF;">登录</a>
+            	</label>
+            </div>
+		</form>
+    </div>
+</div>
+<#include "member/foot.html">
+<script type="text/javascript" src="js/regist.js"></script>
+<script>
+function subform(urlStr, formName) {
+	if($('#' + formName).valid()){
+		$.ajax({
+			type : 'post',
+			url : urlStr,
+			data : $('#' + formName).serialize(),
+			success : function(msg) {
+				var obj = JSON.parse(eval(msg));
+				var toUrl = obj.url;
+				var code = obj.code;
+				if (code == "1") {
+					alert(obj.info);
+				}else{
+					alert(obj.info);
+					location.href = toUrl;
+				}
+			},
+			error : function() {
+				alert("提交通讯失败!");
+			}
+		});
+	}
+	
+}
+</script>

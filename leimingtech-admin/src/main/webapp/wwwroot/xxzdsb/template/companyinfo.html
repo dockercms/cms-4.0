@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://faneuro.cn/News_list_2&nav=gsgk.html -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title><#assign navTag =newTag("navTag")> <#assign navTagList
+	=navTag("{'name':'${catalogF.id}'}")> <#if navTagList?exists> <#list
+	navTagList as navTag> <#if catalogF.id==navTag.id> ${navTag.name}
+	</#if> </#list> </#if></title>
+
+<meta name="Description" content="${site.siteName} ">
+<meta name="Keywords" content="${site.siteName} ">
+
+<!-- 首页样式、公用样式、js (线上已有)↓↓↓ -->
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/region.css">
+<link rel="stylesheet" href="/css/nj_v2.css">
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<!-- 我是分割线 -->
+
+<!-- 内容页js -->
+<script src="/js/page.js"></script>
+
+<!-- 内容页样式-必须放到首页样式以下 -->
+<link rel="stylesheet" href="/css/page.css">
+</head>
+
+<body>
+	<!-- 头部暂时引用↓↓↓↓↓ -->
+	<#include "/wwwroot/${sitePath}/template/common/index_nav.html">
+
+
+	<div class="nj_content_v2">
+		<div class="nj_con_v2">
+			<div class="nj_nav_v2Box"></div>
+
+			<div class="njLeft">
+				<div class="guideNav mtauto">
+					<div class="guideNav-left"></div>
+				</div>
+				<div class="njText-box">
+
+					<div class="njText-article"><#assign articleTag
+						=newTag("articleTag")> <#assign articleList
+						=articleTag("{'name':'${catalogF.id}','levels':'all'}")> <#if
+						articleList?exists && articleList?size gt 0> <#list articleList as
+						article> <#if article.atriles?exists>${article.atriles}</#if>
+						</#list> </#if></div>
+
+
+
+
+
+				</div>
+			</div>
+			<!-- 热门新闻 -->
+			<div class="nj_right_v2 nj_rightTwo_v2"><#include
+				"/wwwroot/${sitePath}/template/common/hotnews.html"></div>
+		</div>
+	</div>
+	<!-- 新版底部 start -->
+
+	<div class="footer f-tac"><#include "/wwwroot/${sitePath}/template/common/footer.html"></div>
+
+
+
+
+
+
+
+</body>
+</html>

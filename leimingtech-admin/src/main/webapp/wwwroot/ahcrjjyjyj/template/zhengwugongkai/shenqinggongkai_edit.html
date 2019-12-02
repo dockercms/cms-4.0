@@ -1,0 +1,651 @@
+
+
+<!-- saved from url=(0034)http://data.ahciq.gov.cn/ysq.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>${site.siteName}</title>
+<link rel="stylesheet" href="/zfxxgk/css/zwmain.css" type="text/css">
+
+<script type="text/javascript" src="/zfxxgk/js/fun.js"></script>
+<script src="/js/jquery.js"></script>
+<script type="text/javascript"> 
+function displayTip(id) 
+{ var x = event.x;
+document.getElementById(id).style.left = x + 20 ;
+document.getElementById(id).style.display='block'; 
+} 
+function hideTip(id) 
+{ 
+document.getElementById(id).style.display='none'; 
+} 
+function list(id){
+	for(var i=1,len=7;i<len;i++){
+		document.getElementById('cd_'+i).className="font9";		
+	}
+
+if(id==2){document.getElementById('ml').style.display="block";}
+document.getElementById('cd_'+id).className="font9red";
+}
+</script>
+
+<style>
+.Tip {
+	width: 500;
+	z-index: 999;
+}
+
+.Tip table {
+	width: 100%;
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none
+}
+
+.white,.white a {
+	color: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.font9 {
+	background-image:url(/zfxxgk/images/left_off.jpg);
+	padding-left: 60px
+}
+
+.font9,.font9 a,.font9red,.font9red a {
+	font-size: 13px;
+	line-height: 35px;
+	overflow: hidden;
+	text-decoration: none
+}
+
+.font9 a {
+	color: black
+}
+
+.font9red a {
+	color: #B9000A;
+	font-weight: bold
+}
+
+.font9red {
+	background-image:background-image: url(/zfxxgk/images/left_on.jpg);
+	padding-left: 60px
+}
+
+.font10,.font10 td,.font10 a {
+	font-size: 13px;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0"
+	marginwidth="0" marginheight="0">
+
+	<#include "/wwwroot/${sitePath}/template/common/head_gov.html">
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td valign="top" style="padding:20px 0 0 20px;">
+					<table width="100%" border="0" cellpadding="10" cellspacing="1"
+						bgcolor="#bed8f1">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										style="border-bottom: 1px solid #bed8f1; margin-bottom:10px;">
+										<tbody>
+											<tr>
+												<td width="30" height="30" align="center"><img
+													src="/zfxxgk/images/ico8.gif" width="12"
+													height="11">
+												</td>
+												<td class="blue">当前位置：<a
+													href="/">首页</a> &gt; 
+													<#assign name="catalogTag"> 
+													<#assign catalogTag=newTag("${name}")>
+													<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbaadb60005'}")>
+													<#if catalog?exists>
+														<a href="${catalog.url!'javascript:void(0);'}">政务公开</a>
+													</#if> 
+													&gt; 依申请公开
+												</td>
+											</tr>
+										</tbody>
+									</table> 
+									<script>
+										function check(urlStr,form1) {
+											
+										
+											if (document.form1.bjjSel.value == '0') {//公民
+												if (document.form1.grName.value == '') {
+													alert("请输入姓名！")
+													document.form1.grName
+															.focus()
+													return false;
+												}
+												if (document.form1.grDanwei.value == '') {
+													alert("请输入工作单位！")
+													document.form1.grDanwei
+															.focus()
+													return false;
+												}
+												if (document.form1.grZj.value == '') {
+													alert("请输入证件名称！")
+													document.form1.grZj
+															.focus()
+													return false;
+												}
+												if (document.form1.grHaoma.value == '') {
+													alert("请输入证件号码！")
+													document.form1.grHaoma
+															.focus()
+													return false;
+												}
+												if (document.form1.grContact.value == '') {
+													alert("请输入联系电话！")
+													document.form1.grContact
+															.focus()
+													return false;
+												}
+												if (document.form1.grAddress.value == '') {
+													alert("请输入联系地址！")
+													document.form1.grAddress
+															.focus()
+													return false;
+												}
+
+												if (document.form1.grPost.value == '') {
+													alert("请输入邮政编码！")
+													document.form1.grPost
+															.focus()
+													return false;
+												}
+												if (document.form1.grPost.value.length == '') {
+													alert("请输入6位数字邮政编码！")
+													document.form1.grPost
+															.focus()
+													return false;
+												}
+												var click = document.form1.grPost;
+
+												if (isNaN(click.value)) {
+													alert("邮编必须是数字!");
+													click.focus();
+													return false;
+												}
+												if (document.form1.content.value.length == '') {
+													alert("请输入所需信息的内容描述！")
+													document.form1.content
+															.focus()
+													return false;
+												}
+												if (document.form1.xingshi.value.length == '') {
+													alert("请选择所需信息的指定提供载体形式！")
+													document.form1.xingshi
+															.focus()
+													return false;
+												}else{
+													$.ajax({
+														type:'post',
+														url:urlStr,
+														data:$('#' + form1).serialize(),
+														dataType:'text',
+														success : function(msg) {
+															var obj = JSON.parse(eval(msg));
+															alert(obj.msg);
+															if(obj.isSuccess){
+																location.href=""
+																			}
+															},
+															error : function() {
+																alert("提交失败")
+															}
+													});
+												}
+
+											}
+
+											if (document.form1.bjjSel.value == '1') {//法人
+												if (document.form1.frName.value == '') {
+													alert("请输入名称！")
+													document.form1.frName
+															.focus()
+													return false;
+												}
+												if (document.form1.frDaibiao.value == '') {
+													alert("请输入法人代表！")
+													document.form1.frDaibiao
+															.focus()
+													return false;
+												}
+												if (document.form1.frXingming.value == '') {
+													alert("请输入联系人姓名！")
+													document.form1.frXingming
+															.focus()
+													return false;
+												}
+												if (document.form1.frContact.value == '') {
+													alert("请输入联系人电话！")
+													document.form1.frContact
+															.focus()
+													return false;
+												}
+												if (document.form1.frAddress.value == '') {
+													alert("请输入联系地址！")
+													document.form1.frAddress
+															.focus()
+													return false;
+												}
+
+												if (document.form1.frPost.value == '') {
+													alert("请输入邮政编码！")
+													document.form1.frPost
+															.focus()
+													return false;
+												}
+												if (document.form1.frPost.value.length == '') {
+													alert("请输入6位数字邮政编码！")
+													document.form1.frPost
+															.focus()
+													return false;
+												}
+												var click = document.form1.frPost;
+
+												if (isNaN(click.value)) {
+													alert("邮编必须是数字!");
+													click.focus();
+													return false;
+												}
+												if (document.form1.content.value.length == '') {
+													alert("请输入所需信息的内容描述！")
+													document.form1.content
+															.focus()
+													return false;
+												}
+												if (document.form1.xingshi.value.length == '') {
+													alert("请选择所需信息的指定提供载体形式！")
+													document.form1.xingshi
+															.focus()
+													return false;
+												}else{
+													$.ajax({
+														type:'post',
+														url:urlStr,
+														data:$('#' + form1).serialize(),
+														dataType:'text',
+														success : function(msg) {
+															var obj = JSON.parse(eval(msg));
+															alert(obj.msg);
+															if(obj.isSuccess){
+																location.href=""
+																			}
+															},
+															error : function() {
+																alert("提交失败")
+															}
+													});
+												}
+
+											}
+										}
+									</script>
+									<form name="form1" id="form1">
+										<div id="ctl00_ContentPlaceHolder1_apppl"></div>
+										<table cellspacing="0" cellpadding="0" width="90%"
+											align="center" border="0">
+											<tbody>
+												<tr bgcolor="#f8f8f8">
+													<td colspan="3" style="height: 50px">注：本页面只接受信息公开相关申请，咨询类等其他不属于政府信息依申请公开范围的问题请您进入
+													<#assign name="catalogTag"> 
+													<#assign catalogTag=newTag("${name}")>
+													<#assign catalog=catalogTag("{'levels':'self','name':'402881ea53c03e640153c051ea050007'}")>
+													<#if catalog?exists>
+														<a href="${catalog.url!'javascript:void(0);'}" style="color:red">在线咨询</a>或
+													</#if>
+													<#assign catalog=catalogTag("{'levels':'self','name':'402881ea53c03e640153c050fb060004'}")>
+													<#if catalog?exists>
+														<a href="${catalog.url!'javascript:void(0);'}" style="color:red">${catalog.name}</a>
+													</#if>
+													等栏目提交。
+														<br> 请选择： <input checked="" onclick="showhidden1();"
+														type="radio" value="0" name="bjjSel"> 公民 <input
+														onclick="showhidden2();" type="radio" value="1"
+														name="bjjSel"> 法人或其他组织</td>
+													
+												</tr>
+												<tr>
+													<td bgcolor="#EFEFEF" class="text-2"
+														style="height: 15px; width: 28px;" align="center"><b><font
+															color="#FF0000">申<br> 请<br> 人<br> 信<br>
+																息</font>
+													</b>
+													</td>
+													<td valign="top" style="height: 15px;">
+														<table cellspacing="0" cellpadding="0" width="100%"
+															align="center" border="0">
+															<tbody>
+																<tr>
+																	<td valign="top" style="height: 15px;">
+																		<table cellpadding="0" cellspacing="0" width="99%"
+																			align="center">
+																			<tbody>
+																				<tr align="center">
+																					<td colspan="3" id="gm1">
+																						<div id="layer1" style="">
+																							<table bgcolor="#dfdfdf" border="0"
+																								cellpadding="2" cellspacing="1" width="100%">
+																								<tbody>
+																									<tr>
+																										<td rowspan="5" align="center" width="35"
+																											bgcolor="F7F7F7"><b><img src=""
+																												width="35" height="1"><br> 公<br>
+																												民</b>
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="128"><font color="#e70000">＊</font>姓名</td>
+																										<td bgcolor="#ffffff" align="left"><input
+																											name="grName" type="text"></td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="121"><font color="#e70000">＊</font>工作单位</td>
+																										<td bgcolor="#ffffff" align="left" width="305">
+																											<input name="grDanwei" type="text">
+																										</td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"><font
+																											color="#e70000">＊</font>证件名称</td>
+																										<td bgcolor="#ffffff" align="left"><input
+																											name="grZj" type="text"></td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="121"><font color="#e70000">＊</font>证件号码</td>
+																										<td bgcolor="#ffffff" align="left" width="305">
+																											<input name="grHaoma" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="128"><font color="#e70000">＊</font>联系电话</td>
+																										<td bgcolor="#ffffff" align="left" width="206">
+																											<input name="grContact" type="text">
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="121">传真</td>
+																										<td bgcolor="#ffffff" align="left" width="305">
+																											<input name="grFax" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="128"><font color="#e70000">＊</font>联系地址</td>
+																										<td bgcolor="#ffffff" align="left" width="206">
+																											<input name="grAddress" type="text">
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="121"><font color="#e70000">＊</font>邮政编码<font
+																											color="#e70000">&nbsp;</font>
+																										</td>
+																										<td bgcolor="#ffffff" align="left" width="305">
+																											<input name="grPost" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="128">电子邮箱</td>
+																										<td align="left" bgcolor="#ffffff" colspan="3">
+																											<input name="grEmail" type="text"></td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</div>
+																						<div id="layer2" style="display:none">
+																							<table bgcolor="#dfdfdf" border="0"
+																								cellpadding="2" cellspacing="1" class="text-1"
+																								width="100%">
+																								<tbody>
+																									<tr>
+																										<td rowspan="5" align="center" width="35"
+																											bgcolor="F7F7F7"><b><img src=""
+																												width="35" height="1"><br> 法<br>
+																												人<br> 或<br> 其<br> 他<br>
+																												组<br> 织</b>
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="128"><font color="#e70000">＊</font>名称</td>
+																										<td bgcolor="#ffffff" align="left" colspan="3">
+																											<input name="frName" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"><font
+																											color="#e70000">＊</font>法人代表</td>
+																										<td bgcolor="#ffffff" align="left" width="206">
+																											<input name="frDaibiao" type="text">
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"
+																											width="121"><font color="#e70000">＊</font>联系人姓名</td>
+																										<td bgcolor="#ffffff" align="left" width="305">
+																											<input name="frXingming" type="text">
+																										</td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"><font
+																											color="#e70000">＊</font>联系人电话</td>
+																										<td bgcolor="#ffffff" align="left" width="206">
+																											<input name="frContact" type="text">
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8"><font
+																											color="#e70000">＊</font><font color="#e70000"></font>邮政编码</td>
+																										<td bgcolor="#ffffff" align="left"><input
+																											name="frPost" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8"><font
+																											color="#e70000">＊</font>联系地址</td>
+																										<td align="left" bgcolor="#ffffff" width="206">
+																											<input name="frAddress" type="text">
+																										</td>
+																										<td align="center" bgcolor="#f8f8f8">传真</td>
+																										<td align="left" bgcolor="#ffffff"><input
+																											name="frFax" type="text"></td>
+																									</tr>
+																									<tr>
+																										<td align="center" bgcolor="#f8f8f8">
+																											电子邮箱</td>
+																										<td align="left" colspan="3" bgcolor="#FFFFFF">
+																											<input name="frEmail" type="text">
+																											&nbsp;</td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</div></td>
+																				</tr>
+																				<tr>
+																					<td align="center" bgcolor="#f8f8f8" width="21%">
+																						<font color="#e70000">＊</font>申请时间</td>
+																					<td align="left" bgcolor="#ffffff" height="26"
+																						width="79%"><input name="datetime"
+																						type="text" value="<#if sysdate?exists>${sysdate?string('yyyy-MM-dd HH:mm:ss')}</#if>"
+																						readonly="readonly"> 自动生成</td>
+																				</tr>
+																			</tbody>
+																		</table></td>
+																</tr>
+															</tbody>
+														</table></td>
+												</tr>
+												<tr>
+													<td class="text-2" align="center" bgcolor="#EFEFEF"
+														style="width: 28px; height: 594px;"><b><font
+															color="#FF0000">所<br> 需<br> 信<br> 息<br>
+																情<br> 况</font>
+													</b>
+													</td>
+													<td valign="top" style="height: 594px">
+														<table width="100%" border="0" cellspacing="0"
+															cellpadding="0">
+															<tbody>
+																<tr>
+																	<td height="6"></td>
+																</tr>
+															</tbody>
+														</table>
+														<table class="text-1" cellspacing="1" cellpadding="1"
+															bgcolor="#dfdfdf" border="0" width="99%" align="center">
+															<tbody>
+																<tr>
+																	<td align="center" bgcolor="#f8f8f8"
+																		style="height: 71px;" width="187"><font
+																		color="#e70000">＊</font>所需信息的内容描述</td>
+																	<td bgcolor="#ffffff"
+																		style=" height: 71px;padding:5px;" width="592"><textarea
+																			name="content" rows="5" cols="20"
+																			style="color:Black;background-color:White;width:300px;"></textarea>
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" bgcolor="#f8f8f8"
+																		style="height: 71px; " width="187"><font
+																		color="#e70000">＊</font>所需信息的指定提供载体形式</td>
+																	<td bgcolor="#ffffff" style=" height: 71px" width="592">
+																		&nbsp;
+																		<table class="text-1" cellspacing="0" cellpadding="0"
+																			border="0" style="height: 86px; width: 106%;">
+																			<tbody>
+																				<tr>
+																					<td>
+																						<#if carrierList?exists>
+																						<#list carrierList as carrier>
+																							<input type="radio" name="xingshi" value="${carrier.typecode}"> ${carrier.typename}
+																						</#list>
+																						</#if>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td><input type="checkbox" name="xingshi" value="其他"> 若本机关无法按照指定方式提供所需信息，也可接受其他方式</td>
+																				</tr>
+
+																			</tbody>
+																		</table></td>
+																</tr>
+																<tr bgcolor="F7F7F7">
+																	<td colspan="2" style="text-align: center" height="22">
+																		<strong>选 填 部 分</strong>
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" bgcolor="#f8f8f8" width="187">所需信息的名称</td>
+																	<td bgcolor="#ffffff" style="padding:5px;" width="592">
+																		<input name="xtName" type="text" style="color:Black;background-color:White;height:20px;width:300px;">
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" bgcolor="#f8f8f8" width="187">所需信息的索引号</td>
+																	<td bgcolor="#ffffff" style="padding:5px;" width="592">
+																		<input name="xtSuyinhao" type="text" style="color:Black;background-color:White;height:20px;width:300px;">
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" bgcolor="#f8f8f8" width="187">所需信息的用途</td>
+																	<td bgcolor="#ffffff" style="padding:5px;" width="592">
+																		<textarea name="xtYongtu" rows="5" cols="20"
+																			style="color:Black;background-color:White;height:80px;width:300px;"></textarea>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<table width="100%" border="0" cellspacing="0"
+															cellpadding="0">
+															<tbody>
+																<tr>
+																	<td height="6"></td>
+																</tr>
+															</tbody>
+														</table>
+														<table class="text-1" cellspacing="1" cellpadding="4"
+															width="99%" bgcolor="#dfdfdf" border="0" align="center"
+															height="111">
+															<tbody>
+																<tr>
+																	<td style="height: 47px" bgcolor="#f8f8f8"
+																		align="center" width="183">是否申请减免费用</td>
+																	<td bgcolor="#FFFFFF" style="height: 47px" width="593">
+																		<input type="radio" name="xtJmfy" value="不申请" checked=""> 不申请 
+																		<input type="radio" name="xtJmfy" value="申请"> 申请（ 请提供相关证明）</td>
+																</tr>
+																<tr>
+																	<td bgcolor="#f8f8f8" style="height: 47px"
+																		align="center" width="183">获取信息的方式（可多选）</td>
+																	<td bgcolor="#ffffff" style="height: 47px" width="593">
+																		<table class="text-1" cellspacing="0" cellpadding="0"
+																			width="100%" border="0">
+																			<tbody>
+																				<tr>
+																					<td align="left">
+																						<#if informationList?exists>
+																						<#list informationList as information>
+																							<input type="checkbox" name="xtHuoqufs" value="${information.typecode}"> ${information.typename}
+																						</#list>
+																						</#if>
+																					</td>
+																				</tr>
+																			</tbody>
+																		</table></td>
+																</tr>
+															</tbody>
+														</table></td>
+												</tr>
+												<tr bgcolor="#EFEFEF">
+													<td colspan="2" style="height: 34px" align="center"
+														valign="middle">
+														<input type="button" onclick="check('${contextpath}/front/applyPublicFrontController.do?saveApplyPublic','form1')" value="提交申请" style="color:Black;background-color:#C4D4E0;height:25px;width:72px;">
+														&nbsp;&nbsp;&nbsp;&nbsp; 
+														<input  type="button" value="清空" onclick="resert()" style="width: 72px; height: 25px" class="btn"></td>
+												</tr>
+
+											</tbody>
+										</table>
+									</form></td>
+							</tr>
+						</tbody>
+					</table>
+					<script language="javascript">
+						function showhidden1() {
+							mydiv1 = document.getElementById("layer1");
+							mydiv1.style.display = '';
+							mydiv2 = document.getElementById("layer2");
+							mydiv2.style.display = 'none';
+							document.form1.bjjSel.value = "0";
+						}
+						function showhidden2() {
+							mydiv1 = document.getElementById("layer1");
+							mydiv1.style.display = 'none';
+							mydiv2 = document.getElementById("layer2");
+							mydiv2.style.display = '';
+							document.form1.bjjSel.value = "1";
+						}
+						
+						//清空表单
+						function resert(){
+							$("#form1")[0].reset();
+						}
+						
+					</script>
+					</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="960" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					<hr size="1" color="#bed8f1" noshade=""></td>
+			</tr>
+		</tbody>
+	</table>
+	<#include "/wwwroot/${sitePath}/template/common/foot_gov.html">
+
+
+
+</body>
+</html>

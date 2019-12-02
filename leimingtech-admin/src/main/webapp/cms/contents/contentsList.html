@@ -1,0 +1,686 @@
+ <div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>内容</div>
+				<div class="actions extended tasks">
+				
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="span12">
+					<form id="search_form" class="form-horizontal">
+						<div class="row-fluid margin-bottom-10">
+							<div class="span4">
+								<label class="control-label" style="width:90px;">标题：</label>
+								<div class="controls" style="margin-left: 110px;">
+									<input name="title" class="form-control span12" type="text" value="${title!''}">
+								</div> 
+							</div>
+							<div class="span6">
+								<label class="control-label" style="width:90px;">发布时间：</label>
+								<div class="controls" style="margin-left: 110px;">
+									<input type="text" value="${publishedStart?if_exists}" class="Wdate span5" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="publishedStart">
+									<span style="margin: 0 10px">——</span>
+									<input type="text" value="${publishedEnd?if_exists}" class="Wdate span5" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="publishedEnd">
+								</div> 
+							</div>
+							<div class="span2">
+								<label>
+									<input type="checkbox" id="contribute" name="contribute" value="1" <#if contribute!=''>checked="checked"</#if>>
+									投稿
+								</label>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span4">
+								<label class="control-label" style="width:90px;">分类：</label>
+								<div class="controls" style="margin-left: 110px;">
+									<select id="modelid" name="modelid" class="form-control span12">
+										<option value="">全部</option>
+										<#list modelsList as models>
+											<#if models?exists>
+												<option <#if modelid==models.id>selected</#if> value="${models.id}">${models.name}</option>
+											</#if>
+										</#list>
+									</select>
+								</div> 
+							</div>
+							<div class="span4">
+								<label class="control-label" style="width:90px;">状态：</label>
+								<div class="controls" style="margin-left: 110px;">
+									<select name="constants" id="constants" class="form-control span12">
+										<option value="">全部</option>
+										<option value="10" <#if constants=='10'>selected</#if>>草稿</option>
+										<option value="20" <#if constants=='20'>selected</#if>>待审</option>
+										<option value="30" <#if constants=='30'>selected</#if>>退稿</option>
+										<option value="40" <#if constants=='40'>selected</#if>>待发</option>
+										<option value="50" <#if constants=='50'>selected</#if>>已发</option>
+										<option value="60" <#if constants=='60'>selected</#if>>下线</option>
+										<option value="70" <#if constants=='70'>selected</#if>>回收站</option>
+									</select>
+								</div> 
+							</div>
+							<div class="span4" style="text-align: right;">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('contentsController.do?table&contentCatId=${contentCat?if_exists.id}&tab=', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetFormRefresh('contentsController.do?table&tab=all','search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="actions extended tasks">
+
+					<#if contentCat?exists && contentCat.iscatend==1 && (jsonobj.文章=='true' || jsonobj.组图=='true' || jsonobj.链接=='true' || jsonobj.视频=='true' || jsonobj.活动=='true' || jsonobj.投票=='true' || jsonobj.访谈=='true' || jsonobj.调查=='true' || jsonobj.专题=='true')>
+					<div class="btn-group">
+						<a class="btn default btn-sm purple" href="javascript:void(0);" data-toggle="dropdown" onclick="" data-hover="dropdown" data-delay="500" data-close-others="true">
+							<span class="icon-plus"><b style="margin-left:10px">新建</b></span><#--changePage('articleController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=1') -->
+						</a>
+						<ul class="dropdown-menu" style="min-width:80px;" role="menu">
+							<#list modelsList as models>
+								<#if models.name=='文章' && jsonobj.文章=='true'>
+									<li><a href="javascript:void(0);" onclick="openUrl('articleController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')" ><i class="icon-book"></i> 文章</a></li>
+								</#if>
+								<#if models.name=='组图' && jsonobj.组图=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('pictureGroupController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-picture"></i> 组图</a></li>
+								</#if>
+								<#if models.name=='链接' && jsonobj.链接=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('contentLinkController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-link"></i> 链接</a></li>
+								</#if>
+								<#if models.name=='视频' && jsonobj.视频=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('contentVideoController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-facetime-video"></i> 视频</a></li>
+								</#if>
+								<#if models.name=='活动' && jsonobj.活动=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('activityController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-trophy"></i> 活动</a></li>
+								</#if>
+								<#if models.name=='投票' && jsonobj.投票=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('voteController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-thumbs-up"></i> 投票</a></li>
+								</#if>
+								<#if models.name=='访谈' && jsonobj.访谈=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('interviewController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-comments-alt"></i> 访谈</a></li>
+								</#if>
+								<#if models.name=='调查' && jsonobj.调查=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('surveyController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-credit-card"></i> 调查</a></li>
+								</#if>
+								<#if models.name=='专题' && jsonobj.专题=='true'>
+									<li><a href="javaScript:void(0)" onclick="openUrl('specialController.do?addPageModel&contentCatId=${contentCat.id?if_exists}&modelsId=${models.id}')"><i class="icon-film"></i> 专题</a></li>
+								</#if>
+							</#list>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn default btn-sm blue" href="javascript:void(0);" onclick="songshen(0,'',1)">
+							<span class="icon-signin"><b style="margin-left:10px">发布</b></span>
+						</a>
+					</div>
+					</#if>
+					<div class="btn-group">
+						<a class="btn default btn-sm red" href="javascript:void(0);" onclick="<#if constants=='70'>delContent('contentsController.do?del&contentCatId=${contentCat?if_exists.id}&tab=${tab}',0)</#if><#if constants!='70'>delContent('contentsController.do?downContent',-1)</#if>">
+							<span class="icon-remove"><b style="margin-left:10px">删除</b></span>
+						</a>
+					</div>
+					<#if constants=="70">
+						<div class="btn-group">
+							<a class="btn blue btn-sm" href="javaScript:void(0)" onclick="delContent('contentsController.do?downContent',1)">
+								<span class="icon-star"><b style="margin-left:10px">还原</b></span>
+							</a>
+						</div>											
+					</#if>
+					
+					<div class="btn-group">
+						<a class="btn purple publishindex btn-sm" href="javascript:void(0);">发布站点首页</a>
+					</div>
+					<#if contentCat?exists>
+					<div class="btn-group">
+						<a class="btn purple publishcatalog btn-sm" catalogid="${contentCat.id}" href="javascript:void(0);" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+							发布栏目《${contentCat.name}》
+						</a>
+						<ul class="dropdown-menu pull-right" style="min-width:80px;">
+							<li><a href="javaScript:void(0)" class="publishcatalog" catalogid="${contentCat.id}">快速发布栏目</a></li>
+							<li><a href="javaScript:void(0)" class="publishCatalogAndAllContent" catalogid="${contentCat.id}">发布栏目及栏目下所有内容</a></li>
+						</ul>
+					</div>
+					</#if>
+					<div class="btn-group">
+						<a class="btn purple publishsite btn-sm" href="javascript:void(0);" data-toggle="dropdown" data-hover="dropdown" data-delay="500" data-close-others="true">
+							发布站点
+						</a>
+						<ul class="dropdown-menu pull-right" style="min-width:80px;">
+							<li><a href="javaScript:void(0)" class="publishsite">快速发布站点</a></li>
+							<li><a href="javaScript:void(0)" class="publishSiteAllInfo">发布全站信息</a></li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<a class="btn purple btn-sm" target="_blank" href="javascript:void(0);"  onclick="createIndex('luceneController.do?creatIndex')">建立索引 </a>
+					</div>
+					<div class="btn-group">
+						<a class="btn purple btn-sm" target="_blank" href="<#if domain?exists>http://${domain!'/'}<#else>/</#if>">查看网站首页</a>
+					</div>
+					<div class="btn-group">
+						<a  class="btn purple btn-sm" style="cursor: move;" href="javascript:javascript:void(eval(function(p,a,c,k,e,r){e=String;if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[3-79]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('javascript:void((function(){lmcms_toolbox_ver=2;4=\'${netDomain}/\';5=\'start\';if(typeof(3)!=\'undefined\'){3.ready(5);return}var e=6.createElement(\'script\');e.7(\'src\',4+\'9/toolbox/3.9\');e.7(\'charset\',\'utf-8\');6.body.appendChild(e)})())',[],10,'|||lmcms_toolbox|lmcms_toolbox_domain_admin|lmcms_toolbox_cmd|document|setAttribute||js'.split('|'),0,{})));" title="网编工具箱是一个书签工具栏按钮
+能帮您快捷的转载文章或进行管理操作
+将下面的链接拖动到您的书签工具栏,
+或右键加入收藏夹中">雷铭CMS网编工具
+						</a>
+
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="20" style="text-align:center;">
+								<input type="checkbox" onclick="checkall(this)">
+							</th>
+							<th width="40" style="text-align:center;">序号</th>
+							<th >标题</th>
+							<th width="45" >浏览量</th>
+							<th width="35" >权重</th>
+							<th width="80" >发布人</th>
+							<th width="110" >发布时间</th>
+							<th width="100" >状态</th>
+							<th width="35" >置顶</th>
+							<th width="35">头条</th>
+							<th width="75" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if pageList?exists>
+						  <#list pageList as page>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">
+										<input type="checkbox" name="contentsids" value="${page.id?if_exists}">
+								</td>
+								<td style="text-align:center;">
+									${(pageNo-1)*pageSize+page_index?if_exists+1}
+								</td>
+								<td >
+									<#if page.lockContent=='true'>
+										<i class="fa fa-lock" style="color: red;" title="稿件被锁定 当前为源文件"></i>
+									</#if>
+									<#if page.iscontribute == '1'>
+									<span style="color: red;cursor: help;" title="会员：${page.author!''}&#10;创建时间：${page.created?string("yyyy-MM-dd HH:mm")}">投稿</span>
+									</#if>
+									<!-- 分类(1文章2组图3链接4视频5活动6投票7访谈8调查9专题) -->
+									<#if page.classify =='1'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-book" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='2'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-picture" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='3'><a title="点击预览" href="${page.url}" target="_blank" class="icon-link" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='4'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-facetime-video" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='5'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-trophy" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='6'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-thumbs-up" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='7'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-comments-alt" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='8'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-credit-card" style="text-decoration: none;color:black"></a></#if>
+									<#if page.classify =='9'><a title="点击预览" <#if domain?exists && page.url?exists>href="http://${domain}${page.url}" target="_blank" <#else>href="javaScript:alert('还没有生成！');"</#if> target="_blank" class="icon-film" style="text-decoration: none;color:black"></a></#if>
+									<#if page.constants!='60'>
+										<a href="javascript:void(0);" onclick="openUrl('contentsController.do?updatePageModel&id=${page.id?if_exists}')" title="点击编辑" style="text-decoration:none;color:black"><span style="color:${page.color}" >${page.title}</span></a>
+									<#else>
+										<a href="javascript:void(0)" style="text-decoration:none;color:black" onclick="lmAlert('已下线,无法进行修改操作！')"><span style="color:${page.color}" >${page.title}</span></a>
+									</#if>
+									<#if page.thumb!=''>
+										<input type='button' title='图片附件'  style=' width:18px; height:16px;  border:0; background:url(media/image/imagelittle.png) no-repeat left top'  onclick=""/>
+									</#if>
+								</td>
+								<td >
+										${page.pv}
+								</td>
+								<td >
+										${page.weight}
+								</td>
+								<td>
+										${page.publishedby}
+								</td>
+								<td >
+										<#if page.published?exists>${page.published?string("yyyy-MM-dd HH:mm")}</#if>
+								</td>
+								<td >
+										<#if page.constants=="10">草稿</#if>
+										<#if page.constants=="20"><span <#if page.isOperate>style="color:red;"</#if>>《${maprole[page.workflowRoleid]}》待审</span></#if>
+										<#if page.constants=="30">退稿</#if>
+										<#if page.constants=="40">待发</#if>
+										<#if page.constants=="50">已发</#if>
+										<#if page.constants=="60">下线</#if>
+										<#if page.constants=="70">回收站</#if>
+
+								</td>
+ 									<td>
+										<#if page.isTop!=0>置顶</#if>
+								</td>
+								<td  id="isHeadline${page.id}">
+										<#if page.isHeadline=="1" >
+										是
+										<#else>
+										否
+										</#if>
+								</td>
+
+								<td style="text-align:center;">
+
+									<#if page.constants=="60">
+									<input type='button' title='删除'  class="delbtn"   onclick="<#if page.constants=='70'>del('contentsController.do?del&contentCatId=${contentCat?if_exists.id}&tab=${tab}', '${page.id?if_exists}')</#if><#if page.constants!='70'>down('${page.id?if_exists}',-1)</#if>"   />
+									<#else>
+										<input type='button' title='修改' class="editbtn" onclick="openUrl('contentsController.do?updatePageModel&id=${page.id?if_exists}')"  />
+									<input type='button' title='删除'  class="delbtn"   onclick="<#if page.constants=='70'>del('contentsController.do?del&contentCatId=${contentCat?if_exists.id}&tab=${tab}', '${page.id?if_exists}')</#if><#if page.constants!='70'>down('${page.id?if_exists}',-1)</#if>"   />
+									<div class="btn-group <#if page_index gt 8>dropup</#if>" style="height:20px;margin: 0px !important;">
+										<input type='button' title='管理选项' class="dropdown-toggle" data-toggle="dropdown" style='width:25px; height:16px;  border:0; background:url(media/image/menu.png) no-repeat left top'>
+										<ul class="dropdown-menu pull-right" style="min-width:80px;">
+										<!-- 没有工作流 -->
+											<#if contentCat?if_exists.workflowid=="0">
+												<#if page.constants=="50" || page.constants=="10" || page.constants=="40">
+													<li><a href="javaScript:void(0)" onclick="songshen('${page.id?if_exists}','${page.classify?if_exists}',1)" style="text-align: left;"><i class="icon-signin"></i> 发布</a></li>
+												</#if>
+											</#if>
+											<#if contentCat?if_exists.workflowid!="0">
+												<#if page.constants=="50" || page.constants=="10" || page.constants=="40">
+													<li><a href="javaScript:void(0)" onclick="songshen('${page.id?if_exists}','${page.classify?if_exists}',1)" style="text-align: left;"><i class="icon-signin"></i> 发布</a></li>
+												</#if>
+												<#if page.constants=="10"&&page.status!="30">
+													<li><a href="javaScript:void(0)" onclick="songshen('${page.id?if_exists}','${page.classify?if_exists}',0)" style="text-align: left;"><i class="icon-sort-by-attributes"></i> 送审</a></li>
+												</#if>
+												<#if page.isOperate>
+													<#if page.constants=="20">
+														<li><a href="javaScript:void(0)" onclick="audit('${page.id?if_exists}',1)" style="text-align: left;"><i class="icon-check"></i> 通过</a></li>
+														<li><a href="javaScript:void(0)" onclick="audit('${page.id?if_exists}',0)" style="text-align: left;"><i class="icon-ban-circle"></i> 拒绝</a></li>
+													</#if>
+												</#if>
+											</#if>
+											<li><a href="javaScript:void(0)" onclick="<#if page.constants=='70'>del('contentsController.do?del&contentCatId=${contentCat?if_exists.id}&tab=${tab}', '${page.id?if_exists}')</#if><#if page.constants!='70'>down('${page.id?if_exists}',-1)</#if>" style="text-align: left;"><i class="icon-remove"></i> 删除</a></li>
+											<#if page.constants=="70">
+												<li><a href="javaScript:void(0)" onclick="down('${page.id?if_exists}',1)" style="text-align: left;"><i class="icon-star"></i> 还原</a></li>
+											</#if>
+											<li><a<#if domain?exists && page.url?exists>
+													href="http://${domain}${page.url}"target="_blank"
+													<#else> href="javaScript:alert('还没有生成！');"
+													</#if> target="_blank"  style="text-align: left;"><i class="icon-eye-open"></i> 预览</a></li>
+											<#if page.constants=="50">
+												<li><a href="javaScript:void(0)" onclick="down('${page.id?if_exists}',60)" style="text-align: left;"><i class="icon-minus"></i> 下线</a></li>
+												<li><a href="javaScript:void(0)" onclick="enCode('contentsController.do?enCode','${page.id?if_exists}')" style="text-align: left;"><i class="icon-qrcode"></i> 生成二维码</a></li>
+											</#if>
+											<#if page.twoCode!="">
+											<li><a<#if domain?exists && page.twoCode?exists>
+													href="http://${domain}${page.twoCode}"target="_blank"
+													<#else> href="javaScript:alert('还没有生成！');"
+													</#if> target="_blank" style="text-align: left;"><i class="icon-qrcode"></i> 查看二维码</a></li>
+											</#if>
+											<#if page.classify=="8"><!-- 调查 -->
+												<li><a href="javaScript:void(0)" onclick="changePage('surveyOptionController.do?table&contentCatId=${contentCat?if_exists.id}&contentsId=${page.id?if_exists}')" style="text-align: left;"><i class="icon-magic"></i> 调查选项</a></li>
+												<li><a href="javaScript:void(0)" onclick="changePage('${conpath}/front/surveyLogController.do?surveyLog&contentCatId=${contentCat?if_exists.id}&contentsId=${page.id?if_exists}')" style="text-align: left;"><i class="icon-file-text"></i> 查看调查记录</a></li>
+											</#if>
+											<#if page.classify=="5"><!-- 活动 -->
+												<li><a href="javaScript:void(0)" onclick="changePage('activityPeopleController.do?activityPeople&contentCatId=${contentCat?if_exists.id}&contentsId=${page.id?if_exists}')" style="text-align: left;"><i class="icon-file-text"></i> 查看报名记录</a></li>
+											</#if>
+
+											<#if page.classify=="6"><!-- 投票 -->
+												<li><a href="javaScript:void(0)" onclick="changePage('${conpath}/front/voteLogController.do?voteLog&contentCatId=${contentCat?if_exists.id}&contentsId=${page.id?if_exists}')" style="text-align: left;"><i class="icon-file-text"></i> 查看投票记录</a></li>
+											</#if>
+												<li>
+													<#if page.isTop!=0>
+													<a href="javaScript:void(0)" onclick="to_Top('${page.id!''}')" style="text-align: left;">
+													<i class="icon-long-arrow-down"></i> 取消置顶
+													</a>
+													<#else>
+														<#if page.constants=="50">
+															<a href="javaScript:void(0)" onclick="to_Top('${page.id!''}')" style="text-align: left;">
+															<i class="icon-long-arrow-up"></i> 置顶
+															</a>
+														</#if>
+													</#if>
+												</li>
+												<li>
+													<#if page.isHeadline==0>
+														<#if page.constants=="50">
+															<a id = "aId${page.id}" href="javaScript:void(0)" onclick="setHeadline('${page.id!''}')" style="text-align: left;" ><i class="icon-file-text"></i>
+																	设为头条
+														  	</a>
+													   	</#if>
+													<#else>
+														<a id = "aId${page.id}" href="javaScript:void(0)" onclick="setHeadline('${page.id!''}')" style="text-align: left;" ><i class="icon-file-text"></i>
+																取消头条
+												   		</a>
+													</#if>
+											   </li>
+
+										</ul>
+									</div>
+								</td>
+								</#if>
+							</tr>
+						  </#list>
+						</#if>
+						<tr>
+							<td colspan="11">
+								<#--<#if contentCat?exists><input type="button" value="生成静态页" catalogid="${contentCat.id}"  class="publisharticle"></#if>-->
+								<#--
+								<input type="button" value="送审" onclick="songshen()">
+								<input type="button" value="通过" onclick="audit(1)">
+								<input type="button" value="拒绝" onclick="audit(0)">
+								-->
+								<a class="btn default btn-xs" href="javascript:void(0);" onclick="toContent('mobile')">
+									<span class="icon-cut"><b style="margin-left:10px">移动</b></span>
+								</a>
+								<a class="btn default btn-xs" href="javascript:void(0);" onclick="toContent('copy')">
+									<span class="icon-copy"><b style="margin-left:10px">复制</b></span>
+								</a>
+								<a class="btn default btn-xs" href="javascript:void(0);" onclick="toContent('cite')">
+									<span class="icon-link"><b style="margin-left:10px">引用</b></span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<div id="mobileModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="350"></div>
+<script type="text/javascript" src="media/js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script>
+	App.init();
+	function checkall(obj){
+		if(obj.checked==true){
+			$("input[name='contentsids']").each(function(){
+	            $(this).attr("checked", "checked");
+	        });
+		}else{
+			$("input[name='contentsids']").each(function(){
+	            $(this).attr("checked", false);
+	        });
+		}
+		//解决调整uniform对checkbox美化后，全选不自动更新问题
+		$.uniform.update();
+	}
+	var contentCatId = "${contentCat?if_exists.id}";
+
+	/**
+	*（copy：复制）、（cite：移动）、（mobile：移动）
+	*/
+	function toContent(type){
+		var ids="";
+        $("input[name='contentsids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(ids==""){
+        	UIToastr.info("请选择要操作的记录");
+        }else{
+        	var urlS = "contentsController.do?operate";
+        	$.ajax({
+    			type:'post',
+    			url:urlS,
+    			data:{'ids':ids,'toType':type},
+    			dataType:'text',
+    			success:function(msg){
+    				$('#mobileModel').empty();
+    				$('#mobileModel').append(msg);
+    				$('#mobileModel').modal('show');
+    			}
+    		});
+        }
+	}
+
+	function workFlow(ids,classify,token){
+		var urlStr = "contentsController.do?songshen";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + ids + '&token=' + token+'&contentCatId='+contentCatId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+						toUrl = arguments[2] + '';
+					}
+					if(classify==""){
+
+						lmAlert(obj.msg);
+
+					}else{
+						toEditModel("contentsController.do?pushView&contentsId="+ids+"&contentCatId="+contentCatId+"&classify="+classify+"&flag=");
+					}
+					lazyChangePage(toUrl);
+				}else{
+					lmAlert("提交失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交审核失败!");
+			}
+		});
+	}
+
+
+	function songshen(contentsId,classify,token){
+		var ids="";
+		if(contentsId && contentsId != 0){
+			ids=contentsId;
+		}else{
+	        $("input[name='contentsids']:checkbox").each(function(){
+	            if($(this).attr("checked")){
+	                ids += $(this).val()+","
+	            }
+	        })
+		}
+
+        if(ids==""){
+        	UIToastr.info("请选择要操作的记录");
+        }else{
+			if(token=="0"){
+				UIToastr.info("送审处理中...");
+				workFlow(ids,classify,token);
+			}else{
+				UIToastr.info("发布处理中...");
+				workFlow(ids,classify,token);
+			}
+        }
+	}
+
+	function execDelContent(ids,urlStr,result,constants){
+		 $.ajax({
+				type:'post',
+				url:urlStr,
+				data:'id=' + ids+'&constants='+constants,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						var toUrl = obj.toUrl;
+						if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+						{
+						    toUrl = arguments[2] + '';
+						}
+						changePage(toUrl);
+					}else{
+						UIToastr.error("删除处理失败!");
+					}
+				},
+				error:function(){
+					UIToastr.error("提交审核失败!");
+				}
+			});
+	}
+
+	function delContent(urlStr,result){
+	var constants=$("#constants option:selected").val();
+
+		var ids="";
+        $("input[name='contentsids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(ids==""){
+        	UIToastr.info("请选择要操作的记录");
+        	return ;
+        }else{
+			if(result=='-1'){
+				urlStr=urlStr+"&result="+result+"&contentCatId="+contentCatId;
+				//放入回收站
+				execDelContent(ids,urlStr,result,constants);
+			}if(result=="1"){
+				urlStr=urlStr+"&result="+result+"&contentCatId="+contentCatId;
+				//还原
+				execDelContent(ids,urlStr,result,constants);
+			}else if(result!='-1'&&result!="1"){
+				lmConfirm("是否删除所选记录？","",function (){
+					execDelContent(ids,urlStr,result,constants);
+				});
+			}
+        }
+	}
+	function audit(contentsId,result){
+		//审核
+		var urlStr = "contentsController.do?contentsAudit";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + contentsId + '&result=' + result+'&contentCatId='+contentCatId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					UIToastr.success(obj.msg);
+					changePage(toUrl);
+				}else{
+					UIToastr.error("审核失败!");
+				}
+			},
+			error:function(){
+				UIToastr.error("提交审核失败!");
+			}
+		});
+
+	}
+
+	function execDown(contentsId,result){
+		var urlStr = "contentsController.do?downContent";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:{'id':contentsId,'result':result,'contentCatId':contentCatId},
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					lmAlert(obj.msg);
+					changePage(toUrl);
+				}else{
+					lmAlert("操作失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交操作失败!");
+			}
+		});
+	}
+
+	function down(contentsId,result){
+		if(result=="60"){
+			//下线
+        	execDown(contentsId,result);
+		}
+		if(result=="-1"){
+			//放入回收站
+        	execDown(contentsId,result);
+		}
+		if(result=="1"){
+			//还原
+			execDown(contentsId,result);
+		}
+	}
+	//建立索引
+	function createIndex(urlStr){
+		UIToastr.info("全站索引建立中...");
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					UIToastr.success(obj.msg);
+				}else{
+					UIToastr.error(obj.msg);
+				}
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	//生成二维码
+	function enCode(urlStr,contentId){
+		UIToastr.info("二维码生成中...");
+		 $.ajax({
+			type:'post',
+			url:urlStr,
+			data:'contentId='+contentId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				UIToastr.success(obj.msg);
+			},
+			error:function(){
+				UIToastr.error("通讯失败");
+			}
+		});
+	}
+//---------------------------------把新闻设置头条新闻----------------------------------------------
+function setHeadline(contentId){
+$.ajax({
+			url : 'contentsController.do?setHeadline&contentId='+contentId,
+			type : 'post',
+			dataType : 'text',//解析方式
+			success : function(result) {
+				 var message=result;
+				 if(message.indexOf("1") > 0 ){
+				  	$("#isHeadline"+contentId+"").text("").text("是");
+				  	$("#aId"+contentId+"").text("").text("取消头条");
+				 }else{
+				  	$("#isHeadline"+contentId+"").text("").text("否");
+				   	$("#aId"+contentId+"").text("").text("设为头条");
+				 }
+			},
+			error : function(e) {
+			},
+		});
+}
+/**
+ * 新闻置顶或者取消置顶
+ *
+ * @param id
+ */
+function to_Top(id) {
+	var el = $(".page-header-fixed");
+	App.blockUI(el);
+	var urlStr = "contentsOperateController.do?updateTop&contentId="+id;
+	$.ajax({
+		type : 'post',
+		url : urlStr,
+		dataType : 'text',
+		success : function(data) {
+			var obj = JSON.parse(eval(data));
+			if (obj.isSuccess) {
+				changePage(obj.toUrl);
+			} else {
+				lmAlert(obj.msg);
+			}
+		},
+		error : function() {
+			lmAlert("操作失败");
+		},
+		complete : function() {
+			App.unblockUI(el);
+		}
+	});
+}
+
+</script>

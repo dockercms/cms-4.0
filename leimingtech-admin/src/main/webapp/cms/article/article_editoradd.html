@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<!--  使用方法 先引用 WdarePicker.css 和WdatePicker.js  
+	然后再input框 加入 onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" class="Wdate"
+	更多自定义 方法请 参照API http://www.my97.net/dp/demo/index.htm -->
+<link href="/plug-in/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/plug-in/My97DatePicker/WdatePicker.js"></script>
+<div class="row-fluid">
+<div class="span12">
+	<div class="modal-header">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>区块信息</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${relateContent.id?if_exists}"/>
+				
+						<div class="control-group">
+							<label class="control-label">标题</label>
+							<div class="controls">
+								<input type="text" id="sectionClass.id" name="title" class="span6 m-wrap" value="${relateContent.title?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">链接</label>
+							<div class="controls">
+								<input type="text" id="name" name="url" class="span6 m-wrap" value="${relateContent.url?if_exists}"/>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">缩略图</label>
+							<div class="controls">
+								<input type="text" id="name" name="images" class="span6 m-wrap" value="${relateContent.images?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">日期</label>
+							<div class="controls">
+								<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  id="name" name="newdate" class="span6 m-wrap Wdate" value="${relateContent.created?if_exists}"/>
+							</div>
+						</div>
+				<div class="modal-footer">
+					<button type="button" onclick="formSubmitSection('sectionController.do?save', 'form','sectionController.do?sectionList&classid=${sectionClass.id?if_exists}','${sectionClass.id?if_exists}');" class="btn btn-primary">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="500">
+</div>

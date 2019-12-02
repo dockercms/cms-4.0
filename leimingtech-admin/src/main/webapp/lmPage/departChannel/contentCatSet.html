@@ -1,0 +1,70 @@
+<div style="width:350px;float:left;">
+	<div style="width:337px;"><h4>${site.siteName!}</h4></div>
+	<ul id="treeDemo${index}" class="ztree" style="width:337px;height:500px;border:28px;margin-top:0px;overflow-y:scroll;overflow-x:auto;">
+	</ul>
+	<div class="right" style="display:none">
+		<input type="button" value="获取选中的值"/>
+		<input type="text" id="funVal${index}"  name="funVal"/>
+		<ul class="info">
+			<li class="title"><h2>1、setting 配置信息说明</h2>
+				<ul class="list">
+					<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+					<li><p>父子关联关系：<br/>
+						被勾选时：<input type="checkbox" id="py${index}" class="checkbox first" checked /><span>关联父</span>
+						<input type="checkbox" id="sy${index}" class="checkbox first" checked /><span>关联子</span><br/>
+						取消勾选时：<input type="checkbox" id="pn${index}" class="checkbox first" checked /><span>关联父</span>
+						<input type="checkbox" id="sn${index}" class="checkbox first" checked /><span>关联子</span><br/>
+						<ul id="code${index}" class="log" style="height:20px;"></ul></p>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+<SCRIPT type="text/javascript">
+	var code${index};
+	function setCheck${index}() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo${index}"),
+		py = $("#py${index}").attr("checked")? "p":"",
+		sy = $("#sy${index}").attr("checked")? "s":"",
+		pn = $("#pn${index}").attr("checked")? "p":"",
+		sn = $("#sn${index}").attr("checked")? "s":"",
+		type = { "Y":py + sy, "N":pn + sn};
+		zTree.setting.check.chkboxType = type;
+		showCode${index}('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+	}
+	function showCode${index}(str) {
+		if (!code${index}) code${index} = $("#code${index}");
+		code${index}.empty();
+		code${index}.append("<li>"+str+"</li>");
+	}
+	var json${index} = JSON.parse('${channelJson!''}');
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo${index}"), setting,json${index});
+		setCheck${index}();
+		$("#py${index}").bind("change", setCheck${index});
+		$("#sy${index}").bind("change", setCheck${index});
+		$("#pn${index}").bind("change", setCheck${index});
+		$("#sn${index}").bind("change", setCheck${index});
+		//加载页面时要赋值于funVal用于在不选择任何菜单提交之后当前菜单不变
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo${index}");
+		var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+		var checkCount = checked.length;
+		var v="";
+		for(var i=0;i<checkCount;i++){
+			v+=checked[i].id+",";//获取的是值
+		}
+		$('#funVal${index}').attr("value",v);
+		$('#treeDemo${index}').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo${index}");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#funVal${index}').attr("value",v);
+		});
+	});
+</SCRIPT>
+</div>

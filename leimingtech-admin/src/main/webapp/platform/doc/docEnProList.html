@@ -1,0 +1,111 @@
+<div class="modal-body">
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>${docEn.name}实体属性表</div>
+				
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditModelSub('docEnController.do?addOrUpdateSub&entityid=${entityid?if_exists}')">
+						新增 <i class="icon-plus"></i>
+					</button>
+					<button id="sample_editable_1_new" class="btn yellow-stripe" data-dismiss="modal" aria-hidden="true"> 关闭 </button>
+				</div>
+			</div>
+			</div>
+			<div class="portlet-body">
+			<div class="span12 booking-search">
+				<form id="searchSub_form" class="form-horizontal">
+				<input type="hidden" name="entityid" value="${entityid?if_exists}"/>
+					 <div class="clearfix">
+						<div class="span4">
+							<label>名称
+								<input name="name" class="form-control span7" type="text" value="${searchMap["name"]?if_exists[0]}">
+							</label>
+						</div>
+						<div class="span4">
+							<label>数据类型
+								<select name="type" class="form-control span7">
+									<option value="">所有</option>
+									<option <#if searchMap["type"]?exists && searchMap["type"][0]=='Integer'>selected="selected"</#if> value="Integer">Integer</option>
+									<option <#if searchMap["type"]?exists && searchMap["type"][0]=='String'>selected="selected"</#if> value="String">String</option>
+									<option <#if searchMap["type"]?exists && searchMap["type"][0]=='Double'>selected="selected"</#if> value="Double">Double</option>
+									<option <#if searchMap["type"]?exists && searchMap["type"][0]=='Boolean'>selected="selected"</#if> value="Boolean">Boolean</option>
+								</select>
+							</label>
+						</div>
+					  <div class=" pull-right">
+					  <button type="button" class="btn yellow btn-sm" onclick="toSearchSub('docEnController.do?docEnPro', 'searchSub_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+					  <button type="button" class="btn yellow btn-sm" onclick="resetForm('searchSub_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+					  </div>
+					</div>
+				</form>
+			</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th style="width:40px;text-align:center;">序号</th>
+							<th style="width:150px;">名称</th>
+							<th style="width:100px;">数据类型</th>
+							<th>描述</th>
+							<#--<th>排序</th>
+							<th>状态</th>
+							<th>添加时间</th>
+							<th>添加人</th>
+							<th>修改次数</th>
+							<th>修改时间</th>
+							<th>修改人</th>-->
+							<th style="width:40px;text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if docEnProList?exists>
+						  <#list docEnProList as docEnPro>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+docEnPro_index?if_exists+1}</td>
+								<td >${docEnPro.name?if_exists}</td>
+								<td >${docEnPro.type?if_exists}</td>
+								<td >${docEnPro.description?if_exists}</td>
+								<#--<td >${docEnPro.sort?if_exists}</td>
+								<td >${docEnPro.status?if_exists}</td>
+								<td >${docEnPro.createdtime?if_exists}</td>
+								<td >${docEnPro.createdby?if_exists}</td>
+								<td >${docEnPro.updatecount?if_exists}</td>
+								<td >${docEnPro.updatetime?if_exists}</td>
+								<td >${docEnPro.updateby?if_exists}</td>-->
+								<td style="text-align:center;">
+									<input type='button' title='修改' class="editbtn"   onclick="toEditModelSub('docEnController.do?addOrUpdateSub&id=${docEnPro.id?if_exists}&entityid=${entityid?if_exists}')"/>
+									<input type='button' title='删除' class="delbtn"   onclick="delSub('docEnController.do?delSub', '${docEnPro.id?if_exists}')"   />
+								</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/pageSub.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="toEditModelSub" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="600">
+</div>
+<script>
+function toEditModelSub(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>

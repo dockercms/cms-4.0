@@ -1,0 +1,66 @@
+<#include '/platform/doc/header.html' />
+<!--正文-->
+<div id="main">
+	<div class="menu_list">
+		<h1><a href="${contextpath}/docs/docAct.do?index">返回<span>主页面</span></a></h1>
+		<ul>
+			<#if docList?exists && docList?size gt 0>
+				<#list docList as doc>
+					<li>
+						<#if doc.type=='API'>
+							<a href="docAct.do?docapi&id=${doc.id}">
+						<#else>
+							<a href="docAct.do?doctag&id=${doc.id}">
+						</#if>
+								<div>${doc.tag}</div>
+								<div><p>${doc.name}</p></div>
+							</a>
+					</li>
+				</#list>
+			</#if>
+		</ul>
+	</div>
+	<div class="right_list">
+		<h3>${docEn.code}  ${docEn.name}</h3>
+		<h2>需要简述</h2>
+		<h6>${docEn.description!''}</h6>
+		<div class="intro">	
+			<div class="same" id="parameter">
+				<h2>输入参数</h2>
+				<table cellspacing="0">
+					<tr>
+						<th style="width:35%">名称</th>
+						<th style="width:80px;">类型</th>
+						<th>描述</th>
+					</tr>
+					<#if docEnProList?exists && docEnProList?size gt 0>
+						<#list docEnProList as docPro>
+							<tr>
+								<td>${docPro.name}</td>
+								<td>${docPro.type}</td>
+								<td>${docPro.description!''}</td>
+							</tr>
+						</#list>
+					<#else>
+						<tr>
+							<td>&nbsp;</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</#if>
+				</table>
+		</div>
+	</div>
+</div>
+
+<!--正文结束-->
+</body>
+</html>
+
+
+
+
+
+
+
+

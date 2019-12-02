@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <title>网站标题</title>
+    <meta name="keywords" content="keyword ..." />
+    <meta name="Description" content="description ..." />
+    <!--<link href="favicon.ico" rel="shortcut icon" />-->
+    <link href="css/global.css" rel="stylesheet" type="text/css" />
+    <link href="css/reg.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header">
+  <div class="headertop">
+   <div class="l">您好，欢迎访问<strong>人力资源市场网</strong>！<span>|</span>今天是&nbsp;<strong>2011</strong>&nbsp;年&nbsp;<strong>08</strong>&nbsp;月&nbsp;<strong>26</strong>&nbsp;日<span>|</span>上午&nbsp;<strong>10:29</strong>&nbsp;<span>|</span></div>
+   <div class="l"><a href="registerController.do?login">登录</a></div>
+   <div class="r"><a href="#"><img src="member/pic/header_menu01.gif" alt="" title="" />关于我们</a><a href="#"><img src="member/pic/header_menu02.gif" alt="" title="" />联系我们</a></div>
+  </div>
+  <h1 id="logo"><a href="#">中国人力资源市场网</a><strong>注册</strong></h1>
+  <!--<div class="ver">
+    <p>系统版本号：V3.0</p>
+    <p><strong>北京斯通威尔钻探机械有限公司</strong><a href="#">查看登录记录</a></p>
+  </div>-->
+</div>
+<div id="stepcontent">
+<div class="inner">
+  <ul>
+   <li class="select">01.注册</li><li>02.完善基本信息</li><li class="last">03.完成</li>
+  </ul>
+  </div>
+</div>
+<div id="maincontent" >
+  <h2 class="h2">新用户注册<span>马上注册并填写好简历，您会得到更多更好的工作机会</span></h2>
+  <div class="l">
+  <form action="/registerController.do?save" method="post">
+    <ul>
+      <li><label>电子邮箱：</label><input name="email" type="text" class="text" /><span class="s2">推荐邮箱：<a href="#">网易163</a><a href="#">QQ免费邮</a></span></li>
+      <li><label>用&nbsp;户&nbsp;名：</label><input name="username" type="text" class="text" /><span class="s2"><input type="checkbox" class="checkbox" />用上面的电子邮箱作为用户名 </span></li>
+      <li><label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label><input name="password" type="text" class="text" /><span class="s2">密码可由大小写英文字母、数字组成,长度6-20个字符</span></li>
+      <li><label>确认密码：</label><input name="repassword" type="text" class="text" /><span class="s2">请再输入一次密码</span></li>    
+      <li class="agreeli agreelis"><input type="checkbox" class="checkbox" />我接受中国国家人才网的用户协议</li>
+      <li class="libtn"><input type="submit" class="regbtn" value=""/></li>
+    </ul>
+   </form>
+  </div>
+  <div class="r">
+   <ul class="ul">
+     <li>一键申请，快速投递心仪职位 </li>
+     <li>时时刷新，好工作自动送上门 </li>
+     <li>简历跟踪，了解“谁看过我的简历” </li>
+     <li>专业分析，助您打造不一般的简历 </li>
+   </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+<div id="footer">
+  <div class="menu"><a href="#">联系我们</a>|<a href="#">关于我们</a></div>
+  <p>网站主办：人力资源和社会保障部 人力资源市场司&nbsp;&nbsp;&nbsp;&nbsp;网站承办：人力资源和社会保障部中国人力资源市场网</p>
+  <p>联系地址：北京市东城区和平里滨河路一号&nbsp;&nbsp;邮编：100013</p>
+  <p>京ICP备05036988号</p>
+</div>
+</body>
+</html>

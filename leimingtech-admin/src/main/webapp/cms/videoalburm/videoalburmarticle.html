@@ -1,0 +1,41 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">视频专辑关联文章</h4>
+		</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${videoalburmarticle.id?if_exists}"/>
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+						<div class="control-group">
+							<label class="control-label">视频专辑id</label>
+							<div class="controls">
+								<input type="text" id="alburmid" name="alburmid" class="span3 form-control" data-rule-required="true" value="${videoalburmarticle.alburmid?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">视频文章id</label>
+							<div class="controls">
+								<input type="text" id="articleid" name="articleid" class="span3 form-control" data-rule-required="true" value="${videoalburmarticle.articleid?if_exists}"/>
+							</div>
+						</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<input type="button" onclick="formSubmitModel('videoalburmarticleController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">
+			<input type="button" class="btn" value="关闭" data-dismiss="modal">
+		</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#form_sample_2").myValidate();
+});
+</script>

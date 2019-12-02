@@ -1,0 +1,106 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>调查选项内容</div>
+			<div class="tools">
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="extid" name="extid" value="${page.extid?if_exists}"/>
+				<input type="hidden" id="optionVId" name="optionVId" value="${optionVId}"/>
+				<input type="hidden" id="surveyOptionId" name="surveyOptionId" value="${surveyOptionId}"/>
+						
+						<div class="control-group">
+							<label class="control-label">选项ID</label>
+							<div class="controls">
+								<input type="text" id="optionsid" name="optionsid" class="span6 m-wrap" value="<#if page.optionsid==''>${optionVId}</#if><#if page.optionsid!=''>${page.optionsid?if_exists}</#if>"/>
+								<span class="help-inline">填写选项ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项名称</label>
+							<div class="controls">
+								<input type="text" id="extOptionname" name="extOptionname" class="span6 m-wrap" value="${page.extOptionname?if_exists}"/>
+								<span class="help-inline">填写选项名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项图片</label>
+							<div class="controls">
+								<input type="text" id="extOptionpicture" name="extOptionpicture" class="span6 m-wrap" value="${page.extOptionpicture?if_exists}"/>
+								<span class="help-inline">填写选项图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">数据类型</label>
+							<div class="controls">
+								<input type="text" id="extDatatype" name="extDatatype" class="span6 m-wrap" value="${page.extDatatype?if_exists}"/>
+								<span class="help-inline">填写数据类型</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">排序</label>
+							<div class="controls">
+								<input type="text" id="extSort" name="extSort" class="span6 m-wrap" value="${page.extSort?if_exists}"/>
+								<span class="help-inline">填写排序</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitJump('surveyOptionExtController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>                          
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+function formSubmitJump(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				alert(obj.msg);
+				jump(toUrl);
+			}else{
+				alert("提交处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	});
+}
+function jump(tourl){
+	$.ajax({
+		type:'post',
+		url:tourl,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editOption').modal('hide');
+			$('#optionDiv').empty();
+			$('#optionDiv').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+</script>

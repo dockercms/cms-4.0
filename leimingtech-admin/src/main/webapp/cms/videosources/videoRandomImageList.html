@@ -1,0 +1,83 @@
+<#if flag?exists || flag=='false'>
+<div class="control-group" id="defaultimagelist" >
+	<label class="control-label">默认图片</label>
+	<div class="controls">视频资源未找到！生成图片失败</div>
+</div>
+<#else>
+<div class="control-group" id="defaultimagelist" <#if !page.defaultimage?exists || page.defaultimage==''>style="display: none;"</#if>>
+<meta http-equiv=Cache-Control content=no-cache />
+	<label class="control-label">默认图片</label>
+	<div class="controls">
+		<div class="span5">
+		<#--<input type="text" id="defaultimage" name="defaultimage" class="form-control span6" value="${page.defaultimage!''}"/>-->
+		<#list  1..6 as i>
+			<#if i%3==1><div class="row-fluid"></#if>
+			   <div class="span4">
+					<div class="item">
+						<a class="fancybox-button" data-rel="fancybox-button" title="aa" alt="aa" href="${page.localpath!''}${i}.jpg?${.now?string('yyyyMMddHHmmss')}">
+							<div class="zoom">
+								<img src="${page.localpath!''}${i}.jpg?${.now?string('yyyyMMddHHmmss')}" alt="aa" title="aa" />                    
+								<div class="zoom-icon"></div>
+							</div>
+						</a>
+					</div>
+				<label class="radio">
+					<input type="radio" <#if page.localpath+i+'.jpg'==page.defaultimage>checked="checked"</#if> value="${page.localpath!''}${i}.jpg" name="defaultimage"/>
+					${i}.jpg
+				</label>
+				</div>
+			<#if i%3==0></div></#if>
+		</#list>
+		</div>
+		<span class="btn green" id="newRandomImage">重新生成</span>
+	</div>
+<script type="text/javascript">
+jQuery(function($) {
+	App.init();
+	//点击看大图
+	if (!jQuery.fancybox) {
+        return;
+    }
+
+    if (jQuery("#defaultimagelist .fancybox-button").size() > 0) {
+        jQuery("#defaultimagelist .fancybox-button").fancybox({
+            groupAttr: 'data-rel',
+            prevEffect: 'none',
+            nextEffect: 'none',
+            closeBtn: true,
+            helpers: {
+                title: {
+                    type: 'inside'
+                }
+            }
+        });
+    }
+    
+});
+var randomimag=function (){
+	$("#newRandomImage").unbind("click",randomimag);
+	$("#newRandomImage").text("正在生成！请稍候...");
+	var id=$("#id").val();
+	var urlStr='videoSourcesController.do?getImage&id='+id+'&t='+new Date().getTime();
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		cache:false,
+		ifModified :true,
+		success:function(msg){
+			$("#defaultimagelist").replaceWith(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+	return false;
+}
+
+//重新生成随机图片
+$("#newRandomImage").unbind("click").bind("click",randomimag);
+</script>
+</div>
+</#if>

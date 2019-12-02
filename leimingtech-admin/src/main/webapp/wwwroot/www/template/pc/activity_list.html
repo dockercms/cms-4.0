@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><#assign navTag =newTag("navTag")> <#assign navTagList
+	=navTag("{'name':'${catalogF.id}'}")> <#if navTagList?exists> <#list
+	navTagList as navTag> <#if catalogF.id==navTag.id> ${navTag.name}
+	</#if> </#list> </#if></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="/pcstyle/main.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
+
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<link rel="stylesheet" href="/pcstyle/activity-common.css"
+	type="text/css"></link>
+<link rel="stylesheet" href="/pcstyle/activity.css" type="text/css"></link>
+</head>
+<body>
+	<!--头部 -->
+		<#include "/wwwroot/${sitePath}/template/pc/section/menu.html">
+	<!--主题 -->
+	<div class="hr40"></div>
+
+	<div class="column activity-list js-returntop">
+		<div class="activity-list-item">
+			<#assign articleTag =newTag("articleTag")>
+			<#assign articleList =articleTag("{'name':'${catalogidF}','page':true,'pageindex':'${pageindexF}'}")>
+			<#if articleList?exists && articleList?size gt 0>
+			<#list articleList as article>
+
+			<div class="activity-list-item-left">
+				<img src="${article.thumb?if_exists}" width="100%" height="100%">
+					<div class="title">${article.title?if_exists}</div>
+			</div>
+
+			<div class="activity-list-item-right">
+				<#assign activityTag =newTag("activityTag")>
+				<#assign activity =activityTag("{'contentId':'${article.id}'}")>
+				<p class="time">报名时间: 
+					<#if activity.activityapplystarttime?exists>
+					${activity.activityapplystarttime?string("yyyy-MM-dd HH:mm")!''}</#if> ~ 
+					<#if activity.activityapplyendtime?exists>${activity.activityapplyendtime?string("yyyy-MM-dd HH:mm")!''}
+					</#if>
+				</p>
+				<p style="position: absolute;top: 80px;left: 20px; font-size: 12px;">活动时间:
+					<#if
+					activity.activitystarttime?exists>${activity.activitystarttime?string("yyyy-MM-dd
+					HH:mm")!''}</#if> ~ <#if
+					activity.activityendtime?exists>${activity.activityendtime?string("yyyy-MM-dd
+					HH:mm")!''}</#if></p>
+
+				<p
+					style="position: absolute;top: 120px;left: 20px; font-size: 12px;">活动地址:
+					${activity.activityaddress?if_exists}</p>
+					<p class="condition">
+					<#if activity.activityplenum?exists && activity.activityplenum!=""> 
+					限额:&nbsp;&nbsp;&nbsp;&nbsp;${activity.activityplenum?if_exists}人
+					<#-- <#if activity.activitysex=='10'>
+					限额:男&nbsp;&nbsp;&nbsp;&nbsp;${activity.activityplenum?if_exists}人
+					<#elseif activity.activitysex=='20'>
+					限额:女&nbsp;&nbsp;&nbsp;&nbsp;${activity.activityplenum?if_exists}人
+					<#elseif activity.activitysex=='30'>
+					限额:&nbsp;&nbsp;&nbsp;&nbsp;${activity.activityplenum?if_exists}人
+					</#if> --> 
+					<#else>不限人数
+					 </#if>
+					</p>
+				<a href="${article.url!'javascript:void(0);'}" target="_blank"
+					class="view" style="text-decoration:none;">查看详情</a>
+				
+			</div>
+
+			</#list> <#else> 无数据 </#if> ${pagebar}
+		</div>
+	</div>
+
+	<!--footer-->
+	<div class="footer">
+		<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+		<!-- 页脚 -->
+	</div>
+	<!--footer end-->
+
+
+	<div class="t_line sxtq" style=" display: none">
+		<span class="mycity_cs" id="mycity_0">--</span> <span
+			style="cursor:pointer;margin-left:10px;color:#003368;" id="ordercity"></span>
+		<br> <span id="mycity_1" style="display: none;"></span> <span
+			id="mycity_5">--</span><br> <span id="mycity_2">--</span><br>
+					<span id="mycity_3">--</span><br> <span id="mycity_4">--</span>
+	</div>
+	<script src="/pcstyle/base-min.js" type="text/javascript"></script>
+	<script src="/pcstyle/plugin-mod.min.js" type="text/javascript"></script>
+	
+</body>
+</html>

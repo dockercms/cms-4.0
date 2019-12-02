@@ -1,0 +1,185 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">视频</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<div class="control-group" id="uploadervideo">
+			<label class="control-label">上传后访问路径</label>
+			<div class="controls">
+				<input type="text" id="videopath" name="localpath" class="form-control span6" value="${page.localpath!''}"/>
+				<#if !page.localpath?exists && page.localpath==''>
+				<span class="btn green btn-sm" id="picker" style="padding:0px !important;">上传视频</span>
+                </#if>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">视频名称</label>
+			<div class="controls">
+				<input type="text" id="videoname" name="videoname" class="form-control span6" value="${page.videoname!''}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">上传后的名称</label>
+			<div class="controls">
+				<input type="text" id="realname" name="realname" class="form-control span6" value="${page.realname!''}"/>
+			</div>
+		</div>
+		
+		<#if page.transpath?exists && page.transpath!=''>
+		<div class="control-group">
+			<label class="control-label">转化后本地路径</label>
+			<div class="controls">
+				<input type="text" id="transpath" name="transpath" class="form-control span6" value="${page.transpath!''}"/>
+			</div>
+		</div>
+		</#if>
+		<#include "/cms/videosources/videoRandomImageList.html">
+		<div class="control-group">
+			<label class="control-label">时长(秒)</label>
+			<div class="controls">
+				<input type="text" id="timesize" name="timesize" class="form-control span6" value="${page.timesize!''}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">创建时间</label>
+			<div class="controls">
+				<input type="text" id="createdate" name="createdate" class="form-control span6" value="${page.createdate!''}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">视频大小(B)</label>
+			<div class="controls">
+				<input type="text" id="size" name="size" class="form-control span6" value="${page.size!''}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">备注</label>
+			<div class="controls">
+				<textarea class="span6 form-control" rows="3" id="mark" name="mark" >${page.mark!''}</textarea>
+			</div>
+		</div>
+	</form>
+	<!-- END FORM-->       
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="formSubmitModel('videoSourcesController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">  
+    <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+</div>
+<#if !page.localpath?exists && page.localpath==''>
+<style>
+	#uploadervideo .progress {
+	    border: 1px solid #1483d8;
+	    width: 198px;
+	    background: #fff;
+	    height: 18px;
+	    position: absolute;
+	    text-align: center;
+	    line-height: 20px;
+	    color: #6dbfff;
+	    margin-right: 10px;
+	    display: none;
+	}
+	#uploadervideo .progress span.percentage {
+	    width: 0;
+	    height: 100%;
+	    left: 0;
+	    top: 0;
+	    background: #1483d8;
+	    position: absolute;
+	}
+	#uploadervideo .progress span.text {
+	    position: relative;
+	    z-index: 10;
+	    margin-top: 0px !important;
+	}
+</style>
+<script type="text/javascript">
+function lazyInit(){
+	var uploader = WebUploader.create({
+		
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadvideo&save=false',
+
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#picker',
+
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'video',
+	        extensions: "flv,swf,mkv,avi,rm,rmvb,mpeg,mpg,ogg,ogv,mov,wmv,mp4,webm,mp3,wav,mid",
+	        mimeTypes: '*'
+	    }
+	});
+
+	uploader.on( 'uploadStart', function( file,Object ) {
+		$(".progress").show();
+	});
+
+	uploader.onUploadProgress = function( file, percentage ) {
+	    var $li = $('#uploadervideo'),
+	        $percent = $li.find('.progress .percentage'),$text=$li.find('.progress .text');
+
+	    $percent.css( 'width', percentage * 100 + '%' );
+	    $text.text(parseInt(percentage * 100) + '%');
+	};
+
+	uploader.on( 'uploadSuccess', function( file,Object ) {
+		$("#videoname").val(Object.original);
+		$("#realname").val(file.name);
+		$("#createdate").val(Object.createdate);
+		$("#videopath").val(Object.url);
+		$("#size").val(file.size);
+		$("#timesize").val(Object.timesize);
+		
+		if(Object.defaultimage){
+			$("#defaultimage").val(Object.defaultimage);
+		}
+		uploader.removeFile(file,true);
+		$(".progress").hide();
+		
+		var id=$("#id").val();
+		var urlStr='videoSourcesController.do?getImage&id='+id+'&flag=true';
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			cache:false,
+			ifModified :true,
+			success:function(msg){
+				$("#defaultimagelist").replaceWith(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	});
+
+	uploader.on("error",function(type){
+		if (type=="Q_TYPE_DENIED") {
+			alert("请选择支持的文件类型");
+		}
+	});
+}
+jQuery(document).ready(function() {   
+   App.init();
+   $("#form_sample_2").myValidate();
+   setTimeout("lazyInit()",500);
+
+});
+
+</script>
+</#if>

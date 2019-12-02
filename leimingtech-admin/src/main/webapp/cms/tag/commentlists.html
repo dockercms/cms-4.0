@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${content.title}</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" href="${contextpath}/member/css/common.css" />
+<script type="text/javascript" src="${contextpath}/member/js/jquery-1.4.4.min.js"></script>
+
+<script type="text/javascript" src="${contextpath}/media/js/form-validation.js"></script>
+<script type="text/javascript" src="${contextpath}/media/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${contextpath}/media/js/messages_cn.js"></script>
+
+
+<script type="text/javascript" src="/static/js/front.js"></script>
+<script>
+var contextpath="${contextpath}";
+	function changepic(obj, img) {
+		obj.src = img;
+	}
+</script>
+<script type="text/javascript">
+	function settab_xbingjs(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+
+	function settab_xbingjs1(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs1" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+
+	function settab_xbingjs2(name, num, n) {
+		for (i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var con = document.getElementById(name + "_" + "xbingjs2" + i);
+			menu.className = i == num ? "on_xbingjs" : "";
+			con.style.display = i == num ? "block" : "none";
+		}
+	}
+</script>
+</head>
+<body>
+<#include "wwwroot/${sitePath}/template/logoAndSearch.html"> 
+<#include "wwwroot/${sitePath}/template/nav.html">
+<div class="div_mid">
+	<div class="div_main">
+    	<div class="div_midleft">
+	     
+		<#include "cms/tag/commentlist_page.html">
+		<div class="clear-10"></div>
+		<#--<#include "cms/tag/surveylist.html">
+		<div class="clear-10"></div>-->
+	    </div>
+	    <div class="div_midright">
+	    	<#include "wwwroot/${sitePath}/template/宋涛谈生技.html">
+		      <div class="div_rtitle"><img src="/images/img/xh.png" width="220" height="34" /></div>
+		      <div class="div_content blank"><a href="#">为推动我国生物技术创新、加速科研成果向生产力转化，促进医药生物技术的繁荣发展特成立生物技术协会。</a></div>
+		      <div class="blank"><a href="#"><img src="/images/img/lm.png" width="220" height="67"  onmouseover="changepic(this,'/images/img/lm2.png')" onmouseout="changepic(this,'/images/img/lm.png')" /></a></div>
+	      	<#include "wwwroot/${sitePath}/template/ly.html">
+	    </div>
+    	<div class="clear"></div>
+    	<#include "wwwroot/${sitePath}/template/friend_link.html">
+  </div>
+</div>
+<#include "wwwroot/${sitePath}/template/footer.html">
+
+<#include "wwwroot/${sitePath}/template/login.html">
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>图标管理</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('iconAction.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class="dataTables_filter span4">
+								<label >
+									图标名称：
+									<input name="iconName" class="m-wrap" type="text" value="${searchMap["iconName"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="dataTables_filter pull-right">
+								<button type="button" class="btn blue" onclick="toSearch('${actionUrl?if_exists}', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn red" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
+							<th width="50">序号</th>
+							<th width="100">图标名称</th>
+							<th>图标样式</th>
+							<th width="100">图标类型</th>
+							<th width="50">图标</th>
+							<th width="50">类型</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if iconList?exists>
+					  <#list iconList as icon>
+						<tr class="odd gradeX">
+							<td>${icon_index?if_exists+1}</td>
+							<td class="center">${icon.iconName?if_exists}</td>
+							<td >${icon.iconClas?if_exists}</td>
+							<td ><#if icon.iconType=='1'>系统图标</#if><#if icon.iconType=='2'>菜单图标</#if></td>
+							<td ><!--<img class="avatar img-responsive" alt="" src="${icon.iconPath?if_exists}"/>-->
+							<i class="${icon.iconClas?if_exists}" ></i>
+							</td>
+							<td >${icon.extend?if_exists}</td>
+							<td >
+								<input type='button' title='修改' href="javaScript:void(0)" style=' width:16px; height:16px;  border:0; background:url(media/image/edit.gif) no-repeat left top' href="javaScript:void(0)" onclick="toEditModel('iconAction.do?addOrUpdate&id=${icon.id?if_exists}')"/>
+								<input type='button' title='删除' href="javaScript:void(0)" style=' width:16px; height:16px;  border:0; background:url(media/image/del.gif) no-repeat left top' href="javaScript:void(0)" onclick="del('iconAction.do?del', '${icon.id?if_exists}')"/>
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>

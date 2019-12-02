@@ -1,0 +1,150 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<title>${contentF.title!''}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link href="/wapStyle/css/mobile_style.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+		
+		<script src="/wapStyle/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/wapStyle/js/yuxi.js"></script>
+		<#setting number_format="#">
+		<script type="text/javascript">
+		 
+		</script>
+		<link href="/wapStyle/css/blue.css" rel="stylesheet">
+		<script src="/wapStyle/js/icheck.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('input').each(function() {
+			var self = $(this), label = self.next(), label_text = label.text();
+
+			label.remove();
+			self.iCheck({
+				checkboxClass : 'icheckbox_line-blue',
+				radioClass : 'iradio_line-blue',
+				insert : '<div class="icheck_line-icon"></div>' + label_text
+			});
+		});
+	});
+	
+	window.onload = function(){
+	var contentid = "${contentF.id?if_exists}";
+	$.ajax({
+		type:'post',
+		url: "${contextpath}/contentsController.do?addPv",
+		data:"contentId="+contentid,
+		success:function(msg){
+		}
+	});
+}
+	
+</script>
+	</head>
+	<body class="vote_view">
+	 <div data-role="page">
+	<div data-role="header" data-position="fixed" style="height: 50px;line-height: 30px;">
+          <a href="javascript:goBack();"  data-ajax=false data-role='none' class="top_back"><img src="/wapStyle/images/4shizheng_03.png"></a>
+          <h1></h1>
+    </div>
+		<#if  contentF.thumb?exists && contentF.thumb!=''><div style="margin-left: auto;margin-right:auto" class="vote_thumb"><img src="${contentF.thumb}.450_450.jpg"/></div></#if>
+		<div class="vote_title">${contentF.title!''}</div>
+		<#--<span style="color: #BABABA;font-size: 10px;float: right">已<b style="color: red;margin: 0px 2px;">0</b>人参与投票</span>-->
+		<span class="vote_publish_date"><#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+		<div>
+		<#if contentF.digest?exists && contentF.digest !=''>
+		<div class="vote_digest">
+			${contentF.digest!''}
+		</div>
+		</#if>
+		<#if voteOptionListF?exists>
+		<div class="vote_content">
+		<#if voteF.votepattern=="10">
+			<#list voteOptionListF as voteOption>
+			<input type="<#if voteF.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/><label><a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a></label><br/>
+			</#list>
+		</#if>
+			<#if voteF.votepattern=="20">
+			<ul>
+				<#list voteOptionListF as voteOption>
+				<li style="margin-bottom: 15px;">
+					<img src="${voteOption.optionimg}.450_450.jpg" alt="${voteOption.optionname}" style="display: block;margin-bottom: 7px;"/>
+					<input type="<#if voteF.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+					<label><a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a></label>
+				</li>
+				</#list>
+			</ul>
+			</#if>
+			<div class="vote_footer">
+				<input class="submitBtn" type="button" value="投 票" />
+			</div>
+		</div>
+		</#if>
+		</div>
+		<script type="text/javascript">
+		
+			var storage = window.localStorage;
+			var is_vote=storage.getItem("${(contentF.id)?string}_${contentF.title}_is_vote");
+			
+			function getResult(){
+				$(".vote_content").show();
+				$(".vote_content").html("投票结果获取中...");
+				$("<span class='vote_publish_date' style='margin-left:10px;'>你已经投票</span>").insertAfter(".vote_publish_date");
+				var url="${contextpath}/front/voteLogController.do?queryVoteLog&contentId=${contentidF!''}&voteId=${voteF.id}";
+				$.ajax({
+					type:'post',
+					url:url,
+					dataType:'text',
+					success:function(view){
+						$(".vote_content").html(view).show();
+					},
+					error:function(){
+						$(".vote_content").html("获取投票结果失败");
+					}
+				});
+			}
+			
+			if(is_vote && is_vote=='true'){
+				//显示结果
+				getResult();
+			}else{
+				$(".vote_content").show();
+				$(".submitBtn").click(function (){
+					var submitUrl="${contextpath}/front/voteLogController.do?voteLogTag&voteId=${voteF.id}";
+					
+					var cheradio = new Array();
+					var radio = document.getElementsByName('voteitem');
+					var arr = radio.length;
+					for(var i=0;i<arr;i++){
+						if(radio[i].checked == true){
+							cheradio.push(radio[i].value);
+						}
+					}
+					if(cheradio==""){
+						alert("请先选择选项～！");
+						return;
+					}
+					$(".submitBtn").val("正在提交...").attr("disabled","disabled");
+					$.ajax({
+						type:'post',
+						url:submitUrl,
+						data:{'cheradio':cheradio.join(",")},
+						dataType:'text',
+						success:function(data){
+							var obj = JSON.parse(eval(data));
+							if(obj.isSuccess){
+								storage.setItem("${contentF.id!''}_${contentF.title}_is_vote","true");
+								getResult();
+							}else{
+								alert(obj.msg);
+							}
+						}
+					});
+				});
+			}
+		</script>
+		</div>
+	</body>
+</html>

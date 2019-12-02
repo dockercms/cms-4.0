@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- 头部 引入文件 -->
+<#include "/lmPage/main/head.html">
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+	<!-- 头部 菜单 -->
+	<#include "/lmPage/main/header.html">
+	<!-- END HEADER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- 菜单选项 -->
+		<#include "/lmPage/main/left.html">
+		
+		<!-- BEGIN PAGE -->
+		<div id="pageContent" class="page-content">
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				
+				<!-- 页面内容头部 -->
+				<#include "/lmPage/main/pageheader.html">
+				<div id="dashboard">
+					<div class="row-fluid">
+					<!-- BEGIN STYLE CUSTOMIZER -->
+						<div class="color-panel hidden-phone">
+							<div class="color-mode-icons icon-color"></div>
+							<div class="color-mode-icons icon-color-close"></div>
+							<div class="color-mode">
+								<p>THEME COLOR</p>
+								<ul class="inline">
+									<li class="color-black current color-default" data-style="default"></li>
+									<li class="color-blue" data-style="blue"></li>
+									<li class="color-brown" data-style="brown"></li>
+									<li class="color-purple" data-style="purple"></li>
+									<li class="color-grey" data-style="grey"></li>
+									<li class="color-white color-light" data-style="light"></li>
+								</ul>
+							</div>
+						</div>
+
+<style>
+.box_color ul{ list-style: none;}
+.box_color, .box_color ul li{ float:left;}
+.box_color li a:hover{ opacity:0.8;text-decoration:none;}
+.box_blue{ width:300px; height:120px; background:#38aaeb}
+.box_green{ width:300px; height:120px; background:#5bc167}
+.box_yellow{ width:300px; height:120px; background:#f2a52c}
+.box_purple{ width:300px; height:120px; background:#925ee2}
+.box_red{ width:300px; height:120px; background:#e94646}
+.box_blue_top{ width:300px; height:85px;}
+.box_blue_botton{ width:300px; height:35px; opacity:0.5; background:#FFF}
+.box_blue_botton span{ color:#000; font-size:14px; text-align:center; line-height:35px;}
+.box_image{width:80px; height:80px;text-align:center; float:left}
+.box_tip{width:240px; height:80px; text-align:center; font-size:24px; color:#FFF; line-height:80px;}
+.top-news span{ text-align:center}
+</style>
+						<!-- END BEGIN STYLE CUSTOMIZER --> 
+						<h1>欢迎登陆</h1>
+						
+						<div class="top-news box_color">
+							<ul>
+                             <li>
+                                <a href="http://lmcms.leimingtech.com/" target="_blank">
+                                   <div class="box_blue" >
+                                       <div class="box_blue_top">
+                                         <span class="box_image"><img src="statics/images/one.png"></span>
+                                         <span class="box_tip">雷铭新闻网</span>
+                                       </div>
+                                       <div class="box_blue_botton"><span>PC演示站</span></div>
+                                   </div>
+                                </a>
+                             </li>
+                            <li>
+                                <a href="http://lmcms-sub.leimingtech.com/" target="_blank">
+                                   <div class="box_green" >
+                                       <div class="box_blue_top">
+                                         <span class="box_image"><img src="statics/images/two.png"></span>
+                                         <span class="box_tip">雷铭小小站电商版</span>
+                                       </div>
+                                       <div class="box_blue_botton"><span>PC演示站</span></div>
+                                   </div>
+                                </a>
+                             </li>
+								<li>
+									<a href="http://gov.leimingtech.com/" target="_blank">
+										<div class="box_green" >
+											<div class="box_blue_top">
+												<span class="box_image"><img src="statics/images/two.png"></span>
+												<span class="box_tip">雷铭某某政府版</span>
+											</div>
+											<div class="box_blue_botton"><span>PC演示站</span></div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="http://gov.leimingtech.com:81/" target="_blank">
+										<div class="box_green" >
+											<div class="box_blue_top">
+												<span class="box_image"><img src="statics/images/two.png"></span>
+												<span class="box_tip">雷铭资源信息版</span>
+											</div>
+											<div class="box_blue_botton"><span>PC演示站</span></div>
+										</div>
+									</a>
+								</li>
+
+                              <li>
+                                <a href="http://lmcms.leimingtech.com/lmcms/docs/docAct.do?index" target="_blank">
+                                   <div class="box_yellow" >
+                                       <div class="box_blue_top">
+                                         <span class="box_image"><img src="statics/images/three.png"></span>
+                                         <span class="box_tip">在线API</span>
+                                       </div>
+                                       <div class="box_blue_botton"><span>点击查看</span></div>
+                                   </div>
+                                </a>
+                             </li>
+                              <li>
+                                <a href="http://lmcms.leimingtech.com/lmcms/member/loginAct.do?login" target="_blank">
+                                   <div class="box_purple" >
+                                       <div class="box_blue_top">
+                                         <span class="box_image"><img src="statics/images/fore.png"></span>
+                                         <span class="box_tip">会员中心</span>
+                                       </div>
+                                       <div class="box_blue_botton"><span>测试会员名：liuzhen  密码：liuzhen</span></div>
+                                   </div>
+                                </a>
+                             </li>
+                              <li>
+                                <a href="http://www.leimingtech.com/" target="_blank">
+                                   <div class="box_red" >
+                                       <div class="box_blue_top">
+                                         <span class="box_image"><img src="statics/images/five.png"></span>
+                                         <span class="box_tip">购买咨询</span>
+                                       </div>
+                                       <div class="box_blue_botton"><span>点击查看</span></div>
+                                   </div>
+                                </a>
+                             </li>
+                           
+                           </ul>
+						</div>
+						
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- END PAGE CONTAINER-->    
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	
+	<!-- 底部 -->
+	<#include "/lmPage/main/footer.html">
+	
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	
+	<!-- toastr begin -->
+	<link rel="stylesheet" type="text/css" href="media/css/toastr.min.css" />
+	<script src="media/js/toastr.min.js" type="text/javascript" ></script>
+	<script src="media/js/ui-toastr.js" type="text/javascript" ></script>
+	<!-- toastr end  -->
+	
+	<!-- notific8 begin -->
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.notific8.min.css" />
+	<script src="media/js/jquery.notific8.min.js" type="text/javascript" ></script>
+	<script src="media/js/ui-notific8.js" type="text/javascript" ></script>
+	<!-- notific8 end -->
+	
+	<script src="js/jquery-livetip.js" type="text/javascript"></script>
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<!--[if lt IE 9]>
+	<script src="media/js/excanvas.min.js"></script>
+	<script src="media/js/respond.min.js"></script>  
+	<![endif]-->   
+	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="media/js/app.js"></script>
+	<script src="media/js/table-managed.js"></script>     
+	<script>
+		jQuery(document).ready(function() {
+		   var divHeight = document.documentElement.clientHeight - 77-34;
+		   $('#pageContent').css('minHeight', divHeight);
+		   App.init();
+		});
+	</script>
+	
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="media/js/select2.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<#--<script type="text/javascript" src="media/js/wysihtml5-0.3.0.js"></script>--> 
+<script type="text/javascript" src="media/js/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="media/js/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.toggle.buttons.js"></script>
+<script type="text/javascript" src="media/js/jquery.inputmask.bundle.min.js"></script>   
+<script type="text/javascript" src="media/js/jquery.input-ip-address-control-1.0.min.js"></script>
+<script type="text/javascript" src="media/js/jquery.multi-select.js"></script>   
+<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
+<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="media/js/jquery.fancybox.pack.js"></script>   
+<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="media/js/gallery.js"></script> 
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="media/js/form-components.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="media/js/bootstrap-tree.js"></script>
+<script src="media/js/ui-tree.js"></script>
+
+<script src="js/form-validation.js"></script> 
+<script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
+<script src="media/js/messages_cn.js"></script>     
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<link rel="stylesheet" type="text/css" href="plug-in/ueditor/third-party/webuploader/webuploader2.css">
+<script type="text/javascript" src="plug-in/ueditor/third-party/webuploader/webuploader.js"></script>
+
+<script type="text/javascript" src="js/publish.js"></script>
+<script type="text/javascript" src="js/commons-2014-12-27.js"></script>
+
+<!-- begin jstree -->
+<link href="media/js/jstree/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="media/js/jstree/themes/default/style.min.css" rel="stylesheet" type="text/css"/>
+<link href="media/js/jstree/style.css" rel="stylesheet" type="text/css"/>
+<link href="media/js/jstree/plugins.css" rel="stylesheet" type="text/css"/>
+<script src="media/js/jstree/jstree.min.js" ></script>
+<!-- end jstree -->
+<!-- login out time begin -->
+<script type="text/javascript" src="js/jquery.cookies.2.2.0.js"></script>
+<script type="text/javascript" src="js/loginTimeOut.js"></script>
+<!-- login out time end -->
+<!-- progressBar begin -->
+<link rel="stylesheet" href="js/progressbar/progressbar.css" type="text/css"></link>
+<script src="js/progressbar/progressbar.js"></script>
+<div class="modal fade progressBars" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="1062">
+	<div class="modal-header">
+		<span class="modal-title" >
+			<a href="javascript:void(0);" class="halflings-icon tasks" style="margin-bottom: 10px;"><i></i></a>
+			<span style="font-size: 14px;">进行中,请稍后...<span style="font-size: 12px; color: red;" class="loginHint"></span></span>
+		</span>
+	</div>
+	<div class="modal-body">
+		<div class="content progressdiv">
+		</div>
+	</div>
+</div>
+<!-- progressBar end -->
+<!-- END BODY -->
+</html>

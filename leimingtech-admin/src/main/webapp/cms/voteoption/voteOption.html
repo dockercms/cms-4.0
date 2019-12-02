@@ -1,0 +1,124 @@
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">投票选项</h4>
+	</div>
+	<div class="modal-body">
+		<!-- BEGIN FORM-->
+		<form id="vote_option_form" class="form-horizontal">
+			<input type="hidden" id="optionid" name="optionid" value="${page.optionid?if_exists}"/>
+			<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCatId}"/>
+			<input type="hidden" id="modelsId" name="modelsId" value="${modelsId}"/>
+			<input type="hidden" id="temporary" name="temporary" value="${temporary}"/>
+			<input type="hidden" id="voteId" name="voteId" value="${voteId}"/>
+					
+			<div class="control-group" style="display:none">
+				<label class="control-label">投票ID</label>
+				<div class="controls">
+					<input type="text" id="voteid" name="voteid" class="form-control span3" value="<#if page.voteid==''>${temporary}</#if><#if page.voteid!=''>${page.voteid?if_exists}</#if>"/>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">选项名称</label>
+				<div class="controls">
+					<input type="text" id="optionname" name="optionname" class="form-control span3" value="${page.optionname?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">选项链接</label>
+				<div class="controls">
+					<input type="text" id="optionlink" name="optionlink" class="form-control span3" value="${page.optionlink?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">选项图片</label>
+				<div class="controls">
+					<div class="left" id="mytable">
+						<input type="text" id="backpath2" name="optionimg" class="form-control span3" value="${page.optionimg?if_exists}"/>
+					</div>
+						<a id="sample_editable_1_new" class="btn blue" href="javascript:toEditModel('attachPictureController.do?tableDialog&requestCode=backpath2')" style="text-decoration: none">
+							图片库 <i class="icon-search"></i>
+						</a>
+						<span id="picUp" class="btn green"  style="padding:0px !important;">上传<i class="icon-upload-alt"></i></span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">初始票数</label>
+				<div class="controls">
+					<input type="text" id="optiontotal" name="optiontotal" class="form-control span3" value="${page.optiontotal?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">排序</label>
+				<div class="controls">
+					<input type="text" id="optionsort" name="optionsort" class="form-control span3" value="${page.optionsort!'0'}"/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">  
+        <input  type="button" onclick="formSubmitJump('voteOptionController.do?save', 'vote_option_form');" class="btn btn-primary" value="提交">  
+        <input type="button" class="btn" value="取消" data-dismiss="modal">  
+    </div>
+<script>
+	var pathid="optionimg";
+	$('.date-picker').datepicker({
+	    rtl : App.isRTL()
+	});
+	
+	var toNextUrl="";
+	function lazyChangePage(toUrl){
+		toNextUrl=toUrl;
+		setTimeout(jump,500);
+	}
+	function jump(tourl){
+		if(!tourl){
+			tourl=toNextUrl;
+		}
+		$.ajax({
+			type:'post',
+			url:tourl,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#showModel').modal('hide');
+				$('#optionDiv').empty();
+				$('#optionDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+var uploaderoptionimg = WebUploader.create({
+		
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#picUp',
+
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+
+	//当有文件添加进来的时候
+	uploaderoptionimg.on( 'uploadSuccess', function( file,Object ) {
+		$("#backpath2").val(Object.url);
+	});
+</script>

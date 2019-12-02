@@ -1,0 +1,105 @@
+
+<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">前台用户组</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${users.id?if_exists}"/>
+				<div class="control-group">
+					<label class="control-label">用户名称</label>
+					<div class="controls">
+						<input class="form-control span3" size="20" type="text" id="username" name="username" value="${users.username?if_exists}"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">密码</label>
+					<div class="controls">
+						<input class="form-control span3" size="20" type="password" id="password" name="password" value=""/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">确认密码</label>
+					<div class="controls">
+						<input class="form-control span3" size="20" type="password" id="" name="" value=""/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">用户角色</label>
+					<div class="controls">
+						<select id="gid" name="gid">
+						<#list userGroupList as userGroup>
+							<#if userGroup?exists>
+					        	<option <#if users.gid==userGroup.id>selected="selected"</#if> value="${userGroup.id}">${userGroup.name}</option> 
+					        </#if>
+					    </#list>      
+				        </select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">用户状态</label>
+					<div class="controls">
+						<label class="radio">
+							<input class="form-control span3" type="radio" name="status" <#if users.status==1||!users.status?exists>checked="checked"</#if> value="1" />启用
+						</label>
+						<label class="radio">
+							<input class="form-control span3" type="radio" name="status" <#if users.status==0>checked="checked"</#if> value="0" />关闭
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">活动创建数</label>
+						<div class="controls">
+							<input class="form-control span3" size="20" type="text" id="activitynum" name="activitynum" value="${users.activitynum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">公众号已创建数</label>
+						<div class="controls">
+							<input class="form-control span3" size="20" type="text" id="wechatCardNum" name="wechatCardNum" value="${users.wechatCardNum!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">资金余额</label>
+						<div class="controls">
+							<input class="form-control span3" size="20" type="text" id="money" name="money" value="${users.money!'0'}"/>
+						</div>
+				</div>
+				<div class="control-group">
+					<div class="control-group pull-left margin-right-20">
+						<label class="control-label">到期时间</label>
+						<div class="controls">
+							<div class="input-append date date-picker" data-date="<#if users.viptime>${users.viptime?string('yyyy-MM-dd')}</#if>" data-date-viewmode="years">
+								<input class="form-control span3 date-picker" size="16" name="vipT" type="text" value="<#if users.viptime>${users.viptime?string('yyyy-MM-dd')}</#if>" /><span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">备注说明</label>
+						<div class="controls">
+							<input class="form-control span3" size="20" type="text" id="remark" name="remark" value="${users.remark?if_exists}"/>
+						</div>
+				</div>
+				
+			</form>
+			<!-- END FORM-->       
+		</div>
+	</div>
+	<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<div class="modal-footer">
+					<button type="button" onclick="formSubmitModel('usersController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+				</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});</script>

@@ -1,0 +1,16 @@
+<td width="220" style="border:1px solid #D6E9F8;padding:10px"
+	valign="top">
+	<h3 style="color: #1a5ca3;">点击排行</h3>
+	<ul class="list200">
+		<#assign articleTag =newTag("articleTag")>
+		<#assign articleList =articleTag("{'name':'402881e6539ce67f01539d033d6f0028',count:'15',order:'top'}")>
+		<#if articleList?exists && articleList?size gt 0>	
+			<#list articleList as article>
+			<li>&#8226; 
+				<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+			</li>
+			</#list>
+		</#if>
+		
+	</ul>
+</td>

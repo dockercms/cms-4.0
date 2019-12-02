@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://www.ahciq.gov.cn/system/2015/05/14/000012970.shtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>${catalogF.name}</title>
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+	background-image:
+		url(/images/2013715101320.gif);
+	text-align: center;
+}
+
+body,td,th {
+	text-align: left;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.title h4 {
+	float: left;
+	font-size: 15px;
+	font-weight: bold;
+	padding-left: 15px;
+	color: #00479C;
+}
+
+.red {
+	font-weight: bold;
+	color: #D00111;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #D00212;
+}
+
+.list2 {
+	background-image: url(/images/listbg.gif);
+	background-repeat: repeat-x;
+	background-position: 0px bottom;
+	line-height: 30px;
+	font-size: 14px;
+	color: #004497;
+}
+
+.list2 a {
+	color: #004497;
+}
+-->
+</style>
+<script>
+	var lmid = 0;
+</script>
+<script>
+	var newsid = 12970;
+</script>
+</head>
+
+<body>
+	<#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+	<div
+		style="background:url(/images/201551515747.jpg) no-repeat top center; height:634px; width:100%;"></div>
+
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="20" bgcolor="#FFFFFF" style="margin-top:-300px;">
+		<tbody>
+			<tr>
+				<td valign="top"><table width="100%" border="0"
+						cellspacing="10" cellpadding="0">
+						<tbody>
+							<tr>
+								
+								<td valign="top">
+									<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a0154008b7be00033'}")>
+									<#if catalog?exists>
+									<table width="886" border="0" cellspacing="0" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td
+													background="/images/2015514101932.jpg">
+													<table width="886" border="0" cellspacing="0"
+														cellpadding="0" align="center">
+														<tbody>
+															<tr>
+																<td height="42" class="title" width="736">
+																	<h4>${catalog.name}</h4>
+																</td>
+																<td height="42" width="150" align="right"><a
+																	href="${catalog.url!'javascript:void(0);'}"
+																	target="_blank"><img
+																		src="/images/2013715101320_1.gif"
+																		width="50" height="5" border="0"></a></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="880" border="0" cellspacing="15" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")>
+														<#assign articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0>
+														<#list articleList as article>
+														<li><a
+															href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a>
+															<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li>
+														</#list>
+														</#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									</#if>
+									<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a0154008bf6f40035'}")>
+									<#if catalog?exists>
+									<table width="886" border="0" cellspacing="0" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td
+													background="/images/2015514101932.jpg">
+													<table width="886" border="0" cellspacing="0"
+														cellpadding="0" align="center">
+														<tbody>
+															<tr>
+																<td height="42" class="title" width="736">
+																	<h4>${catalog.name}</h4>
+																</td>
+																<td height="42" width="150" align="right"><a
+																	href="${catalog.url!'javascript:void(0);'}"
+																	target="_blank"><img
+																		src="/images/2013715101320_1.gif"
+																		width="50" height="5" border="0"></a></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<table width="880" border="0" cellspacing="15" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")>
+														<#assign articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0>
+														<#list articleList as article>
+														<li><a
+															href="${article.url!'javascript:void(0);'}"
+															title="${article.title}" target="_blank">
+																${article.title}</a>
+															<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li>
+														</#list>
+														</#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									</#if>
+									<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a0154008c8d890037'}")>
+									<#if catalog?exists>
+									<table width="886" border="0" cellspacing="0" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td
+													background="/images/2015514101932.jpg">
+													<table width="886" border="0" cellspacing="0"
+														cellpadding="0" align="center">
+														<tbody>
+															<tr>
+																<td height="42" class="title" width="736">
+																	<h4>${catalog.name}</h4>
+																</td>
+																<td height="42" width="150" align="right"><a
+																	href="${catalog.url!'javascript:void(0)'}"
+																	target="_blank"><img
+																		src="/images/2013715101320_1.gif"
+																		width="50" height="5" border="0"></a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="880" border="0" cellspacing="15" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")>
+														<#assign articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0>
+														<#list articleList as article>
+														<li><a
+															href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}
+															</a>
+															<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li>
+														</#list>
+														</#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									</#if>
+									
+									<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a0154008da1c2003c'}")>
+									<#if catalog?exists>
+									<table width="886" border="0" cellspacing="0" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td
+													background="/images/2015514101932.jpg">
+													<table width="886" border="0" cellspacing="0"
+														cellpadding="0" align="center">
+														<tbody>
+															<tr>
+																<td height="42" class="title" width="736">
+																	<h4>${catalog.name}</h4>
+																</td>
+																<td height="42" width="150" align="right"><a
+																	href="${catalog.url!'javascript:void(0)'}"
+																	target="_blank"><img
+																		src="/images/2013715101320_1.gif"
+																		width="50" height="5" border="0"></a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="880" border="0" cellspacing="15" cellpadding="0"
+										align="center">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")>
+														<#assign articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0>
+														<#list articleList as article>
+														<li><a
+															href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}
+															</a>
+															<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li>
+														</#list>
+														</#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									</#if>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td height="100" align="center">安徽出入境检验检疫局 专题报道<br> <a
+					href="http://www.anhuinews.com/" target="_blank">中安在线</a> 技术支持
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<script src="/js/foot.js"></script>
+	
+</body>
+</html>

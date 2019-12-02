@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://data.ahciq.gov.cn/vote/vote_46.shtml -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<title>${site.siteName} - ${catalogF.name}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+		<link href="/css/base.css" rel="stylesheet">
+		<link href="/css/style.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
+		<script src="/js/jquery.js"></script>
+		<script src="/js/base.js" type="text/javascript"></script>
+		<!--[if lt IE 8]>
+		<script src="/js1/png.js"type="text/javascript"></script>
+		<script src="/js1/htmlfix.js"type="text/javascript"></script>
+		<![endif]-->
+        <!--<base target="_blank">--><base href="." target="_blank">
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+	<script>var lmid=22;</script><script>var newsid=0;</script></head>
+	<body>
+        <#include "/wwwroot/${sitePath}/template/common/head.html">
+		<div class="cl"></div>
+		<div class="container">
+			<div class="tag">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody><tr>
+									    <td>当前位置：<a href="/">首页</a> &gt;
+										<#assign navTag =newTag("navTag")>
+										<#assign navTagList =navTag("{'name':'${catalogF.id}'}")> 
+										<#if navTagList?exists> 
+											<#list navTagList as navTag> 
+												<a href="${navTag.url!'javascript:void(0);'}">${navTag.name}&gt;</a>
+											</#list> 
+										</#if>
+									</tr>
+								</tbody></table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="content-block">
+				<div class="block gzly">
+					<div class="bt">
+						<h3>${catalogF.name}</h3>
+					</div>
+					<#if contentF?exists && surveyF?exists>
+					<div class="gzly-block"><h3>${contentF.title}</h3><br>
+					<form id="surveyForm" >
+						<table width="100%" border="0" cellspacing="5" cellpadding="0">
+						<input type="hidden" name="surveyId" value="${contentF.id}" />
+						
+							
+							<#list surveyF.optionList as option>
+								<tr>
+									<td height="30" colspan="2" align="left">
+									<span style="color: #1c77ba;">${option_index+1}、${option.optionname}</span>
+									</td>
+								</tr>
+								<#if option.dataType=='radio'>
+									<tr>
+										<td height="30" colspan="2" align="left">
+										<#list option.optionextList as ext>
+											<input type="radio"	name="${option.id}" value="${ext.id}" id="${ext.id}"/>${ext_index+1}.${ext.extOptionname}
+											
+										</#list>
+										</td>
+									</tr>
+								</#if>
+								<#if option.dataType=='checkbox'>
+									<tr>
+										<td height="30" colspan="2" align="left">
+										<#list option.optionextList as ext>
+											<input type="checkbox"	name="${option.id}" value="${ext.id}" id="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+										</#list>
+										</td>
+									</tr>
+								</#if>
+								<#if option.dataType=='text'>
+									<tr>
+										<td height="30" colspan="2" align="left">
+										<input name="${option.id}"	type="text" id="${option.id}" /></td>
+									</tr>
+								</#if>
+								<input name=subIds type="hidden" value="${option.id}" />
+							</#list>
+							<tr>
+								<td height="35" colspan="2" align="center" valign="bottom">
+									<input id="surveybtn"	type="button" onclick="survey('${contextpath}/front/surveyLogController.do?subSurvey&surveyId=${surveyF.id}','surveyForm')" value="投票" /> &nbsp; 
+									<input type="button" onclick="query1('${contextpath}/front/surveyLogController.do?surveyPcTag')" value="结果"/>
+								</td>
+							</tr>
+						</table>
+	     	</form>
+		<script type="text/javascript">
+			$(function (){
+				//$("#surveybtn").click(function (){
+				//	Cms.survey(function (data){
+				//		alert("提交的数据未处理");
+				//	});
+				//});
+			});
+			function survey(urlStr,surveyForm){
+				
+				
+					$.ajax({
+						type:'post',
+						url:urlStr,
+						data:$('#' + surveyForm).serialize(),
+						dataType:'text',
+						success:function(msg){
+							var obj = JSON.parse(eval(msg));
+							alert(obj.msg);
+						},error:function(){
+							alert("提交失败!");
+						}
+					});
+				}
+			
+			//查看结果
+			function query1(urlStr){
+				window.location = urlStr+"&surveyId=${surveyF.id}&contentId=${contentF.id}&catId=${catalogF.id}";
+			}
+		</script>	
+					
+					
+
+					</div>
+					</#if>
+				</div>
+				<div style="width: 230px;
+	height: 696px;
+	padding: 10px;
+	text-align: left;
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border: 1px solid #d6e9f8;
+	">
+				
+							<#include "/wwwroot/${sitePath}/template/common/benJuTongZhi.html">
+				</div>
+		    
+			</div>
+		</div>
+		<div class="cl"></div>
+		<#include "/wwwroot/${sitePath}/template/common/foot.html">
+
+</body>
+</html>

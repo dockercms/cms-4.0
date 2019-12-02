@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://www.ahciq.gov.cn/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>${site.siteName}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<script src="/js/jquery.js"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<script src="/js/float.js" type="text/javascript"></script>
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<script>
+	var lmid = 1;
+</script>
+<script>
+	var newsid = 0;
+</script>
+<script type="text/javascript">
+	$(function() {
+	  
+		var urlStr = "${contextpath}/front/surveyLogController.do?isLogin&toFrontSite=${site.id}";
+		$.ajax({
+			type : 'post',
+			url : urlStr,
+			data : 'data=0',
+			dataType : 'text',
+			success : function(msg) {
+				
+			}
+		});
+	});
+	
+</script>
+
+</head>
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/head.html">
+
+	<!-- <div id="gg1"
+		style="z-index: 1101; width: 200px; height: 67px; text-align: center; position: absolute; left: 1135.30842303017px; top: 218.607535249445px; background-color: rgb(255, 255, 255);">
+		<a href="http://www.ahciq.gov.cn/system/2016/03/21/000014673.shtml"><img
+			src="/images/2016321144734.gif"> </a><br>
+	</div>
+	<script type="text/javascript">
+		//var ad2=new AdMove("gg2");ad2.Run();
+
+		var ad1 = new AdMove("gg1");
+		ad1.Run();
+		function closeDiv() {
+			gg2.style.display = 'none'
+		}
+
+		var rrstr = (screen.width - 1260) / 2;
+		document
+				.writeln("<div id=\"ewm\" style=\"position:fixed; top:80px;right:10px;width:128px; height:143px; z-index:1;font-size:13px;\">");
+		document
+				.writeln("  <table width=\"102\" border=\"0\" cellspacing=\"0\" cellpadding=\"3\" style=\"background:#fff;\">");
+		document.writeln("    <tr>");
+		document.writeln("      <td align=\"center\">“徽韵国检”微信<\/td>");
+		document.writeln("  <\/tr>");
+		document.writeln("  <tr>");
+		document
+				.writeln("      <td align=\"center\"><a href=\"http://www.ahciq.gov.cn/system/2015/07/22/000013630.shtml\"><img src=\"http://pic.ahciq.gov.cn/2015/07/22/201572211558.jpg\" width=\"121\" border=\"0\"><\/a><\/td>");
+		document.writeln("  <\/tr>");
+		document.writeln("<\/table>");
+		document.writeln("<\/div>");
+	</script> -->
+	<!-- <div id="ewm"
+		style="position:fixed; top:80px;right:10px;width:128px; height:143px; z-index:1;font-size:13px;">
+		<table width="102" border="0" cellspacing="0" cellpadding="3"
+			style="background:#fff;">
+			<tbody>
+				<tr>
+					<td align="center">“徽韵国检”微信</td>
+				</tr>
+				<tr>
+					<td align="center"><a
+						href="http://www.ahciq.gov.cn/system/2015/07/22/000013630.shtml"><img
+							src="/images/201572211558.jpg" width="121" border="0">
+					</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div> -->
+	<script>
+		/*
+		 function closeDiv(){
+		 document.getElementById('zdl').style.display='none';
+		 document.getElementById('ydl').style.display='none';
+		 }
+		 var rrstr1=(screen.width-1280)/2;
+		 document.writeln("<div id=ydl style=\"position:absolute; top:285px;left:"+rrstr1+"px;width:108px; height:143px; z-index:1;font-size:13px\"><img width=108 src=http://pic.ahciq.gov.cn/2016/02/05/201625111133.jpg><br><a onclick=\"closeDiv()\" style=\"cursor:hand;\">关闭<\/a>");
+		 document.writeln("<\/div>");
+		 document.writeln("<div id=zdl style=\"position:absolute;top:285px;right:"+rrstr1+"px;width:108px; height:143px; z-index:1;font-size:13px\"><img width=108 src=http://pic.ahciq.gov.cn/2016/02/05/201625111133_1.jpg><br><a onclick=\"closeDiv()\" style=\"cursor:hand;\">关闭<\/a>");
+		 document.writeln("<\/div>");
+		 */
+	</script>
+	<div class="container">
+		<div class="news">
+			<div class="slider">
+				<!--大图开始-->
+				<div class="area">
+					<div class="focusImage" id="focusImage">
+						<div class="focusImage-inner">
+							<div class="focusImage-content">
+								<ul class="js-content" id="focusImage-content">
+									<#assign articleTag =newTag("articleTag")>
+									<#assign articleList =articleTag("{'name':'402881e6539ce67f01539cfdebd9001b',count:'5',order:'top'}")>
+									<#if articleList?exists && articleList?size gt 0>
+										<#list articleList as article>
+											<#if article.thumb?exists && article.thumb!="">	
+									<table width="100%" cellspacing="1" cellpadding="0">
+									<tbody>
+											<tr>
+												<td width="100%" valign="top">
+													<#if article_index==0>
+												        <li class="current">
+														<a href="${article.url!'javascript:void(0);'}" target="_blank">
+															<img src="<#if article.thumb?exists>${article.thumb}</#if>" border="0" width="320" height="224">
+														</a>
+														<div class="focusImage-title">
+															<div class="focusImage-title-bg"></div>
+															<h2>
+																<a 	href="${article.url!'javascript:void(0);'}" target="_blank">${article.title} 
+																<#if article.published?exists>${article.published?string('yyyy-MM-dd HH:mm:ss')}</#if>
+																</a>
+															</h2>
+														</div>
+														</li> 
+													</#if>
+													<#if article_index!=0>
+												        <li class="">
+														<a href="${article.url!'javascript:void(0);'}" target="_blank">
+															<img src="<#if article.thumb?exists>${article.thumb}</#if>" border="0" width="320" height="224">
+														</a>
+														<div class="focusImage-title">
+															<div class="focusImage-title-bg"></div>
+															<h2>
+																<a 	href="${article.url!'javascript:void(0);'}" target="_blank">${article.title} 
+																<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+																</a>
+															</h2>
+														</div>
+														</li>
+													</#if>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									</#if>
+									</#list>
+									</#if>
+								</ul>
+							</div>
+							<div class="focusImage-slide">
+								<ul class="js-tab" id="focusImage-tab">
+									<li class="current">1</li>
+									<li class="">2</li>
+									<li class="">3</li>
+									<li class="">4</li>
+									<li class="">5</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					function focusImage(interval) {
+						var content = document.getElementById(
+								"focusImage-content")
+								.getElementsByTagName("li");
+						var tab = document.getElementById("focusImage-tab")
+								.getElementsByTagName("li");
+						var num = tab.length;
+						var current = 0;
+						var intervalObj;
+						function init() {
+							tab[0].className = 'current';
+							content[0].className = 'current';
+							for ( var i = 0; i < tab.length; i++) {
+								tab[i].onclick = function() {
+									tabOnClick(this);
+								}
+							}
+							window.setTimeout(scrollImage, interval * 1000);
+						}
+						function tabOnClick(liTag) {
+							var i = parseInt(liTag.innerHTML) - 1;
+							if (i == current) {
+								return;
+							}
+							clearInterval(intervalObj);
+							tab[current].className = '';
+							content[current].className = '';
+							tab[i].className = 'current';
+							content[i].className = 'current';
+							current = i;
+							intervalObj = window.setTimeout(scrollImage,
+									interval * 1000);
+						}
+						function scrollImage() {
+							clearInterval(intervalObj);
+							tab[current].className = '';
+							content[current].className = '';
+							current++;
+							if (current >= num) {
+								current = 0;
+							}
+							tab[current].className = 'current';
+							content[current].className = 'current';
+							intervalObj = window.setTimeout(scrollImage,
+									interval * 1000);
+						}
+						init();
+					}
+					new focusImage(5); // 换图频道，秒
+				</script>
+				<!--大图结束-->
+			</div>
+			<div class="kx"
+				style="height:240px;overflow: hidden;position:relative">
+				<div class="title">
+					<ul>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539cf8d7b60017'}")>
+						<#if catalog?exists>
+						<li class="tabon" data-link="xwbd1"><a
+							href="${catalog.url!'javascript:void(0);'}" target="_blank">${catalog.name}</a>
+							<hr class="slider-dot">
+						</li>
+						</#if>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539cff7bd0001d'}")>
+						<#if catalog?exists>
+						<li data-link="xwbd2"><a
+							href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a>
+						</li>
+						</#if>
+						<#assign catalog=catalogTag("{'levels':'self','name':'297e5018539ced7401539cff38d40007'}")>
+						<#if catalog?exists>
+						<li data-link="xwbd3"><a href="${catalog.url!'javascript:void(0);'}"
+							target="_blank">${catalog.name}</a>
+						</li>
+						</#if>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539d02ac690026'}")>
+						<#if catalog?exists>
+						<li data-link="xwbd4"><a href="${catalog.url!'javascript:void(0);'}"
+							target="_blank">${catalog.name}</a>
+						</li>
+						</#if>
+					</ul>
+				</div>
+				<ul class="kx-news show" id="xwbd1">
+					<ul>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539cfc11aa0019'}")>
+						<#if catalog?exists>
+						<#assign articleTag=newTag("articleTag")>
+						<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+						<#if articleList?exists&&articleList?size gt 0>
+						<#list articleList as article>
+						<li>
+							<a
+								href="${article.url!'javascript:void(0);'}"
+								title="${article.title}" target="_blank">${article.title}
+							</a>
+							<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+						</li>
+						</#list>
+						</#if>
+						</#if>
+					</ul>
+				</ul>
+
+				<ul class="kx-news" id="xwbd2"
+					style="height:210px;overflow: hidden;">
+					<ul>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539cff7bd0001d'}")>
+						<#if catalog?exists>
+						<#assign articleTag=newTag("articleTag")>
+						<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+						<#if articleList?exists&&articleList?size gt 0>
+						<#list articleList as article>
+						<li><a
+							href="${article.url!'javascript:void(0);'}"
+							title="${article.title}" target="_blank">${article.title}</a>
+							<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+						</li>
+						</#list>
+						</#if>
+						</#if>
+					</ul>
+				</ul>
+				<ul class="kx-news" id="xwbd3">
+					<ul>
+						<#assign catalog=catalogTag("{'levels':'self','name':'297e5018539ced7401539cff38d40007'}")>
+						<#if catalog?exists>
+						<#assign articleTag=newTag("articleTag")>
+						<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+						<#if articleList?exists&&articleList?size gt 0>
+						<#list articleList as article>
+						<li><a
+							href="${article.url!'javascript:void(0);'}"
+							title="${article.title}" target="_blank">${article.title}</a>
+							<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+						</li>
+						</#list>
+						</#if>
+						</#if>
+					</ul>
+				</ul>
+				<ul class="kx-news" id="xwbd4">
+					<ul>
+						<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539d02ac690026'}")>
+						<#if catalog?exists>
+						<#assign articleTag=newTag("articleTag")>
+						<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+						<#if articleList?exists&&articleList?size gt 0>
+						<#list articleList as article>
+						<li><a
+							href="${article.url!'javascript:void(0);'}"
+							title="${article.title}" target="_blank">${article.title}</a>
+							<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+						</li>
+						</#list>
+						</#if>
+						</#if>
+					</ul>
+				</ul>
+			</div>
+			<div class="tz">
+
+				<h3>
+					<a href="http://www.ahciq.gov.cn/tongzhi/">本局通知</a>
+				</h3>
+				<div id="demoss"
+					style="overflow:hidden;height: 196px;float: left;display: inline;text-align:left;">
+					<div id="demoss1">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+								<#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539d02ac690026'}")>
+								<#if catalog?exists>
+								<#assign articleTag=newTag("articleTag")>
+								<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+								<#if articleList?exists&&articleList?size gt 0>
+								<#list articleList as article>
+								<tr>
+									<td>&#8226; 
+										<a
+											href="${article.url!'javascript:void(0);'}"
+											target="_blank">${article.title}
+										</a> 
+										<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+									</td>
+								</tr>
+								</#list>
+								</#if>
+								</#if>
+							</tbody>
+						</table>
+					</div>
+					<div id="demoss2">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+							    <#assign catalog=catalogTag("{'levels':'self','name':'402881e6539ce67f01539d02ac690026'}")>
+								<#if catalog?exists>
+								<#assign articleTag=newTag("articleTag")>
+								<#assign articleList=articleTag("{'name':'${catalog.id}','count':'8','levels':'child','order':'top'}")>
+								<#if articleList?exists&&articleList?size gt 0>
+								<#list articleList as article>
+								<tr>
+									<td>&#8226; 
+									  <a
+										href="${article.url!'javascript:void(0);'}"
+										target="_blank">${article.title}
+									  </a> 
+									  <#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+									</td>
+								</tr>
+								</#list>
+								</#if>
+								</#if>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<script type="text/javascript">
+					var speed = 40;
+					var FGDemo = document.getElementById('demoss');
+					var FGDemo1 = document.getElementById('demoss1');
+					var FGDemo2 = document.getElementById('demoss2');
+					FGDemo2.innerHTML = FGDemo1.innerHTML
+					function Marquee1() {
+						if (FGDemo2.offsetHeight - FGDemo.scrollTop <= 0)
+							FGDemo.scrollTop -= FGDemo1.offsetHeight
+						else {
+							FGDemo.scrollTop++
+						}
+					}
+					var MyMar1 = setInterval(Marquee1, speed)
+					FGDemo.onmouseover = function() {
+						clearInterval(MyMar1)
+					}
+					FGDemo.onmouseout = function() {
+						MyMar1 = setInterval(Marquee1, speed)
+					}
+				</script>
+			</div>
+		</div>
+
+		<div class="ad">
+			<!--<script language=javascript src=http://data.ahciq.gov.cn/ads/ad_8.shtml></script>-->
+			<img src="/images/ad.jpg" width="1000" height="40">
+		</div>
+		<div class="block xxgk">
+			<div class="bt">
+				<#assign catalog=catalogTag("{'levels':'self','name':'297e5018539ced7401539cf8ad590001'}")>
+				<#if catalog?exists>
+				<h3>${catalog.name}</h3>
+				</#if>
+			</div>
+			<div class="gknews">
+				<div class="items">
+					<ul class="items-btn">
+						<#assign catalogList=catalogTag("{'name':'297e501853bbaffe0153bbb5f36c0001','levels':'child'}")>
+						<#if catalogList?exists>
+						<#list catalogList as cat>
+						<#if cat_index==0>
+						<li><img src="/images/gkml.png"><a
+							href="${cat.url!'javascript:void(0)'}">${cat.name}</a>
+						</li>
+						</#if>
+						<#if cat_index==1>
+						<li><img src="/images/gkzn.png"><a
+							href="${cat.url!'javascript:void(0);'}">${cat.name}</a>
+						</li>
+						</#if>
+						<#if cat_index==2>
+						<li><img src="/images/gkgd.png"><a
+							href="${cat.url!'javascript:void(0)'}">${cat.name}</a>
+						</li>
+						</#if>
+						<#if cat_index==3>
+						<li><img src="/images/gknb.png"><a
+							href="${cat.url!'javascript:void(0)'}">${cat.name}</a>
+						</li>
+						</#if>
+						<#if cat_index==4>
+						<li><img src="/images/sqgk.png"><a
+							href="${cat.url!'javascript:void(0)'}">${cat.name}</a>
+						</li>
+						</#if>
+						</#list>
+						</#if>
+					</ul>
+					<div>
+						<ul>
+							<#assign catalog=catalogTag("{'name':'402881ed53c017a60153c1034a1e0005','levels':'self'}") >
+							<#if catalog?exists>
+							<li><img src="/images/ldxx.png"><a
+								href="${catalog.url!'javascript:void(0)' }" target="_blank">${catalog.name}</a></li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'name':'297e5018539ced7401539cf9a9560003','levels':'self'}")>	
+							<#if catalog?exists>
+							<li><img src="/images/zzjg.png"><a
+								href="${catalog.url!'javascript:void(0)'}" target="_blank">${catalog.name}</a></li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'name':'297e501853cf70470153d0b770000013','levels':'self'}")>
+							<#if catalog?exists>
+							<li><img src="/images/rsxx.png"><a
+								href="${catalog.url!'javascript:void(0)'}" target="_blank">${catalog.name}</a>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'name':'297e501853ea7a240153ea85c46d0005','levels':'self'}")>
+							<#if catalog?exists>
+							<li><img src="/images/ghjh.png"><a
+								href="${catalog.url!'javascript:void(0)'}" target="_blank">${catalog.name}</a>
+							</li>
+							</#if>
+							<#assign catalog=catalogTag("{'name':'297e501853ea7a240153ea8a1ed50007','levels':'self'}")>
+							<#if catalog?exists>
+							<li><img src="/images/tjsj.png"><a
+								href="${catalog.url!'javascript:void(0)'}"
+								target="_blank">${catalog.name}</a></li>
+							</#if>
+							<#assign catalog=catalogTag("{'name':'297e501853ea7a240153ea8cc5f9000c','levels':'self'}")>
+							<#if catalog?exists>
+							<li><img src="/images/yjgl.png"><a
+								href="${catalog.url!'javascript:void(0)'}"
+								target="_blank">${catalog.name}</a></li>
+							</#if>
+						</ul>
+					</div>
+				</div>
+				<div class="cl"></div>
+				<div class="tgnews">
+					<div class="xxgk-title">
+						<ul class="xxgk-ul">
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853a2790f0153a2d86ff80016'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li itemon ieml5"><a
+								href="${catalog.url!'javascript:void(0);'}"> ${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ea7a240153ea84190b0001'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li"><a href="${catalog.url!'javascript:void(0);'}">
+									 ${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a><span>
+													<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ea7a240153eab0179f001f'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li"><a
+								href="${catalog.url!'javascript:void(0);'}"> 
+								${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ee4a1c0153ef455f170052'}") >
+							<#if catalog?exists>
+							<li class="xxgk-li">
+								<a href="${catalog.url!'javascript:void(0);'}">技贸措施 </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists &&articleList?size gt 0>
+											<#list articleList as article>
+											<li><a href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853a2790f0153a2e97452001f'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li"><a href="${catalog.url!'javascript:void(0);'}">
+									${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ee4a1c0153ee7bd73b0006'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li"><a href="${catalog.url!'javascript:void(0);'}">
+									${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+							
+							<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ee4a1c0153ef286efe003b'}")>
+							<#if catalog?exists>
+							<li class="xxgk-li">
+								<a href="${catalog.url!'javascript:void();'}"> ${catalog.name} </a>
+								<div>
+									<ul class="kx-news">
+										<ul>
+											<#assign articleTag=newTag("articleTag")>
+											<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','level':'all','order':'top'}")>
+											<#if articleList?exists && articleList?size gt 0>
+											<#list articleList as article>
+											<li><a
+												href="${article.url!'javascript:void(0);'}"
+												title="${article.title}" target="_blank">${article.title}</a>
+												<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+											</li>
+											</#list>
+											</#if>
+										</ul>
+									</ul>
+								</div>
+							</li>
+							</#if>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="zljj">
+				<#assign catalog=catalogTag("{'levels':'self','name':'297e501853efec9f0153eff3e0710001'}")>
+				<#if catalog?exists>
+				<h3>
+					${catalog.name}<a href="${catalog.url!'javascript:void(0)'}">更多</a>
+				</h3>
+				</#if>
+				<table width="100%" cellspacing="0" cellpadding="0" border="0">
+					<tbody>
+						<tr>
+							<td width="100%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+										    <#assign catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f4a90c370061'}")>
+										    <#if catalog?exists>
+											<td height="50"><a
+												href="${catalog.url!'javascript:void(0)'}"
+												target="_blank"><img
+													src="/images/2015519101637.gif" width="200"
+													height="45" border="0"> </a>
+											</td>
+											</#if>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a01540065f53c0007'}")>
+											<#if catalog?exists>
+											<td height="50"><a href="${catalog.url!'javascipt:void(0)'}"
+												target="_blank"><img
+													src="/images/20151228145446.gif" width="200"
+													height="45" border="0"> </a>
+											</td>
+											</#if>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td width="100%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<#assign catalog=catalogTag("{'levels':'self','name':'297e501853fe7d9a01540082024b0031'}")>
+											<#if catalog?exists>
+											<td height="50"><a
+												href="${catalog.url!'javascipt:void(0)'}"
+												target="_blank"><img
+													src="/images/2015610145947_1.jpg" width="200"
+													height="45" border="0"> </a>
+											</td>
+											</#if>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td width="100%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<#assign catalog=catalogTag("{'levels':'self','name':'297e5018540472020154047d6096000d'}")>
+											<#if catalog?exists>
+											<td height="50"><a
+												href="${catalog.url!'javascript:void(0)'}"
+												target="_blank"><img
+													src="/images/2015610145947.jpg" width="200"
+													height="45" border="0"> </a>
+											</td>
+											</#if>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td width="100%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tbody>
+										<tr>
+											<#assign catalog=catalogTag("{'levels':'self','name':'297e501853ee4a1c0153ef455f170052'}")>
+											<#if catalog?exists>
+											<td height="50"><a href="${catalog.url!'javascript:void(0)'}"
+												target="_blank"><img
+													src="/images/2015626163948.jpg" width="200"
+													height="45" border="0"> </a>
+											</td>
+											</#if>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						<tr>
+						</tr>
+					</tbody>
+				</table>
+				<!--guide_model(sy_zt,1,5,1,/web/small_template/zt.htm)-->
+			</div>
+			<div class="cl"></div>
+		</div>
+		<div class="block bsfw">
+			<div class="bt">
+				<#assign catalog=catalogTag("{'name':'402881e653ab70120153ab72691d0001','levels':'self'}")>
+				<#if catalog?exists>
+				<h3>${catalog.name}</h3>
+				</#if>
+			</div>
+
+			<div class="e-service">
+				<a href="http://www.ahciq.gov.cn/service/index.htm" target="_blank"><img
+					src="/images/201563092543.png" alt="出入境人员体检"
+					class="bjyba" border="0"> </a> <a
+					href="http://www.ahciq.gov.cn/service/index5.htm" target="_blank"><img
+					src="/images/201563092543_2.png" alt="注册登记流程"
+					class="zcdj" border="0"> </a> <a
+					href="http://www.ahciq.gov.cn/service/index3.htm" target="_blank"><img
+					src="/images/201563092543_1.png" alt="出口食品生产企业卫生注册"
+					class="wszc" border="0"> </a> <a
+					href="http://www.ahciq.gov.cn/info/ywcx.shtml"
+					class="service-platform"><img
+					src="/images/2015610151942_1.gif" alt="业务查询"> </a>
+			</div>
+			<div class="bsdt">
+				<#assign catalog=catalogTag("{'name':'402881e653ab70120153ab7565dc0004','levels':'self'}")>
+				<#if catalog?exists> 
+				   <h3>
+					    ${catalog.name}<a href="${catalog.url!'javascript:void(0);'}">更多</a>
+				   </h3>
+				 </#if>
+				<div class="tgnews">
+					<div class="bsdt-title">
+						<ul class="bsdt-ul">
+							<#assign catalogList=catalogTag("{'name':'402881e653ab70120153ab7565dc0004','levels':'child'}")>
+							<#if catalogList?exists>
+							<#list catalogList as cat>
+							<#if cat_index==0>
+							<li class="bsdt-itemon"><a> <span>${cat.name}</span>
+							<#else>
+							<li class=""><a><span>${cat.name}</span>
+							</#if>
+							</a>
+								<div class="bsdt-news">
+									<table class="kx-t" width="100%" border="0" cellspacing="0"
+										cellpadding="0">
+										<tbody>
+											<tr>
+												<td class="list" width="240">选择分类</td>
+												<td width="70" align="center" class="list">办事指南</td>
+												<td width="100" align="center" class="list">表格附件下载</td>
+												<td width="70" align="center" class="list">业务咨询</td>
+												<td width="120" align="center" class="list">在线查询和办理</td>
+											</tr>
+										</tbody>
+									</table>
+									<table class="bsdt-table" width="100%" border="0"
+										cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><table width="100%" cellspacing="1" cellpadding="0">
+														<tbody>
+														    <!-- 三级栏目 -->
+															<#assign catalogList=catalogTag("{'name':'${cat.id}','levels':'child'}")>
+															<#if catalogList?exists>
+															<#list catalogList as catThird>
+															<tr>
+																<td class="list" width="240">
+																	<div class="listlen">
+																		<a href="${catThird.url!'javascript:void(0);'}"
+																			target="_blank" title="${catThird.name}"
+																			class="ellipsis">${catThird.name}</a>
+																	</div>
+																</td>
+																<!-- 四级栏目 -->
+																<#assign catalogList=catalogTag("{'name':'${catThird.id}','levels':'child'}")>
+																<#if catalogList?exists >
+																<#list catalogList as catFourth>
+																  <#if catFourth?exists>
+																  <#if catFourth_index==0>
+																	<td width="70" align="center" class="list"><a
+																		href="${catFourth.url!'javascript:void(0);'}"
+																		target="_blank"><img
+																			src="/images/bs1.gif" border="0"> </a></td>
+																  <#elseif catFourth_index==1>
+																	<td width="100" align="center" class="list"><a
+																		href="${catFourth.url!'javascript:void(0);'}"
+																		target="_blank"><img
+																			src="/images/bs2.gif" border="0"> </a></td>
+																  <#elseif catFourth_index==2>
+																	<td width="80" align="center" class="list"><a
+																		href="${catFourth.url!'javascript:void(0);'}"
+																		target="_blank"><img
+																			src="/images/bs4.gif" border="0"> </a></td>
+																  <#elseif catFourth_index==3>
+																  	<td width="100" align="center" class="list"><a
+																		href="${catFourth.url!'javascript:void(0);'}"
+																		target="_blank"><img src="/images/bs5.gif"
+																			border="0"></a></td>
+																  
+																 <#else>	
+																   <td width="100" align="center" class="list">--</td>
+																 </#if>
+																 </#if>
+																<!--<td width=35 align=center class=list>--</td>    <td width=35 align=center class=list>--</td>    <td width=50 align=center class=list><img width=50 height=1><br>--</td>-->
+															   </#list>
+															   </#if>
+															</tr>
+															</#list>
+															</#if>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							</#list>
+						  </#if>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block hdjl">
+			<div class="bt">
+			<#assign catalog=catalogTag("{'name':'297e501853ac5c560153ac8269b90009','levels':'self'}")>
+				<#if catalog?exists>
+				<h3>${catalog.name}</h3>
+				</#if>
+			</div>
+			<div class="buttons">
+					<ul>
+					<#assign catalogList=catalogTag("{'name':'297e501853ac5c560153ac8269b90009','levels':'child'}")>
+					<#if catalogList?exists>
+					<#list catalogList as cat>
+					<#if cat?exists>
+					<#if cat_index==0>
+					<li><img src="/images/ggly.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==1>
+					<li><img src="/images/ywzx.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==2>
+					<li><img src="/images/tsjb.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<#elseif cat_index==7>
+					<li><img src="/images/bmdh.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a>
+					</li>
+					<#elseif cat_index==3>
+					<li><img src="/images/zxft.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a>
+					</li>
+					<#elseif cat_index==4>
+					<li><img src="/images/myzj.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					<!-- <#elseif cat_index==5>
+					<li><img src="/images/cjwt.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li> -->
+					<#elseif cat_index==6>
+					<li><img src="/images/jzxx.png" alt="${cat.name}"><a
+						href="${cat.url!'javascript:void(0);'}">${cat.name}</a></li>
+					</#if>
+					</#if>
+					</#list>
+					</#if>	
+				</ul>
+			</div>
+			<div class="jlcontent">
+				<div class="zxft">
+					<#assign catalog=catalogTag("{'name':'402881ea53c03e640153c053cdbc000c','levels':'self'}")>
+					<#if catalog?exists>
+					<h3>
+						${catalog.name}<a href="${catalog.url!'javascript:void(0);'}">更多</a>
+					</h3>
+					</#if>
+					
+					<#assign articleTag = newTag("articleTag")>
+                    <#assign articleTagList = articleTag("{'name':'402881ec53c536ea0153c56b5e0b0001','count':'1'}")>
+					<#if articleTagList?exists && articleTagList?size gt 0>
+                    <#list articleTagList as article>
+					<div class="zxft-left">
+						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td width="100%">
+										<a href="${article.url!'javascript:void(0)'}"><img
+											src="${article.thumb}" class="pull-left">
+										</a> 
+										<a href="${article.url!'javascript:void(0)'}"><span><b>${article.title}</b>
+											</span> <span>访谈嘉宾：${article.author}</span> <span>访谈时间：${article.published}</span>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</#list>
+					</#if>
+					<div class="zxft-right">
+						<ul>
+							<ul>
+								<#assign catalog=catalogTag("{'levels':'self','name':'402881ec53c536ea0153c56b5e0b0001'}")>
+								<#if catalog?exists>
+								<#assign articleTag=newTag("articleTag")>
+								<#assign articleList=articleTag("{'name':'${catalog.id}','count':'3','levels':'child','order':'top'}")>
+								<#if articleList?exists&&articleList?size gt 0>
+								<#list articleList as article>
+								<li><a
+									href="${article.url!'javascript'}"
+									title="${article.title}" target="_blank">${article.title}</a>
+									<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+								</li>
+								</#list>
+								</#if>
+								</#if>
+							</ul>
+						</ul>
+					</div>
+					<div class="cl"></div>
+					<div class="myzj">
+						<#assign catalog=catalogTag("{'name':'402881ea53c03e640153c0553374000e','levels':'self'}")>
+						<#if catalog?exists>
+						<h3>
+							${catalog.name}<a href="${catalog.url!'javascript:void(0);'}">更多</a>
+						</h3>
+						</#if>
+						<ul>
+							<#assign catalog=catalogTag("{'name':'402881ea53c03e640153c0553374000e','levels':'self'}")>
+							<#if catalog?exists>
+							<#assign articleTag=newTag("articleTag")>
+							<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','levels':'child','order':'top'}")>
+							<#if articleList?exists&&articleList?size gt 0>
+							<#list articleList as article>
+							<li>
+								<a href="${article.url!'javascript:void(0);'}"
+								title="${article.title}">${article.title}</a>
+								<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+							</li>
+							</#list>
+							</#if>
+							</#if>
+						</ul>
+					</div>
+					<div class="cjwt">
+						<#assign catalog=catalogTag("{'name':'402881ea53c03e640153c05664040011','levels':'self'}")>
+						<#if catalog?exists>
+						<h3>
+							${catalog.name}<a href="${catalog.url!'javascript:void(0);'}">更多</a>
+						</h3>
+						</#if>
+						<ul>
+							<ul>
+								<#assign catalog=catalogTag("{'name':'402881ea53c03e640153c05664040011','levels':'self'}")>
+								<#if catalog?exists>
+								<#assign articleTag=newTag("articleTag")>
+								<#assign articleList=articleTag("{'name':'${catalog.id}','count':'6','levels':'child','order':'top'}")>
+								<#if articleList?exists&&articleList?size gt 0>
+								<#list articleList as article>
+								<li>
+									<a
+									href="${article.url!'javascript:void(0);'}"
+									title="${article.title}" target="_blank">${article.title}</a>
+									<span><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+								</li>
+								</#list>
+								</#if>
+								</#if>
+							</ul>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block zylj">
+			<div class="bt">
+				<h3>重要链接</h3>
+			</div>
+			<ul>
+				<#assign friendLinkCtgTag =newTag("friendLinkCtgTag")>
+				<#assign friendLinkCtgList =friendLinkCtgTag("{'siteid':'${site.id}'}")>
+				<#if friendLinkCtgList?exists && friendLinkCtgList?size gt 0>
+				<#list friendLinkCtgList as friendLinkCtg>
+				<#if friendLinkCtg_index==0>
+				<li class="active" data-name="gjxt">${friendLinkCtg.friendlinkctgName}</li>
+				</#if>
+				<#if friendLinkCtg_index==1>
+				<li data-name="zjxt">全国质检系统</li>
+				</#if>
+				<#if friendLinkCtg_index==2>
+				<li data-name="fzjg">分支机构</li>
+				</#if>
+				<#if friendLinkCtg_index==3>
+				<li data-name="bjzx">直属单位</li>
+				</#if>
+				<#if friendLinkCtg_index==4>
+				<li data-name="dfzf">地方政府</li>
+				</#if>
+				</#list>
+				</#if>
+			</ul>
+			
+			<div id="gjxt" class="links" style="display:block">
+				<#assign friendLinkTag =newTag("friendLinkTag")>
+				<#assign friendLinkList =friendLinkTag("{'name':'402881ea53e473750153e517f2ac0001'}")>
+				<#if friendLinkList?exists && friendLinkList?size gt 0>
+					<#list friendLinkList as friendLink>
+						<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>
+				    </#list>
+				</#if>
+				
+			</div>
+			<div id="zjxt" class="links" style="display:none">
+				<#assign friendLinkTag =newTag("friendLinkTag")>
+				<#assign friendLinkList =friendLinkTag("{'name':'402881ea53e473750153e5182f0e0003'}")>
+				<#if friendLinkList?exists && friendLinkList?size gt 0>
+					<#list friendLinkList as friendLink>
+						<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>
+				    </#list>
+				</#if>
+			</div>
+
+			<div id="fzjg" class="links">
+				<#assign friendLinkTag =newTag("friendLinkTag")>
+				<#assign friendLinkList =friendLinkTag("{'name':'402881ea53e473750153e518ab930005'}")>
+				<#if friendLinkList?exists && friendLinkList?size gt 0>
+					<#list friendLinkList as friendLink>
+						<#if !friendLink_has_next>
+							<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>
+						<#else>
+							<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>|
+						</#if>
+				    </#list>
+				</#if>
+			</div>
+			<div id="bjzx" class="links">
+				<#assign friendLinkTag =newTag("friendLinkTag")>
+				<#assign friendLinkList =friendLinkTag("{'name':'402881ea53e473750153e519f8430007'}")>
+				<#if friendLinkList?exists && friendLinkList?size gt 0>
+					<#list friendLinkList as friendLink>
+						<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>
+				    </#list>
+				</#if>
+			</div>
+			
+			<div id="dfzf" class="links">
+				<#assign friendLinkTag =newTag("friendLinkTag")>
+				<#assign friendLinkList =friendLinkTag("{'name':'402881ea53e473750153e51a6dab0009'}")>
+				<#if friendLinkList?exists && friendLinkList?size gt 0>
+					<#list friendLinkList as friendLink>
+						<a href="${friendLink.domain!''}" target="_blank">${friendLink.siteName!''}</a>
+				    </#list>
+				</#if>
+			</div>
+		</div>
+	</div>
+	<div class="cl"></div>
+	<#include "/wwwroot/${sitePath}/template/common/foot.html">
+	
+
+
+
+</body>
+</html>

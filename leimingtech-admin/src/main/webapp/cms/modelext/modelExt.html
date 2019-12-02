@@ -1,0 +1,70 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>选项内容</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">选择模型</label>
+							<div class="controls">
+								<select  id="modelId" name="modelId" class="span6 m-wrap" value="${page.modelId?if_exists}"/>
+								
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">栏目</label>
+							<div class="controls">
+								<input type="text" id="channelId" name="channelId" class="span6 m-wrap" value="${page.channelId?if_exists}"/>
+								<span class="help-inline">填写栏目id</span>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label">类型名称</label>
+							<div class="controls">
+								<input type="text" id="attrName" name="attrName" class="span6 m-wrap" value="${page.attrName?if_exists}"/>
+								<span class="help-inline">填写类型名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选择类型</label>
+							<div class="controls">
+								<select type="text" id="attrValue" name="attrValue" class="span6 m-wrap" value="${page.attrValue?if_exists}"/>
+								<option value="3">单行文本框</option>
+								<option value="4">多行文本框</option>
+								<option value="5">时间控件</option>
+								<option value="6">下拉列表框</option>
+								<option value="7">复选框</option>
+								<option value="8">单选框</option>
+								<!-- <option value="9">附件上传</option> -->
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标记</label>
+							<div class="controls">
+								<input type="text" id="attrToken" name="attrToken" class="span6 m-wrap" value="${page.attrToken?if_exists}"/>
+								<span class="help-inline">填写标记</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('modelExtController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

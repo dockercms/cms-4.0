@@ -1,0 +1,37 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>区块权限</div>
+			<div class="tools">
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${sectionClassPriv.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">区块id</label>
+							<div class="controls">
+								<input type="text" id="sectionclassid" name="sectionclassid" class="span6 m-wrap" value="${sectionClassPriv.sectionclassid?if_exists}"/>
+								<span class="help-inline">填写区块id</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">角色id</label>
+							<div class="controls">
+								<input type="text" id="roleid" name="roleid" class="span6 m-wrap" value="${sectionClassPriv.roleid?if_exists}"/>
+								<span class="help-inline">填写角色id</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('sectionClassPrivController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>                          
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>

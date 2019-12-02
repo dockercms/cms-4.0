@@ -1,0 +1,167 @@
+<style type="text/css">
+	.tab td{border:solid #ddd; 
+		border-width:0px 1px 1px 0px;
+		font-size:13px}
+	.tab{border:solid #ddd;
+		border-width:1px 0px 0px 1px;}
+</style>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">依申请公开</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="applyPublic_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${applyPublic.id?if_exists}"/>
+		<table class="tab" cellspacing="0" cellpadding="0" style="margin-left: 100px">
+		  <tr>
+		    <td width="250" height="30"><div align="right"><strong>状态:</strong></div></td>
+		    <td width="359" height="30">&nbsp;
+		    	<#if statusList?exists>
+					<#list statusList as status>
+						<#if applyPublic.isstat==status.typecode>
+							${status.typename}
+						</#if>
+					</#list>
+				</#if>
+		    </td>
+		  </tr>
+		  <#if applyPublic.bjjSel==0>
+		  <tr>
+		    <td height="30"><div align="right"><strong>类别:</strong></div></td>
+		    <td height="30">&nbsp;公众</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>姓名:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grName}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>工作单位:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grDanwei}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>证件名称:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grZj}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>证件号码:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grHaoma}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>联系电话:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grContact}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>传真:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grFax}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>联系地址:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grAddress}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>邮政编码:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.grPost}</td>
+		  </tr>
+		  <#elseif applyPublic.bjjSel==1>
+		  	<tr>
+		    <td height="30"><div align="right"><strong>类别:</strong></div></td>
+		    <td height="30">&nbsp;法人或其他组织</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>名称:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frName}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>法人代表:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frDaibiao}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>联系人姓名:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frXingming}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>联系电话:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frContact}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>传真:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frFax}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>联系地址:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frAddress}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>邮政编码:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.frPost}</td>
+		  </tr>
+		  </#if>
+		  <tr>
+		    <td height="30"><div align="right"><strong>申请时间:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.datetime?string("yyyy-MM-dd HH:mm:ss")}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>所需信息的内容描述:</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.content}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>所需信息的指定提供载体形式：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xingshi}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>所需信息的名称：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xtName}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>所需信息的索引号：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xtSuyinhao}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>所需信息的用途：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xtYongtu}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>是否申请减免费用：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xtJmfy}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>获取信息的方式：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.xtHuoqufs}</td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>发布者IP：</strong></div></td>
+		    <td height="30">&nbsp;${applyPublic.publisherIp}</td>
+		  </tr>
+		  <tr>
+		    <td height="40"><div align="right"><strong>更改状态：</strong></div></td>
+		    <td height="40">&nbsp;<select id="isstat" name="isstat">
+		    		<#if statusList?exists>
+						<#list statusList as status>
+		    				<option value="${status.typecode}" 
+		    				<#if applyPublic.isstat==status.typecode>selected="selected"</#if>> ${status.typename}
+		    				
+		    				</option>
+		    			</#list>
+					</#if>
+		    	</select>			
+		    </td>
+		  </tr>
+		  <tr>
+		    <td height="30"><div align="right"><strong>备注说明：</strong></div></td>
+		    <td height="30">&nbsp;<textarea style="width: 325px" id="remarks" name="remarks" cols="3" rows="5">${applyPublic.remarks}</textarea></td>
+		  </tr>
+		</table>	
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('applyPublicController.do?save', 'applyPublic_form');" class="btn btn-primary" value="修改状态">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#applyPublic_form").myValidate();
+});
+</script>

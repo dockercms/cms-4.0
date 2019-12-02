@@ -1,0 +1,71 @@
+<div class="tab-pane " id="tab_3">
+	<div class="portlet box green">
+		<div class="portlet-title">
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form class="form-horizontal" role="form">
+				<div class="form-body">
+					<h2 class="margin-bottom-20"> ${parentFunction.functionName?if_exists} </h2>
+					<h4> ${parentFunction.functionUrl?if_exists} </h4>
+				</div>
+				<div class="form-actions fluid " style="padding-left:50px;">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-offset-3 col-md-9">
+								<#if parentFunction.id != "">
+								<input type="button" class="btn green btn-sm" value="修改"   onclick="toEditModel('menuController.do?editModelPage&selectId=${selectId}&id=${parentFunction.id?if_exists}')"/>
+								<input type="button" class="btn green btn-sm" value="删除" onclick="del('menuController.do?del', '${parentFunction.id?if_exists}', 'menuController.do?menuTable&id=${parentFunction.TSFunction?if_exists.id?if_exists}', '${parentFunction.TSFunction?if_exists.id?if_exists}')"/>
+								</#if>
+								<input type="button" class="btn green btn-sm" value="添加子菜单" onclick="toEditModel('menuController.do?editModelPage&selectId=${selectId}&parentId=${parentFunction.id?if_exists}')"/>
+								<#if parentFunction.id != "">
+								<input type="button" class="btn green btn-sm" value="功能列表" onclick="toEditModel('operationController.do?table&functionid=${parentFunction.id?if_exists}')"/>
+								</#if>
+							</div>
+						</div>
+					</div>
+				</div>
+					<#if (list?exists && list?size > 0)>
+				<div class="form-body margin-top-20">
+			<table class="table table-hover" id="sample_1">
+				<thead>
+					<tr>
+						<th width="40" style="text-align:center;">序号</th>
+						<th>子菜单</th>
+						<th>菜单地址</th>
+						<th width="40" style="text-align:center;">图标</th>
+						<th width="40">顺序</th>
+						<th width="40" style="text-align:center;">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				  <#list list as function>
+					<tr class="odd gradeX">
+						<td style="text-align:center;">
+							${function_index?if_exists+1}
+						</td>
+						<td class="center">${function.functionName?if_exists}</td>
+						<td >${function.functionUrl?if_exists}</td>
+						<td style="text-align:center;"><i class="${function.iconclass!''}"></i>
+						<td >${function.functionOrder?if_exists}</td>
+						<td  style="text-align:center;">
+							<@shiro.hasRole name="管理员">
+							<input type='button' title='修改' style=' width:16px; height:16px;  border:0; background:url(media/image/edit.gif) no-repeat left top'  onclick="toEditModel('menuController.do?editModelPage&&selectId=${selectId}&id=${function.id?if_exists}')">
+						</@shiro.hasRole>
+								<@shiro.hasAnyRoles name="刘振,管理员">
+							<input type='button' title='删除' style=' width:16px; height:16px;  border:0; background:url(media/image/del.gif) no-repeat left top' onclick="del('menuController.do?del', '${function.id?if_exists}', 'menuController.do?menuTable&id=${selectId}', '${selectId}')">
+						</@shiro.hasAnyRoles>
+						</td>
+					</tr>
+				  </#list>
+				</tbody>
+			</table>
+				</div>
+</#if>
+			</form>
+			<!-- END FORM-->
+		</div>
+	</div>
+</div>
+							
+

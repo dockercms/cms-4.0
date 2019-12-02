@@ -1,0 +1,78 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>文本回复</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				        <!--
+						<div class="control-group">
+							<label class="control-label">户用id</label>
+							<div class="controls">
+								<input type="text" id="uid" name="uid" class="span6 m-wrap" value="${page.uid?if_exists}"/>
+								<span class="help-inline">填写户用id</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">用户姓名</label>
+							<div class="controls">
+								<input type="text" id="uname" name="uname" class="span6 m-wrap" value="${page.uname?if_exists}"/>
+								<span class="help-inline">填写用户姓名</span>
+							</div>
+						</div>
+						-->
+						<div class="control-group">
+							<label class="control-label">键关字</label>
+							<div class="controls">
+								<input type="text" id="keyword" name="keyword" class="span6 m-wrap" value="${page.keyword?if_exists}"/>
+								<span class="help-inline">填写键关字</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">关键词型类</label>
+							<div class="controls">
+								<input id="dx" type="radio" name="type" value="1" <#if page.type?if_exists && page.type =='1'>checked</#if> /> 完全匹配，用户输入的和此关键词一样才会触发!</br>
+							    <input id="ddx" type="radio" name="type" value="2" <#if page.type?if_exists && page.type =='2'>checked</#if> />包含匹配 (只要用户输入的文字包含本关键词就触发!v2用户才生效)
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">回答或简介</label>
+							<div class="controls">
+								<textarea id="Cti" name="text" class="text">${page.text?if_exists}</textarea>
+							</div>
+						</div>
+						<!--
+						<div class="control-group">
+							<label class="control-label">览浏次数</label>
+							<div class="controls">
+								<input type="text" id="click" name="click" class="span6 m-wrap" value="${page.click?if_exists}"/>
+								<span class="help-inline">填写览浏次数</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">token</label>
+							<div class="controls">
+								<input type="text" id="token" name="token" class="span6 m-wrap" value="${page.token?if_exists}"/>
+								<span class="help-inline">填写token</span>
+							</div>
+						</div>
+						-->
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxTextController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

@@ -1,0 +1,55 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">编辑</h4>
+</div>
+<div class="portlet-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>页面名称</label>
+			<div class="controls">
+				<input type="text" id="name" name="name" class="form-control span3" data-rule-required="true" value="${sectionClass?if_exists.name}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>排序</label>
+			<div class="controls">
+				<input type="text" id="sort" name="sort" class="form-control span3" data-rule-digits="true" data-rule-required="true" value="${sectionClass?if_exists.sort!'0'}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">备注</label>
+			<div class="controls">
+				<textarea class="form-control span3" rows="3" id="memo" name="memo" >${sectionClass?if_exists.memo}</textarea>
+			</div>
+		</div>
+	</form>
+	<!-- END FORM-->
+</div>
+<div class="modal-footer">
+	<input type="hidden" id="id" name="id" value="${sectionClass?if_exists.id}"/>
+	<input type="hidden" id="id" name="sectionClass.id" value="${sectionClass?if_exists.sectionClass?if_exists.id}"/>
+	<input type="button" onclick="submitSectionClass()" class="btn" value="提交"/>
+	<input type="button" class="btn" data-dismiss="modal" aria-hidden="true" value="关闭"/>                            
+</div>
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+	function submitSectionClass(){
+		if($('#form_sample_2').valid()){
+	    	formSubmitModel2Div('sectionClassController.do?update', 'form_sample_2', 'dashboard', 'sectionClassController.do?sectionClass');
+	  	}
+	}
+</script>

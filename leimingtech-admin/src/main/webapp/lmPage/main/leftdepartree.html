@@ -1,0 +1,25 @@
+<#if list?exists>
+	<#list list as depart>
+		<#if (depart.TSDeparts?size > 0) > 
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('departAction.do?list4tree&departid=${depart.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${depart.departname?if_exists}</span>
+				<span class="arrow "></span>
+				</a>
+				<ul class="sub-menu">
+				<#assign list=depart.TSDeparts/>
+					<#include "/lmPage/main/leftdepartree.html">
+				</ul>
+			</li>
+		<#else>
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('departAction.do?list4tree&departid=${depart.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${depart.departname?if_exists}</span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>		
+		

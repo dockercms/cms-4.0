@@ -1,0 +1,287 @@
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->   
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>
+					<span class="hidden-480">WAP设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li style="list-style: none;"><a href="#portlet_tab2" data-toggle="tab">扩展设置</a></li>
+						<li style="list-style: none;" class="active"><a href="#portlet_tab1" data-toggle="tab">基本设置</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+							<form id="form_sample_2" class="form-horizontal">
+								<input type="hidden" id="id" name="id" value="${wapconfig.id?if_exists}"/>
+								<div class="alert alert-error hide">
+									<button class="close" data-dismiss="alert"></button>
+									有未填写项或错误项. 请检查后再提交.
+								</div>
+								<div class="alert alert-success hide">
+									<button class="close" data-dismiss="alert"></button>
+									表单验证成功!
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>WAP开启状态</label>
+									<div class="controls">
+										<label class="radio">
+											<input type="radio" id="wapstatus" name="wapstatus" class="span1 m-wrap" value="1" <#if wapconfig.wapstatus=="1"> checked=checked</#if>/>是
+										</label>
+										<label class="radio">
+											<input type="radio" id="wapstatus" name="wapstatus" class="span1 m-wrap" value="0" <#if wapconfig.wapstatus=="0"> checked=checked</#if>/>否
+										</label>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>WAP网站名称</label>
+									<div class="controls">
+										<input type="text" id="wapname" name="wapname" class="span3 form-control" data-rule-required="true" value="${wapconfig.wapname?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>WAP网站LOGO</label>
+									<div class="controls">
+										<input type="text" id="waplogo" name="waplogo" class="span3 form-control" data-rule-required="true" value="${wapconfig.waplogo?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>首页栏目内容条数</label>
+									<div class="controls">
+										<input type="text" id="indexcolumncount" name="indexcolumncount" class="span3 form-control" data-rule-required="true" value="${wapconfig.indexcolumncount?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>首页显示最低权重</label>
+									<div class="controls">
+										<input type="text" id="indexminweights" name="indexminweights" class="span3 form-control" data-rule-required="true" value="${wapconfig.indexminweights?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>栏目首页子栏目显示条数</label>
+									<div class="controls">
+										<input type="text" id="columncount" name="columncount" class="span3 form-control" data-rule-required="true" value="${wapconfig.columncount?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>列表页条数</label>
+									<div class="controls">
+										<input type="text" id="listcount" name="listcount" class="span3 form-control" data-rule-required="true" value="${wapconfig.listcount?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>栏目显示最低权重</label>
+									<div class="controls">
+										<input type="text" id="columnminweights" name="columnminweights" class="span3 form-control" data-rule-required="true" value="${wapconfig.columnminweights?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>评论列表页条数</label>
+									<div class="controls">
+										<input type="text" id="evaluatelistcount" name="evaluatelistcount" class="span3 form-control" data-rule-required="true" value="${wapconfig.evaluatelistcount?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>首页模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowindex" name="indextemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.indextemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=index')">选择模板</button>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>列表页模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowlist" name="listtemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.listtemplate?if_exists}"/>
+										<button class="btn purple btn-sm"  type="button" onclick="toEditModel('templateController.do?tableDialog&model=list')">选择模板</button>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>文章内容模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowcontent" name="contenttemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.contenttemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=content')">选择模板</button>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>组图内容模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowpicture" name="picturestemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.picturestemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=picture')">选择模板</button>
+									</div>
+								</div>
+								<!-- <div class="control-group">
+									<label class="control-label"><span class="required">*</span>评价模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowevaluate" name="evaluatetemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.evaluatetemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=evaluate')">选择模板</button>
+									</div>
+								</div> -->
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>视频模板</label>
+									<div class="controls">
+										<input type="text" id=templateshowvideo name="videoTemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.videoTemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=video')">选择模板</button>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>调查模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowsurvey" name="surveyTemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.surveyTemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=survey')">选择模板</button>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><span class="required">*</span>投票模板</label>
+									<div class="controls">
+										<input type="text" id="templateshowvote" name="voteTemplate" class="form-control span5" data-rule-required="true" value="${wapconfig.voteTemplate?if_exists}"/>
+										<button class="btn purple btn-sm" type="button" onclick="toEditModel('templateController.do?tableDialog&model=vote')">选择模板</button>
+									</div>
+								</div>
+								<div class="modal-footer" style="text-align: left;">
+									<input type="button" onclick="formSubmitWap('wapconfigController.do?save', 'form_sample_2');" class="btn btn-primary" value="保存">
+								</div>
+							</form>
+							<!-- END FORM-->  
+						</div>
+						<div class="tab-pane " id="portlet_tab2">
+							<form id="form_sample_2" class="form-horizontal">
+								<input type="hidden" id="configid" name="configid" class="span3 form-control" data-rule-required="true" value="${wapconfig.id?if_exists}"/>
+								<div class="control-group">
+									<label class="control-label">模型开启</label>
+									<div class="controls">
+										<#assign selectmodel = wapexpand.modelids>
+										<#list modelList as model>
+											<#assign mid = model.id?string >
+											<label class="checkbox">
+												<input type="checkbox" name="modelid" value="${model.id}" <#if selectmodel?contains(mid)>  checked="checked" </#if> /> ${model.name}
+											</label>
+										</#list>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">栏目开启</label>
+									<div id="menuContent" class="menuContent" style="position:relative;">
+										<ul id="treeDemo" class="ztree" style="margin-top:0; width:238px; height: auto;position:relative;left:20px; border:0px solid white; overflow-y:hidden; ">
+										</ul>
+										
+									</div>
+									<div class="right" style="display:none">
+										<input type="button" value="获取选中的值" id="button"/>
+										<input type="text" id="catalogids" name="catalogids" value="${wapexpand.catalogids!''}"/>
+										<ul class="info">
+											<li class="title"><h2>1、setting 配置信息说明</h2>
+												<ul class="list">
+													<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+													<li><p>父子关联关系：<br/>
+															被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+															<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+															取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+															<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+															<ul id="code" class="log" style="height:20px;"></ul></p>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="modal-footer" style="text-align: left;">
+									<input type="button" onclick="formSubmitWap('wapexpandController.do?save', 'form_sample_2');" class="btn btn-primary" value="保存">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800" data-height="550">
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css"> 
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>  
+<script type="text/javascript" src="js/content.js"></script> 
+<script>
+	jQuery(document).ready(function() {   
+	   App.init();
+	});
+	function formSubmitWap(urlStr, formName){
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:$('#' + formName).serialize(),
+			dataType:'text',
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != ''){
+					    toUrl = arguments[2] + '';
+					}
+					alert("保存成功");
+					lazyChangePage(toUrl);
+				}else{
+					alert("提交处理失败!");
+				}
+			},
+			error:function(){
+				alert("提交通讯失败!");
+			}
+		});
+	};
+	
+	//ztree属性下拉树选择
+	var setting = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	var zNodes = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'wapconfigController.do?loadCatalogTree&wapid=${wapconfig.id?if_exists}',
+		data:'data=0',
+		success:function(data){
+			 zNodes = data;
+		}
+	})
+	var json = JSON.parse(zNodes);
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo"), setting,json);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+		$('#treeDemo').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#catalogids').attr("value",v);
+		});
+		
+	});
+</script>

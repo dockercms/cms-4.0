@@ -1,0 +1,193 @@
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4><i class="icon-reorder"></i>前台用户</h4>
+		</div>
+		<div class="modal-body form">
+			<!-- BEGIN FORM-->
+			<!--<form id="form" class="form-horizontal">-->
+			<form id="form_sample_2" class="form-horizontal">
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+				<input type="hidden" id="id" name="id" value="${member.id?if_exists}"/>
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>用户名</label>
+					<div class="controls">
+						<input class="form-control span3" type="text" data-rule-required="true" id="username" name="username" value="${member.username?if_exists}"/>
+					</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">真实姓名</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="realname" name="realname" value="${member.realname?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">昵称</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="name" name="name" value="${member.name?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">会员级别</label>
+					<div class="controls">
+						<select id="membergroupsid" name="membergroupsid" class="form-control span3">
+						<#list userGroupList as userGroup>
+							<#if userGroup?exists>
+					        	<option <#if member.membergroupsid==userGroup.id>selected="selected"</#if> value=${userGroup.id}>${userGroup.usergroupsname}</option> 
+					        </#if>
+					    </#list>      
+			        </select>
+				</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">密码</label>
+						<div class="controls">
+							<input type="password" class="form-control span3" type="text" id="password" name="password" value="${member.password?if_exists}"/>
+							<#if member.id?exists><span class="help-inline">不修改留空</span></#if>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">确认密码</label>
+						<div class="controls">
+							<input type="password" class="form-control span3" type="text" id="repassword" name="repassword" value="${member.repassword?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">邮箱</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="email" name="email" data-rule-email="true" value="${member.email?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">出生日期</label>
+						<div class="controls">
+							<input class="form-control span3" data-rule-date="true" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" type="text" id="birthday" name="birthday" value="${member.birthday?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">性别</label>
+						<div class="controls">
+							<label class="radio">
+								<input type="radio" name="sex"   <#if member.sex!=1>checked="checked"</#if> value="0" />女
+							</label>
+							<label class="radio">
+								<input type="radio" name="sex"   <#if member.sex==1>checked="checked"</#if> value="1" />男
+							</label>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">地址</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="address" name="address" value="${member.address?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">QQ</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="qq" name="qq" value="${member.qq?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">手机</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="cellphone" name="cellphone" value="${member.cellphone?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">电话</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="telephone" name="telephone" value="${member.telephone?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">地域id</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="cityid" name="cityid" value="${member.cityid?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+						<label class="control-label">城市</label>
+						<div class="controls">
+							<input class="form-control span3" type="text" id="city" name="city" value="${member.city?if_exists}"/>
+						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><span class="required"></span>头像</label>
+					   <div class="controls">
+								<span id="faceImgSpan" name="faceImgSpan">
+								<#if member.faceImg=="" >
+								   <img style=" margin-left:-12px;width:135px;height:100px;" id="faceImgs" src="/acquiesce_head_portrait.png" alt="" title="图片预览" />  
+								<#else>
+								   <img style=" margin-left:-12px;width:135px;height:100px;" id="faceImgs" src="${ member.faceImg}" alt="" title="图片预览" />  
+								</#if>
+								  </span> 
+								  <input type="hidden" id="faceImg" name="faceImg" value="${ member.faceImg}" datatype="*1-127" nullmsg="请上传头像！" />
+					</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+		<div class="modal-footer">
+			<button type="button" onclick="submitMember()" class="btn btn-primary">提交</button>
+			<button type="reset" class="btn" data-dismiss="modal">关闭</button>                            
+		</div>
+<script>
+//*************************************************************上传图片***************************************************************************************************************************
+		var headeruploaderimg = WebUploader.create({
+			// 选完文件后，是否自动上传。
+			auto : true,
+			// swf文件路径
+			swf : '${contextpath}/plug-in/ueditor/third-party/webuploader/Uploader.swf',
+			// 文件接收服务端。
+			server : '${contextpath}/controller.jsp?action=uploadimage',
+			// 选择文件的按钮。可选。
+			// 内部根据当前运行时创建，可能是input元素，也可能是flash.
+			pick : '#faceImgSpan',
+			// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			resize : true,
+			// 只允许选择的文件。
+			accept : {
+				title : 'Images',
+				extensions : 'gif,jpg,jpeg,bmp,png',
+				mimeTypes : 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+			}
+		});
+
+		//上传成功
+		headeruploaderimg.on('uploadSuccess', function(file, Object) {
+		    
+			$("#faceImgs").attr("src", "" + Object.url);
+			$("#faceImg").val(Object.url);
+		});
+
+		headeruploaderimg.on('uploadProgress', function(file, percentage) {
+			var $li = $('#' + file.id), $percent = $li.find('.progress .progress-bar');
+
+			// 避免重复创建
+			if (!$percent.length) {
+				$percent = $('<div class="progress progress-striped active">' + '<div class="progress-bar" role="progressbar" style="width: 0%">' + '</div>' + '</div>').appendTo($li).find('.progress-bar');
+			}
+			$li.find('p.state').text('上传中');
+
+			$percent.css('width', percentage * 100 + '%');
+		});
+//*************************************************************上传图片***************************************************************************************************************
+
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+	function submitMember(){
+		if($('#form_sample_2').valid()){
+	    	formSubmitModel('memberController.do?save', 'form_sample_2');
+	  	}
+	}
+</script>

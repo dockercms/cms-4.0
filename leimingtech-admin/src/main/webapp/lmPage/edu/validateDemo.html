@@ -1,0 +1,135 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>教育局</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="alert alert-error hide">
+							<button class="close" data-dismiss="alert"></button>
+							有未填写项或错误项. 请检查后再提交.
+						</div>
+						<div class="alert alert-success hide">
+							<button class="close" data-dismiss="alert"></button>
+							表单验证成功!
+						</div>
+						<div class="control-group">
+							<label class="control-label"><span class="required">*</span>教育局名称</label>
+							<div class="controls">
+								<input type="text" id="testRequired" name="testRequired" class="span6 m-wrap" data-rule-required="true" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">电子邮件</label>
+							<div class="controls">
+								<input type="text" id="testEmail" name="testEmail" class="span6 m-wrap" data-rule-email="true" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">时间</label>
+							<div class="controls">
+									<input class="Wdate" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" type="text" id="modifytime" name="modifytime" data-rule-date="true" value="${page.modifytime?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">数字</label>
+							<div class="controls">
+								<input type="text" id="testNumber" name="testNumber" class="span6 m-wrap" data-rule-number="true" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">整数</label>
+							<div class="controls">
+								<input type="text" id="testdigits" name="testdigits" class="span6 m-wrap" data-rule-digits="true" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">最大长度</label>
+							<div class="controls">
+								<input type="text" id="testmaxlength" name="testmaxlength" class="span6 m-wrap" data-rule-maxlength="5" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">最小长度</label>
+							<div class="controls">
+								<input type="text" id="testminlength" name="testminlength" class="span6 m-wrap" data-rule-minlength="5" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">长度为5-10</label>
+							<div class="controls">
+								<input type="text" id="testrangelength" name="testrangelength" class="span6 m-wrap" data-rule-rangelength="5,10" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">5-10之间的值</label>
+							<div class="controls">
+								<input type="text" id="testrange" name="testrange" class="span6 m-wrap" data-rule-range="5,10" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">最大为10</label>
+							<div class="controls">
+								<input type="text" id="max" name="max" class="span6 m-wrap" data-rule-max="10" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">最小为10</label>
+							<div class="controls">
+								<input type="text" id="min" name="min" class="span6 m-wrap" data-rule-min="10" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">混合校验</label>
+							<div class="controls">
+								<input type="text" id="anotherEmail" name="anotherEmail" class="span6 m-wrap" data-rule-required="true" data-rule-email="true" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">自定义提示校验</label>
+							<div class="controls">
+								<input type="text" id="bitian" name="bitian" class="span6 m-wrap" data-rule-required="true" data-msg-required="请输入一些东西。。。" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">自定义提示混合校验</label>
+							<div class="controls">
+								<input type="text" id="test11" name="test11" class="span6 m-wrap" data-rule-required="true" data-rule-email="true" data-msg-required="请输入一些东西。。。" data-msg-email="请输入电子邮件" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="test();" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL STYLES -->
+<!-- END PAGE LEVEL STYLES -->    
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+	function test(){
+		if($('#form_sample_2').valid()){
+	    	<!--$('#form_sample_2').submit();-->
+	    	<!--formSubmitModel('educationController.do?save', 'form_sample_2');-->
+	    	alert("提交成功");
+	  	}
+	}
+</script>
+<!-- END JAVASCRIPTS -->  

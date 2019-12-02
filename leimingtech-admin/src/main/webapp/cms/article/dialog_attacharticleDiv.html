@@ -1,0 +1,100 @@
+<script type="text/javascript" src="media/js/jquery-ui.js"></script>
+
+<script>
+	var ss = new Array();
+	$(function() {
+		$( "#sortable1" ).sortable({
+			connectWith: ".connectedSortable",
+			
+			 update: function(event, ui) { 
+				var size = ui.item.context.parentElement.children;
+				for(var i=0;i<size.length;i++){
+					ss[i] = i+"_"+size[i].id;
+					
+				}
+				
+				
+			 }
+		}).disableSelection();
+	});
+	
+</script>
+<style>
+	#sortable1 { float: left; }
+	</style>
+<ul id="sortable1" class="connectedSortable">
+	<#list relateContentList as relateContent>
+		<li class="ui-state-default" id="${relateContent.id}" style="list-style-type: none;">
+			<a href="${relateContent.relateUrl}" target="_blank">${relateContent.relateTitle}</a>
+			&nbsp;&nbsp;&nbsp;<input type='button' style=' width:16px; height:16px;  border:0; background:url(media/image/edit.gif) no-repeat left top'  onclick="toEditDiv('relateContentController.do?updatePageModel&id=${relateContent.id}&temporary=${temporary}&contentId=${contentId}')"/>
+			&nbsp;&nbsp;&nbsp;<input type='button' style=' width:16px; height:16px;  border:0; background:url(media/image/del.gif) no-repeat left top'  onclick="delDiv('relateContentController.do?del&temporary=${temporary}&contentId=${contentId}', '${relateContent.id}')"   />
+		</li>
+	</#list>						
+</ul>
+
+<div id="editModelDiv" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800"></div>
+<script>
+	function toEditDiv(urlStr){
+		initSWFUload = null;
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#editModelDiv').empty();
+				$('#editModelDiv').append(msg);
+				$('#editModelDiv').modal('show');
+				if(initSWFUload){
+					initSWFUload();
+				}
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	function delDiv(urlStr, id){
+		if(!confirm("是否删除该记录？")){
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'id=' + id,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					lmAlert(obj.msg);
+					jump(toUrl);
+				}else{
+					lmAlert("删除处理失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交通讯失败!");
+			}
+		});
+	}
+	function jump(tourl){
+		$.ajax({
+			type:'post',
+			url:tourl,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#editModel').modal('hide');
+				$('#correlationDiv').empty();
+				$('#correlationDiv').append(msg);
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+</script>

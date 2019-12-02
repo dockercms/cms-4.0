@@ -1,0 +1,28 @@
+﻿<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">${videoName}</h4>
+</div>
+<div class="modal-body">
+<input type="hidden" id="url" value="${uri}">
+	<div id="video" style="position:relative;width:600px;height:400px;float: center;">
+		<div id="a1" style="height:400px"></div>
+	</div>
+</div>
+<div class="modal-footer">  
+    <input type="button" class="btn" value="取消" data-dismiss="modal">  
+</div>
+<!--
+上面一行是播放器所在的容器名称，如果只调用flash播放器，可以只用<div id="a1"></div>
+-->
+<script type="text/javascript" src="/static/js/ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var flashvars={
+        f:'${uri}',
+        c:0,
+        st:1,
+        fc:1
+    };
+    var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
+    var video=['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4'];
+    CKobject.embed('/static/js/ckplayer/ckplayer.swf','a1','ckplayer_a1','100%','100%',false,flashvars,video,params);
+</script>

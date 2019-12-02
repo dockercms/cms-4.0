@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="leimingtech-admin:war">
+    <output-path>$PROJECT_DIR$/leimingtech-admin/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>leimingtech-admin</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="leimingtech-admin.war">
+      <element id="artifact" artifact-name="leimingtech-admin:war exploded" />
+    </root>
+  </artifact>
+</component>

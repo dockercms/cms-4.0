@@ -1,0 +1,193 @@
+<link href="/plug-in/ckeditor/plugins/swfupload/default.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="/media/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/plug-in/ckeditor/plugins/swfupload/js/swfupload.js"></script>
+<script type="text/javascript" src="/plug-in/ckeditor/plugins/swfupload/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="/plug-in/ckeditor/plugins/swfupload/js/fileprogress.js"></script>
+<script type="text/javascript" src="/plug-in/ckeditor/plugins/swfupload/js/handlers.js"></script>
+<script type="text/javascript">
+function uploadSuccess(file, serverData) {
+	try {
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setComplete();
+		progress.setStatus("上传完成.");
+		progress.toggleCancel(false);
+		var rsarr = serverData.split("|");
+		var rsinfo = rsarr[1];
+		var rsfile = rsarr[3];
+		var filename2 = file.name;
+		var imgpath = rsinfo.substring(rsinfo.indexOf('/upload/'))+rsfile+file.type;
+		document.getElementById("prop1").value = imgpath;	//给input赋值
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+
+function uploadSuccess2(file, serverData) {
+	try {
+		var progress = new FileProgress(file, this.customSettings.progressTarget);
+		progress.setComplete();
+		progress.setStatus("上传完成.");
+		progress.toggleCancel(false);
+		var rsarr = serverData.split("|");
+		var rsinfo = rsarr[1];
+		var rsfile = rsarr[3];
+		var filename2 = file.name;
+		var imgpath = rsinfo.substring(rsinfo.indexOf('/upload/'))+rsfile+file.type;
+		document.getElementById("prop2").value = imgpath;	//给input赋值
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+
+		var swfu ,swfu2;
+		var initSWFUload = function() {
+			var settings = {
+				flash_url : "/plug-in/ckeditor/plugins/swfupload/js/swfupload.swf",
+				upload_url: "/uploadfile",
+				/* post_params: {"PHPSESSID" : ""}, */
+				file_size_limit : "100 MB",
+				file_types : "*.gif;*.jpg;*.jepg;*.JEPG;*.png",
+				file_types_description : "图片文件",
+				file_upload_limit : 100,
+				file_queue_limit : 0,
+				custom_settings : {
+					progressTarget : "fsUploadProgress",
+					cancelButtonId : "btnCancel"
+				},
+				debug: false,
+
+				// Button settings
+				button_image_url: "/plug-in/ckeditor/plugins/swfupload/images/XPButtonNoText_160x22.png",
+				button_width: "65",
+				button_height: "29",
+				button_placeholder_id: "spanButtonPlaceHolder",
+				button_text: '<span class="theFont">上传</span>',
+				button_text_style: ".theFont { font-size: 16; }",
+				button_text_left_padding: 12,
+				button_text_top_padding: 3,
+				
+				// The event handler functions are defined in handlers.js
+				file_queued_handler : fileQueued,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_start_handler : uploadStart,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				queue_complete_handler : queueComplete	// Queue plugin event
+			};
+			swfu = new SWFUpload(settings);
+			var settings2 = {
+				flash_url : "/plug-in/ckeditor/plugins/swfupload/js/swfupload.swf",
+				upload_url: "/uploadfile",
+				/* post_params: {"PHPSESSID" : ""}, */
+				file_size_limit : "100 MB",
+				file_types : "*.gif;*.jpg;*.jepg;*.JEPG;*.png",
+				file_types_description : "图片文件",
+				file_upload_limit : 100,
+				file_queue_limit : 0,
+				custom_settings : {
+					progressTarget : "fsUploadProgress2",
+					cancelButtonId : "btnCancel2"
+				},
+				debug: false,
+
+				// Button settings
+				button_image_url: "/plug-in/ckeditor/plugins/swfupload/images/XPButtonNoText_160x22.png",
+				button_width: "65",
+				button_height: "29",
+				button_placeholder_id: "spanButtonPlaceHolder2",
+				button_text: '<span class="theFont">上传</span>',
+				button_text_style: ".theFont { font-size: 16; }",
+				button_text_left_padding: 12,
+				button_text_top_padding: 3,
+				
+				// The event handler functions are defined in handlers.js
+				file_queued_handler : fileQueued,
+				file_queue_error_handler : fileQueueError,
+				file_dialog_complete_handler : fileDialogComplete,
+				upload_start_handler : uploadStart,
+				upload_progress_handler : uploadProgress,
+				upload_error_handler : uploadError,
+				upload_success_handler : uploadSuccess,
+				upload_complete_handler : uploadComplete,
+				queue_complete_handler : queueComplete	// Queue plugin event
+			};
+			swfu2 = new SWFUpload(settings2);
+			swfu.uploadSuccess = uploadSuccess;
+			
+			swfu2.uploadSuccess = uploadSuccess2;
+	     };
+	</script>
+<div class="row-fluid">
+<div class="span12">
+	<div class="modal-header">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>swf示例</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">名称</label>
+							<div class="controls">
+								<input type="text" id="name" name="name" class="span6 m-wrap" value="${page.name?if_exists}"/>
+								<span class="help-inline">填写名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">路径</label>
+							<div class="controls">
+								<input type="text" id="myPath" name="path" class="span6 m-wrap" value="${page.path?if_exists}"/>
+								<span class="help-inline">填写路径</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">排序</label>
+							<div class="controls">
+								<input type="text" id="sort" name="sort" class="span6 m-wrap" value="${page.sort?if_exists}"/>
+								<span class="help-inline">填写排序</span>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">备用字段1</label>
+							<div class="controls">
+								<input type="text" id="prop1" name="prop1" class="span6 m-wrap" value="${page.prop1?if_exists}"/>
+								<div class="fieldset flash" id="fsUploadProgress">
+									<span class="legend">上传图片</span>
+									</div>
+								<div id="divStatus">0个上传文件</div>
+								<div>
+									<span id="spanButtonPlaceHolder"></span>
+									<input id="btnCancel" type="button" value="取消所有上传" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;">
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">备用字段2</label>
+							<div class="controls">
+							<input type="text" id="prop2" name="prop2" class="span6 m-wrap" value="${page.prop2?if_exists}"/>
+								<div class="fieldset flash" id="fsUploadProgress2">
+									<span class="legend">上传图片</span>
+									</div>
+								<div id="divStatus">0个上传文件</div>
+								<div>
+									<span id="spanButtonPlaceHolder2"></span>
+									<input id="btnCancel2" type="button" value="取消所有上传" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;">
+								</div>
+							</div>
+						</div>
+				<div class="modal-footer">
+					<button type="button" onclick="formSubmitModel('swfdemoController.do?save', 'form');" class="btn btn-primary">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>

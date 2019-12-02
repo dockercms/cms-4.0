@@ -1,0 +1,132 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">修改密码</h4>
+		</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${user.id?if_exists }"/>
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>当前密码</label>
+					<div class="controls">
+						<input type="password" id="passwordOld" name="passwordOld" class="form-control span3" value="" onblur="clearSpan()"/>
+						<span class="help-inline" id="pwdHelp1"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>新密码</label>
+					<div class="controls">
+						<input type="password" id="password" name="password" class="form-control span3" value="" onblur="isPasswd()"/>
+						<span class="help-inline" id="pwdHelp"></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label"><span class="required">*</span>确认新密码</label>
+					<div class="controls">
+						<input type="password" id="title" name="title" class="form-control span3" value="" onblur="pwd()"/>
+						<span class="help-inline" id="cpwdHelp"></span>
+					</div>
+				</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+		<div class="modal-footer">  
+            <input  type="button" onclick="submit()" class="btn btn-primary" value="提交">  
+            <input type="button" class="btn" value="取消" data-dismiss="modal">  
+        </div>
+<script>
+	//校验
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+	var oldFlag ;
+	var sameFlag;
+	var newFlag;
+	function isPasswd(){
+		var password = $('#password').val();
+		var patrn=/^(\w){6,20}$/;
+		if (!patrn.test(password)){
+			document.getElementById("pwdHelp").innerHTML = "只能输入6-20个字母、数字、下划线!";
+			$('#password').css('border','solid 1px #990033');
+			$('#pwdHelp').css('color','#990033');
+			oldFlag = false;
+			return false;
+		}else{
+			oldFlag = true;
+		}
+		var oldPwd = $("#passwordOld").val();
+		if(oldPwd == password){
+			document.getElementById("pwdHelp").innerHTML = "旧密码和新密码不能相同!";
+			$('#password').css('border','solid 1px #990033');
+			$('#pwdHelp').css('color','#990033');
+			sameFlag = false;
+			return false;
+		}else{
+			sameFlag = true;
+		}
+		
+		document.getElementById("pwdHelp").innerHTML = "";
+		$('#password').css('border','solid 1px #CCCCCC');
+		return true;
+	}
+	function pwd(){
+		var password = $('#password').val();
+		var title = $('#title').val();
+		if(password!=title){
+			document.getElementById("cpwdHelp").innerHTML = "两次输入的密码不一致！请重新输入";
+			$('#title').css('border','solid 1px #990033');
+			$('#cpwdHelp').css('color','#990033');
+			newFlag = false;
+			return false;
+		}else{
+			document.getElementById("cpwdHelp").innerHTML = "";
+			$('#title').css('border','solid 1px #CCCCCC');
+			newFlag = true;
+		}
+	}
+	function submit(){
+		if(oldFlag==true && sameFlag==true && newFlag==true){
+			var pwdOld = $('#passwordOld').val();
+			$.ajax({
+				type:'post',
+				url:'metroUserController.do?encryption&userId=${user.id}',
+				data:{'pwdOld':pwdOld},
+				dataType:'text',
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.pwdEn!='${user.password}'){
+						document.getElementById("pwdHelp1").innerHTML = "旧密码有误";
+						$('#passwordOld').css('border','solid 1px #990033');
+						$('#pwdHelp1').css('color','#990033');
+					}else{
+						if($('#password').val()!=""&&$('#title').val()!=""){
+							document.getElementById("pwdHelp1").innerHTML = "";
+							$('#passwordOld').css('border','solid 1px #CCCCCC');
+							alert("修改成功");
+							formSubmitModel('metroUserController.do?savePwd', 'form_sample_2');
+						}else{
+							alert("有未填写的选项");
+						}
+					}
+				},
+				error:function(){
+					alert("load page error, page url is " + urlStr);
+				}
+			});	
+		}
+	}
+	function clearSpan(){
+		document.getElementById("pwdHelp1").innerHTML = "";
+		$('#passwordOld').css('border','solid 1px #CCCCCC');
+	}
+</script>

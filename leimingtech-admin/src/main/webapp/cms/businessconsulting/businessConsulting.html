@@ -1,0 +1,53 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">业务咨询</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="businessConsulting_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${businessConsulting.id?if_exists}"/>
+		
+		<div class="control-group">
+			<div  style="padding-left: 100px">
+				<font style="font-size: 14px">咨询类别</font>
+				
+				
+		
+					<#list classList as classType>
+						<#if classType.typecode==businessConsulting.businessClass>
+							<input type="text"  readonly="readonly" style="width: 160px;margin-left: 20px" class="m-wrap" value=" ${classType.typename}"/>
+						</#if>
+					</#list>
+			<font style="font-size: 14px">回复部门</font>
+					<#list departList as depart>
+						<#if depart.typecode==businessConsulting.departid>
+							<input type="text"  readonly="readonly" style="width: 160px" class="m-wrap" value=" ${depart.typename}"/>
+						</#if>
+					</#list>
+			</div>
+			
+			
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>回复内容</label>
+			<div class="controls">
+				<textarea id="replyCount" name="replyCount" rows="3" cols="50"
+					style="width: 400px; height: 200px;" data-rule-required="true"></textarea>
+			
+			</div>
+		</div>
+		
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('businessConsultingController.do?save', 'businessConsulting_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#businessConsulting_form").myValidate();
+});
+</script>

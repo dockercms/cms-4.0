@@ -1,0 +1,31 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>${contentF.title!''}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="/mobilestyle/js/jquery-1.10.1.min.js"></script>
+	<#setting number_format="#">
+	<script type="text/javascript">var contextpath='${contextpath}';var contentId='${contentidF}';$.get(contextpath + "/contentsMobileController.do?addPv&contentId="+contentId);</script>
+	<script type="text/javascript">
+		function startVideo(src){
+			try{
+				window.honghe.startVideo(src);
+			}catch(e){
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<div style="font-size: 18px;margin-top: 15px;">${contentF.title!''}</div>
+		<span style="color: #BABABA;font-size: 10px;margin-top: 5px;display: block;">${contentF.sourceid!''}&nbsp;&nbsp;<#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+	<video src="${videoF.videourl}" onclick="startVideo('${videoF.videourl}')" controls="controls" style="width: 100%;margin-top: 10px;"><span style="color:red;margin-top: 10px;font-size: 14px;">此浏览器不支持html5标签 视频无法播放</span></video>
+	<#if contentF.digest?exists && contentF.digest !=''>
+	<div style="font-size: 12px;line-height: 15px;">
+		<span style="display: block;font-size: 18px;margin-top: 15px;margin-bottom: 10px;">简介：</span>
+		${contentF.digest!''}
+	</div>
+	</#if>
+</body>
+</html>

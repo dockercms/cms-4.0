@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd ">
+		
+	<context:property-placeholder location="classpath:sysConfig.properties"   ignore-unresolvable="true" />
+ 	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          lazy-init="false">
+        <property name="locations">
+            <list>
+                <value>classpath*:sysConfig.properties</value>
+            </list>
+        </property>
+    </bean> -->
+    
+ 	<!-- ApplicationContext -->
+	<bean class="com.leimingtech.core.base.ApplicationContextUtil"></bean>
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射， 配置一个基于注解的定制的WebBindingInitializer，解决日期转换问题，方法级别的处理器映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="cacheSeconds" value="0" />
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->
+			</list>
+		</property>
+		<property name="webBindingInitializer">
+			<bean class="com.leimingtech.platform.core.interceptors.MyWebBinding" />
+		</property>
+	</bean>
+	<!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+	<bean id="defaultViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:order="3">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="contentType" value="text/html" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 针对freemarker的视图配置  -->
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver" p:order="1">  
+	     <property name="cache" value="true" />  
+	     <property name="prefix" value="" />  
+	     <!-- 修改 页面文件类型-->
+	     <property name="suffix" value=".html" />
+	     <property name="contentType" value="text/html;charset=UTF-8"></property>  
+	     <property name="requestContextAttribute" value="request" />  
+	     <property name="exposeSpringMacroHelpers" value="true" />  
+	     <property name="exposeRequestAttributes" value="true" />  
+	     <property name="exposeSessionAttributes" value="true" />
+		<property name="attributesMap">
+			<map>
+				<entry key="newTag">
+					<bean class="com.leimingtech.core.entity.TagCreator" />
+				</entry>
+			</map>
+		</property>  
+	 </bean>
+	 
+	 <bean id="shiroTags" class="com.leimingtech.cms.security.tag.ShiroTags" />
+	 
+	 <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	 <!-- 修改路径path -->
+		<property name="templateLoaderPath" value="/"/>
+		
+		
+		<property name="freemarkerSettings">
+		    <props>
+		        <prop key="template_update_delay">0</prop>
+		        <prop key="default_encoding">UTF-8</prop>
+		        <prop key="boolean_format">true,false</prop>
+		        <prop key="number_format">0.##########</prop>
+		        <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+		        <prop key="date_format">yyyy-MM-dd</prop>
+                	<prop key="time_format">HH:mm:ss</prop>
+		        <prop key="classic_compatible">true</prop>
+		        <prop key="template_exception_handler">ignore</prop>
+		    </props>
+		</property>
+		<property name="freemarkerVariables">
+            <map>
+                <entry key="shiro" value-ref="shiroTags"/>
+            </map>
+        </property>
+		
+	 </bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="UTF-8">
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	
+	<bean id="realPathResolver" class="com.leimingtech.platform.tpl.ServletContextRealPathResolver"></bean>
+	<!--文件模板-->
+	<bean id="tplManager" class="com.leimingtech.platform.tpl.FileTplManagerImpl"/>
+	<!-- 方言 -->
+	<bean id="dialect"
+		class="com.leimingtech.core.hibernate.dialect.DialectFactoryBean">
+		<property name="dbType" value="${jdbc.dbType}" />
+	</bean>
+	<!-- 异常处理类 -->
+	<bean id="exceptionHandler"
+		class="com.leimingtech.core.base.MyExceptionHandler" />
+	<!-- 系统错误转发配置[并记录错误日志] -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="500"></property>   <!-- 默认为500，系统错误(error.jsp) -->
+		<property name="defaultStatusCode" value="404"></property>
+		<property name="statusCodes"><!-- 配置多个statusCode -->
+			<props>
+				<prop key="error">500</prop>  <!-- error.jsp -->
+				<prop key="error1">404</prop>    <!-- error1.jsp -->
+			</props>
+		</property>
+		<property name="exceptionMappings">
+			<props>
+				<!-- 这里你可以根据需要定义N多个错误异常转发 -->
+				<prop key="java.sql.SQLException">dbError</prop> <!-- 数据库错误(dbError.jsp) -->
+				<prop key="org.springframework.web.bind.ServletRequestBindingException">bizError</prop> <!-- 参数绑定错误(如：必须参数没传递)(bizError.jsp) -->
+				<prop key="java.lang.IllegalArgumentException">bizError</prop>  <!-- 参数错误(bizError.jsp) -->
+				<prop key="org.springframework.validation.BindException">bizError</prop>  <!-- 参数类型有误(bizError.jsp) -->
+				<prop key="java.lang.Exception">unknowError</prop>  <!-- 其他错误为'未定义错误'(unknowError.jsp) -->
+			</props>
+		</property>
+	</bean>
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.leimingtech.platform.core.interceptors.EncodingInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.leimingtech.platform.core.interceptors.AuthInterceptor">
+				<property name="excludeUrls">
+					<list>
+						<!-- 系统登录 -->
+						<value>loginAction.do?noAuth</value>
+						<value>loginAction.do?login</value>
+      					<value>loginAction.do?checkuser</value>
+      					<value>loginAction.do?logout</value>
+      					
+      					<!-- 浏览量 -->
+      					<value>contentsController.do?addPv</value>
+      					<value>contentsMobileController.do?addPv</value>
+
+      					<value>coreServerController.do?processServer</value>
+      					<value>uploadFileController.do?imageUpload</value>
+      					<value>testController.do?paping</value>
+
+      					<!-- goods begin -->
+      					<value>goods_Controller.do?addcarts</value>
+      					<value>goods_Controller.do?addcart</value>
+      					<value>goods_Controller.do?mycat</value>
+      					<value>goods_Controller.do?pay</value>
+      					<value>goods_Controller.do?confirmOrder</value>
+      					<value>goods_Controller.do?table</value>
+      					<value>goods_Controller.do?editor</value>
+      					<!-- goods end -->
+
+      					<!-- CMS会员中心 begin -->
+      					<value>member/registerAct.do?checkregister</value>
+      					<value>member/registerAct.do?register</value>
+      					<value>member/registerAct.do?checkUsername</value>
+      					<value>member/registerAct.do?checkValicode</value>
+      					<value>member/loginAct.do?login</value>
+      					<value>member/loginAct.do?thirdLogin</value>
+      					<value>member/loginAct.do?checkLogin</value>
+      					<value>member/loginAct.do?checkName</value>
+      					<value>member/loginAct.do?sinaUserInfo</value>
+      					<value>member/loginAct.do?qqUserInfo</value>
+      					<value>member/MemberAct.do?findpassword</value>
+      					<value>member/MemberAct.do?sendemail</value>
+      					<value>member/MemberAct.do?checkNameAndEmail</value>
+      					<value>member/MemberAct.do?editPassword</value>
+      					<value>member/MemberAct.do?saveEditPassword</value>
+      					<value>member/MemberAct.do?sendEmailSuccess</value>
+      					<!-- CMS会员中心 end -->
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
+	<!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
+				<prop key="java.lang.Throwable">error/500</prop>
+			</props>
+		</property>
+	</bean>-->
+	<!-- 支持Shiro对Controller的方法级AOP安全控制 end -->
+	<!-- 智能表单配置引入 -->
+	<import resource="classpath*:spring/*.xml" />
+</beans>

@@ -1,0 +1,136 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">车系表</h4>
+		</div>
+		<div class="modal-body" >
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${carSeries.id?if_exists}"/>
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+						<div class="control-group">
+							<label class="control-label">品牌</label>
+							<div class="controls">
+								<!-- 
+								<input type="text" id="brandid" name="brandid" class="span3 form-control" data-rule-required="true" value="${carSeries.brandid?if_exists}"/>
+								 -->
+								 <select id="brandid" name="brandid" style="width:132px">
+								 	<#list carBrands as b>
+								        <option value="${b.id?if_exists}" <#if b.id == carSeries.brandid>selected='selected'</#if>>${b.brandname}</option>
+									</#list>
+								 </select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"><font color="red">&nbsp;*</font>车系名称</label>
+							<div class="controls">
+								<input type="text" id="seriname" name="seriname" class="span3 form-control" data-rule-required="true" value="${carSeries.seriname?if_exists}"
+								style="width:150px"
+								/>
+								请添加车系的完整名称，如“奔驰A级”
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"><font color="red">&nbsp;*</font>车系简称</label>
+							<div class="controls">
+								<input type="text" id="tinyseriname" name="tinyseriname" class="span3 form-control" data-rule-required="true" value="${carSeries.tinyseriname?if_exists}"
+								style="width:150px"
+								/>
+								请添加车系的简称,如“A级”；手机端显示的是车系简称
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">图片</label>
+							<div class="controls">
+							<!-- 
+								<input type="text" id="seriimg" name="seriimg" class="span3 form-control" value="${carSeries.seriimg?if_exists}"/>
+							 -->
+							 <input name="seriimg" id="seriimg_path" type="text" value="${carSeries.seriimg?if_exists}">
+								<!-- 
+								<img name="seriimg" id="seriimg" src="http://stc.weimob.com/img/default/car_series.jpg" style="max-height: 100px;" value="${carSeries.seriimg?if_exists}" >
+								 -->
+								<a id="sample_editable_1_new" class="btn blue" href="javascript:toEditModel('attachPictureController.do?tableDialog')" style="text-decoration: none">
+										图片库 <i class="icon-search"></i>
+									</a>
+									<span class="btn green" id="upload_seriimg"  style="padding:0px !important;">上传图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"><font color="red">*</font>显示顺序</label>
+							<div class="controls">
+								<input type="text" id="showorder" name="showorder" class="span3 form-control" data-rule-digits="true" value="${carSeries.showorder?if_exists}"
+								style="width:60px"
+								/>
+								数字越大越靠前
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">车系亮点</label>
+							<div class="controls">
+								<textarea cols="800" rows="4" id="serihighlights" name="serihighlights" class="span3 form-control" data-rule-maxlength="200" value="${carSeries.serihighlights?if_exists}"
+								style="width:400px"
+								/>
+								<br>
+								请用简短的文字描述该车系的亮点所在,不超过200字
+							</div>
+						</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<input type="button" onclick="formSubmitModel('carSeriesController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">
+			<input type="button" class="btn" value="关闭" data-dismiss="modal">
+		</div>
+<script>
+function selectPictureBack(requestCode){
+	var result = $("input[name='path']:checked").val();
+	$("#seriimg_path").val(result);
+	$('#editModel').modal('hide');
+}
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#form_sample_2").myValidate();
+});
+</script>
+
+<script type="text/javascript">
+	var uploader = WebUploader.create({
+	
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+	
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+	
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#upload_seriimg',
+	
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+	
+	//当文件上传成功时触发
+	uploader.on('uploadSuccess', function(file, Object) {
+		$("#seriimg").val(Object.url);
+		$("#seriimg").attr("src", Object.url);
+		$("#seriimg_path").val(Object.url);
+		uploader.removeFile(file,true);
+	});
+</script>

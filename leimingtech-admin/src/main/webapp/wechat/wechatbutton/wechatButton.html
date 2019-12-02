@@ -1,0 +1,249 @@
+<style type="text/css">
+.modal-body{padding:0px;}
+.menuView{
+	float:left;width:344px;
+	border-right: 1px solid #EFEFEF;
+}
+.bodyForm{ 
+    margin-top: 20px;
+	float: left;
+}
+/****createWechatMenu*******/
+.createWechatMenuDiv {
+	width: 344px;
+	height: 622px;
+	margin: 0px auto;
+	background-image: url(media/image/wechatMenuViewPhone.png);
+}
+.wechatMenus {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+.createWechatMenuDiv .Level_2_Menu {
+	position: relative;
+	width: 255px;
+	height: 202px;
+	left: 44px;
+	top: 255px;
+	background-color: #FDFDFD;
+}
+.createWechatMenuDiv .Level_1_Menu {
+	position: relative;
+	left: 44px;
+	top: 254px;
+	width: 255px;
+	height: 48px;
+}
+.createWechatMenuDiv ul {
+	display: block;
+	float: left;
+}
+.createWechatMenuDiv ul li {
+	display: block;
+	list-style: none;
+	text-align: center;
+}
+.createWechatMenuDiv .Level_2_Menu ul {
+	padding: 0px;
+	margin: 0px;
+	height: 202px;
+	width: 83.5px;
+}
+.createWechatMenuDiv .Level_2_Menu ul li {
+	border-top: 1px solid #ECEBEB;
+	line-height: 40px;
+}
+.createWechatMenuDiv .Level_2_Menu .Level_2_Menu_first {
+	border-left: 1px solid #ECEBEB;
+}
+.createWechatMenuDiv .Level_2_Menu .Level_2_Menu_center {
+	border-left: 1px solid #ECEBEB;
+	border-right: 1px solid #ECEBEB;
+}
+.createWechatMenuDiv .Level_2_Menu .Level_2_Menu_last {
+	border-right: 1px solid #ECEBEB;
+}
+.createWechatMenuDiv .Level_1_Menu ul {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: block;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+.createWechatMenuDiv .Level_1_Menu ul li {
+	width: 33.3333333%;
+	height: 45px;
+	float: left;
+	line-height: 47px;
+}
+.createWechatMenuDiv .Level_1_Menu ul li:hover {
+	background-color: #BABABA;
+	cursor: pointer;
+}
+.createWechatMenuDiv .Level_1_Menu ul li>.Level_1_Menu_center {
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+/***提示***/
+.ftip{
+    margin: 5px 5px;
+    height: 108px;
+    border: 1px solid #F3ECB9;
+    padding: 6px 20px 6px 36px;
+    font-size: 12px;
+    color: #993300;
+    word-wrap: break-word;
+    text-align: left;
+    background: #FEFBE4;
+    width: 535px;
+    float: left;
+    background: #fefbe4 url(media/image/lightbulb.gif) no-repeat 11px 13px;
+}
+.ftip p{
+	line-height: 27px;
+	    margin: 0 0 0;
+}
+</style>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">自定义菜单管理</h4>
+</div>
+<div class="modal-body">
+	<div class="menuView">
+		<div class="createWechatMenuDiv">
+		  <div class="wechatMenus">
+		    <div class="Level_2_Menu">
+		      <ul class="Level_2_Menu_first">
+		        <li>1_2_5</li>
+		        <li>1_2_4</li>
+		        <li>1_2_3</li>
+		        <li>1_2_2</li>
+		        <li>1_2_1</li>
+		      </ul>
+		      <ul class="Level_2_Menu_center">
+		        <li>2_2_5</li>
+		        <li>2_2_4</li>
+		        <li>2_2_3</li>
+		        <li>2_2_2</li>
+		        <li>2_2_1</li>
+		      </ul>
+		      <ul class="Level_2_Menu_last">
+		        <li>3_2_5</li>
+		        <li>3_2_4</li>
+		        <li>3_2_3</li>
+		        <li>3_2_2</li>
+		        <li>3_2_1</li>
+		      </ul>
+		    </div>
+		    <div class="Level_1_Menu">
+		      <ul>
+		        <li>1</li>
+		        <li class="Level_1_Menu_center">2</li>
+		        <li>3</li>
+		      </ul>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="ftip" >
+		<p>1、自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。</p>
+		<p>2、一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。</p>
+		<p>3、创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果。</p>
+ 	</div>
+	<div class="bodyForm">
+		<!-- BEGIN FORM-->
+		<form id="wechatButton_form" class="form-horizontal">
+			<input type="hidden" id="id" name="id" value="${wechatButton.id?if_exists}"/>
+			<div class="control-group">
+				<label class="control-label">公众号Id</label>
+				<div class="controls">
+					<input type="text" id="wuid" name="wuid" readonly="readonly" class="span3 form-control" data-rule-required="true" value="${wechatButton.wuid?if_exists}"/>
+					<a href="javascript:alert('选择公众号');"><i class="icon-search m-icon-white"></i>选择公众号</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">公众号token</label>
+				<div class="controls">
+					<input type="text" id="token" name="token" readonly="readonly" class="span3 form-control" data-rule-required="true" value="${wechatButton.token?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">父菜单</label>
+				<div class="controls">
+					<input type="text" id="pid" name="pid" readonly="readonly"  class="span3 form-control" value="${wechatButton.pid?if_exists}"/>
+					<a href="javascript:alert('选择父级菜单');"><i class="icon-search m-icon-white"></i>选择父菜单</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">菜单名称</label>
+				<div class="controls">
+					<input type="text" id="name" name="name" class="span3 form-control" value="${wechatButton.name?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">响应动作类型</label>
+				<div class="controls">
+					<select  id="type" name="type" class="span3 form-control">
+						<#list menuEvents as event>
+							<option svalue="${event}" 
+								<#if event==wechatButton.type>
+									 selected="selected"
+								</#if>
+								<#list menuRemarkMap as mrm>
+									<#if mrm.key==event>
+										title="${mrm.value}"
+									</#if>
+								</#list>
+							>
+								<#list menuChineseMap as mcm>
+									<#if mcm.key==event>
+										${mcm.value}
+									</#if>
+								</#list>
+							</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">资源Id</label>
+				<div class="controls">
+					<input type="text" id="mediaId" name="mediaId" class="span3 form-control" value="${wechatButton.mediaId?if_exists}"/>
+					<a href="javascript:alert('选择资源');"><i class="icon-search m-icon-white"></i>选择资源</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">网页链接</label>
+				<div class="controls">
+					<input type="text" id="url" name="url" class="span3 form-control" value="${wechatButton.url?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">菜单KEY值</label>
+				<div class="controls">
+					<input type="text" id="menukey" name="menukey" class="span3 form-control" value="${wechatButton.menukey?if_exists}"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">菜单级别</label>
+				<div class="controls">
+					<input type="text" id="level" name="level" class="span3 form-control" value="${wechatButton.level?if_exists}"/>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModel('wechatButtonController.do?save', 'wechatButton_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#wechatButton_form").myValidate();
+});
+</script>

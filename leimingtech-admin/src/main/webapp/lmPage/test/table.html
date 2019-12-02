@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<link rel="stylesheet" type="text/css" href="media/css/search.css" />
+
+<link href="/plug-in/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/plug-in/My97DatePicker/WdatePicker.js"></script>
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>管理表</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('testController.do?addPageModel')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+			
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="control-group pull-left margin-right-20">
+								<label>标题</label>
+								<div class="left">
+									<input name="title" class="m-wrap" type="text" value="${searchMap["title"]?if_exists[0]}">
+								</div>
+							</div>
+							<div class="control-group pull-left margin-right-20">
+								<label>内容</label>
+								<div class="left">
+									<input name="content" class="m-wrap" type="text" value="${searchMap["content"]?if_exists[0]}">
+								</div>
+							</div>
+							<div class="control-group pull-left">
+								<label class="control-label">创建日期</label>
+								<div class="controls">
+										<input id="createDate_begin" name="createDate_begin" value="${searchMap["createDate_begin"]?if_exists[0]}" class="Wdate" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" type="text" value="" />
+									<span>-</span>
+										<input id="createDate_end" name="createDate_end" value="${searchMap["createDate_end"]?if_exists[0]}" class="Wdate" onfocus="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})" type="text" value="" />
+								</div>
+							</div>
+						</div>
+						<button type="button" class="btn blue" style="width:90%" onclick="toSearch('testController.do?table', 'search_form');">搜索  <i class="m-icon-swapright m-icon-white"></i></button>
+						<button type="button" class="btn" style="width:9%" onclick="resetForm('search_form');">重置</button>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
+							<th>序号</th>
+							<th class="hidden-480">标题</th>
+							<th class="hidden-480">内容</th>
+							<th class="hidden-480">日期</th>
+							<th >操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if testList?exists>
+					  <#list testList as test>
+						<tr class="odd gradeX">
+							<td>${test_index?if_exists+1}</td>
+							<td class="center">${test.title?if_exists}</td>
+							<td >${test.content?if_exists}</td>
+							<td >${test.createDate}</td>
+							<td >
+								<a href="javaScript:void(0)" onclick="toEditModel('testController.do?updatePageModel&id=${test.id?if_exists}')">修改</a>|
+								<a href="javaScript:void(0)" onclick="del('testController.do?del', '${test.id?if_exists}')">删除</a>|
+								<a href="testController.do?paping&id=${test.id?if_exists}" target="_blank">查看分页</a>
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>
+
+<script>
+//TableManaged.init();
+//FormComponents.init();
+//FormComponents.handleDatePickers();
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+/*$(function(){
+	setInterval(function(){
+		$('div.modal-scrollable').css({'z-index':'8000'});
+		$('div.modal-backdrop').css({'z-index':'7050'});
+	},200);
+});*/
+</script>

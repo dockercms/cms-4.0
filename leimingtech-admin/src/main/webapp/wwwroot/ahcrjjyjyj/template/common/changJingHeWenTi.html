@@ -1,0 +1,47 @@
+
+<div class="cjsfw">
+	<h3>场景式服务</h3>
+	<a href="http://www.ahciq.gov.cn/service/index.htm"><img
+		src="/images//201563092743.png">
+	</a>
+	<!--<a href="http://www.ahciq.gov.cn/service/index1.htm"><img src="http://www.ahciq.gov.cn/images1/blue.png"></a>-->
+	<a href="http://www.ahciq.gov.cn/service/index5.htm"><img
+		src="/images//201563092743_2.png">
+	</a>
+	<!--<a href="http://www.ahciq.gov.cn/service/index4.htm"><img src="http://www.ahciq.gov.cn/images1/spxk.png"></a>-->
+	<a href="http://www.ahciq.gov.cn/service/index3.htm"><img
+		src="/images//201563092743_1.png">
+	</a>
+
+</div>
+
+<div class="cjwtpage">
+		<#assign name ="catalogTag">
+		<#assign catalogTag =newTag("${name}")>
+		<#assign catalog =catalogTag("{'levels':'self','name':'402881eb53ab62820153ac7354a00045'}")>
+		<#if catalog?exists>
+	<h3>
+		
+		${catalog.name}<a href="${catalog.url!'javascript:void(0);'}">更多</a>
+		
+	</h3>
+	<ul>
+		<ul>
+			<#assign articleTag=newTag("articleTag")>
+			<#assign articleList=articleTag("{'name':'${catalog.id}',count:'6'}")>
+			<#if articleList?exists && articleList?size gt 0>
+				<#list articleList as article>
+					<li><a
+						href="${article.url!'javascript:void(0);'}"
+						title="${article.title}" target="_blank">${article.title}</a><span>
+							<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+					</li>
+				</#list>
+			<#else>
+					无数据		
+			</#if>
+
+		</ul>
+	</ul>
+	</#if>
+</div>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>lm-maven-cms-1.0.0 GA</display-name>
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>LMCMS</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<mime-mapping>
+		<extension>zip</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/rar</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>exe</extension>
+		<mime-type>application/octet-stream</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>iso</extension>
+		<mime-type>application/octet-stream</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/doc</mime-type>
+	</mime-mapping>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring-*.xml</param-value>
+	</context-param>
+
+	<!-- Apache Shiro -->
+
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter>
+		<description>字符集过滤器</description>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<description>字符集编码</description>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>druidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>/css/*,/context/*,/plug-in/*,*.js,*.css,*/druid*,/attached/*,*.jsp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>principalSessionName</param-name>
+			<param-value>sessionInfo</param-value>
+		</init-param>
+		<init-param>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>druidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+
+
+	<listener>
+		<description>spring监听器</description>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<description>Introspector缓存清除监听器</description>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<listener>
+		<description>request监听器</description>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<listener>
+		<description>系统初始化监听器</description>
+		<listener-class>com.leimingtech.platform.listener.InitListener</listener-class>
+	</listener>
+
+	<!-- 在线用户监听器 add by duanql 20130607 -->
+	<listener>
+		<listener-class>com.leimingtech.core.base.OnlineListener</listener-class>
+	</listener>
+
+
+
+	<servlet>
+		<description>spring mvc servlet</description>
+		<servlet-name>springMvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<description>spring mvc 配置文件</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMvc</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>druidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMvc</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	<!-- 配置快逸导出报表文件的Servlet 
+	<servlet> 
+	  <servlet-name>reportServlet</servlet-name> 
+	  <servlet-class> 
+	   com.runqian.report4.view.ReportServlet
+	  </servlet-class> 
+	  <init-param>　　　　 
+	   <param-name>configFile</param-name> 
+	   <param-value>/WEB-INF/quieeReport/reportConfig.xml</param-value> 
+	  </init-param> 
+	  <load-on-startup>1</load-on-startup> 
+	</servlet> 
+	
+	<servlet-mapping> 
+	  <servlet-name>reportServlet</servlet-name> 
+	  <url-pattern>/reportServlet</url-pattern> 
+	</servlet-mapping> 
+	<taglib>
+	    <taglib-uri>/WEB-INF/quieeReport/runqianReport4.tld</taglib-uri>
+	    <taglib-location>/WEB-INF/quieeReport/runqianReport4.tld</taglib-location>
+	</taglib>
+	--> 
+	
+	<!-- CXF webservie配置 --> 
+	<servlet>
+          <servlet-name>CXFServlet</servlet-name>
+          <!-- <display-name>CXFServlet</display-name> -->
+          <servlet-class>
+                 org.apache.cxf.transport.servlet.CXFServlet
+          </servlet-class>
+          <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+           <servlet-name>CXFServlet</servlet-name>
+           <url-pattern>/webservice/*</url-pattern>
+    </servlet-mapping>
+	
+	<!-- update begin Author:liuht Date:20131228 -->
+	<!-- restUrl风格配置 -->
+	<servlet>
+		<servlet-name>restSpringMvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<description>spring mvc 配置文件</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>restSpringMvc</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- update end Author:liuht Date:20131228 -->
+	<servlet-mapping>
+		<servlet-name>druidStatView</servlet-name>
+		<url-pattern>/webpage/system/druid/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- ckfinder配置 add by Alexander Date:2013-09-19 -->
+	<servlet>
+		<servlet-name>ConnectorServlet</servlet-name>
+		<servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
+		<init-param>
+			<param-name>XMLConfig</param-name>
+			<param-value>/WEB-INF/classes/CKfinderConfig.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<!-- 自定义ckfinder监听器 -->
+		<init-param>
+			<param-name>configuration</param-name>
+			<param-value>com.leimingtech.platform.listener.CkfinderConfiguration</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConnectorServlet</servlet-name>
+		<url-pattern>/plug-in/ckfinder/core/connector/java/connector.java</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 图片上传 20140328 begin-->
+	<servlet>
+		<servlet-name>uploadPicServlet</servlet-name>
+		<servlet-class>com.leimingtech.platform.servlet.FileUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadPicServlet</servlet-name>
+		<url-pattern>/uploadfile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.leimingtech.platform.servlet.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/uploadimg</url-pattern>
+	</servlet-mapping>
+	<!-- 图片上传 20140328 end-->
+	
+    <!--update-begin-Author:zhangguoming  Date:20140226 for：添加验证码-->
+    <servlet>
+        <servlet-name>RandCodeImage</servlet-name>
+        <servlet-class>com.leimingtech.platform.servlet.RandCodeImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RandCodeImage</servlet-name>
+        <url-pattern>/randCodeImage</url-pattern>
+    </servlet-mapping>
+    <!--update-end-Author:zhangguoming  Date:20140226 for：添加验证码-->
+    
+    <servlet>
+	    <display-name>同步UC Server发出的操作指令</display-name>
+	    <servlet-name>UC</servlet-name>
+	    <servlet-class>com.leimingtech.ucenter.fivestars.interfaces.bbs.api.UC</servlet-class>
+	    <load-on-startup>2</load-on-startup>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>UC</servlet-name>
+	    <url-pattern>/api/uc.php</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>FileUploadFilter</filter-name>
+		<filter-class>com.ckfinder.connector.FileUploadFilter</filter-class>
+		<init-param>
+			<param-name>sessionCookieName</param-name>
+			<param-value>jsessionid</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionParameterName</param-name>
+			<param-value>JSESSIONID</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>FileUploadFilter</filter-name>
+		<url-pattern>/plug-in/ckfinder/core/connector/java/connector.java</url-pattern>
+	</filter-mapping>
+	<!-- ckfinder配置 END -->
+
+	<!-- session超时设置30分钟 add by zhoujunfeng 20130830 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<!-- session超时设置30分钟 add by zhoujunfeng 20130830 -->
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

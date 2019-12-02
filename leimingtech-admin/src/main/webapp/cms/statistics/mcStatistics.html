@@ -1,0 +1,222 @@
+	<input type="hidden" id="searchYear" value="${searchYear}">
+	<input type="hidden" id="searchMonth" value="${searchMonth}">
+	<input type="hidden" id="staticsType" value="${staticsType}">
+	 <p style="text-align: center;">
+	 	<strong>
+	 		<#if searchYear=="0">
+	 			所有年份<#if searchMonth!="0">${searchMonth}月</#if>
+	 			统计报表
+	 		</#if>
+	 		<#if searchYear!="0">
+	 			${searchYear}年<#if searchMonth!="0">${searchMonth}月</#if>
+	 			统计报表
+	 		</#if>
+	 	</strong>
+				 </p>
+	<div id="chart_5" style="height:350px;"></div>
+	<div class="btn-toolbar">
+		<div class="space5"></div>
+		<!-- <div class="btn-group graphControls">
+			<input type="button" class="btn" value="柱状图" />
+			<input type="button" class="btn" value="线状图" />
+		</div> -->
+	</div>
+	<!-- <div class="btn-group pull-left">
+		<a class="btn green" style="text-decoration: none" href="javascript:;" onclick="exportXlS()">
+			导出Excel  <i class="icon-share"></i>
+		</a>
+	</div> -->
+	 <div class="portlet-body">
+		<table class="table table-bordered table-striped table-hover" id="caseListTable">
+			<thead>
+				<tr style="background-color:#cccccc">
+					<th class="span7">日期</th>
+					<#if staticsType=="member"><th>注册人数</th></#if>
+					<#if staticsType=="comment"><th>评论量</th></#if>
+					<#if staticsType=="messages"><th>留言量</th></#if>
+				</tr>
+			</thead>
+			<tbody id="tbody1">
+				
+			</tbody>
+		</table>
+	</div>
+<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="media/js/jquery.flot.js"></script>
+<script src="media/js/jquery.flot.resize.js"></script>
+<script src="media/js/jquery.flot.pie.js"></script>
+<script src="media/js/jquery.flot.stack.js"></script>
+<script src="media/js/jquery.flot.crosshair.js"></script>
+<script src="media/js/jquery.flot.time.js"></script>
+<script src="media/js/jquery.flot.time.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script>
+	
+/* 获取数据报表 */
+	var chartJSON = new Array();
+	var searchYear = $("#searchYear").val();
+	var searchMonth = $("#searchMonth").val();
+	var staticsType = $("#staticsType").val();
+	//导出Excel
+	function exportXlS() {
+		alert("导出时间较长请耐心等待...");
+		var cUrl = "contentStatisticsController.do?exportXls";
+		$.ajax({
+			url : cUrl,
+			type : 'post',
+			cache : false,
+			data:{'searchYear':searchYear,'searchMonth':searchMonth},
+			success : function(result) {
+				var d = $.parseJSON(result);
+				if (d.success) {
+					var msg = d.msg;
+					if("" != msg){
+						window.open(msg);
+					}else{
+						alert("导出失败");
+					}
+				}else{
+					alert("导出失败");
+				}
+			}
+		}); 
+	}
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'statisticsController.do?loadDataStat',
+		data:{'searchYear':searchYear,'searchMonth':searchMonth,'staticsType':staticsType},
+		success:function(data){
+			chartJSON = data;
+		}
+	});
+	var json = JSON.parse(chartJSON);
+	/* 加载报表数据绘图 */
+	jQuery(document).ready(function() {   
+		var tbody = document.getElementById('tbody1');
+		for (var i = 0; i < json.length; i += 1){
+			if(searchYear==0){
+				if(searchMonth!="0"){
+					tbody.innerHTML += "<tr><td>"+json[i].date+"年"+searchMonth+"月</td><td>"+json[i].count+"</td></tr>";
+				}else{
+					tbody.innerHTML += "<tr><td>"+json[i].date+"年</td><td>"+json[i].count+"</td></tr>";
+				}
+				
+			}else{
+				if(searchMonth!="0"){
+					tbody.innerHTML += "<tr><td>"+searchYear+"年"+searchMonth+"月"+json[i].date+"日</td><td>"+json[i].count+"</td></tr>";
+				}else{
+					tbody.innerHTML += "<tr><td>"+searchYear+"年"+json[i].date+"月</td><td>"+json[i].count+"</td></tr>";
+				}
+			}
+	     }
+	   // initiate layout and plugins
+	   if (!jQuery.plot) {
+	          return;
+	      }
+	//alert(json);
+	      //bars with controls
+	      function chart5() {
+	          var d1 = [];
+	          for (var i = 0; i < json.length; i += 1){
+	        	 // alert(json[i].count)
+	             d1.push([parseInt(json[i].date), parseInt(json[i].count)]);
+	          }
+	          var stack = 0,
+	              bars = false,
+	              lines = true,
+	              steps = false;
+	
+	          function plotWithOptions() {
+	              $.plot($("#chart_5"), [d1], {
+	                      series: {
+	                          stack: stack,
+	                          lines: {
+	                              show: lines,
+	                              fill: true,
+	                              steps: steps,
+	                              fillColor: {
+	                                  colors: [{
+	                                          opacity: 0.05
+	                                      }, {
+	                                          opacity: 0.01
+	                                      }
+	                                  ]
+	                              }
+	                          },
+	                          bars: {
+	                              show: bars,
+	                              barWidth: 0.6
+	                          },
+	                         
+	              			 
+	                         shadowSize: 3
+	                      },
+	                      points: {
+                             show: true
+                       	  },
+	                      xaxis: {
+	                    	  
+	                      },
+	                      yaxis:{
+	                    	  show:true,
+	                      },
+	                      grid: {
+	                          hoverable: true,
+	                          clickable: true,
+	                          tickColor: "#eee",
+	                          borderWidth: 0
+	                      },
+	                      colors: ["#ffcc33", "#37b7f3", "#52e136"],
+		           			
+	                  });
+	          }
+	
+	          $(".graphControls input").click(function (e) {
+	              e.preventDefault();
+	              bars = $(this).val().indexOf("柱状图") != -1;
+	              lines = $(this).val().indexOf("线状图") != -1;
+	              plotWithOptions();
+	          });
+	          plotWithOptions();
+	      }
+	      //graph
+	      chart5();
+	      $("<div id='tooltip'></div>").css({
+				position: "absolute",
+				display: "block",
+				border: "1px solid #fdd",
+				padding: "2px",
+				"background-color": "#fee",
+				opacity: 0.80
+			}).appendTo("body");
+	      $("#chart_5").bind("plothover", function (event, pos, item) {
+	    	 	if(item) {
+					var x = item.datapoint[0],
+						y = item.datapoint[1];
+	
+					var val = "";
+					if(searchYear=="0"){
+			 			x= x + "年";
+					}else{
+			 			if(searchMonth!="0"){
+			 				x= ${searchYear}+"年"+${searchMonth}+"月"+x+"日";
+			 			}else{
+				 			x= ${searchYear}+"年"+x+"月";
+			 			}
+	    	 		}
+					$("#tooltip").html("       "+x + ", <#if staticsType=='member'>注册人数：</#if><#if staticsType=='comment'>评论量：</#if><#if staticsType=='messages'>留言量：</#if>" + y)
+						.css({top: item.pageY+5, left: item.pageX+5})
+						.fadeIn(200);
+				} else {
+					$("#tooltip").hide();
+				}
+			});
+	});
+</script>

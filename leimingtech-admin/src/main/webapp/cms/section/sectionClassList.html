@@ -1,0 +1,42 @@
+<div class="row-fluid">
+	<div class="span3">
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-sitemap"></i>页面</div>
+			</div>
+			<div class="portlet-body fuelux">
+				<ul class="tree" id="tree_2">
+					<li>
+						<a href="#" data-role="branch" class="tree-toggle" data-toggle="branch" data-value="">顶级</a>
+						<ul class="branch in">
+						<#if list?exists>
+		  					<#list list as function>
+		  						<#if (function.sectionClasss?size >0) > 
+								<li>
+									<a href="sectionClassController.do?load&id=${function.id}" data-role="branch" class="tree-toggle closed" data-toggle="branch" data-value="${function.id}">
+										${function.name}
+									</a>
+								</li>
+								<#else>
+									<li><a href="#" data-role="leaf" id="nut" data-value="${function.id}"><i class="icon-file-text"  style="width: 1em;margin-right: 4px;"></i>${function.name}</a></li>
+								</#if>
+							</#list>
+						</#if>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="portlet box purple">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-reorder"></i>页面管理</div>
+			</div>
+			<div id="divBody" class="portlet-body fuelux">
+				<#include "/cms/section/sectionClass.html">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/section.js"></script>

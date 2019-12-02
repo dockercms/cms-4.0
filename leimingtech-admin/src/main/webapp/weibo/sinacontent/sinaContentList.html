@@ -1,0 +1,86 @@
+<style>
+.Divimages{width:100px;height:100px;margin:10px 10px 10px 10px;float:left;border:2px solid #eee}
+</style>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>新浪微博内容</div>
+				<div class="actions">
+					<button onclick="toEditModel('sinaContentController.do?add')" class="btn yellow-stripe"><i class="fa fa-plus"></i> 新增 </button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									标题：
+									<input name="sinaTitle" class="form-control span7" type="text" value="${searchMap["sinaTitle"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									摘要：
+									<input name="sinaDigest" class="form-control span7" type="text" value="${searchMap["sinaDigest"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('sinaContentController.do?sinaContent', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="">标题</th>
+							<th style="">摘要</th>
+							<th style="">图片</th>	
+							<th style="">创建时间</th>
+							<th width="45" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if sinaContentList?exists>
+					  <#list sinaContentList as sinaContent>
+						<tr class="odd gradeX">
+							<td style="text-align:center;">${(pageNo-1)*pageSize+sinaContent_index?if_exists+1}</td>
+							<td>
+								${sinaContent.sinaTitle}
+							</td>
+							<td>
+								${sinaContent.sinaDigest}
+							</td>
+							<td>
+							<#if sinaContent.sinaThumb?if_exists>
+							<img class="Divimages" src="${sinaContent.sinaThumb}" />
+							<#else>
+							未发布图片
+							</#if>
+							</td>
+							
+							<td>
+								${sinaContent.createtime?string("yyyy-MM-dd hh:mm")}
+							</td>
+							
+							<td style="text-align:center;">
+								<input type='button' class="editbtn" title='修改' onclick="toEditModel('sinaContentController.do?edit&id=${sinaContent.id?if_exists}')" />
+								<input type='button' class="delbtn" title='删除' onclick="del('sinaContentController.do?del', '${sinaContent.id?if_exists}')" />
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>

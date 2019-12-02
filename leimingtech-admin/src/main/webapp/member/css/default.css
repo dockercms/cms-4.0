@@ -1,0 +1,6 @@
+﻿.page{ text-align:center; padding:10px 0px 0px 0px;}
+.page a{ color:#164AAF; border:solid 1px #C5C7C1; padding:4px 5px; margin:0px 3px;}
+.page .text{ height:19px; border:solid 1px #DDDDDD; text-align:center; width:30px; margin:0px 4px; vertical-align:middle;}
+.page .btn{ cursor:pointer; padding:3px 5px; margin:0px 0px 0px 5px;}
+.page .current{ border:0px; color:#FD5D0E; padding:0px 4px; font-weight:bold;}
+a.selectpage{color:red;border:1px solid red;}

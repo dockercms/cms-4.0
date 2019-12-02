@@ -1,0 +1,62 @@
+<div class="top left">
+    <div class="area">
+        <div class="top_logo left"><a href="#" target="_blank"><img src="/images/my_logo.png"/></a></div>
+        <div class="top_search left">
+            <div class="top_search_input"><input id="keyword2" name="" type="text" value="${keyword?if_exists}"/></div>
+            <div class="top_search_but right">
+                <input type="button" onclick="toSearch('${contextpath}/front/frontController.do?mysearch')"/>
+            </div>
+        </div>
+        <div class="top_tel left">客服热线:010-56201420<br>E-mail:zhaopin@ibackchina.com</div>
+    </div>
+</div>
+<script >
+    function toSearch(urlStr) {
+        var keyword = document.getElementById("keyword2").value;
+        var key=keyword.replace(/\s+/g,"");
+        var keyWord2 = encodeURI(key);
+        keyWord2 = encodeURI(keyWord2);
+        window.location = urlStr + "&keyword=" + keyWord2+"&siteid="+'${site.id}';
+    }
+</script>
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+    <div class="nav left">
+        <div class="area">
+         <ul>
+             <!--<li><a class="curli" href="#" target="_blank">首页</a></li>-->
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5abbf70b015abbf84bc10001'}")>
+                 <#if catalog?exists>
+                     <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+                 </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ac53962015ac6d388d6015f'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5aca34ee015aca4c000d0002'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015acf80a33a0001'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad0f3aef2016d'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad4de86015ad4f0a18a0001'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5b30f9e0003'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+             <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5dcfe390049'}")>
+             <#if catalog?exists>
+             <li><a href="${catalog.url!'javascript:void(0);'}">${catalog.name}</a><li>
+             </#if>
+         </ul>
+        </div>
+    </div>

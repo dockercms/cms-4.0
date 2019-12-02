@@ -1,0 +1,39 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">留言管理</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="messageManagement_form" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${messageManagement.id?if_exists}"/>
+		<input type="hidden" name="boardId" value="${boardId?if_exists}"/>
+		
+		
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>回复内容</label>
+			<div class="controls">
+				<textarea id="reply" name="reply" rows="3" cols="50"
+					style="width: 400px; height: 200px;" data-rule-required="true"  value="${messageManagement.reply?if_exists}">${messageManagement.reply?if_exists}</textarea>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+	</form>
+</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModelSub('messageBoardController.do?saveMessageManagement', 'messageManagement_form');" class="btn btn-primary" value="提交">
+	<input type="button" class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#messageManagement_form").myValidate();
+});
+</script>

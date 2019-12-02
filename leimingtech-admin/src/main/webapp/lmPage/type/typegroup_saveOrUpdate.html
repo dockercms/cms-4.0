@@ -1,0 +1,45 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">字典类别</h4>
+		</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+			<input type="hidden" id="TSTypegroup.id" name="id" value="${typegroup.id?if_exists }"/>
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+				<div class="control-group">
+					<label class="control-label">字典名称</label>
+					<div class="controls">
+						<input type="text" name="typegroupname" class="form-control span3" data-rule-required="true" value="${typegroup.typegroupname?if_exists }"/>
+						<span class="help-inline">字典名称在3~10位字符</span>
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">字典编码</label>
+					<div class="controls">
+						<input type="text" name="typegroupcode" class="form-control span3" data-rule-required="true" value="${typegroup.typegroupcode?if_exists }"/>
+					</div>
+				</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+		<div class="modal-footer">  
+            <input  type="button" onclick="formSubmitModel('systemAction.do?saveTypeGroup', 'form_sample_2');" class="btn btn-primary" value="提交">  
+            <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+        </div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+</script>

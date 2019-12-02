@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://data.ahciq.gov.cn/xfxx.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>${site.siteName} - ${catalogF.name}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<script src="/js/jquery.js"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<script type="text/javascript">
+	//清空表单
+	function resetEmailAddress(){
+		
+		$('#form_jubao')[0].reset();
+	}
+	//保存举报
+	function saveEmailAddress(urlStr,form_emailAddress){
+		if($("#name").val()==''){
+			alert("请填写姓名!");
+		}else if($("#email").val()==''){
+			alert("请填写电子邮箱!");
+		}else if($("#content").val()==''){
+			alert("请填写内容!");
+		}else{
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:$('#' + form_emailAddress).serialize(),
+				dataType:'text',
+				success : function(msg) {
+					var obj = JSON.parse(eval(msg));
+					alert(obj.msg);
+					if(obj.isSuccess){
+						location.href=""
+					}
+				},
+				error : function() {
+					alert("提交失败")
+	            }
+			});
+		}
+	}
+</script>
+</head>
+<body>
+
+	<#include "/wwwroot/${sitePath}/template/common/head.html">
+	<div class="cl"></div>
+	<div class="container" style="width:980px">
+		<div class="tag">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td width="36" class="center"><img src="/images/tl.gif">
+						</td>
+						<td>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody>
+									<tr>
+										<td>当前位置：<a href="/">首页</a> &gt;
+											<#assign navTag =newTag("navTag")>
+											<#assign navTagList =navTag("{'name':'${catalogF.id}'}")> 
+											<#if navTagList?exists> 
+												<#list navTagList as navTag> 
+													<a href="${navTag.url!'javascript:void(0);'}">${navTag.name}&gt;</a>
+												</#list> 
+											</#if>
+										</td>
+									</tr>
+								</tbody>
+							</table></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="content-block" style="width: 980px; height: 580px;">
+			<div class="block gzly" style="width:980px">
+				<div class="bt">
+					<h3>信访信箱</h3>
+				</div>
+				<div class="gzly-block">
+					<div class="tip">说
+						明：对涉及到具体工作人员的违规和服务态度的问题，请您详细提供有关情况（具体时间、地点）和您的具体联系方法，以便有关部门进行核对。</div>
+
+					<table border="0" cellspacing="1" cellpadding="2" width="100%"
+						bgcolor="#cccccc" align="center">
+						<form id="form_emailAddress">
+						<tbody>
+							<tr bgcolor="#fefdf7">
+								<td width="25%" align="right"><font color="red">*</font>您的姓名：</td>
+ 
+								<td width="75%"><input name="name" id="name" type="text"
+									maxlength="50"></td>
+							</tr>
+							<tr bgcolor="#fefdf7">
+								<td align="right" width="25%"><font color="red">*</font>电子邮箱：</td>
+								<td width="75%"><input name="email" id="email" type="text"
+									maxlength="100"></td>
+							</tr>
+							<tr bgcolor="#fefdf7">
+								<td align="right" width="25%">联系电话：</td>
+								<td width="75%"><input name="telephone" id="telephone" type="text"
+									maxlength="50"></td>
+							</tr>
+							<tr bgcolor="#fefdf7">
+								<td align="right" width="25%">工作单位：</td>
+								<td width="75%"><input name="workUnit" id="workUnit" type="text"
+									maxlength="100"></td>
+							</tr>
+							<tr bgcolor="#fefdf7">
+								<td align="right" width="25%"><font color="red">*</font>内
+									容：</td>
+								<td width="75%"><textarea name="content" id="content" rows="8"
+										cols="40"></textarea></td>
+							</tr>
+							<tr bgcolor="#fefdf7">
+								<td colspan="2" align="center">
+									<input type="button"  value="发送" onclick="saveEmailAddress('${contextpath}/front/emailAddressFrontController.do?saveEmailAddress','form_emailAddress')"> 
+									<input type="reset"  value="重填" onclick="resetEmailAddress()">
+							</tr>
+
+						</tbody>
+						</form>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="cl"></div>
+	<#include "/wwwroot/${sitePath}/template/common/foot.html">
+
+</body>
+</html>

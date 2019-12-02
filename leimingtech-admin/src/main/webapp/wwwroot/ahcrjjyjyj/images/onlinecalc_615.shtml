@@ -1,0 +1,1 @@
+if(document.getElementById("alltotal")!=null){document.getElementById("alltotal").innerHTML = 5509225;}

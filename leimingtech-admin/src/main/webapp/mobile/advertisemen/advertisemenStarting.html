@@ -1,0 +1,149 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">启动画面广告</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${advertisemenStarting.id?if_exists}" />	
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<!-- <div class="control-group">
+			<label class="control-label">图片高度</label>
+			<div class="controls">
+				<input type="text" id="imgHeight" name="imgHeight"
+					class="span3 form-control" data-rule-required="true"
+					value="${advertisemenStarting.imgHeight?if_exists}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">图片宽度</label>
+			<div class="controls">
+				<input type="text" id="imgWidth" name="imgWidth"
+					class="span3 form-control" data-rule-required="true"
+					value="${advertisemenStarting.imgWidth?if_exists}" />
+			</div>
+		</div>  -->
+		<div class="control-group">
+			<!--  <label class="control-label">图片地址</label>-->
+			<div class="controls">
+				<input type="text" name="imgUrl" id="imgUrl" class="autoimg" value="${advertisemenStarting.imgUrl?if_exists}" placeholder="显示上传后的图片路径" class="form-control span9" style="width: 255px" />
+				<a id="sample_editable_1_new" class="btn blue" onclick="toEditModel('attachPictureController.do?tableDialog')" style="text-decoration: none">
+				图片库 <i class="icon-search"></i></a>
+				<span class="btn green btn-sm" id="picker" style="padding: 0px !important;">上传图片</span>
+				<script type="text/javascript">
+					var uploader = WebUploader
+							.create({
+
+								// 选完文件后，是否自动上传。
+								auto : true,
+
+								// swf文件路径
+								swf : 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+
+								// 文件接收服务端。
+								server : 'controller.jsp?action=uploadimage',
+
+								// 选择文件的按钮。可选。
+								// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+								pick : '#picker',
+
+								// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+								resize : false,
+
+								// 只允许选择图片文件。
+								accept : {
+									title : 'Images',
+									extensions : 'gif,jpg,jpeg,bmp,png',
+									mimeTypes : 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+								}
+							});
+
+					//当文件上传成功时触发
+					uploader.on('uploadSuccess', function(file, Object) {
+						$("#imgUrl").val(Object.url);
+						uploader.removeFile(file, true);
+					});
+				</script>
+			</div>
+		<div class="controls">
+			<label id="display1" style="width:100px;background:#17A2E7;color:#fff;padding:5px;font:12px;margin-top:10px;">是否显示启动图</label>
+				<label class="radio">
+					<input class="m-wrap m-ctrl-medium" id="word1" type="radio" name="display" <#if !advertisemenStarting.display?if_exists || advertisemenStarting.display =='1'>checked="checked"</#if> value="1"/>启动
+				</label>
+				<label class="radio">
+					<input class="m-wrap m-ctrl-medium" id="word2" type="radio" name="display" <#if advertisemenStarting.diplay?if_exists && advertisemenStarting.display =='0'>checked="checked"</#if> value="0"/>关闭
+				</label>
+		</div>
+		<div class="controls">
+			<label id="display2" style="width:100px;background:#17A2E7;color:#fff;padding:5px;font:12px;margin-top:10px;">是否允许跳转</label>
+				<label class="radio">
+					<input class="m-wrap m-ctrl-medium" id="word3" type="radio" name="jump" <#if !advertisemenStarting.jump?if_exists || advertisemenStarting.jump =='1'>checked="checked"</#if> value="1"/>跳转
+				</label>
+				<label class="radio">
+					<input class="m-wrap m-ctrl-medium" id="word4" type="radio" name="jump" <#if advertisemenStarting.jump?if_exists && advertisemenStarting.jump =='0'>checked="checked"</#if> value="0"/>关闭
+				</label>
+		</div>
+		
+		<div class="controls">
+				<label id="show" style="width:158px;height:30px;background:#17A2E7;color:#fff;font:12px;margin-top:10px;padding-left:142px;line-height:30px"><span style="float:left;margin-left:-136px">输入启动图显示时间:</span><input  id="showtime"  name="showtime" type="text"style="float:left;width:120px;text-align:center;" 
+				 <#if advertisemenStarting.showtime??>
+				   value="${advertisemenStarting.showtime?if_exists}"  
+				  <#else>
+				  value="2"
+				  </#if>
+				  />(S)</label>
+		</div>
+		
+		<div class="controls">
+				<label id="sort" style="width:158px;height:30px;background:#17A2E7;color:#fff;font:12px;margin-top:10px;padding-left:142px;line-height:30px"><span style="float:left;margin-left:-136px">输入启动图排序号:</span><input id="sort"  name="sort"  type="text"style="float:left;text-align:center;" 
+				<#if advertisemenStarting.sort??>
+				   value="${advertisemenStarting.sort?if_exists}"  
+				  <#else>
+				  value="0"
+				  </#if>
+				 /></label>
+		</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div id="editModel" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="600">
+
+    </div>
+<div class="modal-footer">
+	<input type="button"
+		onclick="formSubmitadver('advertisemenStartingController.do?save', 'form_sample_2');"
+		class="btn btn-primary" value="提交">
+		<input type="button"
+		class="btn" value="关闭" data-dismiss="modal">
+</div>
+<script>
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	   liveTip();
+	});
+function selectPictureBack(){
+	var result = $("input[name='path']:checked").val();
+	$("#imgUrl").val(result);
+	$('#editModel').modal('hide');
+}
+	//校验
+	jQuery(document).ready(function() {
+		//$("#imgUrl").livetip();
+		App.init();
+		$("#form_sample_2").myValidate();
+	});
+	
+	
+</script>

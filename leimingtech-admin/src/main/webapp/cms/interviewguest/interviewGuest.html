@@ -1,0 +1,99 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>访谈嘉宾</div>
+			<div class="tools">
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="guestid" name="guestid" value="${page.guestid?if_exists}"/>
+				<input type="hidden" id="optionId" name="optionId" value="${optionId}"/>
+				<input type="hidden" id="interviewId" name="interviewId" value="${interviewId}"/>
+						<div class="control-group">
+							<label class="control-label">访谈ID</label>
+							<div class="controls">
+								<input type="text" id="interviewid" name="interviewid" class="span6 m-wrap" value="<#if page.interviewid==''>${optionId}</#if><#if page.interviewid!=''>${page.interviewid?if_exists}</#if>"/>
+								<span class="help-inline">填写访谈ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">嘉宾姓名</label>
+							<div class="controls">
+								<input type="text" id="guestName" name="guestName" class="span6 m-wrap" value="${page.guestName?if_exists}"/>
+								<span class="help-inline">填写嘉宾姓名</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">嘉宾介绍网址</label>
+							<div class="controls">
+								<input type="text" id="guestUrl" name="guestUrl" class="span6 m-wrap" value="${page.guestUrl?if_exists}"/>
+								<span class="help-inline">填写嘉宾介绍网址</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">嘉宾介绍</label>
+							<div class="controls">
+								<input type="text" id="guestIntroduce" name="guestIntroduce" class="span6 m-wrap" value="${page.guestIntroduce?if_exists}"/>
+								<span class="help-inline">填写嘉宾介绍</span>
+							</div>
+						</div>
+						
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitJump('interviewGuestController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>                          
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+function formSubmitJump(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				alert(obj.msg);
+				jump(toUrl);
+			}else{
+				alert("提交处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	});
+}
+function jump(tourl){
+	$.ajax({
+		type:'post',
+		url:tourl,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#editOption').modal('hide');
+			$('#optionDiv').empty();
+			$('#optionDiv').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+</script>

@@ -1,0 +1,52 @@
+		<div class="row-fluid">
+			<div class="span3">
+				<div class="portlet box blue">
+					<div class="portlet-title">
+						<div class="caption"><i class="icon-sitemap"></i>地域管理</div>
+					</div>
+					<div class="portlet-body fuelux">
+						<ul class="tree" id="tree_2">
+							<li>
+								<a href="#" data-role="branch" class="tree-toggle" data-toggle="branch" data-value="">全国</a>
+								<ul class="branch in">
+								<#if list?exists>
+				  					<#list list as function>
+				  						<#if (function.TSTerritorys?size > 0) > 
+										<li>
+											<a href="territoryController.do?loadTerritory&id=${function.id}" data-role="branch" class="tree-toggle closed" data-toggle="branch" data-value="${function.id}">
+												${function.territoryName}
+											</a>
+										</li>
+										<#else>
+											<li><a href="#" data-role="leaf" id="nut" data-value="${function.id}"><i class="icon-file-text"  style="width: 1em;margin-right: 4px;"></i>${function.territoryName}</a></li>
+										</#if>
+									</#list>
+								</#if>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="span9">
+				<div class="portlet box grey">
+					<div class="portlet-title">
+						<div class="caption"><i class="icon-sitemap"></i>地域信息</div>
+					</div>
+					<div id="divBody" class="portlet-body fuelux">
+						<#include "/lmPage/test/territoryTable.html">
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script>
+$("#tree_2").on("nodeselect.tree.data-api", "[data-role=leaf]", function (e) {
+    var id = e.node.value;
+    changeDivBody('territoryController.do?territoryTable&id=' + id, 'divBody');
+});
+$("#tree_2").on("openbranch.tree", "[data-role=branch]", function (e) {
+    var id = e.node.value;
+    changeDivBody('territoryController.do?territoryTable&id=' + id, 'divBody');
+});
+</script>

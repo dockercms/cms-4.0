@@ -1,0 +1,766 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="http:/media/image/favicon.ico" />
+<title>${contentF.title!''}</title>
+</head>
+<style type="text/css">
+video {
+	width: 100%;
+	height: auto;
+}
+</style>
+<link href="/pcstyle/main.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/view.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<link rel="stylesheet" href="/pcstyle/activity-common.css"
+	type="text/css"></link>
+<link rel="stylesheet" href="/pcstyle/activity.css" type="text/css"></link>
+<script src="/pcstyle/js/jquery-1.10.1.min.js"></script>
+
+
+
+</head>
+
+<link rel="stylesheet" href="/pcstyle/activity-basecolor.css">
+<link rel="stylesheet" href="/pcstyle/activity-article.css">
+
+<link rel="stylesheet" href="/pcstyle/activity-singup.css">
+<link rel="stylesheet" href="/pcstyle/activity-dialog.css">
+<link rel="stylesheet" href="/pcstyle/activity-member.css">
+
+
+
+
+
+<script type="text/javascript">
+	var contentid = '289';
+	var topicid = '887';
+</script>
+
+
+
+<script>
+	function toSearch4(urlStr) {
+		var keyword = document.getElementById("keyword4").value;
+		var key = keyword.replace(/\s+/g, "")
+		var keyWord4 = encodeURI(key);
+		keyWord4 = encodeURI(keyWord4);
+		window.location = urlStr + "&keyword=" + keyWord4+"&siteid="+${site.id};;
+	}
+
+</script>
+<script>
+	$(function() {
+		var urlStr = "${contextpath}/front/surveyLogController.do?isLogin";
+		$.ajax({
+			type : 'post',
+			url : urlStr,
+			data : 'data=0',
+			dataType : 'text',
+			success : function(msg) {
+				$('#divLogin').empty();
+				$('#divLogin').append(msg);
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<!--头部 -->
+
+	<iframe frameborder="0" style="display: none;"></iframe>
+	<#include "/wwwroot/${sitePath}/template/pc/section/secondMenu.html">
+	<div class="s">
+		<div class="logo">
+			<a href="/" target="_blank"><img
+				src="/pcstyle/newimg/content_logo.png" alt="雷铭新闻网" width="129"
+				height="27" /> </a>
+		</div>
+		<div class="wei">
+			<a href="/">首页</a> <#assign navTag =newTag("navTag")> <#assign
+			navTagList =navTag("{'name':'${catalogF.id}'}")> <#if
+			navTagList?exists> <#list navTagList as navTag> <#if
+			catalogF.id==navTag.id> <a href="${navTag.url!'javascript:void(0);'}"
+				class="act">>${navTag.name}</a> </#if> </#list> </#if>
+		</div>
+
+
+		<div class="so">
+			<form action="" method="post" id="unify_search">
+				<input type="hidden" name="show" value="title" /> <input
+					type="hidden" name="tempid" value="1" />
+
+				<div class="div_search">
+					<table align="right" cellpadding="0" cellspacing="0">
+						<tr>
+
+							<td width="188" height="41"><input id="keyword4"
+								value="${keyword?if_exists}" name="keyword" autocomplete="off"
+								style="margin-left:4px;height:22px" /></td>
+							<td><a href="javaScript:void(0)"
+								onclick="toSearch4('${contextpath}/front/frontController.do?search');"><img
+									src="/pcstyle/newimg/search_icon.png" width="56" height="24"
+									onmouseover="changepic(this,'/pcstyle/newimg/search_icon.png')"
+									onmouseout="changepic(this,'/pcstyle/newimg/search_icon.png')" />
+							</a></td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="column article-content pos-r">
+		<h1 class="article-content-title">${contentF.title!''}</h1>
+		<!-- <h2 class="article-content-level2title">副标题的自留地，此树是我栽，此路是我开</h2> -->
+		<div class="article-infos ov">
+			<span class="date fl-l"><#if
+				contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+			<div class="share fl-l">
+				<!-- Baidu Button BEGIN -->
+
+				<div class=" jiathis_style" style="padding-top:5px">
+
+					<a class="jiathis_button_qzone"></a> <a
+						class="jiathis_button_tsina"></a> <a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_weixin"></a> <a
+						class="jiathis_button_renren"></a> <a
+						href="http://www.jiathis.com/share?uid=2043452"
+						class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+					<a class="jiathis_counter_style"></a>
+
+
+				</div>
+			</div>
+			<script type="text/javascript">
+				var jiathis_config = {
+					data_track_clickback : 'true'
+				};
+			</script>
+			<script type="text/javascript"
+				src="http://v3.jiathis.com/code/jia.js?uid=2043452" charset="utf-8"></script>
+			<!-- JiaThis Button END -->
+
+
+		</div>
+		<!-- 活动头图 -->
+		<div class="activity-big-pic ov">
+			<div class="fl-l activity-logo-pic">
+				<img src="${activityF.activitybackground!''}" width="660"
+					height="280">
+			</div>
+			<div class="fl-r activity-infos pos-r">
+				<div class="hr30"></div>
+				<div class="hr10"></div>
+				<p class="text cor444 fz14">报名时间： <#if
+					activityF.activityapplystarttime?exists>
+					${activityF.activityapplystarttime?string('yyyy-MM-ddHH:mm')}</#if>~
+					<#if
+					activityF.activityapplyendtime?exists>${activityF.activityapplyendtime?string('yyyy-MM-ddHH:mm')}</#if></p>
+				<div class="hr30"></div>
+				<p class="text cor444 fz14 address ov">活动地址：${activityF.activityaddress!''}</p>
+				<div class="hline"></div>
+				<div class="hr15"></div>
+				<p class="text cor444 fz14 text2">
+					<#if activityF.activityplenum?exists && activityF.activityplenum!="">
+					限额:&nbsp;&nbsp;&nbsp;&nbsp;${activityF.activityplenum?if_exists}人
+					<#-- <#if activityF.activitysex=='10'>
+					限额:男&nbsp;&nbsp;&nbsp;&nbsp;${activityF.activityplenum?if_exists}人
+					<#elseif activityF.activitysex=='20'>
+					限额:女&nbsp;&nbsp;&nbsp;&nbsp;${activityF.activityplenum?if_exists}人
+					<#elseif activityF.activitysex=='30'>
+					限额:&nbsp;&nbsp;&nbsp;&nbsp;${activityF.activityplenum?if_exists}人
+					</#if> --><#else>不限人数 </#if> <span class="gender"><span></span>
+					</span>
+				</p>
+				<div class="hr15"></div>
+				<div class="hline"></div>
+				<script type="text/javascript">
+					//收藏本页
+					function AddFavorite(sURL, sTitle) {
+						try {
+							window.external.addFavorite(sURL, sTitle);
+						} catch (e) {
+							try {
+								window.sidebar.addPanel(sTitle, sURL, "");
+							} catch (e) {
+								alert("加入收藏失败，请使用Ctrl+D进行添加");
+							}
+						}
+					}
+				</script>
+
+				<div class="ov join-bar pos-a">
+					<#if activityF.activityapplystarttime?exists> <input type="hidden"
+						id="activityapplystarttime"
+						value="${activityF.activityapplystarttime?string('yyyy-MM-dd HH:mm')}" />
+					</#if> <#if activityF.activityapplyendtime?exists> <input
+						type="hidden" id="activityapplyendtime"
+						value="${activityF.activityapplyendtime?string('yyyy-MM-dd HH:mm')}" />
+					</#if> <#if activityF.activitystarttime?exists> <input
+						type="hidden" id="activitystarttime"
+						value="${activityF.activitystarttime?string('yyyy-MM-dd HH:mm')}" />
+					</#if> <#if activityF.activityendtime?exists> <input type="hidden"
+						id="activityendtime" name="activityendtime"
+						value="${activityF.activityendtime?string('yyyy-MM-dd HH:mm')}" />
+					</#if>
+					<!-- .disable 为活动结束状态 ,添加在.button1上，效果呈灰色状态 -->
+					<a id="a1" class="button1 fl-l js-gojoin"
+						style="text-decoration:none;background-color: #888888;display: none;">活动未开始</a>
+					<a id="a2" href="javascript:;" onclick="btnform()"
+						class="button1 fl-l js-gojoin"
+						style="text-decoration:none;display: none">报名</a> <a id="a3"
+						class="button1 fl-l js-gojoin"
+						style="text-decoration:none;background-color: #888888;display: none">活动已结束</a>
+					<div class="interaction ov fl-l">
+						<!-- <a href="javascript:digg.set(289,'supports')"
+							class="icon40x40 interaction-btn love fl-l js-ilove"><span
+							class="hidden">10</span> -->
+						</a> <a href="${contentF.url!'javascript:void(0);'}" rel="sidebar"
+							onclick="AddFavorite(window.location,document.title)"
+							class="icon40x40 interaction-btn collect fl-l"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hr20"></div>
+		<!-- 详情 -->
+		<div class="activity-detail ov">
+			<div class="w660 fl-l">
+				<div class="m-title-a">
+					<h2 class="m-title-h2">
+						<a>活动详情</a>
+					</h2>
+				</div>
+				<div class="activity-text">
+					<p class="time">
+						<strong>活动时间：</strong> <#if activityF.activitystarttime?exists>
+						${activityF.activitystarttime?string('yyyy-MM-dd HH:mm')} </#if>~
+						<#if activityF.activityendtime?exists>
+						${activityF.activityendtime?string('yyyy-MM-dd HH:mm')} </#if>
+					</p>
+					<p>${activityF.activitycontent!''}</p>
+				</div>
+			</div>
+			<div class="w300 fl-r">
+				<div class="activity-map">
+					<div class="m-title-a pos-r">
+						<h2 class="m-title-h2">
+							<a>活动地址</a>
+						</h2>
+						<a target="_blank"
+							href="http://map.baidu.com/?latlng=${activityF.activityaddressPoint}&title=${activityF.activityaddress}&content=${activityF.activityaddress}"
+							class="view pos-a">放大查看</a>
+					</div>
+					<input type="hidden" id="point"
+						value="${activityF.activityaddressPoint}">
+					<div class="hr20"></div>
+					<div class="border1">
+						<a target="_blank"
+							href="http://map.baidu.com/?latlng=${activityF.activityaddressPoint}&title=${activityF.activityaddress}&content=${activityF.activityaddress}"
+							class="view">
+							<div id="allmap"></div>
+					</div>
+				</div>
+				<style type="text/css">
+#allmap {
+	width: 298px;
+	height: 398px;
+	overflow: hidden; hidden;
+	margin: 0;
+}
+</style>
+				<script type="text/javascript"
+					src="http://api.map.baidu.com/api?v=2.0&ak=eogdOE1Z9IjXd9etmG2sNXmo"></script>
+				<script type="text/javascript">
+					//加载地图
+					var map = new BMap.Map("allmap");
+					var point = document.getElementById("point").value
+					var strs = new Array()
+					var strs = point.split(",");
+					var Lat = strs[0];
+					var Lng = strs[1];
+					var new_point = new BMap.Point(Lng, Lat);
+					map.centerAndZoom(new_point, 12);
+					var mk = new BMap.Marker(new_point);
+					map.addOverlay(mk);
+					map.panTo(new_point);
+
+					function btnform() {
+						$("#show1").show();
+						$("#show2").show();
+						
+						setTimeout("lazyInit()",500);
+						setTimeout("lazyInitFile()",500);
+					
+	   					
+					}
+					
+					$(document).ready(function(){ 
+					 
+							var activityapplystarttime=document.getElementById("activityapplystarttime").value;//活动报名时间
+							var start  = new Date(activityapplystarttime)
+							
+			 				var activityendtime=document.getElementById("activityendtime").value;//活动结束时间
+							var end= new Date(activityendtime)
+						
+							var sysdate=document.getElementById("sysdate").value;//当前时间
+							var date=new Date(sysdate)
+							
+								if(date<start){
+								$("#a1").show();//活动未开始
+								
+								$("#a2").hide();
+								$("#a3").hide();
+								}else if(date>=start &&　date<=end){
+		
+								$("#a1").hide();//活动开始
+								
+								$("#a2").show();
+								$("#a3").hide();
+							
+								}else{
+								$("#a1").hide();//活动结束
+								
+								$("#a2").hide();
+								$("#a3").show();
+		
+								}
+	 
+						})
+					
+				</script>
+
+				<div class="hr20"></div>
+				<div class="activity-joiner">
+					<div class="m-title-a">
+						<h2 class="m-title-h2">
+							<a>最新活动</a>
+						</h2>
+
+					</div>
+					<div class="new5">
+						<ul>
+							<#assign articleTag =newTag("articleTag")> <#assign articleList
+							=articleTag("{'name':'${catalogF.id}','count':'402881914f6d2c89014f6d6032d2003e','level':'all','order':'pv'}")>
+							<#if articleList?exists && articleList?size gt 0> <#list
+							articleList as article>
+							<li class="ellips" style="width:300px;"><div class="yuan">${article_index+1}</div>
+								<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+							</#list> </#if>
+						</ul>
+					</div>
+					<div class="hr10"></div>
+					<div class="list ov" id="name_list"></div>
+				</div>
+			</div>
+		</div>
+		<div class="hr30"></div>
+	</div>
+
+	<div tabindex="0"
+		style="opacity: 0.7; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; -webkit-user-select: none; z-index: 1025; background: rgb(0, 0, 0);display:none"
+		class="ui-popup-backdrop" id="show1"></div>
+	<div tabindex="-1"
+		style="position: fixed; outline: 0px; left: 358px; top: 0px; z-index: 1025;display:none"
+		aria-labelledby="title:1440571571219"
+		aria-describedby="content:1440571571219"
+		class="ui-popup ui-popup-modal ui-popup-show ui-popup-focus"
+		role="alertdialog" id="show2">
+		<div i="dialog" class="ui-dialog">
+			<div class="ui-dialog-arrow-a"></div>
+			<div class="ui-dialog-arrow-b"></div>
+			<table class="ui-dialog-grid">
+				<tbody>
+					<tr>
+						<td i="header" class="ui-dialog-header"><a href=""
+							class="ui-dialog-close" title="关闭">&times;</a>
+							<div i="title" class="ui-dialog-title" id="title:1440571571219">
+								报名</div></td>
+					</tr>
+					<tr>
+						<td i="body" class="ui-dialog-body">
+							<div i="content" class="ui-dialog-content"
+								id="content:1440571571219">
+								<div class="joinform hidden margin-l-20 margin-r-20"
+									style="width: 550px; display: block;">
+									<div class="m-title-a">
+										<h2 class="m-title-h2">
+											<a>活动报名</a>
+										</h2>
+									</div>
+									<form id="form_sample_2">
+										<input type="hidden" name="activityId" value="${contentF.id}"
+											value="289" />
+										<!-- 报名结束时间 -->
+										<input type="hidden" id="activityendtime"
+											name="activityendtime"
+											value="${activityF.activityendtime?if_exists}" />
+										<!-- 报名人数 -->
+										<input type="hidden" id="activityplenum" name="activityplenum"
+											value="${activityF.activityplenum?if_exists}" />
+
+										<div class="field">
+											<table>
+												<tbody>
+													<#list activityOptionListF as activityOption> <#if
+													activityOption.dateType=='radio'>
+													<tr>
+														<td class="align-r">
+
+
+															<div class="hr20"></div> <#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if><label for=""
+															class="label">${activityOption.optionName}</label>
+														</td>
+
+														<td style="padding-top: 20px;"><#list
+															activityOption.optionalValue?split("\n") as
+															optional_value> <input type="radio"
+															name="${activityOption.id?if_exists}" value="${optional_value?if_exists}"
+															checked="checked" class="input-radio" /> <label>${optional_value?if_exists}</label>
+															</#list></td>
+													</tr>
+													</#if> <#if activityOption.dateType=='checkbox'>
+													<tr>
+														<td class="align-r">
+
+															<div class="hr20"></div> <#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if><label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td style="padding-top: 20px;"><input type="hidden"
+															id="selectsizeLimit" name="selectsizeLimit"
+															value="${activityOption.selectsizeLimit?if_exists}" /> <#list
+															activityOption.optionalValue?split("\n") as
+															optional_value> <input name="${activityOption.id?if_exists}"
+															type="checkbox" value="${optional_value?if_exists}"
+															class="input-radio" /> <label>${optional_value?if_exists}</label>
+
+															</#list> <input type="hidden" name="isRequired"
+															id="isRequired" value="${activityOption.isRequired?if_exists}" />
+														</td>
+													</tr>
+
+													</#if> <#if activityOption.dateType=='text'>
+													<tr>
+														<td class="align-r">
+															<div class="hr20"></div> <#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if> <label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td>
+															<div class="hr20"></div> <input type="hidden"
+															id="validation" name="validation"
+															value="${activityOption.validation?if_exists}" /> <input
+															type="hidden" id="textsizeLimit" name="textsizeLimit"
+															value="${activityOption.textsizeLimit?if_exists}" /> <input
+															type="text" class="m-input-text w160"<#if
+															activityOption.isRequired==1>data-rule-required="true"</#if>
+															name="${activityOption.id?if_exists}" /></td>
+
+													</tr>
+
+
+													</#if> <#if activityOption.dateType=='img'>
+													<tr>
+														<td class="align-r">
+
+															<div class="hr20"></div> <#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if> <label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td>
+															<div class="hr20"></div> <span id="pictureSpan"
+															name="pictureSpan"> <img
+																style="width:215px;height:200px;" name="picture"
+																id="picture" src="" alt="" title="图片预览" /> </span> <input
+															type="hidden" id="filesizeLimit" name="filesizeLimit"
+															value="${activityOption.filesizeLimit?if_exists}" /> <input
+															type="hidden" name="${activityOption.id?if_exists}" id="extPicture"
+															datatype="*1-127" nullmsg="请上传图片！" /> <input
+															type="hidden" name="isRequired" id="isRequired"
+															value="${activityOption.isRequired?if_exists}" />
+														</td>
+													</tr>
+													</#if> <#if activityOption.dateType=='file'>
+													<tr>
+														<td class="align-r">
+
+															<div class="hr20"></div><#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if> <label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td>
+															<div class="hr20"></div> <input type="hidden"
+															id="filesize" name="filesizeLimit"
+															value="${activityOption.filesizeLimit}" /> <input
+															type="text"<#if
+															activityOption.isRequired==1>data-rule-required="true"</#if>
+															class="m-input-text w160" name="${activityOption.id?if_exists}"
+															id="extFile" /> <a id="file" class="submit button1"
+															style="padding-top: 0px;padding-bottom: 0px;text-decoration: none">上传</a>
+															</div>
+														</td>
+													</tr>
+													</#if> <#if activityOption.dateType=='select'>
+													<tr>
+														<td class="align-r">
+
+															<div class="hr20"></div> <#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if><label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td><select name="${activityOption.id}"
+															style="width: 174px;height: 32px;"<#if
+																activityOption.isRequired==1>data-rule-required="true"</#if>>
+																<option value="">请选择</option> <#list
+																activityOption.optionalValue?split("\n") as
+																optional_value>
+																<option value="${optional_value}">${optional_value?if_exists}</option>
+																</#list>
+														</select>
+														</td>
+													</tr>
+													</#if> <#if activityOption.dateType=='textarea'>
+													<tr>
+														<td class="align-r">
+
+
+															<div class="hr20"></div><#if
+															activityOption.isRequired==1><span style="color:red"
+															class="leveltop">*</span></#if> <label for=""
+															class="label">${activityOption.optionName?if_exists}</label>
+														</td>
+														<td>
+															<div class="hr20"></div> <input type="hidden"
+															id="validation" name="validation"
+															value="${activityOption.validation?if_exists}" /> <input
+															type="hidden" id="textsizeLimit" name="textsizeLimit"
+															value="${activityOption.textsizeLimit?if_exists}" /> <textarea
+																name="${activityOption.id}"<#if activityOption.isRequired==1>data-rule-required="true"</#if> cols="60" rows="4" style="width:320px;"></textarea>
+														</td>
+													</tr>
+													</#if>
+													<input type="hidden" id="sysdate"
+														value="${sysdate?string('yyyy-MM-dd HH:mm')}" />
+
+												</tbody>
+												</#list>
+											</table>
+											<link rel="stylesheet" type="text/css"
+												href="${contextpath}/plug-in/ueditor/third-party/webuploader/webuploader2.css">
+											<script type="text/javascript"
+												src="${contextpath}/plug-in/ueditor/third-party/webuploader/webuploader.js"></script>
+
+											<script type="text/javascript">
+												
+												
+													
+											//上传图片
+												function lazyInit(){
+											
+												var picturesize = document.getElementById("filesizeLimit").value;
+												var uploaderimg = WebUploader.create({
+													// 选完文件后，是否自动上传。
+													auto : true,
+													// swf文件路径
+													swf : '${contextpath}/plug-in/ueditor/third-party/webuploader/Uploader.swf',
+													// 文件接收服务端。
+													server : '${contextpath}/controller.jsp?action=uploadimage',
+													// 选择文件的按钮。可选。
+													// 内部根据当前运行时创建，可能是input元素，也可能是flash.
+													pick : '#pictureSpan',
+													// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+													resize : true,
+													
+													fileSizeLimit :picturesize*1024,
+													
+													// 只允许选择的文件。
+													accept : {
+														title : 'Images',
+														extensions : 'gif,jpg,jpeg,bmp,png',
+														mimeTypes : 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+													}
+												});
+													
+													//上传成功
+													uploaderimg.on('uploadSuccess', function(file, Object) {
+													   
+														$("#picture").attr("src", "" + Object.url);
+														$("#extPicture").val(Object.url);
+													});
+													uploaderimg.on( 'error', function( file ) {
+												  	 alert("上传的图片大于"+picturesize+"MB");
+													});
+									
+												
+											}
+											
+											
+											
+												//上传文件
+												function lazyInitFile(){
+												var filesize = document.getElementById("filesize").value;
+												var uploaderfile = WebUploader.create({
+													// 选完文件后，是否自动上传。
+													auto : true,
+													// swf文件路径
+													swf : '${contextpath}/plug-in/ueditor/third-party/webuploader/Uploader.swf',
+													// 文件接收服务端。
+													server : '${contextpath}/controller.jsp?action=uploadfile',
+													// 选择文件的按钮。可选。
+													// 内部根据当前运行时创建，可能是input元素，也可能是flash.
+													pick : '#file',
+													// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+													resize : true,
+													fileSizeLimit :filesize*1024,
+													
+													
+												});
+													
+													uploaderfile.on( 'error', function( file ) {
+												  	 alert("上传的文件大于"+filesize+"MB");
+													});
+													//上传成功
+													uploaderfile.on('uploadSuccess', function(file, Object) {	
+													
+														$("#extFile").val(Object.url);
+													});
+													
+													
+									
+											}
+											</script>
+
+										</div>
+										<div>
+											<div class="hr10"></div>
+											<div class="ov submit-bar">
+
+												验证码：<input type="text" name="valicode" id="valicode"
+													class="txt" /> <span
+													style="position: absolute; top: 32px; left: 0px;"
+													class="help-inline" htmlfor="valicode"></span> <img
+													title="点击刷新验证码" alt="点击刷新验证码" id="randCodeImage"
+													src="${contextpath}/randCodeImage"
+													style="margin-bottom:-8px; width:74px; height:37px;">
+
+											</div>
+											<script type="text/javascript">
+												// 验证码
+												$('#randCodeImage')
+														.click(
+																function() {
+																	reloadRandCodeImage();
+																});
+
+												// 刷新验证码
+												function reloadRandCodeImage() {
+													var date = new Date();
+													var img = document
+															.getElementById("randCodeImage");
+													img.src = '${contextpath}/randCodeImage?a='
+															+ date.getTime();
+												}
+											</script>
+											<div class="hr20"></div>
+											<div class="ov submit-bar">
+												<input type="button" name="submit" id="activitybtn"
+													value="确定" class="submit button1"
+													onclick="activity('${contextpath}/activityOptionExtController.do?subActivity&activityId=${activityF.id}','form_sample_2')" />
+												<a
+													style="font-size:14px;margin-left:20px;color:#444;text-decoration:none"
+													href="" class="cancel">取消</a>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div></td>
+					</tr>
+					<script type="text/javascript" src="/pcstyle/js/form-validation.js"></script>
+					<script type="text/javascript"
+						src="${contextpath}/media/js/jquery.validate.min.js"></script>
+					<script type="text/javascript"
+						src="${contextpath}/media/js/messages_cn.js"></script>
+
+					<script type="text/javascript">
+					 
+							jQuery(document).ready(function() {   
+	   						// initiate layout and plugins
+	  					 	App.init();
+	 
+	   						$("#form_sample_2").myValidate();
+							});
+						function activity(urlStr,activityForm) {
+						
+							
+							var valicode = document.getElementById("valicode").value;
+							if (valicode == "") {
+								alert("验证码不能为空！")
+
+							}else if(!$('#' + activityForm).valid()){
+								
+								return false;
+							}else {
+								$.ajax({
+									type:'post',
+									url:urlStr,
+									data:$('#' + activityForm).serialize(),
+									dataType:'text',
+									success : function(msg) {
+										var obj = JSON.parse(eval(msg));
+										alert(obj.msg);
+										if(obj.isSuccess){
+										location.href=""
+										}
+									},
+									error : function() {
+										alert("提交失败")
+									}
+								});
+							}
+						}
+					</script>
+					<tr>
+						<td i="footer" class="ui-dialog-footer" style="display: none;">
+							<div i="statusbar" class="ui-dialog-statusbar"
+								style="display: none;"></div>
+							<div i="button" class="ui-dialog-button"></div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="footer">
+		<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+		<!-- 页脚 -->
+	</div>
+	<!--footer end-->
+
+
+	<div class="t_line sxtq" style=" display: none">
+		<span class="mycity_cs" id="mycity_0">--</span> <span
+			style="cursor:pointer;margin-left:10px;color:#003368;" id="ordercity"></span>
+		<br> <span id="mycity_1" style="display: none;"></span> <span
+			id="mycity_5">--</span><br> <span id="mycity_2">--</span><br>
+		<span id="mycity_3">--</span><br> <span id="mycity_4">--</span>
+	</div>
+	<script src="/pcstyle/base-min.js" type="text/javascript"></script>
+
+
+</body>
+</html>

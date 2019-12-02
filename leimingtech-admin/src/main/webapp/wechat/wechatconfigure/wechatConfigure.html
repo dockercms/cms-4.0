@@ -1,0 +1,82 @@
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i> <span class="hidden-480">微信公众账号设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#portlet_tab1" data-toggle="tab">微信公众账号设置</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+							<form id="wechatConfigure_form" class="form-horizontal">
+								<input type="hidden" id="id" name="id"
+									value="${wechatConfigure.id?if_exists}" />
+								<div class="control-group">
+									<label class="control-label" style="width:220px">AppID(应用ID):</label>
+									<div class="controls">
+										<input type="text" id="appid" name="appid"
+											class="span6 form-control" data-rule-required="true"
+											value="${wechatConfigure.appid?if_exists}" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" style="width:220px">AppSecret(应用密钥):</label>
+									<div class="controls">
+										<input type="text" id="secret" name="secret"
+											class="span6 form-control" data-rule-required="true"
+											value="${wechatConfigure.secret?if_exists}" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" style="width:220px">Token(令牌 ):</label>
+									<div class="controls">
+										<input type="text" id="token" name="token"
+											class="span6 form-control" data-rule-required="true"
+											value="${wechatConfigure.token?if_exists}" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" style="width:220px">EncodingAESKey(消息加解密密钥):</label>
+									<div class="controls">
+										<input type="text" id="aeskey" name="aeskey"
+											class="span6 form-control" data-rule-required="true"
+											value="${wechatConfigure.aeskey?if_exists}" />
+									</div>
+								</div>
+								
+								<div class="form-actions">
+									<!-- <a href="javascript:void(0);"
+										onclick="test('configSettingController.do?testsend');"
+										class="btn blue btn-sm"><i class="icon-search "></i>测试</a> --> <a
+										href="javascript:void(0);"
+										onclick="formSubmit('wechatConfigureController.do?save', 'wechatConfigure_form');"
+										class="btn blue btn-sm"><i class="icon-ok"></i>保存</a>
+								</div>
+							</form>
+							<!-- END FORM-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT-->
+
+<script>
+	//校验
+	jQuery(document).ready(function() {
+		App.init();
+		$("#wechatConfigure_form").myValidate();
+	});
+	
+</script>

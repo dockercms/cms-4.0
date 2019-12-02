@@ -1,0 +1,88 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>添加</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id}"/>
+				<div class="control-group">
+					<label class="control-label">公众号名称</label>
+					<div class="controls">
+						<input type="text" id="wxname" name="wxname" class="span6 m-wrap" value="${page.wxname}"/>
+						<span class="help-inline">填写公众号名称</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">公众号原始ID</label>
+					<div class="controls">
+						<input type="text" id="wxid" name="wxid" class="span6 m-wrap" value="${page.wxid}"/>
+						<span class="help-inline">填写公众号原始ID</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">微信号</label>
+					<div class="controls">
+						<input type="text" id="weixin" name="weixin" class="span6 m-wrap" value="${page.weixin}"/>
+						<span class="help-inline">填写微信号</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">头像地址</label>
+					<div class="controls">
+						<input type="text" id="headerpic" name="headerpic" class="span6 m-wrap" value="${page.headerpic}"/>
+						<span class="help-inline">填写头像地址</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">地址</label>
+					<div class="controls">
+						<input type="text" id="province" name="province" class="span3 m-wrap" value="${page.province}"/>
+						<span class="help-inline">省</span>
+						<input type="text" id="city" name="city" class="span3 m-wrap" value="${page.city}"/>
+						<span class="help-inline">市</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">公众号邮箱</label>
+					<div class="controls">
+						<input type="text" id="qq" name="qq" class="span6 m-wrap" value="${page.qq}"/>
+						<span class="help-inline">填写公众号邮箱</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">微信粉丝</label>
+					<div class="controls">
+						<input type="text" id="wxfans" name="wxfans" class="span6 m-wrap" value="${page.wxfans}"/>
+						<span class="help-inline">填写微信粉丝数量</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">分类</label>
+					<div class="controls">
+						<select  id="type" name="type" class="span6 m-wrap">                  
+							<option value="1,情感">情感</option>
+							<option value="2,数码">数码</option>
+							<option value="3,娱乐">娱乐</option>
+							<option value="4,IT">IT</option>
+							<option value="5,数码">数码</option>
+							<option value="6,购物">购物</option>
+							<option value="7,生活">生活</option>
+							<option value="8,服务">服务</option>
+						</select>
+						<span class="help-inline">填写分类ID</span>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxUserController.do?add', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>

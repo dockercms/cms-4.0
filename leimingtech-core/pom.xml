@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.leimingtech.lmcms</groupId>
+		<artifactId>leimingtech</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>com.leimingtech.lmcms</groupId>
+	<artifactId>leimingtech-core</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>leimingtech-core</name>
+	<description>leimingtech-core</description>
+	
+	<properties>
+		<bcs-sdk-java.version>0.0.1</bcs-sdk-java.version>
+		<jodconverter.version>3.0-beta-4</jodconverter.version>
+		<sdk4j.version>0.0.1</sdk4j.version>
+		<QRCode.version>0.0.1</QRCode.version>
+	</properties>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>org.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>${jodconverter.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/jodconverter-3.0-beta-4.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>xdocreport</groupId>
+			<artifactId>xdocreport</artifactId>
+			<version>1.0.4</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/xdocreport-1.0.4.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>pinyin4j</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/pinyin4j-2.5.0.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>htmllexer</groupId>
+			<artifactId>htmllexer</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/htmllexer-1.0.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>htmlparser</groupId>
+			<artifactId>htmlparser</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/htmlparser-1.0.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.leimingtech</groupId>
+			<artifactId>jacob</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/jacob-1.0.0.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>bcs-sdk-java</groupId>
+			<artifactId>bcs-sdk-java</artifactId>
+			<version>${bcs-sdk-java.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/bcs-sdk-java-0.0.1.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>sdk4j</groupId>
+			<artifactId>sdk4j</artifactId>
+			<version>${sdk4j.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/sdk4j-0.0.1.jar
+			</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>QRCode</groupId>
+			<artifactId>QRCode</artifactId>
+			<version>${QRCode.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/QRCode-0.0.1.jar
+			</systemPath>
+		</dependency>
+	</dependencies>
+	
+	<build>
+        <finalName>leimingtech-core</finalName>
+        <resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.Dat</include>
+				</includes>
+			</resource>
+		</resources>
+
+    </build>
+</project>

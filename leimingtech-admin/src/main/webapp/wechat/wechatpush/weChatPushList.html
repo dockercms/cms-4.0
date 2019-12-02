@@ -1,0 +1,138 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>微信推送</div>
+				<div class="actions">
+					<button onclick="toEditModel('weChatPushController.do?addWeChatContent')" class="btn yellow-stripe"><i class="fa fa-plus"></i> 新增 </button>
+				</div>
+			</div>
+
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									创建人：
+									<input name="createPerson" class="form-control span7" type="text" value="${searchMap["createPerson"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									创建时间：
+									<input name="createTime" class="form-control span7" type="text" value="${searchMap["createTime"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('weChatPushController.do?weChatPush', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+			
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="width:87px">创建人</th>
+							<th style="width:132px">创建时间</th>
+							<th style="">推送信息</th>
+						
+							<th style="width:40px">推送</th>
+							
+							<th width="90px" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if weChatPushList?exists>
+					  <#list weChatPushList as weChatPush>
+						<tr class="odd gradeX">
+							<td style="text-align:center;">${(pageNo-1)*pageSize+weChatPush_index?if_exists+1}</td>
+							<td>
+								${weChatPush.createPerson}
+							</td>
+							<td>
+								${weChatPush.createTime?string("yyyy-MM-dd HH:mm:ss")}
+							</td>
+							<td>
+								${weChatPush.pushPerson}<br>
+								<#if weChatPush.pushTime?exists>
+								${weChatPush.pushTime?string("yyyy-MM-dd HH:mm:ss")}
+								</#if><br>
+								<#if weChatPush.isSucesspush==1>
+									推送成功
+								
+								<#elseif weChatPush.isSucesspush==0>
+									推送失败
+								</#if>
+								
+							</td>
+							<td>
+								<#if weChatPush.isPush==1>
+									是
+								
+								<#else>
+									否
+								</#if>
+							</td>
+							
+							<td style="text-align:center;"> 
+								<a href="javaScript:void(0)" onclick="tuisong('${contextpath}/front/wechatAPI.do?tuiSong&weixinId=${weChatPush.id?if_exists}')" >推送</a>
+								
+								<input type='button' class="delbtn" title='删除' onclick="del('weChatPushController.do?del', '${weChatPush.id?if_exists}')" />
+								<input type='button' class="editbtn" title='管理' onclick="toEditModel('weChatPushController.do?editWeChatContent&weixinId=${weChatPush.id?if_exists}')" />
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+					
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1"  data-backdrop="static" data-width="600"></div>
+<script>
+	function tuisong(urlStr){
+	
+	lmConfirm("是否推送？","",function (){
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					lmAlert(obj.msg);
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+							   toUrl = arguments[2] + '';
+							   
+					}
+					
+					lazyChangePage(toUrl);
+					
+					
+				}else{
+					lazyChangePage(obj.toUrl);
+					lmAlert(obj.msg);
+				}
+			},
+			error:function(){
+				lmAlert("提交通讯失败!");
+			}
+		});
+	});
+}
+var toNextUrl="";
+
+function lazyChangePage(toUrl){
+	toNextUrl=toUrl;
+	setTimeout(changePage,600);
+}
+</script>

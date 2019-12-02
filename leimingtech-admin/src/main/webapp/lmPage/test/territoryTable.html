@@ -1,0 +1,164 @@
+<div class="portlet-body">
+	<table class="table table-striped table-bordered table-hover" id="sample_1">
+		<tbody>
+		<ul>
+			<select name="states" id="classes_id" style="width:160px; " onchange="he(this.value)" >
+				<option value="" selected='selected'>--请选择--</option> 
+				<#list list as li>
+				<option value="${li.id?if_exists}">${li.territoryName?if_exists}</option> 
+			 	</#list>
+   			</select>
+			<select name="states" id="city" style="width:160px; line-height:25px;"onchange="he2(this.value)" >
+				<option value="f" >--请选择--</option> 
+   			</select>
+   			<select name="states" id="city2" style="width:160px; line-height:25px;" >
+				<option value="d" >--请选择--</option> 
+   			</select>
+		</ul>
+			<tr class="odd gradeX">
+				<td >地区名称</td>
+				<td >
+				<#if parentFunction?exists>
+				${parentFunction.territoryName?if_exists}
+				<#else>
+				顶级菜单
+				</#if>
+				</td>
+				<td >地区码</td>
+				<td >
+				<#if parentFunction?exists>
+				${parentFunction.territoryCode?if_exists}
+				</#if>
+				</td>
+			</tr>
+			<tr class="odd gradeX">
+				<td colspan="4" align="center">
+					<#if parentFunction?exists && parentFunction.id != "">
+					<input type="button" class="btn green" value="修改" onclick="toEditModel('territoryController.do?editModelPage&selectId=${selectId}&id=${parentFunction.id?if_exists}')"/>
+					<input type="button" class="btn green" value="删除"  onclick="del('territoryController.do?del', '${selectId?if_exists}')"/>
+					</#if>
+					<input type="button" class="btn green" value="添加子地区" onclick="toEditModel('territoryController.do?editModelPage&selectId=${selectId}&parentId=<#if parentFunction?exists>${parentFunction.id?if_exists}</#if>')"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="portlet-body">
+	<#if (list?exists && list?size > 0)>
+	<table class="table table-striped table-bordered table-hover" id="sample_1">
+		<thead>
+			<tr style="background-color:#CCCCFF;">
+				<th class="hidden-480" style="text-align:center;">子地区</th>
+				<th class="hidden-480" style="text-align:center;">地区码</th>
+				<th width="40" style="text-align:center;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <#list list as territor>
+			<tr class="odd gradeX">
+				<td class="center">${territor.territoryName?if_exists}</td>
+				<td >${territor.territoryCode?if_exists}</td>
+				<td >
+					<input type="button" class="editbtn" onclick="toEditModel('territoryController.do?editModelPage&&selectId=${selectId}&id=${territor.id?if_exists}')"></a>
+					<input type="button" class="delbtn" onclick="del('territoryController.do?del', '${territor.id?if_exists}')"></a>
+				</td>
+			</tr>
+		  </#list>
+		</tbody>
+	</table>
+	</#if>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+function he(val){
+	if(val==""){
+		var subject = document.getElementById("city");
+	clearSel(subject);
+	var subject2 = document.getElementById("city2");
+	clearSel(subject2);
+	var option = new Option("--请选择--","");
+	var option2 = new Option("--请选择--","");
+	subject.options.add(option);
+	subject2.options.add(option2);
+	return false;
+	}
+	$.ajax({
+		url : 'territoryController.do?loadTerritorys&id=' + val,
+		type : "POST",
+		dataType : 'json',
+		success : function(result) {
+		 json= JSON.parse(result);
+		setSubject(json);
+		},
+		error : function(e) {
+		},
+	});
+}
+
+//设置下拉框选项
+function setSubject(result){
+	var subject = document.getElementById("city");
+	clearSel(subject);
+	var subject2 = document.getElementById("city2");
+	clearSel(subject2);
+	var option = new Option("--请选择--","");
+	var option2 = new Option("--请选择--","");
+	subject.options.add(option);
+	subject2.options.add(option2);
+	$.each(result, function(i, area){
+	var value = area.id;
+	var text = area.text;
+	var option = new Option(text,value);
+	subject.options.add(option);
+	});
+}
+
+//清空下拉框选项
+function clearSel(oSelect){
+
+	while(oSelect.childNodes.length>0){
+	oSelect.removeChild(oSelect.childNodes[0]);
+
+	}
+}
+
+function he2(val){
+
+	if(val==""){
+	var subject2 = document.getElementById("city2");
+	clearSel(subject2);
+	var option2 = new Option("--请选择--","");
+	subject2.options.add(option2);
+	return false;
+	}
+	$.ajax({
+		url : 'territoryController.do?loadTerritorys&id=' + val,
+		type : "POST",
+		dataType : 'json',
+		success : function(result) {
+		 json= JSON.parse(result);
+		setSubject2(json);
+		},
+		error : function(e) {
+		},
+	});
+}
+
+//设置下拉框选项
+function setSubject2(result){
+	var subject = document.getElementById("city2");
+	clearSel(subject);
+			var option = new Option("--请选择--","");
+	subject.options.add(option);
+	$.each(result, function(i, area){
+	var value = area.id;
+	var text = area.text;
+	var option = new Option(text,value);
+	subject.options.add(option);
+	});
+
+}
+
+</script>

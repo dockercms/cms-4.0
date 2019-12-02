@@ -1,0 +1,140 @@
+<div id="alipay_content">
+	<div class="title"><b>留言列表</b></div>
+	<div class="body">
+		<p class="p">您申请过的职位，国家人才网自动帮您保存60天的申请职位信息，方便您对职位进行跟踪。</p>
+		<p class="p">留言记录查询：</p>
+	 	<form id="memberSearchForm">
+		 	起始时间：
+		 	<input name="begintime" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${begintime!''}" type="text" />
+		 	&nbsp;结束时间：
+		 	<input name="endtime"  type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${endtime!''}" />
+		 	<button type="button" onclick="memberSearch('${searchUrl}','memberSearchForm')" class="btn searchbtn">查询</button>
+		 	<input type="button"  value="重置" class="btn"  onclick="resetForm('memberSearchForm')" />
+	 	</form>
+	 	<div class="tablediv">
+	    	<button type="button" onclick="test();" class="btn">新增</button>
+	   		<table class="table" cellpadding="0" cellspacing="0">
+			     <thead>
+			       <tr>
+			         <th style="width:30px;">联系人</th>
+			         <th style="width:70px;">内容</th>
+			         <th style="width:70px;">状态</th>
+			         <th style="width:70px;">回复</th>
+			         <th style="width:70px;">时间</th>
+			       </tr>
+			     </thead>
+			     <tbody>
+			     	<#if guestBookList?exists>
+			     	<#list guestBookList as guestBook>
+				        <tr>
+				          	<td >${guestBook.name?if_exists}</td>
+				          	<td style="text-align: center;">${guestBook.content?if_exists}</td>
+				          	<td style="text-align: center;">
+				          		<#if guestBook.ischeck == '1'>已审核</#if>
+				          		<#if guestBook.ischeck != '1'>未审核</#if>
+					          	<!--<a href="javascript:;" onclick="modifyGueskBook(${guestBook.id})">修改</a>&nbsp;|&nbsp;-->
+					          	<!-- <a href="javascript:void(0);" onclick="delGuestBook('${guestBook.id}')">删除</a> -->
+	          				</td>
+	          				<td style="text-align: center;">${guestBook.reply?if_exists}</td>
+	          				<td style="text-align: center;">${guestBook.createdtime?if_exists}</td>
+				        </tr>
+			        </#list>
+			        </#if>
+			     </tbody>
+		   	</table>
+		   	<#include "member/inc/page.html">
+		</div>
+	</div>
+</div>
+<script>
+	function test(){
+	var urlStr="guestBookFrontController.do?add";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#rightcontent').empty();
+				$('#rightcontent').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	<#--
+	function modifyGueskBook(id){
+		$.ajax({
+			type:'post',
+			url:'guestBookFrontController.do?modify',
+			data:'id='+id,
+			dataType:'text',
+			success:function(msg){
+				$('#rightcontent').empty();
+				$('#rightcontent').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}-->
+	function delGuestBook(id){
+		if (!confirm("是否删除该记录？")) {
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'guestBookFrontController.do?del&id='+id,
+			dataType:'text',
+			success:function(data){
+				var obj = JSON.parse(eval(data));
+				alert(obj.msg);
+				if(obj.isSuccess){
+					document.location.reload()
+				}
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	
+	/**
+		分页
+	*/
+	function nextpage(pageIndex,count){
+	if(pageIndex<1){
+		alert("已经到首页");
+		return;
+	}
+	if(pageIndex>count){
+		alert("已经是最后一页");
+		return;
+	}
+		$.ajax({
+			type:'post',
+			url:'guestBookFrontController.do?guestBook',
+			data:'pageIndex='+pageIndex,
+			dataType:'text',
+			success:function(msg){
+				$('#rightcontent').empty();
+				$('#rightcontent').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+</script>
+<style>
+.btn {
+    border: 1px solid #F28427;
+    cursor: pointer;
+    padding: 0px 15px;
+    height: 27px;
+    background:#ff8b00;
+    color: #FFF;
+    font-size: 14px;
+}
+</style>

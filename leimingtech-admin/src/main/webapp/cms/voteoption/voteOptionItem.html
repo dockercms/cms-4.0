@@ -1,0 +1,48 @@
+<tr>
+   	<td>
+   		<input type="hidden" name="voteoptionId" value="<#if voteOption?exists>${voteOption.id!''}</#if>"/>
+   		<input type="text" style="width:90%;" name="optionname" value="<#if voteOption?exists>${voteOption.optionname!''}</#if>"/>
+ 	</td>
+   	<td mark="${option}">
+   		<input type="text" class="optionimg" id="optionimg_${option}"  style="width:88px;" name="optionimg" value="<#if voteOption?exists>${voteOption.optionimg!''}</#if>"/>
+   		<div class="btn mini blue voteImg" >图库</div>
+   		<div class="btn mini green uploadbtn" style="padding:0px !important;height: 21px;" id="optionimgUpload_${option}" >上传</div>
+   	</td>
+   	<td><input type="text" style="width:48px;" name="optiontotal" value="<#if voteOption?exists>${voteOption.optiontotal!''}</#if>"/></td>
+   	<td>
+   		<a class="btn mini red delVoteOption" >删除</a>
+   	</td>
+</tr>
+<script>
+   	var optionimgUpload${option} = WebUploader.create({
+
+		// 选完文件后，是否自动上传。
+	    auto: true,
+	    
+	    // swf文件路径
+	    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+	
+	    // 文件接收服务端。
+	    server: 'controller.jsp?action=uploadimage',
+	
+	    // 选择文件的按钮。可选。
+	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	    pick: '#optionimgUpload_${option}',
+	
+	    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+	    resize: false,
+	    
+	    // 只允许选择图片文件。
+	    accept: {
+	        title: 'Images',
+	        extensions: 'gif,jpg,jpeg,bmp,png',
+	        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+	    }
+	});
+
+	//当有文件添加进来的时候
+	optionimgUpload${option}.on( 'uploadSuccess', function( file,Object ) {
+		$("#optionimg_${option}").val(Object.url);
+	});
+	$(function (){$(".optionimg").livetip();});
+</script>

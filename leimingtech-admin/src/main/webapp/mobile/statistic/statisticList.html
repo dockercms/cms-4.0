@@ -1,0 +1,332 @@
+
+<!-- BEGIN CHART PORTLETS-->
+<style type="text/css">
+.unstyled a {
+	color: #077AC7;
+	font-size: 15px;
+	text-decoration: none; <!--
+	background-color: #077AC7;
+	-->
+}
+</style>
+<script type="text/javascript">
+	$(".unstyled a").bind("hover", function() {
+
+	});
+</script>
+
+
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN STACK CHART CONTROLS PORTLET-->
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i> 内容统计
+				</div>
+				
+			</div>
+			<input type="hidden" id="catIdHidden" value="0"> <input
+				type="hidden" id="classifyHidden" value="0"> <input
+				type="hidden" id="typeHidden" value="${type}">
+				<input type="hidden" id="catNameHidden" value="0"> <input
+				type="hidden" id="classifyNameHidden" value="0"> <input
+				type="hidden" id="typeHidden" value="${type}">
+			<input type="hidden" id="startDateHidden" value="${startDate}">
+			<input type="hidden" id="stopDateHidden" value="${stopDate}">
+			<div class="portlet-body">
+				<ul class="unstyled">
+					<li id="Channel"
+						style="margin-bottom: 10px; border-bottom: 1px dashed #ddd;">
+						<span
+						style="font-weight: bold; font-size: 16px; margin-left: 20px;">频道：</span>
+						<a id="y1" onclick="channelStat('0','全部')">全部</a></li>
+					<li id="mobileChannel"
+						style="margin-bottom: -1px; margin-bottom: 10px; border-bottom: 1px dashed #ddd;">
+						<span
+						style="font-weight: bold; font-size: 16px; margin: 20px">模型：</span>
+						<a id="m1" onclick="mobileChannelStat('0','全部')">全部</a></li>
+				</ul>
+				<script>
+					/*加载频道*/
+					//$(document).ready(
+					//		function() {
+					$.get("contentStatisticController.do?getListChannel",
+							function(result) {
+								var data = eval('(' + result + ')');
+								data = eval('(' + data + ')');
+								for ( var i = 0; i < data.length; i++) {
+									$('#Channel').append(
+											"<a style='margin:0px 10px 0px 10px' onclick='channelStat("
+													+ (data[i].id) + ",\""+ (data[i].name) + "\")'>"
+													+ (data[i].name) + "</a>");
+								}
+							});
+					//		})
+					/*加载模型*/
+					//$(document).ready(
+					//		function() {
+					$.get("contentStatisticController.do?getListMobileChannel",
+							function(result) {
+								var data = eval('(' + result + ')');
+								data = eval('(' + data + ')');
+								for ( var i = 0; i < data.length; i++) {
+									$('#mobileChannel').append(
+											"<a style='margin:0px 10px 0px 10px' onclick='mobileChannelStat("
+													+ (data[i].id) + ",\""+ (data[i].name) + "\")'>"
+													+ (data[i].name) + "</a>");
+								}
+							});
+					//	})
+				</script>
+				<div style="font-weight: bold; font-size: 14px; margin-left: 20px">
+					<span style="font-weight: bold; font-size: 16px; ">开始日期：</span><input
+						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true}),changeClockBegin1(this.value)"
+							onblur="changeClockEnd()"
+						class="Wdate" id="startDate" name="startDate" class="form-control"
+						type="text" value="${startDate}" > 
+						<span style="font-weight: bold; font-size: 16px; ">结束日期：</span>
+						<input onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true}),changeClockBegin1(this.value)"
+							onblur="changeClockEnd()"
+						class="Wdate" id="stopDate" name="stopDate" class="form-control"
+						type="text" value="${stopDate}" > <input type="hidden" id=adf>
+						<span style="font-weight: bold; font-size: 16px; margin-left: 20px">查看方式:</span> <a id="typeDate"
+						onclick="typeStat('dateTime')">时间</a> <a id="typeCat"
+						onclick="typeStat('catName')">频道</a>
+				</div>
+				<div id="statistics"></div>
+
+			</div>
+		</div>
+		<!-- END STACK CHART CONTROLS PORTLET-->
+	</div>
+</div>
+
+<script type="text/javascript">
+//       $(function(){  
+//            //IE  
+//            if($.browser.msie){  
+//                  $("#adf").get(0).attachEvent("onpropertychange",function (o){  
+//                           alert(o.srcElement.value);  
+//                    });  
+//            //非IE  
+//            }else{  
+//            $("#adf").get(0).addEventListener("input",function(o){  
+//                    alert(o.target.value);  
+//                },false);  
+//            }  
+//    });      
+</script>  
+<script>
+	/*加载统计*/
+	$.get("contentStatisticController.do?loadStat&type="
+			+ $('#typeHidden').val(), function(result) {
+		$('#statistics').empty();
+		$('#statistics').append(result);
+
+	});
+	function getData(catId,catName, classify, classifyName,type, startDate, stopDate) {
+		/*加载统计*/
+		$.get("contentStatisticController.do?loadStat&type=" + type
+				+ "&catId=" + catId + "&catName=" + catName + "&classify=" + classify+ "&classifyName=" + classifyName + "&startDate="
+				+ startDate + "&stopDate=" + stopDate, function(result) {
+			$('#statistics').empty();
+			$('#statistics').append(result);
+
+		});
+	}
+
+	/* 按频道统计*/
+	function channelStat(catId,catName) {
+		//var catId = $('#catIdHidden').val();
+		//if (catId == "") {
+		//catId = "0";
+		//}
+		var classify = $('#classifyHidden').val();
+		if (classify == "") {
+			classify = "0";
+		}
+		var classifyName = $('#classifyNameHidden').val();
+		if (classifyName == "" || classifyName == "0") {
+			classifyName = "全部";
+		}
+		var type = $('#typeHidden').val();
+		if (type == "") {
+			type = "dateTime";
+		}
+		var startDate = $('#startDateHidden').val();
+		if (startDate == "") {
+
+		}
+		var stopDate = $('#stopDateHidden').val();
+		if (stopDate == "") {
+
+		}
+		$('#catIdHidden').attr('value', catId);
+		$('#catNameHidden').attr('value', catName);
+
+		getData(catId,catName,classify,classifyName,type,startDate,stopDate);
+	}
+	/* 按模型统计*/
+	function mobileChannelStat(classify,classifyName) {
+		var catId = $('#catIdHidden').val();
+		if (catId == "") {
+			catId = "0";
+		}
+		var catName = $('#catNameHidden').val();
+		if (catName == "" || catName == "0") {
+			catName = "全部";
+		}
+		//var classify = $('#classifyHidden').val();
+		//if (classify == "") {
+		//classify = "0";
+		//}
+		var type = $('#typeHidden').val();
+		if (type == "") {
+			type = "dateTime";
+		}
+		var startDate = $('#startDateHidden').val();
+		if (startDate == "") {
+
+		}
+		var stopDate = $('#stopDateHidden').val();
+		if (stopDate == "") {
+
+		}
+		$('#classifyHidden').attr('value', classify);
+		$('#classifyNameHidden').attr('value', classifyName);
+		getData(catId,catName,classify,classifyName,type,startDate,stopDate);
+	}
+	/* 按类型统计*/
+	function typeStat(type) {
+		var catId = $('#catIdHidden').val();
+		if (catId == "") {
+			catId = "0";
+		}
+		var catName = $('#catNameHidden').val();
+		if (catName == "" || catName == "0") {
+			catName = "全部";
+		}
+		var classify = $('#classifyHidden').val();
+		if (classify == "") {
+			classify = "0";
+		}
+		var classifyName = $('#classifyNameHidden').val();
+		if (classifyName == "" || classifyName == "0") {
+			classifyName = "全部";
+		}
+		//var type = $('#typeHidden').val();
+		//if (type == "") {
+		//type = "dateTime";
+		//}
+		var startDate = $('#startDateHidden').val();
+		if (startDate == "") {
+
+		}
+		var stopDate = $('#stopDateHidden').val();
+		if (stopDate == "") {
+
+		}
+		$('#typeHidden').attr('value', type);
+
+		getData(catId,catName,classify,classifyName,type,startDate,stopDate);
+	}
+	/* 按模开始日期统计*/
+	function startDateStat(startDate) {
+		var catId = $('#catIdHidden').val();
+		if (catId == "") {
+			catId = "0";
+		}
+		var catName = $('#catNameHidden').val();
+		if (catName == "" || catName == "0") {
+			catName = "全部";
+		}
+		var classify = $('#classifyHidden').val();
+		if (classify == "") {
+			classify = "0";
+		}
+		var classifyName = $('#classifyNameHidden').val();
+		if (classifyName == "" || classifyName == "0") {
+			classifyName = "全部";
+		}
+		var type = $('#typeHidden').val();
+		if (type == "") {
+			//type = "dateTime";
+		}
+		//var startDate = $('#startDateHidden').val();
+		//if (startDate == "") {
+
+		//}
+		var stopDate = $('#stopDateHidden').val();
+		//if (stopDate == "") {
+
+		//}
+		$('#startDateHidden').attr('value', startDate);
+
+		getData(catId,catName,classify,classifyName,type,startDate,stopDate);
+	}
+	/* 按模结束日期统计*/
+	function stopDateStat(stopDate) {
+		var catId = $('#catIdHidden').val();
+		if (catId == "") {
+			catId = "0";
+		}
+		var catName = $('#catNameHidden').val();
+		if (catName == "" || catName == "0") {
+			catName = "全部";
+		}
+		var classify = $('#classifyHidden').val();
+		if (classify == "") {
+			classify = "0";
+		}
+		var classifyName = $('#classifyNameHidden').val();
+		if (classifyName == "" || classifyName == "0") {
+			classifyName = "全部";
+		}		var type = $('#typeHidden').val();
+		if (type == "") {
+			//type = "dateTime";
+		}
+		var startDate = $('#startDateHidden').val();
+		//if (startDate == "") {
+
+		//}
+		//var stopDate = $('#stopDateHidden').val();
+		//alert(stopDate);
+		//if (stopDate == "") {
+
+		//}
+		$('#stopDateHidden').attr('value', stopDate);
+
+		getData(catId,catName,classify,classifyName,type,startDate,stopDate);
+	}
+	var t;
+	var oValueBegin;
+	var oValueEnd;
+	function changeClockBegin1(o){
+		t=setTimeout(
+			function (){
+				if(oValueBegin==o){
+					
+				}else{
+					oValueBegin=o;
+					startDateStat(o);
+				}
+			}
+		,300) 
+	}
+	function changeClockBegin2(o){
+		t=setTimeout(
+			function (){
+				if(oValueEnd==o){
+					
+				}else{
+					oValueEnd=o;
+					stopDateStat(o);
+				}
+			}
+		,300) 
+	}
+	function changeClockEnd(){
+		clearTimeout(t);
+	}
+</script>

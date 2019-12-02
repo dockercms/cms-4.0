@@ -1,0 +1,86 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>投诉举报</div>
+				<!-- <div class="actions">
+					<button onclick="toEditModel('complaintsReportController.do?add')" class="btn yellow-stripe"><i class="fa fa-plus"></i> 新增 </button>
+				</div> -->
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									姓名：
+									<input name="name" class="form-control span7" type="text" value="${searchMap["name"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<!-- <div class="span4">
+								<label style="margin-bottom:0px;">
+									电子邮箱：
+									<input name="email" class="form-control span7" type="text" value="${searchMap["email"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div> -->
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('complaintsReportController.do?complaintsReport', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="">姓名</th>
+							<th style="">电子邮箱</th>
+							<th style="">联系电话</th>
+							<th style="">工作单位</th>
+							<th style="">内容</th>
+							<th style="">投诉时间</th>
+							<!-- <th width="45" style="text-align:center;">操作</th> -->
+						</tr>
+					</thead>
+					<tbody>
+					<#if complaintsReportList?exists>
+					  <#list complaintsReportList as complaintsReport>
+						<tr class="odd gradeX">
+							<td style="text-align:center;">${(pageNo-1)*pageSize+complaintsReport_index?if_exists+1}</td>
+							<td>
+								${complaintsReport.name}
+							</td>
+							<td>
+								${complaintsReport.email}
+							</td>
+							<td>
+								${complaintsReport.telephone}
+							</td>
+							<td>
+								${complaintsReport.workUnit}
+							</td>
+							<td>
+								${complaintsReport.count}
+							</td>
+							<td>
+								<#if complaintsReport.createtime?exists>${complaintsReport.createtime?string("yyyy-MM-dd HH:mm:ss")}</#if>
+							</td>
+							
+							<!-- <td style="text-align:center;">
+								<input type='button' class="editbtn" title='修改' onclick="toEditModel('complaintsReportController.do?edit&id=${complaintsReport.id?if_exists}')" />
+								<input type='button' class="delbtn" title='删除' onclick="del('complaintsReportController.do?del', '${complaintsReport.id?if_exists}')" />
+							</td> -->
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>

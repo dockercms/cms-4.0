@@ -1,0 +1,23 @@
+<ul class="branch in">
+<#if list?exists>
+	<#list list as function>
+		<#if (function.TSFunctions?size > 0) > 
+		<li>
+			<#if parentIdList?exists && (parentIdList?seq_index_of(function.id) >= 0)>
+			<a href="menuController.do?loadMenu&id=${function.id}" data-role="branch" class="tree-toggle opend" data-toggle="branch" data-value="${function.id}">
+				${function.functionName}
+			</a>
+				<#assign list=function.TSFunctions/>
+				<#include "/lmPage/menu/menuBranchIn.html">
+			<#else>
+			<a href="menuController.do?loadMenu&id=${function.id}" data-role="branch" class="tree-toggle closed" data-toggle="branch" data-value="${function.id}">
+				${function.functionName}
+			</a>
+			</#if>
+		</li>
+		<#else>
+		<li><a href="#" data-role="leaf" id="nut" data-value="${function.id}"><i class="icon-file-text"  style="width: 1em;margin-right: 4px;"></i>${function.functionName}</a></li>
+		</#if>
+	</#list>
+</#if>
+</ul>

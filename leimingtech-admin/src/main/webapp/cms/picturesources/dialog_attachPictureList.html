@@ -1,0 +1,84 @@
+<div id="dialogdashboard">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">图片库</h4>
+</div>
+<div class="modal-body">
+	<form id="dialog_search_form">
+		 <div class="clearfix">
+				<div class="dataTables_filter span4">
+					<label>图片名称
+						<input name="localname" class="form-control span3" type="text" value="${searchMap["localname"]?if_exists[0]}">
+					</label>
+				</div>
+				<div class="dataTables_filter pull-right">
+					<button type="button" class="btn yellow btn-sm" onclick="toSearchAttach('${actionUrl!''}', 'dialog_search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+					<button type="button" class="btn yellow btn-sm" onclick="resetForm('dialog_search_form');">重置 <i class="icon-repeat m-icon-white"></i></button>
+				</div>
+		  </div>
+	</form>
+	<#if pageList?exists>
+		<div class="row-fluid">
+	   <#list pageList as page>
+		   <#if page_index gt 3 && page_index%4==0>
+		   </div><div class="row-fluid">
+		   </#if>
+			<div class="span3">
+				<div class="item">
+					<a class="fancybox-button" data-rel="fancybox-button" title="${page.localname}" href="${page.localpath}">
+						<div class="zoom">
+							<img src="${page.thumbnailpath}" alt="${page.localname}" width="100%" />    
+							<div class="zoom-icon"></div>                
+						</div>
+					</a>
+				</div>
+				<label class="<#if ischecks==true>checkbox<#else>radio</#if>"><input type="<#if ischecks==true>checkbox<#else>radio</#if>" value="${page.localpath}" name="path"/>${page.localname}</label>
+			</div>
+		</#list></div>
+	</#if>
+	<#include "cms/commons/sourcesDialogPage.html">
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="${fun!'selectPictureBack'}('${requestCode!''}');" class="btn btn-primary" value="确定">  
+    <input type="button" class="btn" value="关闭" data-dismiss="modal">  
+</div>
+<script>
+jQuery(document).ready(function() {       
+   App.init();
+   Gallery.init();
+});
+
+//查询
+function toSearchAttach(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dialogdashboard').empty();
+			$('#dialogdashboard').replaceWith(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+
+function changePageSub(urlStr){
+ 	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#dialogdashboard').empty();
+			$('#dialogdashboard').replaceWith(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+</script>
+</div>

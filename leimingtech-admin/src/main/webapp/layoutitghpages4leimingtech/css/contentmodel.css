@@ -1,0 +1,76 @@
+/*common -limengbo- leimingtech,2014-5-5 15:07:35*/
+ul,ol,li,h2,h3{
+margin:0;
+padding:0;
+list-style:none;
+}
+
+/*start 文字列表1-textlist1,css 样式*/
+.textlist1{
+background-color:#fff;
+font-size:12px;
+color:#CC0000;
+border:solid 1px #D2D2D2;
+}
+.textlist1 h2{
+border-bottom:solid 1px #D2D2D2;
+font-size:12px;
+height:18px;
+padding:6px 11px 0 27px;
+}
+.textlist1 h2,.textlist1 h2 a,.textlist1 h2 span,.textlist1 h2 span a{
+color:#023199;
+margin:0;
+line-height:normal;
+}
+.textlist1 ul,.textlist1 ol,.textlist1 li{
+list-style:none;
+}
+.textlist1 ul{
+margin:1em;
+}
+.textlist1 li{
+line-height:1.5em;
+}
+.textlist1 li strong{
+font-size:1em;
+padding-right:.5em;
+}
+.textlist1 .textlist1-list a,.textlist1 .textlist1-list li{
+color:#2E2E2E;
+}
+/*end 文字列表1-textlist1,css 样式*/
+/*start 文字列表1-imageslist-static-1.html 样式*/
+.imageslist-static-1{
+background-color:#fff;
+font-size:12px;
+color:#CC0000;
+border:solid 1px #D2D2D2;
+}
+.imageslist-static-1 h2{
+background:url(imgs4contentmodel/imageslist-static-1-header.jpg) no-repeat;
+padding: 10px 0 5px 30px;
+font: bold 14px/24px 宋体;
+color:#565656;
+}
+.imageslist-static-1 ul,.imageslist-static-1 ol{
+
+} 
+.imageslist-static-1 li{
+width:140px;
+float:left;
+margin:10px 0 0 17px;
+color:#104d6c;
+}
+.imageslist-static-1 li a span,.imageslist-static-1 li a{
+color:#104d6c;
+}
+.imageslist-static-1 li img{
+border: 1px solid #cdcdcd;
+padding:4px;
+}
+.imageslist-static-1 li a span{
+display: block;
+text-align: center;
+}
+/*end 文字列表1-imageslist-static-1.html 样式*/

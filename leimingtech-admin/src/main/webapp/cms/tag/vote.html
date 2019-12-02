@@ -1,0 +1,116 @@
+<#assign voteTag =newTag("voteTag")> 
+<#assign votemap =voteTag("{'contentid':'${contentid}'}")> 
+<style>
+.article_vote{padding: 10px 20px 20px 20px;}
+.article_title{font-size: 16px;font-family: 微软雅黑;display: block;}
+.article_info{padding:14px 0px 20px 0px;}
+.article_info a{text-decoration:none;}
+.info_date{color:#666;font-size:12px;margin-right: 24px;}
+.article_vote ul{margin: 0px; padding:0px;}
+.article_vote li{list-style:none;padding: 3px 2px;float: left;}
+.vote_name input{padding: 0px;margin: 0px;margin-right: 7px;}
+.vote_name{font-size: 14px;float: left;}
+.vote_result{float:right;}
+.progress{width:100px;background-color: #eee;float:left;margin-bottom: 0px;height: 12px;margin-top: 6px;margin-right: 7px;}
+.per{background-color: #3C6CAC;height: 12px;}
+.vote_btnarea{padding:9px 0px;clear: both;}
+.vote_btnarea input{margin-right: 7px;}
+</style>
+
+<div class="article_vote">
+
+	<span class="article_title">${votemap.content.digest} </span>
+	<div class="article_info">
+		<span class="info_date"><#if votemap.content.published?exists>${votemap.content.published?string('yyyy-MM-dd')}</#if></span>
+		
+		<!-- <a href="javascript:void(0);">我要评论</a> -->
+	</div>
+	<#assign voteOptionTag =newTag("voteOptionTag")> 
+	<#assign voteOptionList =voteOptionTag("{'voteid':'${votemap.vote.id}'}")> 
+	<#if voteOptionList?exists>
+		<#if votemap.vote.votepattern=="10">
+			<ul>
+				<#list voteOptionList as voteOption>
+				<#if voteOption.optionimg?exists && voteOption.optionimg!="">
+					<li>
+					<center>
+						<div class="vote_name">
+						<input type="<#if votemap.vote.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+						<a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a>
+						</div>
+						</center>
+					</li>
+				<#else>
+				<li>
+						<div class="vote_name">
+						<input type="<#if votemap.vote.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+						<a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a>
+						</div>
+					</li>
+				</#if>
+				</#list>
+			</ul>
+		</#if>
+		<#if votemap.vote.votepattern=="20">
+			<ul>
+				<#list voteOptionList as voteOption>
+				<#if voteOption.optionimg?exists && voteOption.optionimg!="">
+				<li>
+				<center>
+						<img src="${voteOption.optionimg}" style="width:121px;height: 140px;margin-left: 20px" alt="${voteOption.optionname}"><br>
+						<span align="center">${voteOption.optionname}</span><br>
+						<input type="<#if votemap.vote.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+						<a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a>
+				</center>
+				</li>
+				<#else>
+				<li>
+						<span align="center">${voteOption.optionname}</span><br>
+						<input type="<#if votemap.vote.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/>
+						<a href='${voteOption.optionlink!'javascript:void(0)'}' >${voteOption.optionname}</a>
+				</li>
+				</#if>
+						  
+				</#list>
+			</ul>
+		</#if>
+	<div class="vote_btnarea">
+		<input type="button" value="投 票" name="" onclick="vote('${contextpath}/front/voteLogController.do?voteLogTag&voteId=${votemap.vote.id}')"/>
+		&nbsp; <a href="javascript:;" onclick="queryResult('${contextpath}/front/voteLogController.do?queryPCvoteLog')">查看投票结果</a>
+		<!-- <span class="vote_message">投票成功，感谢您的参与。</span> -->
+	</div>
+	</#if>
+
+</div>
+<script>
+	function vote(urlStr){
+		var cheradio = "";
+		var radio = document.getElementsByName('voteitem');
+		var arr = radio.length;
+		for(var i=0;i<arr;i++){
+			if(radio[i].checked == true){
+				cheradio = radio[i].value;
+			}
+		}
+		if(cheradio==""){
+			alert("请先选择选项～！");
+		}else{
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:{'cheradio':cheradio},
+				dataType:'text',
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					alert(obj.msg);
+				},error:function(){
+					alert("提交失败!");
+				}
+			});
+		}
+	}
+	//投票结果
+	function queryResult(urlStr){
+		window.location = urlStr+"&contentId=${contentid}&voteId=${votemap.vote.id}";
+	}
+</script>

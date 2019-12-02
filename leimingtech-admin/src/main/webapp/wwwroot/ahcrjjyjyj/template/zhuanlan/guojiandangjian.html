@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)http://www.ahciq.gov.cn/system/2015/05/13/000012947.shtml -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>${catalogF.name}</title>
+	<style type="text/css">
+<!--
+body {
+	background-image: url(/images/2013715101320.gif);
+	margin: 0px;
+}
+
+body,td,th {
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.font18 {
+	font-family: "黑体";
+	font-size: 18px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.red {
+	font-weight: bold;
+	color: #D00111;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #D00212;
+}
+
+.list2 {
+	background-image: url(/images/listbg.gif);
+	background-repeat: repeat-x;
+	background-position: 0px bottom;
+	line-height: 30px;
+	font-size: 14px;
+	color: #004497;
+}
+
+.list2 li {
+	width: 420px;
+	height: 30px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.list2 a {
+	color: #004497;
+}
+
+.area div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote
+	{
+	margin: 0;
+	padding: 0;
+}
+
+.area img {
+	vertical-align: top;
+	border: 0;
+}
+
+.area {
+	zoom: 1;
+	font: 12px/1.75 Arial, sans-serif, \5b8b\4f53;
+}
+
+.focus-box {
+	clear: both;
+}
+
+.focusImage {
+	padding: 1px;
+	background: #2B2B2B;
+	width: 455px;
+}
+
+.focusImage-inner {
+	width: 450px;
+	position: relative;
+}
+
+.focusImage-content li {
+	display: none;
+}
+
+.focusImage-content li.current {
+	display: block;
+}
+
+.focusImage-content img {
+	display: inline-block;
+	height: 320px;
+	width: 450px;
+	float: left;
+}
+
+.focusImage-title {
+	height: 28px;
+	line-height: 28px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.focusImage-title-bg {
+	background: #000;
+	filter: alpha(opacity = 50);
+	opacity: 0.5;
+	position: absolute;
+	z-index: 5;
+	height: 28px;
+	width: 100%;
+}
+
+.focusImage-title h2 {
+	padding: 0 0 0 10px;
+	font-size: 12px;
+	font-weight: bold;
+	position: absolute;
+	z-index: 10;
+}
+
+#focusImage a {
+	color: #FFF;
+}
+
+.focusImage-title a,.focusImage-title a:visited,.focusImage-title a:hover
+	{
+	color: #FFF;
+}
+
+.focusImage-slide {
+	position: absolute;
+	z-index: 15;
+	right: 10px;
+	bottom: 7px;
+}
+
+.focusImage-slide li {
+	background: #88857F;
+	display: inline-block;
+	color: #FFF;
+	cursor: pointer;
+	float: left;
+	padding: 0 5px;
+	margin-right: 1px;
+	line-height: 15px;
+	height: 15px;
+}
+
+.focusImage-slide li.current {
+	background: #FF7E00;
+}
+-->
+</style>
+	<script>
+		var lmid = 0;
+	</script>
+	<script>
+		var newsid = 12947;
+	</script>
+</head>
+
+<body>
+	<#assign name ="catalogTag"> 
+	<#assign catalogTag =newTag("${name}")>
+	<div
+		style="background:url(/images/201633094255.jpg) no-repeat top center; height:634px; width:100%;"></div>
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="10" bgcolor="#FFFFFF"
+		style="margin-top:-300px;padding-right:15px;">
+		<tbody>
+			<tr>
+				<td width="360" valign="top" style="padding-left:20px;">
+					<table width="360" border="0" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td>
+									<!--大图开始--> <!--大图开始-->
+									<div class="area">
+										<div class="focusImage" id="focusImage">
+											<div class="focusImage-inner">
+												<div class="focusImage-content">
+													<ul class="js-content" id="focusImage-content">
+													<#assign articleTag=newTag("articleTag")>
+													<#assign articleList=articleTag("{'name':'297e5018540816560154082381a90001','count':'5','order':'top'}")>
+													<#if articleList?exists && articleList?size gt 0>
+													<#list articleList as article>
+														<#if article.thumb?exists && article.thumb!="">
+														<table width="100%" cellspacing="1" cellpadding="0">
+															<tbody>
+																<tr>
+																	<td width="100%">
+																			<#if article_index==0>
+																			<li class="current"><a
+																			href="${article.url!'javascript:void(0);'}"
+																			target="_blank"><img
+																				src="<#if article.thumb?exists>${article.thumb}</#if>" border="0"
+																				width="320" height="224"></a>
+																			<div class="focusImage-title">
+																				<div class="focusImage-title-bg"></div>
+																				<h2>
+																					<a
+																						href="${article.url!'javascript:void(0);'}"
+																						target="_blank">${article.title} 
+																						<#if article.published?exists>${article.published?string('yyyy-MM-dd HH:mm:ss')}</#if>
+																					</a>
+																				</h2>
+																			</div>
+																			</li>
+																			</#if>
+																			<#if article_index!=0>
+																			<li class=""><a
+																			href="${article.url!'javascript:void(0);'}"
+																			target="_blank"><img
+																				src="<#if article.thumb?exists>${article.thumb}</#if>" border="0"
+																				width="320" height="224"></a>
+																			<div class="focusImage-title">
+																				<div class="focusImage-title-bg"></div>
+																				<h2>
+																					<a
+																						href="${article.url!'javascript:void(0);'}"
+																						target="_blank">${article.title} 
+																						<#if article.published?exists>${article.published?string('yyyy-MM-dd HH:mm:ss')}</#if>
+																					</a>
+																				</h2>
+																			</div>
+																			</li>
+																			</#if>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														</#if>
+														</#list>
+														</#if>
+													</ul>
+												</div>
+												<div class="focusImage-slide">
+													<ul class="js-tab" id="focusImage-tab">
+														<li class="">1</li>
+														<li class="">2</li>
+														<li class="current">3</li>
+														<li class="">4</li>
+														<li class="">5</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div> <script type="text/javascript">
+										function focusImage(interval) {
+											var content = document
+													.getElementById(
+															"focusImage-content")
+													.getElementsByTagName("li");
+											var tab = document.getElementById(
+													"focusImage-tab")
+													.getElementsByTagName("li");
+											var num = tab.length;
+											var current = 0;
+											var intervalObj;
+											function init() {
+												tab[0].className = 'current';
+												content[0].className = 'current';
+												for (var i = 0; i < tab.length; i++) {
+													tab[i].onclick = function() {
+														tabOnClick(this);
+													}
+												}
+												window.setTimeout(scrollImage,
+														interval * 1000);
+											}
+											function tabOnClick(liTag) {
+												var i = parseInt(liTag.innerHTML) - 1;
+												if (i == current) {
+													return;
+												}
+												clearInterval(intervalObj);
+												tab[current].className = '';
+												content[current].className = '';
+												tab[i].className = 'current';
+												content[i].className = 'current';
+												current = i;
+												intervalObj = window
+														.setTimeout(
+																scrollImage,
+																interval * 1000);
+											}
+											function scrollImage() {
+												clearInterval(intervalObj);
+												tab[current].className = '';
+												content[current].className = '';
+												current++;
+												if (current >= num) {
+													current = 0;
+												}
+												tab[current].className = 'current';
+												content[current].className = 'current';
+												intervalObj = window
+														.setTimeout(
+																scrollImage,
+																interval * 1000);
+											}
+											init();
+										}
+										new focusImage(5); // 换图频道，秒
+									</script> <!--大图结束-->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td> <#assign
+				catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f4aa118a0063'}")>
+				<#if catalog?exists>
+				<td valign="top" width="510">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td width="150" align="center" bgcolor="#D00111" class="font18">${catalog.name}</td>
+								<td width="45"><img src="/images/2013715101320_5.gif"
+									width="45" height="35"></td>
+								<td align="right" background="/images/2013715101327.gif"><a
+									href="${catalog.url!'javascript:void(0);'}" target="_blank"><img
+										src="/images/2013715101320_1.gif" width="50" height="5"
+										border="0"></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<table width="100%" border="0" cellspacing="15" cellpadding="0">
+						<tbody>
+							<tr>
+								<td><ul class="list2">
+										<#assign articleTag=newTag("articleTag")> <#assign
+										articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+										<#if articleList?exists && articleList?size gt 0> <#list
+										articleList as article>
+										<li><a href="${article.url!'javascript:void(0)'}"
+											title="${article.title}" target="_blank">${article.title}</a>
+											<span><#if
+												article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+										</li> </#list> </#if>
+									</ul></td>
+							</tr>
+						</tbody>
+					</table>
+				</td> </#if>
+			</tr>
+			<tr>
+				<#assign
+				catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f4aaf46d0065'}")>
+				<#if catalog?exists>
+				<td colspan="2" valign="top">
+					<table width="100%" border="0" cellspacing="10" cellpadding="0">
+						<tbody>
+							<tr>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0);'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")> <#assign
+														articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0> <#list
+														articleList as article>
+														<li><a href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a>
+															<span><#if
+																article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li> </#list> </#if>
+													</ul></td>
+											</tr>
+										</tbody>
+									</table>
+								</td> </#if> <#assign
+								catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f519625d0099'}")>
+								<#if catalog?exists>
+								<td width="49%" valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0);'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><#assign articleTag=newTag("articleTag")> <#assign
+													articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+													<#if articleList?exists && articleList?size gt 0> <#list
+													articleList as article>
+													<li><a href="${article.url!'javascript:void(0)'}"
+														title="${article.title}" target="_blank">${article.title}</a>
+														<span><#if
+															article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+												</li> </#list> </#if>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td> </#if>
+			</tr>
+			<tr>
+				<#assign
+				catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f4ae924e0074'}")>
+				<#if catalog?exists>
+				<td colspan="2" valign="top">
+					<table width="100%" border="0" cellspacing="10" cellpadding="0">
+						<tbody>
+							<tr>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0);'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")> <#assign
+														articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0> <#list
+														articleList as article>
+														<li><a href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a>
+															<span><#if
+																article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li> </#list> </#if>
+													</ul></td>
+											</tr>
+										</tbody>
+									</table>
+								</td> </#if> <#assign
+								catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f4ac0a3d006d'}")>
+								<#if catalog?exists>
+								<td width="49%" valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0)'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td>
+													<ul class="list2">
+														<#assign articleTag=newTag("articleTag")> <#assign
+														articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0> <#list
+														articleList as article>
+														<li><a href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a>
+															<span><#if
+																article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li> </#list> </#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td> </#if>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+
+			<#assign
+			catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f518b2400097'}")>
+			<#if catalog?exists>
+			<tr>
+				<td colspan="2" valign="top">
+					<table width="100%" border="0" cellspacing="10" cellpadding="0">
+						<tbody>
+							<tr>
+								<td valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0)'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td><ul class="list2">
+														<#assign articleTag=newTag("articleTag")> <#assign
+														articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0> <#list
+														articleList as article>
+														<li><a href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a>
+															<span><#if
+																article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li> </#list> </#if>
+													</ul></td>
+											</tr>
+										</tbody>
+									</table>
+								</td> </#if> <#assign
+								catalog=catalogTag("{'levels':'self','name':'297e501853f3a9580153f517a8370094'}")>
+								<#if catalog?exists>
+								<td width="49%" valign="top">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody>
+											<tr>
+												<td width="150" align="center" bgcolor="#D00111"
+													class="font18">${catalog.name}</td>
+												<td width="45"><img src="/images/2013715101320_5.gif"
+													width="45" height="35"></td>
+												<td align="right" background="/images/2013715101327.gif"><a
+													href="${catalog.url!'javascript:void(0)'}" target="_blank"><img
+														src="/images/2013715101320_1.gif" width="50" height="5"
+														border="0"></a></td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellspacing="15" cellpadding="0">
+										<tbody>
+											<tr>
+												<td>
+													<ul class="list2">
+														<#assign articleTag=newTag("articleTag")> <#assign
+														articleList=articleTag("{'name':'${catalog.id}','count':'9','level':'all','order':'top'}")>
+														<#if articleList?exists && articleList?size gt 0> <#list
+														articleList as article>
+														<li><a href="${article.url!'javascript:void(0)'}"
+															title="${article.title}" target="_blank">${article.title}</a><span>
+																<#if
+																article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></span>
+														</li> </#list> </#if>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td> </#if>
+			</tr>
+		</tbody>
+	</table>
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td height="100" align="center">安徽出入境检验检疫局 专题报道<br> <a
+						href="http://www.anhuinews.com/" target="_blank">中安在线</a> 技术支持 </td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	<script src="/js/foot.js"></script>
+</body>
+</html>

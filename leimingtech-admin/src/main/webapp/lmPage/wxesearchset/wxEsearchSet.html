@@ -1,0 +1,84 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>[${wxEsearch.researchName}] 微调研填写项设置</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				<input type="hidden" id="esearchId" name="esearchId" value="${wxEsearch.id}"/>
+						<div class="control-group">
+							<label class="control-label">填写项名称</label>
+							<div class="controls">
+								<input type="text" id="setName" name="setName" class="span6 m-wrap" value="${page.setName?if_exists}"/>
+								<span class="help-inline">填写填写项名称</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项A</label>
+							<div class="controls">
+								<input type="text" id="setOptiona" name="setOptiona" class="span6 m-wrap" value="${page.setOptiona?if_exists}"/>
+								<span class="help-inline">填写选项A</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项B</label>
+							<div class="controls">
+								<input type="text" id="setOptionb" name="setOptionb" class="span6 m-wrap" value="${page.setOptionb?if_exists}"/>
+								<span class="help-inline">填写选项B</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项C</label>
+							<div class="controls">
+								<input type="text" id="setOptionc" name="setOptionc" class="span6 m-wrap" value="${page.setOptionc?if_exists}"/>
+								<span class="help-inline">填写选项C</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项D</label>
+							<div class="controls">
+								<input type="text" id="setOptiond" name="setOptiond" class="span6 m-wrap" value="${page.setOptiond?if_exists}"/>
+								<span class="help-inline">填写选项D</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项E</label>
+							<div class="controls">
+								<input type="text" id="setOptione" name="setOptione" class="span6 m-wrap" value="${page.setOptione?if_exists}"/>
+								<span class="help-inline">填写选项E</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">最多数量</label>
+							<div class="controls">
+								<select name="setNumber" id="setNumber">
+									<option value="${page.setNumber?if_exists}">${page.setNumber?if_exists}</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<span class="help-inline">填写数量</span>
+							</div>
+						</div>
+						
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxEsearchSetController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

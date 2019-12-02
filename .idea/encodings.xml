@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-cms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-gencode" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-lucene" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-member" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-mobile" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-ucenter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-ueditor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-wap" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-wechat" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leimingtech-weibo" charset="UTF-8" />
+  </component>
+</project>

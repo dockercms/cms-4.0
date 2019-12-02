@@ -1,0 +1,195 @@
+.webuploader-container {
+	position: relative;
+	width: 100px;
+	float: left;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px, 1px, 1px, 1px);
+	/* IE6,IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+input[type="file"] {
+	width: 100px;
+	height: 99px;
+}
+
+.webuploader-pick {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	background: #FFF;
+	padding: 10px 15px;
+	color: #DFDFDF;
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+	border: 1px dashed #DFDFDF;
+}
+
+.webuploader-pick-hover {
+	background: #FFF;
+}
+
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+#fileList {
+	width: 600px;
+	margin: 0px atuto;
+	margin-bottom: 10px;
+}
+
+.dialogUpload {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	min-height: 248px;
+	max-height: 248px;
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.info {
+	overflow: hidden;
+}
+
+.file-item {
+	width: 102px;
+	height: 127px;
+	float: left;
+	margin-right: 10px;
+	font-size: 12px;
+	margin-bottom: 35px;
+}
+
+.thumbnail {
+	padding: 0px;
+}
+
+.error { /* border: 1px solid #ccc; */
+	height: 15px;
+	/* margin-top: -74px; */
+	/* left: 12px; */
+	position: relative;
+	top: -37px;
+	color: red;
+	text-align: center;
+}
+
+.dialogUpload .uploader-list div.file-panel {
+	position: relative;
+	height: 0;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr='#80000000', endColorstr='#80000000' ) \0;
+	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	z-index: 300;
+}
+
+.dialogUpload .uploader-list div.file-panel span {
+	width: 24px;
+	height: 24px;
+	display: inline;
+	float: right;
+	text-indent: -9999px;
+	overflow: hidden;
+	background: url(icons.png) no-repeat;
+	margin: 5px 1px 1px;
+	cursor: pointer;
+}
+
+.dialogUpload .uploader-list div.file-panel span.rotateLeft {
+	background-position: 0 -24px;
+}
+
+.dialogUpload .uploader-list div.file-panel span.rotateLeft:hover {
+	background-position: 0 0;
+}
+
+.dialogUpload .uploader-list div.file-panel span.rotateRight {
+	background-position: -24px -24px;
+}
+
+.dialogUpload .uploader-list div.file-panel span.rotateRight:hover {
+	background-position: -24px 0;
+}
+
+.dialogUpload .uploader-list div.file-panel span.cancel {
+	background-position: -48px -24px;
+}
+
+.dialogUpload .uploader-list div.file-panel span.cancel:hover {
+	background-position: -48px 0;
+}
+
+.dialogUpload .uploader-list div.imgWrap {
+	position: relative;
+	z-index: 2;
+	line-height: 110px;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 110px;
+	height: 110px;
+	-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
+	-o-transform-origin: 50% 50%;
+	-ms-transform-origin: 50% 50%;
+	transform-origin: 50% 50%;
+	-webit-transition: 200ms ease-out;
+	-moz-transition: 200ms ease-out;
+	-o-transition: 200ms ease-out;
+	-ms-transition: 200ms ease-out;
+	transition: 200ms ease-out;
+}
+
+.dialogUpload .uploader-list div p.progress {
+	display: block;
+	position: relative;
+	width: 100%;
+	top: -39px;
+	left: 0;
+	height: 8px;
+	overflow: hidden;
+	z-index: 50;
+	margin-bottom: 0px;
+}
+
+.dialogUpload .uploader-list div p.progress span {
+	display: block;
+	overflow: hidden;
+	width: 0;
+	height: 100%;
+	background: #1483d8 url(progress.png) repeat-x;
+	-webit-transition: width 200ms linear;
+	-moz-transition: width 200ms linear;
+	-o-transition: width 200ms linear;
+	-ms-transition: width 200ms linear;
+	transition: width 200ms linear;
+	-webkit-animation: progressmove 2s linear infinite;
+	-moz-animation: progressmove 2s linear infinite;
+	-o-animation: progressmove 2s linear infinite;
+	-ms-animation: progressmove 2s linear infinite;
+	animation: progressmove 2s linear infinite;
+	-webkit-transform: translateZ(0);
+}
+.statusBar{
+	display:none;
+	width: 200px;
+    float: left;
+    text-align: left;
+}
+.statusBar .uploadInfo{
+	
+}
+.statusBar .errorInfo{
+	color:red;
+}

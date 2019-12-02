@@ -1,0 +1,154 @@
+<div class="modal-body">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="portlet">
+				<div class="portlet-title">
+					<div class="caption"><i class="icon-globe"></i>留言管理</div>
+					<div class="actions">
+<!-- 						<button onclick="toEditModelSub('messageBoardController.do?addMessageManagement&boardId=${boardId?if_exists}')" class="btn yellow-stripe"><i class="fa fa-plus"></i> 新增 </button>
+ -->						<button  class="btn yellow-stripe"  data-dismiss="modal" aria-hidden="true"> 关闭 </button>
+					</div>
+				</div>
+		
+			<!-- 	<div class="portlet-body">
+					<div class="span12 booking-search">
+						<form id="searchSub_form">
+						<input type="hidden" name="boardId" value="${boardId?if_exists}"/>
+							<div class="clearfix">
+								<div class="span4">
+									<label style="margin-bottom:0px;">
+										留言人：
+										<input name="name" class="form-control span7" type="text" value="${searchMap["name"]?if_exists[0]}" style="margin-bottom:0px;">
+									</label>
+								</div>
+								<div class="span4">
+									<label style="margin-bottom:0px;">
+										留言内容：
+										<input name="content" class="form-control span7" type="text" value="${searchMap["content"]?if_exists[0]}" style="margin-bottom:0px;">
+									</label>
+								</div>
+								<div class="pull-right">
+									<button type="button" class="btn yellow btn-sm" onclick="toSearchSub('messageBoardController.do?messageManagement', 'searchSub_form')">搜索  <i class="icon-search m-icon-white"></i></button>
+									<button type="button" class="btn yellow btn-sm" onclick="resetForm('searchSub_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+								</div>
+							</div>
+						</form>
+					</div> -->
+				
+					<table class="table table-striped table-bordered table-hover" id="sample_1">
+						<thead>
+							<tr>
+								<th width="40" style="text-align:center;">序号</th>
+								<th style="">留言人</th>
+								<th style="">留言内容</th>
+								<th style="">回复人</th>
+								<th style="">回复内容</th>
+								<th style="">审核状态</th>
+								<th style="">留言时间</th>
+								<th width="120" style="text-align:center;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<#if messageManagementList?exists>
+						  <#list messageManagementList as messageManagement>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+messageManagement_index?if_exists+1}</td>
+								<td>
+									${messageManagement.name}
+								</td>
+								<td>
+									${messageManagement.content}
+								</td>
+								<td>
+									${messageManagement.replyUser}
+								</td>
+								<td>
+									${messageManagement.reply}
+								</td>
+								<td>
+									<#if messageManagement.ischeck == '1'>
+										审核通过
+									<#elseif messageManagement.ischeck == '0'>
+										审核不通过
+									<#else>
+										未审核
+									</#if>
+								</td>
+								<td>
+								
+									${messageManagement.addTime?string("yyyy-MM-dd")}
+								</td>
+								
+								
+								
+								
+								<td style="text-align:center;"> 
+									
+									
+									<#if messageManagement.replyStatus == "0">
+										<a href="javascript:void(0);" onclick="toEditModelSub('messageBoardController.do?editMessageManagement&id=${messageManagement.id?if_exists}&boardId=${boardId?if_exists}')">回复</a>
+									</#if>
+									<a href="javaScript:void(0)" onclick="delSub('messageBoardController.do?delMessageManagement', '${messageManagement.id?if_exists}')" >删除</a> <br />
+									<#if messageManagement.ischeck == "">
+										<a href="javascript:void(0)" onclick="toCheck('messageBoardController.do?checkMessages', '${messageManagement.id?if_exists}', '1');">审核通过</a>
+										<a href="javascript:void(0)" onclick="toCheck('messageBoardController.do?checkMessages', '${messageManagement.id?if_exists}', '0');">审核不通过</a>
+									</#if>
+									
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+						</tbody>
+						
+					</table>
+					<#include "/lmPage/common/page.html">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function toEditModelSub(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	})
+}
+
+function toCheck(urlStr, id, type){
+		  lmConfirm("是否审核？","",function (){
+				$.ajax({
+					type:'post',
+					url:urlStr,
+					data:'id=' + id + "&ischeck=" + type,
+					success:function(msg){
+						var obj = JSON.parse(eval(msg));
+						if(obj.isSuccess){
+							var toUrl = obj.toUrl;
+							if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+							{
+							    toUrl = arguments[2] + '';
+							}
+							lmAlert(obj.msg);
+							changePage(toUrl);
+						}else{
+							lmAlert("审核处理失败!");
+						}
+					},
+					error:function(){
+						lmAlert("提交通讯失败!");
+					}
+				});
+		  });
+	}
+</script>

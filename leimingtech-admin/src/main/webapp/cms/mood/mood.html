@@ -1,0 +1,80 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">方案管理</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>方案名</label>
+			<div class="controls">
+				<input type="text" id="name" name="name" class="form-control span3" data-rule-required="true" value="${page.name?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>图标</label>
+			<div class="controls">
+				<input type="hidden" id="image" name="image" class="form-control span3" value="${page?if_exists.image}"/>
+				<i class="${page.image!''}"></i>
+				<button class="btn purple mini" type="button" onclick="toEditModelSub('selectIconController.do?showicon&selectIconBack=selectIconBack1')">选择图标</button>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">排序值</label>
+			<div class="controls">
+				<input type="text" id="sort" name="sort" class="form-control span1" value="${page.sort?if_exists}"/>
+				<span class="help-inline">(数字越大越靠前)</span>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" onclick="formSubmitModel('moodController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+	<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+</div>
+<div id="toEditModelSub" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="700" data-height="450">
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+function toEditModelSub(urlStr){
+
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+
+function selectIconBack1(iconclass){
+	$("#form_sample_2 #image").val(iconclass).next().attr("class",iconclass);
+};
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+
+</script>

@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.leimingtech.lmcms</groupId>
+		<artifactId>leimingtech</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>com.leimingtech.lmcms</groupId>
+	<artifactId>leimingtech-cms</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>leimingtech-cms</name>
+	<description>leimingtech-cms</description>
+
+	<properties>
+		<jodconverter.version>3.0-beta-4</jodconverter.version>
+		<json.version>0.0.1</json.version>
+		<QRCode.version>0.0.1</QRCode.version>
+		<sdk4j.version>0.0.1</sdk4j.version>
+		<org.quartz.version>1.6.2</org.quartz.version>
+		<CKFinder.version>2.4</CKFinder.version>
+		<commons-codec.version>1.9</commons-codec.version>
+		<xstream.version>1.4.8</xstream.version>
+		<shiro.version>1.2.3</shiro.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.leimingtech.lmcms</groupId>
+			<artifactId>leimingtech-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.leimingtech.lmcms</groupId>
+			<artifactId>leimingtech-lucene</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+			<!-- SECURITY begin -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+        <finalName>leimingtech-cms</finalName>
+    </build>
+</project>

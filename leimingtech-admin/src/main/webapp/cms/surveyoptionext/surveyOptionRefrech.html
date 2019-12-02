@@ -1,0 +1,70 @@
+
+<table class="table table-striped table-bordered table-hover" id="sample_1" style="margin-bottom: 0px;">
+     <tbody>
+         <tr>
+             <th width="30" style="text-align:center">序号</th>
+             <th style="text-align:left">选项</th>
+             <th width="30">排序</th>
+             <#--<th width="80" style="text-align:left">图片</th>-->
+             <th width="30" style="text-align:center">操作</th>
+         </tr>
+         <#if surveyOptionExtList?if_exists>
+             <#list surveyOptionExtList as surveyOptionExt>
+                 <tr>
+                		<td style="text-align:center">${surveyOptionExt_index+1}</td>
+                 	<td>${surveyOptionExt.extOptionname}</td>
+                 	<td>${surveyOptionExt.extSort}</td>
+                 	<#--<td>${surveyOptionExt.extOptionpicture}</td>-->
+                 	<td style="text-align:center">
+                 		<input type="button" class="delbtn" onclick="delJump('surveyOptionExtController.do?del&optionVId=${optionVId}&surveyOptionId=${surveyOptionId}', '${surveyOptionExt.id}')"/>
+                 	</td>
+             	</tr>
+             </#list>
+         </#if>
+     </tbody>
+ </table>
+
+<script>
+	function delJump(urlStr, id){
+		lmConfirm("是否删除该记录？","",function (){
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:'id=' + id,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						var toUrl = obj.toUrl;
+						if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+						{
+						    toUrl = arguments[2] + '';
+						}
+						lmAlert(obj.msg);
+						jump(toUrl);
+					}else{
+						lmAlert("删除处理失败!");
+					}
+				},
+				error:function(){
+					lmAlert("提交通讯失败!");
+				}
+			});
+		});
+	}
+	function jump(tourl){
+		$.ajax({
+			type:'post',
+			url:tourl,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#editOption').modal('hide');
+				$('#optionDiv').empty();
+				$('#optionDiv').append(msg);
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+</script>

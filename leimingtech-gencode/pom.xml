@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.leimingtech.lmcms</groupId>
+		<artifactId>leimingtech</artifactId>
+		<version>4.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<groupId>com.leimingtech.lmcms</groupId>
+	<artifactId>leimingtech-gencode</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>leimingtech-gencode</name>
+	<description>leimingtech-gencode</description>
+
+	<properties>
+		<cgform-entity.version>0.0.1</cgform-entity.version>
+	</properties>
+
+	<dependencies>
+		<!-- 代码生成器所必须依赖 -->
+		<dependency>
+			<groupId>cgform-entity</groupId>
+			<artifactId>cgform-entity</artifactId>
+			<version>${cgform-entity.version}</version>
+			<scope>system</scope>
+			<systemPath>
+				${project.basedir}/src/main/webapp/WEB-INF/lib/cgform-entity-0.0.1.jar
+			</systemPath>
+		</dependency>
+	</dependencies>
+
+	<build>
+        <finalName>leimingtech-gencode</finalName>
+    </build>
+</project>

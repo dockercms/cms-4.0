@@ -1,0 +1,149 @@
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<div class="row-fluid">
+<div class="span12">
+	<!-- BEGIN SAMPLE FORM PORTLET-->   
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>编辑</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+							<div class="control-group">
+
+					<label class="control-label">customname</label>
+				
+					<div class="controls">
+						<input type="text" id="customname" name="customname" class="span6 m-wrap" value="${custom?if_exists.customname}"/>
+						<span class="help-inline">填写customname</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">sustomsort</label>
+				
+					<div class="controls">
+						<input type="text" id="sustomsort" name="sustomsort" class="span6 m-wrap" value="${custom?if_exists.sustomsort}"/>
+						<span class="help-inline">填写sustomsort</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">description</label>
+				
+					<div class="controls">
+						<input type="text" id="description" name="description" class="span6 m-wrap" value="${custom?if_exists.description}"/>
+						<span class="help-inline">填写description</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">prop1</label>
+				
+					<div class="controls">
+						<input type="text" id="prop1" name="prop1" class="span6 m-wrap" value="${custom?if_exists.prop1}"/>
+						<span class="help-inline">填写prop1</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">prop2</label>
+				
+					<div class="controls">
+						<input type="text" id="prop2" name="prop2" class="span6 m-wrap" value="${custom?if_exists.prop2}"/>
+						<span class="help-inline">填写prop2</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">prop3</label>
+				
+					<div class="controls">
+						<input type="text" id="prop3" name="prop3" class="span6 m-wrap" value="${custom?if_exists.prop3}"/>
+						<span class="help-inline">填写prop3</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">prop4</label>
+				
+					<div class="controls">
+						<input type="text" id="prop4" name="prop4" class="span6 m-wrap" value="${custom?if_exists.prop4}"/>
+						<span class="help-inline">填写prop4</span>
+					</div>
+				</div>
+				<div class="control-group">
+
+					<label class="control-label">prop5</label>
+				
+					<div class="controls">
+						<input type="text" id="prop5" name="prop5" class="span6 m-wrap" value="${custom?if_exists.prop5}"/>
+						<span class="help-inline">填写prop5</span>
+					</div>
+				</div>
+				<!--
+				<div class="control-group">
+					<label class="control-label">菜单等级</label>
+					<div class="controls">
+						<select name="functionLevel" id="functionLevel">
+							<option value="0">一级菜单</option>
+							<option value="1">下级菜单</option>
+						</select>
+					</div>
+				</div>
+				-->
+				<div class="form-actions">
+					<input type="hidden" id="id" name="id" value="${custom?if_exists.id}"/>
+					<input type="hidden" id="id" name="custom.id" value="${custom?if_exists.custom?if_exists.id}"/>
+					<button type="button" onclick="formSubmitModel2Div('customController.do?update', 'form', 'divBody', 'customController.do?Table&id=${selectId}');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+	</div>
+	<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+
+
+
+	
+<script>
+
+
+function formSubmitModel2Div(urlStr, formName, returnUrl, selectId){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				$('#editModel').modal('hide');
+				alert(obj.msg);
+			}else{
+				alert("提交处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	})
+}
+</script>

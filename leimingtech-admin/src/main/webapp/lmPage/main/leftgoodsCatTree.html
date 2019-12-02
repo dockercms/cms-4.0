@@ -1,0 +1,25 @@
+<#if list?exists>
+	<#list list as function>
+		<#if (function.goodsCats?size >0) >  
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('goodsController.do?table&catId=${function.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				<span class="arrow "></span>
+				</a>
+				<ul class="sub-menu">
+				<#assign list=function.goodsCats/>
+					<#include "/lmPage/main/leftgoodsCatTree.html">
+				</ul>
+			</li>
+		<#else>
+			<li>
+				<a href="javaScript:void(0);" onclick="changePage('goodsController.do?table&catId=${function.id?if_exists}')">
+				<i class="icon-picture"></i> 
+				<span class="title">${function.name?if_exists}</span>
+				</a>
+			</li>
+		</#if>
+	</#list>
+</#if>		
+		

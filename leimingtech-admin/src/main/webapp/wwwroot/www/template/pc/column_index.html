@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><#assign navTag =newTag("navTag")>
+	<#assign navTagList =navTag("{'name':'${catalogF.id}'}")>
+	<#if navTagList?exists>
+		<#list navTagList as navTag>
+			
+			<#if catalogF.id==navTag.id>
+				${navTag.name}
+			</#if>
+		</#list>
+	</#if></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="stylesheet" type="text/css" href="/pcstyle/main.css"/>
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/pic.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<SCRIPT src="/pcstyle/js/jquery-1.4.2.min.js"></SCRIPT>
+<SCRIPT src="/pcstyle/js/imgs.js"></SCRIPT>
+<script>
+function toSearch6(urlStr) {
+
+		var keyWord6= encodeURI(document.getElementById("keyword6").value);
+		keyWord6 = encodeURI(keyWord6);
+		window.location = urlStr + "&keyword=" + keyWord6+"&siteid="+${site.id};;
+	}
+	</script>
+</head>
+<body>
+<!--头部 -->
+<#include "/wwwroot/${sitePath}/template/pc/section/menu.html">
+<!--主题 -->
+<div class="wrap1000">
+<DIV id=focus>
+<UL>
+
+
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'5','levels':'all','order':'top'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<LI><a href="${article.url}" target=_blank><IMG alt=" ${article.title}" src="${article.thumb}"></a></LI>
+			
+		</#list>
+	</#if>
+</UL>
+</DIV>
+
+<div class="wrap373">
+<div class="imgs_tit">
+<!--精彩图集 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'41'}")>
+<#if catalog?exists>
+	
+	<h2>${catalog.name}</h2>
+	<span><a href="${catalog.url!'javascript:void(0);'}">更多&gt;&gt;</a></span>
+	
+	</#if>
+</div>
+
+<div class="clearfix imgs_list">
+
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'5','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<a href="${article.url}" target=_blank><IMG alt="${article.title}" src="${article.thumb}">${article.title}</a>
+		</#list>
+	</#if>
+</div>
+</div>
+</div>
+
+<div class="wrap1000">
+<div class="wrap618 h286">
+<div class="imgs_tit"><h2>热门图片</h2></div>
+<div class="clearfix imgs_list">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'8','levels':'all','order':'pv'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<a href="${article.url}" target=_blank>
+			<IMG alt="${article.title}" src="${article.thumb}">${article.title}</a>
+		</#list>
+	</#if>
+</div>
+</div>
+<div class="wrap373 h286">
+<div class="imgs_tit"><h2>频道精选</h2></div>
+<div class="imgs_ones">
+<!--置顶精彩---> 
+    <#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'41','count':'1','levels':'all','order':'is_top'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+		<a href="${article.url}" target=_blank><img src="${article.thumb}"></a>
+	    <h5><a href="${article.url}" target=_blank>${article.title}</p></a></h5>
+			
+		</#list>
+	</#if>
+</div>
+</div>
+</div>
+<div class="wrap998 addmargin" >
+<div class="imgs_tit">
+<!--图览北京 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'402881914e097b8c014e0a114bf5000c'}")>
+<#if catalog?exists>
+	
+	<h2>${catalog.name}</h2>
+	<span><a href="${catalog.url!'javascript:void(0);'}">更多&gt;&gt;</a></span>
+	
+	</#if>
+</div>
+<ul class="imgs_threes bigwidths">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'402881914e097b8c014e0a114bf5000c','count':'10','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li><a href="${article.url}" target=_blank>><img src="${article.thumb}"  alt="${article.title}"></a>
+				<h5><a href="${article.url}" target=_blank>${article.title}</p></a></h5>
+			</li>
+		</#list>
+	</#if>
+</ul>
+</div>
+<div class="wrap998 addmargin" style="margin-bottom: 20px;">
+<div class="imgs_tit">
+<!--图说天下 -->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<#assign catalog =catalogTag("{'levels':'self','name':'42'}")>
+<#if catalog?exists>
+	
+	<h2>${catalog.name}</h2>
+	<span><a href="${catalog.url!'javascript:void(0);'}">更多&gt;&gt;</a></span>
+	
+	</#if>
+</div>
+<ul class="imgs_threes bigwidths">
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'42','count':'10','levels':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li><a href="${article.url}" target=_blank>><img src="${article.thumb}"  alt="${article.title}"></a>
+				<h5><a href="${article.url}" target=_blank>${article.title}</p></a></h5>
+			</li>
+		</#list>
+	</#if>
+</ul>
+</div>
+
+<!--footer-->
+<div class="footer">
+		<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+</div>
+<!--footer end-->
+
+
+<div class="t_line sxtq" style=" display: none">
+<span class="mycity_cs" id="mycity_0">--</span>
+<span style="cursor:pointer;margin-left:10px;color:#003368;" id="ordercity"></span>
+<br>
+<span id="mycity_1" style="display: none;"></span>
+<span id="mycity_5">--</span><br>
+<span id="mycity_2">--</span><br>
+<span id="mycity_3">--</span><br>
+<span id="mycity_4">--</span>
+</div>
+<script src="/pcstyle/base-min.js" type="text/javascript"></script>
+<script src="/pcstyle/plugin-mod.min.js" type="text/javascript"></script>
+</body>
+</html>

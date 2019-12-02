@@ -1,0 +1,40 @@
+<#setting datetime_format="yyyy-MM-dd HH:mm"/>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">网易云直播-直播地址</h4>
+</div>
+<div class="modal-body">
+	<#if errorMessage?exists && errorMessage!=''>
+		${errorMessage}
+	<#else>
+	<!-- BEGIN FORM-->
+	<form class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label">频道名称:</label>
+			<div class="controls">
+				<span class="text">${address.name}</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<h4>推流地址</h4>
+			<p class="well">
+				${address.pushUrl}
+			</p>
+			<h4>拉流地址（HTTP）</h4>
+			<p class="well">
+				${address.httpPullUrl}
+			</p>
+			<h4>拉流地址（HLS）</h4>
+			<p class="well">
+				${address.hlsPullUrl}
+			</p>
+			<h4>拉流地址（RTMP）</h4>
+			<p class="well">
+				${address.rtmpPullUrl}
+			</p>
+		</div>
+	</form>
+	<!-- END FORM-->  
+	</#if>     
+</div>

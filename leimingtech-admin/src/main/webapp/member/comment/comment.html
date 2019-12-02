@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:line-height="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/global.css" rel="stylesheet" type="text/css" />
+    <!--一下样式对登录注册按钮有冲突-->
+
+    <link href="/pcstyle/main.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/view.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+    <link href="/pcstyle/commtent.css" rel="stylesheet" type="text/css" />
+    <link href="/pcstyle/layer.css" rel="stylesheet" type="text/css" />
+
+    <link href="/pcstyle/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="/pcstyle/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/pcstyle/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/pcstyle/js/layer.js"></script>
+    <script type="text/javascript" src="${contextpath}/member/js/comment/comment.js"></script>
+	<title>${content.title}</title>
+    <script type="text/javascript">
+        var contextpath='${contextpath}';
+        var contentId='${content.id}';
+    </script>
+	<script type="text/javascript">
+        $(function (){
+            //获取 评论数量
+            var urlStr = "${contextpath}/front/contentsFrontController.do?calculationCommentCount";
+            $.ajax({
+                type : 'post',
+                url : urlStr,
+                data:"contentId="+contentId,
+                success : function(msg) {
+                    var obj = JSON.parse(eval(msg));
+                    var commentCountStr = "全部评论("+obj.commentCount+"条)";
+                    $('#allCommentCount').text(commentCountStr);
+
+                }
+            });
+        });
+    </script>
+
+</head>
+<body style="background: white">
+<#include "/wwwroot/${sitePath}/template/pc/section/secondMenu.html">
+    <div class="s">
+        <div class="logo"><a href="/" target="_blank"><img src="/pcstyle/newimg/content_logo.png" alt="华东网—华东门户｜华东最大的新闻综合门户" width="129" height="27" /></a></div>
+        <div class="wei">
+            <a href="/">首页</a>
+            > &nbsp;<a href="${catUrl}" class="act">${catName}</a>
+        </div>
+
+        <div class="so">
+            <form action="/e/search/index.php" method="post" id="unify_search">
+                <input type="hidden" name="show" value="title" />
+                <input type="hidden" name="tempid" value="1" />
+                <div class="div_search">
+                    <table align="right" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="188" height="41"><input id="keyword4"  value="${keyword?if_exists}" name="keyword" autocomplete="off" style="margin-left:4px;height:22px"/></td>
+                            <td><a href="javaScript:void(0)"  onclick="toSearch4('${contextpath}/front/frontController.do?search');"><img src="/pcstyle/newimg/search_icon.png" width="56" height="24" onmouseover="changepic(this,'/pcstyle/newimg/search_icon.png')" onmouseout="changepic(this,'/pcstyle/newimg/search_icon.png')" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="comment-left-div" style="height: 900px;">
+        <div class="right">
+            <!--s: 评论广告 -->
+            <div class="zw iconList">
+                <#assign commentAdvertisingTag =newTag("commentAdvertisingTag")>
+                    <#assign commentAdvertisingList =commentAdvertisingTag("{'count':'2','siteId':'${site.id}'}")>
+                        <#if commentAdvertisingList?exists && commentAdvertisingList?size gt 0>
+                            <#list commentAdvertisingList as commentAdvertising>
+                                <div class="right_ad1">
+                                    <a href="${commentAdvertising[1]!'javascript:void(0);'}" target="_blank">
+                                        <!--<span>${commentAdvertising[0]}</span>-->
+                                        <span ><img src="${commentAdvertising[3]}" alt="${commentAdvertising[2]}" width="${commentAdvertising[4]}px;" height="${commentAdvertising[5]}px;"/></span>
+                                    </a></div>
+                            </#list>
+                        </#if>
+            </div>
+            <!--e: 评论广告 -->
+
+            <div class="title2">
+                <p class="p1">今日推荐</p>
+            </div>
+            <div class="zw iconList">
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'count':'10','weight':'60-80','siteid':'${site.id}'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <li class="ellip_div" style="width:282px;">
+                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">
+                                            <span style="color:${article.color!''}" >${article.title}</span>
+                                        </a></li>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+
+        </div>
+
+        <!--左侧部分-->
+        <div  style="margin-top: 20px;">
+
+            <div class="content-h1">
+                <a  href="${content.url}">${content.title}</a>
+            </div>
+
+            <!---- 评论框---->
+
+            <div id="SOHUCS" style="margin-top: -40px;">
+                <form id="addComment">
+                    <input type="hidden" name="contentid" value="${content.id}" />
+                    <textarea tabindex="1" id="commentcontent" name="content" class="comment-text" onkeyup="javascript:chkmaxsms(this,'150')" placeholder="(请勿超过150字)"></textarea>
+                </form>
+                <div class="commtSub np-reply-box-footer comment-div"  id="p_login_btn">
+                    <div class="submitBtn">
+                        <a href="javascript:void(0)" class="np-btn np-btn-submit" onclick="addComment()" >发表评论</a>
+                    </div>
+
+                </div>
+            </div>
+            <h4  class="np-active" id="allCommentCount"></h4>
+
+
+                <div class="allComments">
+                    <ul class="post-list np-comment-list" id="ul_comment_list">
+                    </ul>
+                    <!-- 模态框（Modal） -->
+                    <div id="myModel" class="modal  fade " tabindex="-1" data-backdrop="static" data-focus-on="input:first"></div>
+                    <!--分页条-->
+                    <br/>
+                    <div id="loadMore" class="np-load-more loadMore" style="display:block;width: 560px;">
+                            <span onclick="loadComment('${contextpath}/front/commentFrontController.do?commentPageList&contentid=${content.id?if_exists}','ul_comment_list')">加载更多</span>
+                            <em style="display:none" class="np-load-more-loading">没有更多了</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+
+    <div class="footer">
+        <#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">内容模型</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">模型名称</label>
+							<div class="controls">
+								<input type="text" id="name" name="name" class="form-control span3" value="${page.name?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模型别名</label>
+							<div class="controls">
+								<input type="text" id="alias" name="alias" class="form-control span3" value="${page.alias?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">模型描述</label>
+							<div class="controls">
+								<input type="text" id="description" name="description" class="form-control span3" value="${page.description?if_exists}"/>
+							</div>
+						</div>
+						<#--<div class="control-group">
+							<label class="control-label">模板列表</label>
+							<div class="controls">
+								<input type="text" id="templateList" name="templateList" class="form-control span3" value="${page.templateList?if_exists}"/>
+							</div>
+						</div>-->
+						<div class="control-group">
+							<label class="control-label">模型文件</label>
+							<div class="controls">
+								<input type="text" id="tempaltepath" name="templateShow" readonly class="form-control span3" data-rule-required="true" value="${page.templateShow?if_exists}"/>
+								<button class="btn purple" type="button" onclick="toEditModel('templateController.do?tableDialog')">选择模板</button>
+							</div>
+						</div>
+						<!--<div class="control-group">
+							<label class="control-label">posts</label>
+							<div class="controls">
+								<input type="text" id="posts" name="posts" class="form-control span3" value="${page.posts?if_exists}"/>
+								<span class="help-inline">填写posts</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">评论数</label>
+							<div class="controls">
+								<input type="text" id="comments" name="comments" class="form-control span3" value="${page.comments?if_exists}"/>
+								<span class="help-inline">填写评论数</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">浏览数</label>
+							<div class="controls">
+								<input type="text" id="pv" name="pv" class="form-control span3" value="${page.pv?if_exists}"/>
+								<span class="help-inline">填写浏览数</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">排序</label>
+							<div class="controls">
+								<input type="text" id="sort" name="sort" class="form-control span3" value="${page.sort?if_exists}"/>
+								<span class="help-inline">填写排序</span>
+							</div>
+						</div>-->
+						<div class="control-group">
+							<label class="control-label">模型是否可用</label>
+							<div class="controls">
+								<label class="radio">
+											<input type="radio" id="disabled2" name="disabled" value="0" <#if page.disabled=="0"|| page.disabled=="">checked</#if>/>
+									是
+								</label>
+								<label class="radio">
+											<input type="radio" id="disabled1" name="disabled" value="1" <#if page.disabled=="1">checked</#if>/>
+									否
+								</label>
+							</div>
+						</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+		<div class="modal-footer">
+			<input  type="button" onclick="formSubmitModel1('modelsController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">  
+            <input type="button" class="btn" value="取消" data-dismiss="modal"> 
+		</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   // initiate layout and plugins
+   App.init();
+   $("#form_sample_2").myValidate();
+});
+function formSubmitModel1(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				$('#editModel1').modal('hide');
+				$('#editModel1').empty();
+				/*alert(obj.msg);*/
+				lazyChangePage(toUrl);
+			}else{
+				alert("提交处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	});
+}
+
+</script>
+

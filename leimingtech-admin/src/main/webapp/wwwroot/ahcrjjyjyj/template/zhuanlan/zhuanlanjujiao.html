@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://www.ahciq.gov.cn/zhuanti/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>${site.siteName} - ${catalogF.name}<!-- 安徽出入境检验检疫局 - 专栏聚焦 --></title>
+<meta name="keywords" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<link href="/css/base.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<script src="/js/jquery.js"></script>
+<script src="/js/base.js" type="text/javascript"></script>
+<!--[if lt IE 8]>
+		<script src="/js1/png.js"type="text/javascript"></script>
+		<script src="/js1/htmlfix.js"type="text/javascript"></script>
+		<![endif]-->
+
+
+<script>
+	var lmid = 19;
+</script>
+<script>
+	var newsid = 0;
+</script>
+</head>
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/head.html">
+	<div class="cl"></div>
+	
+	<div class="container nav2" style="padding:15px 0;">
+		<a href="/">首页</a> &gt;&gt; 
+		<#assign navTag=newTag("navTag")>
+		<#assign navTagList=navTag("{'name':'${catalogF.id}'}")>
+		<#if navTagList?exists>
+		<#list navTagList as navTag>
+		<a href="${navTag.url!'javascipt:void(0);'}">${navTag.name}</a> &gt;&gt; 
+		</#list>
+		</#if>
+	</div>
+	<#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+	<div class="container" style="padding:15px 0;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td valign="top">
+						<table width="97%" border="0" cellspacing="0" cellpadding="0"
+							style="border:1px solid #D6E9F8;">
+							<tbody>
+								<tr>
+									<td valign="top">
+										<table width="96%" border="0" align="center" cellpadding="10"
+											cellspacing="0">
+											<tbody>
+												<tr>
+													<td id="wzlb" style="padding-top:15px;"><table
+															width="100%" border="0" cellspacing="0" cellpadding="2"
+															bgcolor="#ffffff">
+															<tbody>
+																<#assign catalogList=catalogTag("{'levels':'child','name':'297e501853efec9f0153eff3e0710001'}")>													
+																<#if catalogList?exists>
+																<#list catalogList as catalog>
+																<tr>
+																	<td class="list2"><a
+																		href="${catalog.url!'javascript:void(0)'}"
+																		target="_blank" title="${catalog.name}">
+																			${catalog.name}</a> 
+																		<#if catalog.created?exists>${catalog.created?string('yyyy-MM-dd')}</#if>
+																	</td>
+																</tr>
+																</#list>
+																</#if>
+																<!-- <tr>
+																	<td class="list2"><a
+																		href="http://www.ahciq.gov.cn/system/2015/05/13/000012947.shtml"
+																		target="_blank" title="国检党建专题"> &#8226; 国检党建专题</a>
+																		2015-5-13 11:19:54</td>
+																</tr>
+																
+																<tr>
+																	<td class="list2"><a
+																		href="http://www.ahciq.gov.cn/system/2015/05/11/000012915.shtml"
+																		target="_blank" title="质检科技成果展示"> &#8226; 质检科技成果展示</a>
+																		2015-5-11 10:56:38</td>
+																</tr>
+																<tr>
+																	<td class="list2"><a
+																		href="http://www.ahciq.gov.cn/system/2013/07/15/000010580.shtml"
+																		target="_blank" title="坚持群众路线 建设人民质检"> &#8226;
+																			坚持群众路线 建设人民质检</a> 2013-7-15 10:10:20</td>
+																</tr> -->
+															</tbody>
+														</table></td>
+												</tr>
+												<tr>
+													<td align="right" height="50">
+													
+														<table width="100%" border="0" cellspacing="0"
+															cellpadding="0">
+															<form name="formarticle" method="post" action=""></form>
+															<tbody>
+																<tr>
+																	<td align="right" height="23">
+																		${pagebar}
+																	</td>
+																</tr>
+															</tbody>
+														</table></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<#include "/wwwroot/${sitePath}/template/common/benJuTongZhi.html">
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		$("#wzlb .list2").each(function() {
+			var html = $(this).html();
+			html = html.replace("·", "");
+			html = html.replace("&#8226;", "");
+			$(this).html(html);
+			$(this).find("a").html(" &#8226; " + $(this).find("a").html());
+		})
+	</script>
+
+	<div class="cl"></div>
+	<#include "/wwwroot/${sitePath}/template/common/foot.html">
+</body>
+</html>

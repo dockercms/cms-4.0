@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Description" content="${site.siteName}" />
+<meta name="keywords" content="${site.siteName}" />
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<script type="text/javascript" src="/js/indexnew.js"></script>
+<style>
+.bannerImg div.bannerImg-only {
+	width: 810px;
+	height: 320px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 99;
+	background: #e7e7e7;
+}
+</style>
+<title>${site.siteName}</title>
+<base target="_blank">
+</head>
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/index_nav.html"> <#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+
+	<div class="wrapper">
+		<div class="wrapperCon mtauto clearfix">
+			<div id="indexBanner" class="banner f-fl">
+
+
+				<div class="bannerImg" id="bannerImgBox">
+
+					<div class="bannerImg-only">
+						<#assign advTag =newTag("advTag")> <#assign advList
+						=advTag("{'name':'402881a55276e248015277a67345002a','count':'1'}")>
+						<#if advList?exists && advList?size gt 0> <#list advList as adv> <a><img
+							src="${adv.imgUrl}" border="0" width="810" height="320"> </a>
+					</div>
+					</#list> </#if>
+				</div>
+
+			</div>
+
+			<div class="activity f-fr">
+				<#assign catalogList
+				=catalogTag("{'name':'4028818d518b5f0e01518b74d4980009','levels':'child'}")>
+				<#if catalogList?exists>
+				<ul class="activityTab">
+					<#list catalogList as catList>
+					<li><a>${catList.name!''}</a></li> </#list>
+
+				</ul>
+				<#list catalogList as catList>
+				<div class="activityList">
+
+					<#assign articleTag =newTag("articleTag")> <#assign articleList
+					=articleTag("{'name':'${catList.id}','count':'10','level':'all'}")>
+
+					<#if articleList?exists && articleList?size gt 0> <#list
+					articleList as article> <a
+						href="${article.url!'javascript:void(0);'}" target="_blank"
+						style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${article.title}</a>
+					</#list> </#if>
+
+				</div>
+				</#list> </#if>
+
+
+			</div>
+
+		</div>
+
+		<div class="w1190 mtauto mt10 newYear_hotshop_bg_box">
+			<#assign name ="catalogTag"> <#assign catalogList
+			=catalogTag("{'name':'4028818d518b5f0e01518b75758d000b','levels':'child'}")>
+			<#if catalogList?exists>
+			<div class="newYear_hotshop_bg"></div>
+			<div class="productTitle hotshop clearfix">
+				<h2 class="f-fl">推荐商品</h2>
+				<div class="hotshopTab f-fl">
+					<div class="hotshop_border" style="left: 119px;"></div>
+
+
+					<#list catalogList as catList>
+					<div class="smt">
+						<a>${catList.name}</a>
+					</div>
+					</#list>
+				</div>
+			</div>
+			<#list catalogList as catList>
+			<ul class="productList" style="display: none;">
+
+				<#assign articleTag =newTag("articleTag")> <#assign articleList
+				=articleTag("{'name':'${catList.id}','count':'5','level':'all'}")>
+
+				<#if articleList?exists && articleList?size gt 0> <#list articleList
+				as article>
+				<li><a href="${article.url!'javascript:void(0);'}"> <img
+						src="${article.thumb}">
+						<div class="imgText">${article.title}</div> </a>
+				</li> </#list> </#if>
+			</ul>
+
+			</#list> </#if>
+		</div>
+
+	</div>
+	<!-- 新版底部 start -->
+	<#include "/wwwroot/${sitePath}/template/common/footer.html">
+</body>
+</html>
+
+

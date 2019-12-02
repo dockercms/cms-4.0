@@ -1,0 +1,54 @@
+<#include "member/head.html">
+<div id="center">
+	<div class="center_left"></div>
+	<div class="center_right">
+         <div class="title-style-1">
+           <h2></h2>
+         </div>
+         <form id="form_sample_1" >
+         	<input type="hidden" name="loginerrornum" value="0" />
+         	<div class="control-group">
+				<label class="control-label">用户名</label>
+                <div class="controls">
+                    <input id="username" name="username" class="txt succeed" type="text error" value="${frontusername!''}" onchange="$('#login_username').hide().removeClass('help-inline ok').closest('.control-group').removeClass('error');" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>
+                    <span id="login_username" style="display:none;"></span>
+                </div>
+			</div>
+			<div class="control-group" style="height:20px;"></div>
+			<div class="control-group">
+				<label class="control-label">密码</label>
+                <div class="controls">
+                    <input name="password" id="password" class="txt error" type="password" onchange="$('#login_password').hide().removeClass('help-inline ok').closest('.control-group').removeClass('error');" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>
+                    <span id="login_password" style="display:none;"></span>
+                </div>
+			</div>
+			<div class="control-group" style="height:20px;"></div>
+			<div class="control-group" style="font-size: 12px;">
+                <label class="f_l" style="background: none repeat scroll 0% 0% #FFF;">
+					<input class="f_l" type="checkbox" name="rememberpassword" value="1"/>&nbsp;记住用户名&nbsp;&nbsp;
+				</label> 
+				<label class="f_l_right">
+					<a href="MemberAct.do?findpassword" style="background: none repeat scroll 0% 0% #FFF;">忘记密码?</a>
+				</label>
+				<label class="register_right" style="float:right;">
+					<a href="registerAct.do?register" style="background: none repeat scroll 0% 0% #FFF;">免费注册</a>
+				</label>
+			</div>
+			<div class="control-group" style="height:20px;"></div>
+			<div class="control-group">
+				<input type="button" name="" value="登  录" class="input-submit-style-3" 
+                            onclick="formSubmitModel1('loginAct.do?checkLogin&addr=${addr}', 'form_sample_1');"/>
+			</div>
+			<div class="control-group" style="height:20px;"></div>
+			<div class="control-group">
+				<label class="control-label">合作账户登录</label>&nbsp;&nbsp;
+				<a href="${qqpath}" title="QQ登录"><img src="image/qq.png" /></a>&nbsp;&nbsp;
+				<a href="${sinapath}" title="微博登录"><img src="image/weibo.png" /></a>
+			
+			</div>
+         	
+		</form>
+    </div>
+</div>
+<#include "member/foot.html">
+<script type="text/javascript" src="js/login.js"></script>

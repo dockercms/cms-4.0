@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+<SCRIPT type="text/javascript">
+	var setting = {
+		check: {
+			enable: true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+</SCRIPT>
+<div class="portlet-body">
+	<table class="table table-striped table-bordered table-hover" id="sample_1">
+		<tbody>
+			<tr class="odd gradeX">
+				<td >部门名称：${parentDepart.departname?if_exists}</td>
+				<td >部门描述：${parentDepart.description?if_exists}</td>
+			</tr>
+			<tr class="odd gradeX">
+				<td colspan="2" align="center">
+					<#if parentDepart.id != "">
+						<input type="button" class="btn green" value="传播" onclick="spread('确定传播权限到下一级吗？','departChannelAction.do?spread', '${selectId?if_exists}')"/>
+						<input type="button" class="btn green" value="继承" onclick="spread('确定继承上一级权限吗？','departChannelAction.do?inherit', '${selectId?if_exists}')"/>
+
+					</#if>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	<#if parentDepart.id != "">
+<input  type="button" onclick="formSubmitModelRole('departChannelAction.do?savecontentCatPriv&departId=${selectId}', 'roleForm');" class="btn yellow" value="保存权限">
+<form id="roleForm" method="post" class="form-horizontal">
+<div class="portlet-body">
+		<#if data?exists && data?size gt 0>
+			<#list data as d>
+			<#assign index = d_index>
+			<#assign site = d.site>
+			<#assign channelJson = d.channelJson>
+			<#include "/lmPage/departChannel/contentCatSet.html">
+			</#list>
+		</#if>
+
+
+</div>
+	</#if>
+</form>
+<SCRIPT type="text/javascript">
+
+function formSubmitModelRole(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+	}
+
+	var el = $(".page-header-fixed");
+	App.blockUI(el);
+	$.ajax({
+		type:'post',
+		url:urlStr+"&funval2="+$("#funVal2").val(),
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			lmAlert(obj.msg);
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				$('#PCRoleModel').modal('hide');
+				$('#PCRoleModel').empty();
+				lazyChangePage(toUrl);
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		},
+		complete:function (){
+			App.unblockUI(el);
+		}
+	});
+}
+		
+		function spread(msgstr,urlStr, id){
+			lmConfirm(msgstr,"",function (){
+				$.ajax({
+					type:'post',
+					url:urlStr,
+					data:'id=' + id,
+					success:function(msg){
+						var obj = JSON.parse(msg);
+						if(obj.success){
+							lmAlert(obj.msg);
+							lazyChangePage(obj.obj);
+						}else{
+							lmAlert(obj.msg);
+						}
+
+					},
+					error:function(){
+						lmAlert("提交通讯失败!");
+					}
+				});
+			});
+		}
+	</SCRIPT>

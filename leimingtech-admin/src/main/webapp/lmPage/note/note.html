@@ -1,0 +1,45 @@
+	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">短信平台</h4>
+		</div>
+		
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+					<div class="control-group">
+						<label class="control-label">短信平台手机号</label>
+						<div class="controls">
+							<input type="text" id="notePhone" name="notePhone" class="form-control span3" value="${page.notePhone?if_exists}"/>
+							<span class="help-inline" style="color:red">填写短信平台手机号</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">短信平台账号</label>
+						<div class="controls">
+							<input type="text" id="onteAccount" name="onteAccount" class="form-control span3" value="${page.onteAccount?if_exists}"/>
+							<span class="help-inline">填写短信平台账号</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">短信平台密码</label>
+						<div class="controls">
+							<input type="text" id="notePassword" name="notePassword" class="form-control span3" value="${page.notePassword?if_exists}"/>
+							<span class="help-inline">填写短信平台密码</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">短信平台状态</label>
+						<div class="controls">
+							<input type="radio" id="noteStauts" name="noteStauts" value="1" checked="checked"/><span class="help-inline">开启</span>
+							<input type="radio" id="noteStauts" name="noteStauts" value="0"/><span class="help-inline">关闭</span>
+							<span class="help-inline"></span>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" onclick="formSubmitModel('noteController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal"> 关闭</button>                            
+				</div>
+			</form>
+		</div>
+

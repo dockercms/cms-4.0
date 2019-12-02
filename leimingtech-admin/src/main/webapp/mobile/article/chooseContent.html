@@ -1,0 +1,317 @@
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css"> 
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="js/contentMobile.js"></script>
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">选取内容</h4>
+	</div>
+	
+	<div class="clearfix" style="background-color:#FFFFFF;">
+		
+		<div class="control-group pull-left" style="margin:20px auto auto 20px">
+			<div class="controls">
+				<input id="cm_title" name="title" title="请输入关键字" class="form-control span3" type="text" value="">
+			</div>
+		</div>
+		<div class="control-group pull-left" style="margin:20px auto auto 20px;">
+			<input type="hidden" id="mobileId">
+			<div class="controls" style="position:relative;">
+			<input type="text" id="souContent" name="souContent" class="form-control span3" onclick="showMenu()" readonly value="-----选择栏目-----">
+			<div id="menuContent" class="menuContent" style="display:none; position: absolute;">
+				<ul id="treeDemo" class="ztree" style="margin-top:0; width:258px; height: 140px">
+				</ul>
+				
+			</div>
+			</div>
+		</div>
+		<div class="right" style="display:none">
+			<input type="button" value="获取选中的值" id="button"/>
+			<input type="text" id="funVal" name="funVal"/>
+			<ul class="info">
+				<li class="title"><h2>1、setting 配置信息说明</h2>
+					<ul class="list">
+						<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+						<li><p>父子关联关系：<br/>
+								被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+								<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+								取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+								<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+								<ul id="code" class="log" style="height:20px;"></ul></p>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+			
+		<div class="control-group pull-left" style="margin:20px 20px auto 20px">
+			<button type="button" class="btn blue"  onclick="showDataSearch('contentsMobileController.do?showContent')">搜索  <i class="m-icon-swapright m-icon-white"></i></button>
+		</div>
+	</div>
+		<!-- BEGIN FORM-->
+		<form id="form_sample_2" class="form-horizontal">
+			<input type="hidden" id="h1" name="checked" value=""/>
+			<div style="height:500px" >
+				<ul style="height:505px;overflow:auto;" id="left_select">
+					<#list contentsList as contents>
+						<li id="${contents.id}" style="list-style-type: none;">
+							<input id='${contents.id}' name='box' type="radio" value="${contents.id}"/>
+							<a href='${contents.url}' style='margin-right:40px'>${contents.title}</a>&nbsp;&nbsp;
+							${contents.published}
+						</li>
+					</#list>						
+				</ul>
+
+			</div>
+		</form>
+	<div class="modal-footer">  
+           <input  type="button" onclick="formSubmitJump()" class="btn btn-primary" value="提交">  
+           <input type="button" class="btn" value="取消" data-dismiss="modal">  
+       </div>
+<script>
+	//ztree属性下拉树选择
+	var setting = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick,
+			onCheck: onCheck
+		}
+	};
+	var zNodes = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'contentsMobileController.do?loadmobile',
+		data:'data=0',
+		success:function(data){
+			 zNodes = data;
+		}
+	})
+	var json = JSON.parse(zNodes);
+	$(document).ready(function(){
+		
+		$.fn.zTree.init($("#treeDemo"), setting,json);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+		$('#treeDemo').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#funVal').attr("value",v);
+		});
+		
+	});
+	//搜索
+	function showDataSearch(urlStr){
+		$("#left_select li").remove();              //条件查询之前，需要先清空ul里面内容。
+		var mobileId = $("#mobileId").val();  //选取的频道id
+		var title = $('#cm_title').val();     //标题
+		var classify = ${classify};       //分类
+		$.ajax({
+			type:'post',
+			url:urlStr,    
+			data:{title:title,mobileId:mobileId,classify:classify},
+			success:function(data){
+				var obj = JSON.parse(eval(data));
+				$.each( obj.contentsList, function(index, contents){
+				var published;
+				if(contents.published){
+					published = getFormatDateByLong(contents.published.time, "yyyy-MM-dd hh:mm:ss");
+				} else{
+					published = "";
+				}
+					$("#left_select").append("<li id='"+contents.id+"'><input id='"+contents.id+"' name='box' type='radio' value='"+contents.id+"'></input><a href='"+contents.url+"' style='margin-right:40px'>"+contents.title+"</a>&nbsp;&nbsp;"+published+"</li>");					                          
+				});
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	<!-- JsonObject格式时间    start -->
+	Date.prototype.format = function (format) {   
+        var o = {   
+            "M+": this.getMonth() + 1,   
+            "d+": this.getDate(),   
+            "h+": this.getHours(),   
+            "m+": this.getMinutes(),   
+            "s+": this.getSeconds(),   
+            "q+": Math.floor((this.getMonth() + 3) / 3),   
+            "S": this.getMilliseconds()   
+        }   
+        if (/(y+)/.test(format)) {   
+            format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));   
+        }   
+        for (var k in o) {   
+            if (new RegExp("(" + k + ")").test(format)) {   
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));   
+            }   
+        }   
+        return format;   
+    } 
+	function getFormatDateByLong(l, pattern) {   
+        return getFormatDate(new Date(l), pattern);   
+    }
+    function getFormatDate(date, pattern) {   
+        if (date == undefined) {   
+            date = new Date();   
+        }   
+        if (pattern == undefined) {   
+            pattern = "yyyy-MM-dd hh:mm:ss";   
+        }   
+        return date.format(pattern);   
+    } 
+    <!-- JsonObject格式时间    end --> 
+	function formSubmitJump(){
+		var str=document.getElementsByName("box");
+		var chestr = $("input[name='box']:checked").val();
+		var urlStr = 'contentsMobileController.do?checkContent&classify=${classify}&chestr='+chestr;
+		var formName = 'form_sample_2';
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:$('#' + formName).serialize(),
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var contents = obj.content;
+					var article = obj.article;
+					var pictureGroup = obj.pictureGroup;
+					var video = obj.video;
+					var vote = obj.vote;
+					var survey = obj.survey;
+					var surveyOptionSize = obj.surveyOptionSize;
+					var domain = obj.domain;
+					$("#title").attr("value",contents.title);
+					$("#select2_sample5").attr("value",contents.sourceid);
+					$("#digest").attr("value",contents.digest);
+					$("#used").attr("value",0);
+					//文章
+					if(article!=null){
+						ueditor.setContent(article.content);//文章编辑器内容
+						editDiv(contents,domain);
+					}
+					//组图
+					if(pictureGroup!=null){
+						pictureChange(pictureGroup.url,pictureGroup.id);
+						$("#pictureId").attr("value",pictureGroup.id);
+						editDiv(contents,domain);
+					}
+					//视频
+					if(video!=null){
+						$("#videobackpath").attr("value",video.videourl);
+						$("#time").attr("value",video.time);
+					}
+					//投票
+					if(vote!=null){
+						$("#voteId").attr("value",vote.id);
+						$("#votepattern").attr("value",vote.votepattern);
+						if(vote.voteiplimit==""||vote.voteiplimit=="0"||vote.voteiplimit==null){
+							document.getElementById('iplimit1').innerHTML = "无限制";
+						}else{
+							$("#voteiplimit").attr("value",vote.voteiplimit);
+							document.getElementById('voteiplimit1').innerHTML = vote.voteiplimit;
+						}
+						document.getElementById('voteiplimit1').innerHTML = vote.voteiplimit;
+						if(vote.votepattern=="10"){document.getElementById('votepattern1').innerHTML = "普通模式"};
+						if(vote.votepattern=="20"){document.getElementById('votepattern1').innerHTML = "评选模式"};
+						$("#vh").css("display",'block');
+						voteOptionView(vote.id);
+					}
+					//调查
+					if(survey!=null){
+						if(survey.surveypeolimit==""||survey.surveypeolimit=="0"||survey.surveypeolimit==null){
+							document.getElementById('surveypeolimit1').innerHTML = "无限制";
+						}else{
+							$("#surveypeolimit").attr("value",survey.surveypeolimit);
+							document.getElementById('surveypeolimit1').innerHTML = survey.surveypeolimit;
+						}
+						if(survey.surveyiplimit==""||survey.surveyiplimit=="0"||survey.surveyiplimit==null){
+							document.getElementById('iplimit1').innerHTML = "无限制";
+						}else{
+							$("#surveyiplimit").attr("value",survey.surveyiplimit);
+							document.getElementById('surveyiplimit1').innerHTML = survey.surveyiplimit;
+						}
+						if(obj.surveyOptionSize==0){
+							$("#detail").css("diaply","none");
+						}
+						$("#surveyIds").attr("value",survey.id);
+						$("#vh").css("display",'block');
+						document.getElementById('size').innerHTML = obj.surveyOptionSize;
+					}
+					$('#editModel').empty();
+					$('#editModel').modal('hide');					
+				}else{
+					alert("提交处理失败!");
+				}
+			},
+			error:function(){
+				alert("提交通讯失败!");
+			}
+		});
+	}
+	//关联内容
+	function editDiv(contents,domain){
+		$("#relevanceid").attr("value",contents.id);
+		document.getElementById('contentsName').innerHTML = contents.title;
+		document.getElementById('aclick').href="http://"+domain+contents.url;
+		document.getElementById('editclick').onclick=function(){
+			changePage('contentsController.do?updatePageModel&id='+contents.id);
+		};
+		$("#relevanceDiv").show();
+	}
+	//组图用以保存、显示
+	function pictureChange(pictureGroupUrl,pictureGroupId){
+		
+		$.ajax({
+			type:'post',
+			url:'pictureAloneMobileController.do?pictureList',
+			data:{'pictureGroup':pictureGroupUrl,'pictureGroupId':pictureGroupId},
+			dataType:'text',
+			success:function(msg){
+				$('#pictureDiv').empty();
+				$('#pictureDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	//投票结果显示
+	function voteOptionView(voteId){
+		$.ajax({
+			type:'post',
+			url:'voteMobileController.do?voteOptionView',
+			data:{'voteId':voteId},
+			dataType:'text',
+			success:function(msg){
+				$('#resultView').empty();
+				$('#resultView').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+</script>

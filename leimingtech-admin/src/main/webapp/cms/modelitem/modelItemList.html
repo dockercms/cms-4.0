@@ -1,0 +1,135 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>方案《${modelManage.modelName!''}》拓展字段设计</div>
+				
+				<div class="actions">
+					<button id="sample_editable_1_back" class="btn gray" onclick="goBackList('modelManageController.do?table')">
+						 <i class="fa fa-pencil"></i>返回拓展字段方案管理
+					</button>
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('modelItemController.do?updatePageModel&modelId=${modelManage.id}')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span12">
+					<span class="label label-success">NOTE:</span>&nbsp;
+					点击下方按钮建立相应字段
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="actions extended tasks">
+					<div class="btn-group">
+						<a class="btn btn-xs" href="javascript:void(0);"  onclick="toEditModel('modelItemController.do?updatePageModel&modelId=${modelManage.id}&dataType=1')">单行文本</a>
+					</div>
+					<div class="btn-group">
+						<a class="btn btn-xs" href="javascript:void(0);"  onclick="toEditModel('modelItemController.do?updatePageModel&modelId=${modelManage.id}&dataType=3')">附件上传</a>
+					</div>
+					<div class="btn-group">
+						<a class="btn btn-xs" href="javascript:void(0);"  onclick="toEditModel('modelItemController.do?updatePageModel&modelId=${modelManage.id}&dataType=2')">多行文本</a>
+					</div>
+				</div>
+				<form id="item_data_list_form">
+				<table class="table" id="item_data_list">
+					<tbody>
+						<#if pageList?exists>
+						  <#list pageList as page>
+							<tr class="odd gradeX">
+								<td class="center">
+									${page.itemLabel}<br/>
+									<#if page.dataType=="1">
+										<input type="text" value=""/>
+									</#if>
+									<#if page.dataType=="2">
+										<textarea class="medium m-wrap" rows="2"></textarea>
+									</#if>
+									<#if page.dataType=="3">
+										<input type="text" value=""/>
+										<div class="btn-group">
+											<a class="btn btn-sm" target="_blank" href="javascript:void(0);">上传</a>
+										</div>
+									</#if>
+								</td>
+								<td width="225">
+									<input type="hidden" name="id" value="${page.id?if_exists}"/>
+									<div class="btn-group">
+										<a class="btn yellow btn-sm" target="_blank" href="javascript:void(0);"  onclick="toEditModel('modelItemController.do?updatePageModel&id=${page.id?if_exists}')">修改 </a>
+									</div>
+									<div class="btn-group">
+										<a class="btn red btn-sm" target="_blank" href="javascript:void(0);"  onclick="del('modelItemController.do?del&modelId=${modelManage.id}', '${page.id?if_exists}')">删除</a>
+									</div>
+									<div class="btn-group">
+										<a class="btn green btn-sm up" target="_blank" href="javascript:void(0);"  onclick="">上移 </a>
+									</div>
+									<div class="btn-group">
+										<a class="btn green btn-sm down" target="_blank" href="javascript:void(0);"  onclick="">下移 </a>
+									</div>
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+					</tbody>
+				</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="550">
+</div>
+<script type="text/javascript">
+function goBackList(url){
+	if(getCurrentChangePageURL()){
+		changePage(getCurrentChangePageURL());
+	}else{
+		changePage(url);
+	}
+
+}
+
+function saveSort(){
+	$.ajax({
+		type:'post',
+		url:'modelItemController.do?saveSort',
+		data:$('#item_data_list_form').serialize(),
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				UIToastr.success("已为您自动保存最新排序！");
+			}else{
+				lmAlert(obj.msg);
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		},
+		complete:function (){
+		
+		}
+	});
+	
+}
+$(function (){
+	//上移
+	$("#item_data_list").on("click",".up",function (){
+	  var $tr = $(this).parent().parent().parent();
+	  if ($tr.index() != 0) {
+		   $tr.prev().before($tr);
+		   saveSort();
+	  }
+	});
+	
+	 $("#item_data_list").on("click",".down",function (){
+	
+	  var $tr = $(this).parent().parent().parent();
+	  if ($tr.index() != $("#item_data_list .down").length - 1) {
+	   	 $tr.next().after($tr);
+	   	 saveSort();
+	  }
+	});
+});
+</script>

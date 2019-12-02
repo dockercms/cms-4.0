@@ -1,0 +1,360 @@
+
+<!-- saved from url=(0044)http://data.ahciq.gov.cn/sheng_list_23.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>${site.siteName}</title>
+<link rel="stylesheet" href="/zfxxgk/css/zwmain.css" type="text/css">
+
+<style>
+.Tip {
+	width: 500;
+	z-index: 999;
+}
+
+.Tip table {
+	width: 100%;
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none
+}
+
+.white,.white a {
+	color: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.font9 {
+	background-image:url(/zfxxgk/images/left_off.jpg);
+	padding-left: 60px
+}
+
+.font9,.font9 a,.font9red,.font9red a {
+	font-size: 13px;
+	line-height: 35px;
+	overflow: hidden;
+	text-decoration: none
+}
+
+.font9 a {
+	color: black
+}
+
+.font9red a {
+	color: #B9000A;
+	font-weight: bold
+}
+
+.font9red {
+	background-image:background-image: url(/zfxxgk/images/left_on.jpg);
+	padding-left: 60px
+}
+
+.font10,.font10 td,.font10 a {
+	font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+	<#include "/wwwroot/${sitePath}/template/common/head_gov.html">
+
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td valign="top" style="padding:20px 0 0 20px;">
+					<table width="100%" border="0" cellpadding="10" cellspacing="1"
+						bgcolor="#bed8f1">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										style="border-bottom: 1px solid #bed8f1; margin-bottom:10px;">
+										<tbody>
+											<tr>
+												<td width="30" height="30" align="center"><img
+													src="/zfxxgk/images/ico8.gif" width="12"
+													height="11">
+												</td>
+												<td class="blue">当前位置：<a
+													href="/">首页</a> &gt; 
+													<#assign name="catalogTag"> 
+													<#assign catalogTag=newTag("${name}")>
+													<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbaadb60005'}")>
+													<#if catalog?exists>
+														<a href="${catalog.url!'javascript:void(0);'}">政务公开</a>
+													</#if> 
+													&gt; 依申请公开
+												</td>
+											</tr>
+										</tbody>
+									</table> 
+								
+									<table cellspacing="0" cellpadding="0" width="90%"
+										align="center" border="0">
+										<tbody>
+											<tr bgcolor="#f8f8f8">
+												<td colspan="3" style="height: 50px"></td>
+											</tr>
+											<tr>
+												<td bgcolor="#EFEFEF" class="text-2"
+													style="height: 15px; width: 28px;" align="center"><b><font
+														color="#FF0000">申<br> 请<br> 人<br> 信<br>
+															息</font>
+												</b>
+												</td>
+												<td valign="top" style="height: 15px;">
+													<table cellspacing="0" cellpadding="0" width="100%"
+														align="center" border="0">
+														<tbody>
+															<tr>
+																<td valign="top" style="height: 15px;">
+																	<table cellpadding="0" cellspacing="0" width="99%"
+																		align="center">
+																		<tbody>
+																			<tr align="center">
+																				<td colspan="3" id="gm1">
+																					<table bgcolor="#dfdfdf" border="0" cellpadding="5"
+																						cellspacing="1" width="100%">
+																						<tbody>
+																							<tr>
+																								<td rowspan="5" align="center" width="35"
+																									bgcolor="F7F7F7"><b><img src=""
+																										width="35" height="1"><br> 公<br>
+																										民</b>
+																								</td>
+																								<td align="center" bgcolor="#f8f8f8" width="128">姓名</td>
+																								<td bgcolor="#ffffff" align="left"><#if applyPublic.bjjSel==0>${applyPublic.grName}<#else>***</#if></td>
+																								<td align="center" bgcolor="#f8f8f8" width="121">工作单位</td>
+																								<td bgcolor="#ffffff" align="left" width="305">
+																									<#if applyPublic.bjjSel==0>${applyPublic.grDanwei}<#else>***</#if>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8">证件名称</td>
+																								<td bgcolor="#ffffff" align="left">***</td>
+																								<td align="center" bgcolor="#f8f8f8" width="121">
+																									证件号码</td>
+																								<td bgcolor="#ffffff" align="left" width="305">
+																									***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8" width="128">
+																									联系电话</td>
+																								<td bgcolor="#ffffff" align="left" width="206">
+																									***</td>
+																								<td align="center" bgcolor="#f8f8f8" width="121">
+																									传真</td>
+																								<td bgcolor="#ffffff" align="left" width="305">
+																									***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8" width="128">
+																									联系地址</td>
+																								<td bgcolor="#ffffff" align="left" width="206">
+																									***</td>
+																								<td align="center" bgcolor="#f8f8f8" width="121">
+																									邮政编码<font color="#e70000">&nbsp;</font>
+																								</td>
+																								<td bgcolor="#ffffff" align="left" width="305">
+																									***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8" width="128">
+																									电子邮箱</td>
+																								<td align="left" bgcolor="#ffffff" colspan="3">
+																									***</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																					<table bgcolor="#dfdfdf" border="0" cellpadding="5"
+																						cellspacing="1" class="text-1" width="100%">
+																						<tbody>
+																							<tr>
+																								<td rowspan="5" align="center" width="35"
+																									bgcolor="F7F7F7"><b><img src=""
+																										width="35" height="1"><br> 法<br>
+																										人<br> 或<br> 其<br> 他<br> 组<br>
+																										织</b>
+																								</td>
+																								<td align="center" bgcolor="#f8f8f8" width="128">
+																									名称</td>
+																								<td bgcolor="#ffffff" align="left" colspan="3">
+																									<#if applyPublic.bjjSel==1>${applyPublic.frName}<#else>***</#if>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8" height="27">
+																									法人代表</td>
+																								<td bgcolor="#ffffff" align="left" width="206"
+																									height="27">***</td>
+																								<td align="center" bgcolor="#f8f8f8" width="121"
+																									height="27">联系人姓名</td>
+																								<td bgcolor="#ffffff" align="left" width="305"
+																									height="27">***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8">联系人电话</td>
+																								<td bgcolor="#ffffff" align="left" width="206">
+																									***</td>
+																								<td align="center" bgcolor="#f8f8f8"><font
+																									color="#e70000"></font>邮政编码</td>
+																								<td bgcolor="#ffffff" align="left">***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8">联系地址</td>
+																								<td align="left" bgcolor="#ffffff" width="206">
+																									<b> ***</b></td>
+																								<td align="center" bgcolor="#f8f8f8">传真</td>
+																								<td align="left" bgcolor="#ffffff">***</td>
+																							</tr>
+																							<tr>
+																								<td align="center" bgcolor="#f8f8f8">电子邮箱</td>
+																								<td align="left" colspan="3" bgcolor="#FFFFFF">
+																									***</td>
+																							</tr>
+																						</tbody>
+																					</table></td>
+																			</tr>
+																			<tr>
+																				<td align="center" bgcolor="#f8f8f8" width="21%">
+																					<font color="#e70000">＊</font>申请时间</td>
+																				<td align="left" bgcolor="#ffffff" height="26"
+																					width="79%">${applyPublic.datetime?string("yyyy-MM-dd HH:mm:ss")}</td>
+																			</tr>
+																		</tbody>
+																	</table></td>
+															</tr>
+														</tbody>
+													</table></td>
+											</tr>
+											<tr>
+												<td class="text-2" align="center" bgcolor="#EFEFEF"
+													style="width: 28px; height: 594px;"><b><font
+														color="#FF0000">所<br> 需<br> 信<br> 息<br>
+															情<br> 况</font>
+												</b>
+												</td>
+												<td valign="top" style="height: 594px">
+													<table width="100%" border="0" cellspacing="0"
+														cellpadding="0">
+														<tbody>
+															<tr>
+																<td height="6"></td>
+															</tr>
+														</tbody>
+													</table>
+													<table width="99%" border="0" cellspacing="1"
+														cellpadding="5" bgcolor="#dfdfdf" align="center">
+														<tbody>
+															<tr bgcolor="#FFFFFF">
+																<td width="166" align="center">所需信息的内容描述</td>
+																<td width="606">${applyPublic.content}</td>
+															</tr>
+															<tr bgcolor="#FFFFFF">
+																<td width="166" align="center">所需信息的用途</td>
+																<td width="606">${applyPublic.xtYongtu}</td>
+															</tr>
+															<tr bgcolor="#FFFFFF">
+																<td width="166" align="center">所需信息的指定提供方式</td>
+																<td bgcolor="#ffffff" width="606">
+																	<#if carrierList?exists>
+																		<#list carrierList as carrier>
+																			<span disabled="" style="font-family:宋体;font-size:11px;"> 
+																		
+																				<input type="checkbox" name="xingshi" value="${carrier.typecode}" 
+																				<#list applyPublic.xingshi?split(",") as xingshi>
+																					<#if xingshi==carrier.typecode>
+																					checked="checked"
+																					</#if>
+																				</#list>
+																				>
+																			${carrier.typename}</span><br> 
+																		</#list>
+																	</#if>
+																	<span disabled="" style="font-family:宋体;font-size:11px;"> 
+																		<input type="checkbox" name="xingshi" value="其他" 
+																		
+																		<#list applyPublic.xingshi?split(",") as xingshi>
+																			<#if xingshi=='其他'>
+																					checked="checked"
+																			</#if>
+																		</#list>
+																		>
+																		若本机关无法按照指定方式提供所需信息，也可接受其他方式
+																	</span><br> 
+																</td>
+															</tr>
+															<tr bgcolor="#FFFFFF">
+																<td width="166" align="center">获取信息的方式</td>
+																<td width="606">
+																	<#if informationList?exists>
+																		<#list informationList as information>
+																			<span disabled="" style="font-family:宋体;font-size:11px;"> 
+																				<input type="checkbox" name="xt_huoqufs" value="${information.typecode}"
+																					<#list applyPublic.xtHuoqufs?split(",") as xtHuoqufs>
+																						<#if xtHuoqufs==information.typecode>
+																						  checked="checked"
+																						</#if>
+																					</#list>
+																				>
+																				${information.typename}
+																			</span><br> 
+																		</#list>
+																	</#if>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<table width="100%" border="0" cellspacing="0"
+														cellpadding="0">
+														<tbody>
+															<tr>
+																<td height="6"></td>
+															</tr>
+														</tbody>
+													</table>
+													<table class="text-1" cellspacing="1" cellpadding="5"
+														width="99%" bgcolor="#dfdfdf" border="0" align="center">
+														<tbody>
+															<tr>
+																<td style="height: 47px" bgcolor="#f8f8f8"
+																	align="center" width="163">办理结果</td>
+																<td bgcolor="#FFFFFF" style="height: 47px" width="613">
+																	<#if statusList?exists>
+																		<#list statusList as status>
+																			<#if applyPublic.isstat==status.typecode>
+																				${status.typename}
+																			</#if>
+																		</#list>
+																	</#if>
+																</td>
+															</tr>
+															<tr>
+																<td bgcolor="#f8f8f8" style="height: 127px"
+																	align="center" width="163">备注</td>
+																<td bgcolor="#ffffff" style="height: 127px" width="613">
+																	${applyPublic.remarks}
+																</td>
+															</tr>
+														</tbody>
+													</table></td>
+											</tr>
+										</tbody>
+									</table></td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+		<#include "/wwwroot/${sitePath}/template/common/foot_gov.html">
+
+
+</body>
+</html>

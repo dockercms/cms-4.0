@@ -1,0 +1,155 @@
+<div class="portlet-title">
+	<div class="caption">
+		<i class="fa fa-shopping-cart"></i>频道信息
+	</div>
+	<#if mobileChannel.id != "">
+	<div class="actions btn-set">
+	<#if mobileChannel?exists && mobileChannel.mobileChannel?exists && mobileChannel.mobileChannel.id?exists && mobileChannel.mobileChannel.id!=null>
+	<#else>
+		<button class="btn yellow btn-sm" onclick="toEditModel('mobileChannelController.do?edit&selectId=${selectId}')"><i class="fa icon-plus"></i> 创建子节点</button>
+	</#if>
+	
+		<button class="btn yellow btn-sm" onclick="submitChannelModel('mobileChannelController.do?update', 'form_sample_4')"><i class="fa fa-check-circle"></i> 保存</button>
+		<button class="btn yellow btn-sm" onclick="del('mobileChannelController.do?del', '${selectId?if_exists}')"><i class="fa icon-remove"></i> 删除</button>
+	</div>
+	</#if>
+</div>
+<div class="portlet-body">
+<#if mobileChannel.id == "">
+	<button class="btn yellow btn-sm" onclick="toEditModel('mobileChannelController.do?edit&selectId=-1')"><i class="icon-plus icon-white"></i> 创建节点</button>
+<#else>
+<form id="form_sample_4" class="form-horizontal">
+	<input type="hidden" id="id" name="id" value="${mobileChannel?if_exists.id}"/>
+	<input type="hidden" id="id" name="mobileChannel.id" value="${mobileChannel?if_exists.mobileChannel?if_exists.id}"/>
+	<div class="control-group">
+		<label class="control-label">频道名称：</label>
+		<div class="controls">
+			<input type="text" id="name" name="name" class="span10 form-control" data-rule-required="true" value="${mobileChannel?if_exists.name}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">图标：</label>
+		<div class="controls">
+			<input type="hidden" id="channelIco" name="channelIco" class="form-control" value="${mobileChannel.channelIco!''}"/>
+			<i class="${mobileChannel.channelIco!''}"></i>
+			<button class="btn purple mini" type="button" onclick="toEditModelSub('selectIconController.do?showicon')">选择图标</button>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">频道类型：</label>
+		<div class="controls">
+			<select id="channelType" name="channelType" class="span10 form-control">
+				<option <#if mobileChannel.channelType=="news">selected="selected"</#if> value="news">新闻</option>
+				<option<#if mobileChannel.channelType=="pic">selected="selected"</#if>  value="pic">图片</option>
+				<option<#if mobileChannel.channelType=="video">selected="selected"</#if>  value="video">视频</option>
+				<#--<option<#if mobileChannel.channelType=="invi">selected="selected"</#if>  value="invi">跟帖</option> -->
+			</select>
+		</div>
+	</div>
+	<#if mobileChannel?exists && mobileChannel.mobileChannel?exists && mobileChannel.mobileChannel.id?exists && mobileChannel.mobileChannel.id!=null>
+	<div class="control-group">
+		<label class="control-label">头条频道：</label>
+		<div class="controls">
+		<#if mobileChannel.channelTop?if_exists && mobileChannel.channelTop =='1'>
+			<label class="radio">
+				<span style="color:red">该栏目已为头条频道,如果想切换,请到其他栏目里面进行切换</span>
+				
+			</label>
+		<#else>
+			<label class="radio">
+				
+ 		        <input  type="radio" id="channelTop" name="channelTop" value="1">是
+ 		  	</label>
+		 	<label class="radio">
+				<input  type="radio" name="channelTop" value="0" 
+					<#if mobileChannel.channelTop?if_exists && mobileChannel.channelTop =='0'>checked</#if>
+					<#if mobileChannel.channelTop !='0' && mobileChannel.channelTop !='1'>checked</#if>
+					>否
+			</label> 
+		
+		</#if>
+		
+			
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">热门频道：</label>
+		<div class="controls">
+			<label class="radio">
+		        <input  type="radio" name="channelHot" value="1" <#if mobileChannel.channelHot?if_exists && mobileChannel.channelHot =='1'>checked</#if>>是
+		  	</label>
+			<label class="radio">
+				<input  type="radio" name="channelHot" value="0" 
+					<#if mobileChannel.channelHot?if_exists && mobileChannel.channelHot =='0'>checked</#if>
+					<#if mobileChannel.channelHot !='0' && mobileChannel.channelHot !='1'>checked</#if>
+					>否
+			</label>
+		</div>
+	</div>
+	</#if>
+	<div class="control-group">
+		<label class="control-label">排序：</label>
+		<div class="controls">
+			<input type="text" id="sort" name="sort" class="span3 form-control" value="${mobileChannel?if_exists.sort!'0'}"/>
+			<span class="help-inline">提示：数字越大越靠前</span>
+		</div>
+	</div>
+</form>
+</#if>
+</div>
+<div id="toEditModelSub" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="700" data-height="450">
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#form_sample_2").myValidate();
+});
+	
+function submitChannelModel(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	var el = $(".page-header-fixed");
+	App.blockUI(el);
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				lazyChangePage(obj.toUrl);
+			}
+			lmAlert(obj.msg);
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		},
+		complete:function (){
+			App.unblockUI(el);
+		}
+	})
+}
+//选择图标
+function toEditModelSub(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+function selectIconBack(iconclass){
+	$("#form_sample_4 #channelIco").val(iconclass).next().attr("class",iconclass);
+};
+
+</script>

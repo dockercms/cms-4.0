@@ -1,0 +1,100 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>依申请公开</div>
+				<!-- <div class="actions">
+					<button onclick="toEditModel('applyPublicController.do?add')" class="btn yellow-stripe"><i class="fa fa-plus"></i> 新增 </button>
+				</div> -->
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+							
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									公民姓名：
+									<input name="grName" class="form-control span7" type="text" value="${searchMap["grName"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="span4">
+								<label style="margin-bottom:0px;">
+									法人名称：
+									<input name="frName" class="form-control span7" type="text" value="${searchMap["grName"]?if_exists[0]}" style="margin-bottom:0px;">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearch('applyPublicController.do?applyPublic', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="">类别</th>
+							<th style="">联系人姓名</th>
+							<th style="">联系方式</th>
+							<th style="">电子信箱</th>
+							<th style="">时间</th>
+							<th width="45" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#if applyPublicList?exists>
+					  <#list applyPublicList as applyPublic>
+						<tr class="odd gradeX">
+							<td style="text-align:center;">${(pageNo-1)*pageSize+applyPublic_index?if_exists+1}</td>
+							<#if applyPublic.bjjSel==0>
+							<td>
+									<a href="javascript:void(0)" onclick="toSearch('applyPublicController.do?applyPublic&bjjSel=0', 'search_form');">公众</a>
+							</td>
+							<td>
+								${applyPublic.grName}
+							</td>
+							<td>
+								${applyPublic.grContact}
+							</td>
+							<td>
+								${applyPublic.grEmail}
+							</td>
+							
+							<#elseif applyPublic.bjjSel==1>
+							<td>
+									<a href="javascript:void(0)" onclick="toSearch('applyPublicController.do?applyPublic&bjjSel=1', 'search_form');">法人或其他组织</a>
+							</td>
+							<td>
+								${applyPublic.frName}
+							</td>
+							<td>
+								${applyPublic.frContact}
+							</td>
+							<td>
+								${applyPublic.frEmail}
+							</td>
+							
+							</#if>
+							<td>
+								${applyPublic.datetime?string("yyyy-MM-dd HH:mm:ss")}
+							</td>
+							
+							<td style="text-align:center;">
+								<input type='button' class="editbtn" title='查看' onclick="toEditModel('applyPublicController.do?edit&id=${applyPublic.id?if_exists}')" />
+								<input type='button' class="delbtn" title='删除' onclick="del('applyPublicController.do?del', '${applyPublic.id?if_exists}')" />
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>

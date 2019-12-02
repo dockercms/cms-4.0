@@ -1,0 +1,82 @@
+<style type="text/css">
+table,caption,tbody,tfoot,thead,tr,th,td,b{margin:0;padding:0;border:0;outline:0;font-size:100%;background:transparent;}
+
+/*网络调查*/
+.survey{ padding-left:12px; padding-right:9px; padding-top:5px; line-height:24px; font-size:12px;}
+.survey table { border-collapse:collapse;border-spacing:0; }
+
+</style>
+
+<div class="rim06">
+	<div class="LanMu01-2">
+		<div class="LanMu01-1"></div>
+		<span>网络调查</span>
+		<div class="LanMu01-3"></div>
+	</div>
+	<div class="survey">
+		<#if content?exists && survey?exists>
+		<form id="surveyForm" >
+			<table width="100%" border="0" cellspacing="5" cellpadding="0">
+				<tr>
+					<td height="30" colspan="2" align="center">
+						<b>< ${content.title} ></b> 
+						<input type="hidden" name="surveyId" value="${survey.id}" />
+					</td>
+				</tr>
+				<tr>
+					<td height="30" colspan="2" align="left">${content.digest}</td>
+				</tr>
+				<#list survey.optionList as option>
+					<tr>
+						<td height="30" colspan="2" align="left">
+						<span style="color: #1c77ba;">${option_index+1}、${option.optionname}</span>
+						</td>
+					</tr>
+					<#if option.dataType=='radio'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="radio"	name="itemIds${option.id}" value="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+							</#list>
+							</td>
+						</tr>
+					</#if>
+					<#if option.dataType=='checkbox'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<#list option.optionextList as ext>
+								<input type="checkbox"	name="itemIds${option.id}" value="${ext.id}" id="${ext.id}" />${ext_index+1}.${ext.extOptionname}
+							</#list>
+							</td>
+						</tr>
+					</#if>
+					<#if option.dataType=='text'>
+						<tr>
+							<td height="30" colspan="2" align="left">
+							<input name="reply"	type="text" /></td>
+						</tr>
+					</#if>
+					<input name=subIds type="hidden" value="${option.id}" />
+				</#list>
+				<tr>
+					<td height="35" colspan="2" align="center" valign="bottom">
+						<input id="surveybtn"	type="button" value="投 票" /> &nbsp; <a href=""	target="_blank">查看投票结果</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<br>
+		<script type="text/javascript">
+			$(function (){
+				$("#surveybtn").click(function (){
+					Cms.survey(function (data){
+						alert("提交的数据未处理");
+					});
+				});
+			});
+		</script>
+		<#else>
+		<div>没有默认投票主题</div>
+		</#if>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+	
+	<div class="page" style="margin-left:100px; padding-top:100px;">
+
+	<#if pageNo == 1>
+	<a href="javascript:void(0)" style="text-decoration: none; cursor: default; color:#666;">首页</a>
+	<a href="javascript:void(0)" style="text-decoration: none; cursor: default; color:#666;">上一页</a>
+	<#else>
+	<a href="javascript:void(0)" onclick="toSearch('${contextpath}/front/frontController.do?mysearch&pageNo=1')">首页</a>
+	<a href="javascript:void(0)" onclick="toSearch('${contextpath}/front/frontController.do?mysearch&pageNo=${pageNo-1}')">上一页</a>
+	</#if>
+	<#list 1..pageCount as i>
+	<#if i == pageNo>
+	<a class="current" href="javascript:void(0)">${i}</a>
+	<#else>
+	<a href="javascript:void(0)" onclick="toSearch('${contextpath}/front/frontController.do?mysearch&pageNo=${i}')">${i}</a>
+	</#if>
+	</#list>
+	<#if pageNo == pageCount>
+	<a href="javascript:void(0)" style="text-decoration: none; cursor: default; color:#666;">下一页</a>
+	<a href="javascript:void(0)" style="text-decoration: none; cursor: default; color:#666;">尾页</a>
+	<#else>
+	<a href="javascript:void(0)" onclick="toSearch('${contextpath}/front/frontController.do?mysearch&pageNo=${pageNo+1}')">下一页</a>
+	<a href="javascript:void(0)" onclick="toSearch('${contextpath}/front/frontController.do?mysearch&pageNo=${pageCount}')">尾页</a>
+	</#if>
+	
+	
+	</div>
+
+

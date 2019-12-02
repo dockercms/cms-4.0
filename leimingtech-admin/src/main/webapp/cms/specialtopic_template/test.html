@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>专题模板</title>
+		<link href="/layoutitghpages4leimingtech/css/bootstrap-combined.min.css" rel="stylesheet">
+	</head>
+	<body>
+	<br /><br />
+	<!--start-leimingtech-limengbo-template-->
+	<div class="container">
+		<div class="row">
+			<div class="span4">
+				<div leimingtech-limenbo-content-model-number="number-1398404922910-0.6231385360006243-1">
+			<div>标题23</div>
+			<div>
+			  <ul>
+			    <#assign flashTag =newTag("flashTag")>
+				<#assign flashList =flashTag("{'token':'tazthk1396344971'}")>
+				<#if flashList?exists>
+				  <#list flashList as flash>
+				    <li>${flash_index?if_exists+1},${flash.info?if_exists},${flash.url?if_exists}</li>
+				  </#list> 
+				</#if>
+			  </ul>
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
+

@@ -1,0 +1,219 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,div,ul,li,h1,h2,a,img,table,p{border:0px; margin:0px; padding:0px;}
+
+ul{list-style:none;}
+.clear{clear:both;}
+
+a{text-decoration:none; color:#737373;}
+a:hover{color:#FF900A;}
+
+body{font-size:12px; 
+	font-family:"微软雅黑"; 
+	line-height:22px; 
+	color:#737373;
+	background:url(../zhuanti/bg.png) top repeat-x;
+	position:relative;
+}
+.div_main{width:1245px;margin:auto;}
+.zhuanti{background:url(../zhuanti/bg_zhuanti.png);
+	height:331px;
+	position:relative;
+}
+.topic{padding:33px 0px 0px 174px;
+	width:530px;
+	color:#FFF;
+	font-family:"微软雅黑";
+}
+.topic h1{font-size:40px;
+	padding-bottom:20px;
+	font-weight:normal;
+}
+.topic h2{font-size:22px;
+	color:#C5F176;
+	padding-bottom:18px;
+	border-bottom:#8AD433 1px dotted;
+	font-weight:normal;
+}
+.topic p{line-height:24px; 
+	font-family:"宋体";
+	color:#DAF2BC;
+	padding-top:20px;
+}
+#topicpic{position:absolute;
+	left:738px;
+	top:-39px;
+	width:381px;
+}
+#topicpic div{padding-bottom:10px; 
+	color:#333333;
+	font-size:14px;
+	font-weight:bold;
+}
+#topicpic div span.date{float:right;
+	display:block;
+	background:url(../zhuanti/date.png);
+	height:22px;
+	width:112px;
+	font-size:12px;
+	font-weight:normal;
+	color:#FFF;
+	padding-left:5px;
+}
+.content{width:988px;
+	margin:auto;
+	margin-top:25px;
+}
+.left{float:left;
+	width:650px;
+	padding:10px 21px 28px 24px;
+	border:#D0D0D0 1px solid;
+	font-family:"微软雅黑";
+	position:relative;
+}
+#topicico{
+	height:54px;
+	width:92px;
+	position:absolute;
+	left: -11px;
+	top: 9px;
+}
+#btnfont{
+	position:absolute;
+	height:24px;
+	width:54px;
+	right:20px;
+	top:23px;
+}
+.left h1{display:block;
+	font-size:24px;
+	height:32px;
+	border-bottom:#D0D0D0 1px solid;
+	margin-left:64px;
+	padding-top:11px;
+	padding-right:60px;
+	font-weight:normal;
+}
+.left h1 span.source{float:right;
+	text-align:right;
+	font-size:12px;
+	font-weight:normal;
+	color:#FD8B05;
+	line-height:18px;
+	margin-top:-6px;
+}
+.left p{padding:18px 0px 12px 0px;}
+
+.right{width:270px;
+	padding-left:18px;
+	float:left;
+}
+.other{padding-bottom:10px;}
+.title{background:url(../zhuanti/bg_other.png);
+	height:33px;
+	font-family:"微软雅黑";
+	font-size:14px;
+	font-weight:bold;
+	color:#FFF;
+	line-height:33px;
+	padding-left:25px;
+}
+.frame{border:#D0D0D0 1px solid;
+	padding:10px;
+	font-family:"微软雅黑";
+}
+.frame h1{font-size:14px;
+	color:#0C3768;
+	background:url(../zhuanti/3dot.png) 0px 8px repeat-x;
+}
+.frame h1 span{background:#FFF; 
+	padding-right:5px;
+}
+.frame table{margin-top:10px;
+	margin-bottom:10px;
+	color:#333333;
+}
+.frame table a{font-weight:bold;}
+.frame table a:hover{color:#81511C;}
+.div_line1{border-bottom:#DFDFDF 1px solid;
+	border-top:#FFF 1px solid;
+}
+.frame ul{padding:10px;}
+.frame ul a{display:block;
+	height:22px;
+	padding-left:16px;
+	background:url(../img/ico_l2.png) no-repeat 0px 9px;
+}
+.frame ul a:hover{background:url(../img/ico_l2act.png) no-repeat 0px 9px;}
+.frame h2{font-size:14px;
+	font-weight:bold;
+	font-family:"宋体";
+	padding-bottom:10px;
+}
+.diaocha{margin:10px 0px 10px 5px;
+	font-size:14px;
+	font-family:"宋体";
+}
+.btn{text-align:center;
+	padding:10px;
+}
+input.text{width:140px;
+	height:20px;
+	border:#DFDFDF 1px solid;
+	color:#D5D5D5;
+	font-size:12px;
+}
+.div_link{background:url(../img/bg_link.png) left no-repeat;
+	height:36px;
+	padding-left:84px;
+	border:1px #C4C4C4 solid;
+	width:905px;
+	margin:auto;
+	margin-top:30px;
+}
+
+.div_link span{display:block;
+	height:24px;
+	margin-top:7px;
+	margin-left:6px;
+	float:left;
+}
+
+.div_link select{height:22px;
+	width:220px;
+	border:1px solid #D4D4D4;
+	background:url(../img/bg_select.png) repeat-x;
+}
+.div_main2{width:1000px;
+margin:auto;
+}
+.div_foot{background:url(../img/bg-foot.png) repeat-x;
+	height:178px;
+}
+
+.div_footlogo{margin:73px 0px 0px 176px;
+	height:68px;
+	width:273px;
+	border-right:#FFF 1px solid;
+	float:left;
+	_margin-left:88px;
+}
+
+.div_footcontent{margin-top:73px;
+	float:left;
+	height:68px;
+	border-left:#D4D4D4 1px solid;
+	padding-left:26px;
+	color:#6A6A6A;
+}
+
+.div_footcontent a{color:#6A6A6A;}
+#share{background:url(../zhuanti/fx.png) left no-repeat;
+	height:94px;
+	width:76px;
+	padding-left:25px;
+	position:absolute;
+	right:0px;
+	top:440px;
+}
+#share div{border:#DFDFDF 1px solid; border-right:0px; background:#fff;}

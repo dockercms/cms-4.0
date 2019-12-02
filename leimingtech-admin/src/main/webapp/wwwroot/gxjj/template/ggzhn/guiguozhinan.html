@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>耳机爱好者俱乐部-专题分享</title>
+    <link href="/css/CHINAiback.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+        <!--导航开始-->
+        <#include "/wwwroot/${sitePath}/template/pc/section/index_nav.html"><!-- 导航 -->
+            <#assign name ="catalogTag">
+                <#assign catalogTag =newTag("${name}")>
+                    <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad0f3aef2016d'}")>
+        <!--导航结束-->
+<div class="blank10"></div>
+<div class="area">
+    <!--============================广告===============-->
+    <#assign advTag =newTag("advTag")>
+    <#assign advList=advTag("{'name':'402881cc5acf77a2015ad0fa2bd70173'}")>
+    <#if advList?exists && advList?size gt 0>
+         <#list advList as adv>
+             <div class="gg990 left"><a href="#" target="_blank"><img src="${adv.imgUrl}" /></a></div>
+         </#list>
+    </#if>
+
+    <div class="blank10"></div>
+    <div style="float:left; width:720px;">
+        <div class="mq720 left bgcolor">
+            <div class="zq355 left">
+                <!--================================综合政策==================================-->
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad108d7970178','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad108d7970178'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad108d7970178'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+            <div class="zq355 right">
+                <!--================================出入境==================================-->
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad10943af017a','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10943af017a'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10943af017a'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+            <div class="blank15"></div>
+            <div class="zq355 left">
+                <!--=========================耳机评测==================================-->
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad109cf44017c','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad109cf44017c'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad109cf44017c'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+<!--==============================落户==================================-->
+            <div class="zq355 right">
+                <h1>
+                    <#assign name ="catalogTag">
+                    <#assign catalogTag =newTag("${name}")>
+                    <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad10a4545017e','page':true, 'pageindex':'${pageindexF}' }")>
+                    <#if catalog?exists>
+                        <span>${catalog.name}</span>
+                        <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                    </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10a4545017e'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10a4545017e'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+            <div class="blank15"></div>
+
+<!--==========================保险========================-->
+            <div class="zq355 left">
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad10a8b4f0180','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10a8b4f0180'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10a8b4f0180'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+<!--==========================住房============================-->
+            <div class="zq355 right">
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5acf77a2015ad10af7d50182','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10af7d50182'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'402881cc5acf77a2015ad10af7d50182'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+<!--=========================================子女安置=========================-->
+            <div class="blank15"></div>
+            <div class="zq355 left">
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'ff8080815ad497af015ad4ad4b140053','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'ff8080815ad497af015ad4ad4b140053'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'ff8080815ad497af015ad4ad4b140053'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+            <div class="zq355 right" >
+                <!--==============================其他=======================================-->
+                <h1>
+                    <#assign name ="catalogTag">
+                        <#assign catalogTag =newTag("${name}")>
+                            <#assign catalog =catalogTag("{'levels':'self','name':'ff8080815ad497af015ad4ad9ca90055','page':true, 'pageindex':'${pageindexF}' }")>
+                                <#if catalog?exists>
+                                    <span>${catalog.name}</span>
+                                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                                </#if>
+                </h1>
+                <dl>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'ff8080815ad497af015ad4ad9ca90055'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index == articleList?size-1>
+                                        <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                        <dd>
+                                            <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                            <p>
+                                                <#if article.digest?length gt 30>
+                                                    ${article.digest?substring(0,30)}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                    <#else>
+                                                        ${article.digest}...
+                                                        <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                </#if>
+                                            </p>
+                                        </dd>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </dl>
+                <ul>
+                    <#assign articleTag =newTag("articleTag")>
+                        <#assign articleList =articleTag("{'name':'ff8080815ad497af015ad4ad9ca90055'}")>
+                            <#if articleList?exists && articleList?size gt 0>
+                                <#list articleList as article>
+                                    <#if article_index != articleList?size-1>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></li>
+                                    </#if>
+                                </#list>
+                            </#if>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div style="float:right; width:260px;">
+        <div class="mq260 left bgcolor">
+<!--=============================焦点新闻===================-->
+            <h1>
+                <#assign name ="catalogTag">
+                    <#assign catalogTag =newTag("${name}")>
+                        <#assign catalog =catalogTag("{'levels':'self','name':'ff8080815ad497af015ad4c90a630093','page':true, 'pageindex':'${pageindexF}' }")>
+                            <#if catalog?exists>
+                                <span>${catalog.name}</span>
+                                <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                            </#if>
+            </h1>
+            <ul>
+                <#assign articleTag =newTag("articleTag")>
+                    <#assign articleList =articleTag("{'name':'ff8080815ad497af015ad4c90a630093'}")>
+                        <#if articleList?exists && articleList?size gt 0>
+                            <#list articleList as article>
+                                    <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>  <span>${article.created?string("yyyy-MM-dd")}</span></li>
+                            </#list>
+                        </#if>
+            </ul>
+        </div>
+        <div class="mq260  margin10 left bgcolor">
+<!--=============================品牌简介===================-->
+            <h1>
+                <#assign name ="catalogTag">
+                <#assign catalogTag =newTag("${name}")>
+                <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5b30f9e0003','page':true, 'pageindex':'${pageindexF}' }")>
+                <#if catalog?exists>
+                    <span>${catalog.name}</span>
+                    <a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多>></a>
+                </#if>
+            </h1>
+            <#assign articleTag =newTag("articleTag")>
+                <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad5b30f9e0003'}")>
+                    <#if articleList?exists && articleList?size gt 0>
+                        <#list articleList as article>
+                                <dl>
+                                    <dt><img width="50%" height="50%" src="${article.thumb?if_exists}"/></dt>
+                                    <dd>
+                                        <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></span>
+                                        <p>
+                                            <#if article.digest?length gt 20>
+                                                ${article.digest?substring(0,20)}...
+                                                <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                                <#else>
+                                                    ${article.digest}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank">[详情]</a>
+                                            </#if>
+                                        </p>
+                                    </dd>
+                                </dl>
+                        </#list>
+                    </#if>
+        </div>
+    </div>
+
+</div>
+
+<!--===========================页脚==================================-->
+<#include "/wwwroot/${sitePath}/template/pc/section/footer.html">
+<!--===========================页脚==================================-->
+</body>
+</html>

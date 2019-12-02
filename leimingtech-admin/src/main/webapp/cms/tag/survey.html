@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网络调查</title>
+<link rel="stylesheet" type="text/css" href="../media/dgsw/css/main.css"/>
+<script type="text/javascript" src="../media/js/jquery-1.10.1.min.js"></script>
+<script>
+	function changepic(obj,img){
+		obj.src=img;
+	}
+</script>
+<script type="text/javascript">
+function settab_xbingjs(name,num,n){
+ for(i=1;i<=n;i++){
+  var menu=document.getElementById(name+i);
+  var con=document.getElementById(name+"_"+"xbingjs"+i);
+  menu.className=i==num?"on_xbingjs":"";
+    con.style.display=i==num?"block":"none";
+ }
+}
+
+function settab_xbingjs1(name,num,n){
+ for(i=1;i<=n;i++){
+  var menu=document.getElementById(name+i);
+  var con=document.getElementById(name+"_"+"xbingjs1"+i);
+  menu.className=i==num?"on_xbingjs":"";
+    con.style.display=i==num?"block":"none";
+ }
+}
+
+function settab_xbingjs2(name,num,n){
+ for(i=1;i<=n;i++){
+  var menu=document.getElementById(name+i);
+  var con=document.getElementById(name+"_"+"xbingjs2"+i);
+  menu.className=i==num?"on_xbingjs":"";
+    con.style.display=i==num?"block":"none";
+ }
+}
+</script>
+</head>
+<body>
+<#include "cms/tag/logoAndSearch.html">
+<#include "cms/tag/nav.html">
+<#include "cms/tag/banner.html">
+<div class="div_mid">
+	<div class="div_main">
+    	<div class="div_midleft">
+		<#include "cms/tag/surveylist.html">
+	    </div>
+	    <div class="div_midright">
+	    	<#include "cms/tag/宋涛谈生技.html">
+		      <div class="div_rtitle"><img src="../media/dgsw/img/xh.png" width="220" height="34" /></div>
+		      <div class="div_content blank"><a href="#">为推动我国生物技术创新、加速科研成果向生产力转化，促进医药生物技术的繁荣发展特成立生物技术协会。</a></div>
+		      <div class="blank"><a href="#"><img src="../media/dgsw/img/lm.png" width="220" height="67"  onmouseover="changepic(this,'../media/dgsw/img/lm2.png')" onmouseout="changepic(this,'../media/dgsw/img/lm.png')" /></a></div>
+	      	<#include "cms/tag/ly.html">
+	    </div>
+    	<div class="clear"></div>
+    	<#include "cms/tag/friend_link.html">
+  </div>
+</div>
+<#include "cms/tag/footer.html">
+<#include "cms/tag/fbtn.html">
+<#include "cms/tag/login.html">
+</body>
+</html>

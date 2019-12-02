@@ -1,0 +1,29 @@
+/***
+ * @website
+ * http://www.jzread.com
+ * @QQ£º568245346
+ * @author£ºjsjlsf
+ * @e-mail: jsjlsf@163.com
+ */
+.clear{clear:both;margin:0;padding:0;height:0;font-size:0}
+.h20{clear:both;margin:0;padding:0;height:20px;font-size:0}
+/*ÄÚÈÝ*/
+.content5{ width:998px; height:900px; background:#F4F4F4; border:1px solid  #d8d8d8; margin: 10px auto;}
+.content5_title{ height:48px; width:998px; background:url(newimg/new_imgstu.jpg)  no-repeat}
+.content5_title .p1{ padding-left:25px; height:40px; line-height:40px; float:left; font-size:14px; color:#333333; font-weight:bold;}
+.content5 ul{ padding-top:5px; width:982px; padding-left:16px;}
+.content5 li{ height:160px; width:181px; float:left; margin-right:15px; display:inline}
+.content5 li img{ width:169px; height:115px; border:1px solid #d8d8d8; padding:5px;}
+.content5_p{ padding-top:7px; text-align:center; line-height:18px;}
+.content5 ul li a,.mrrt ul li a{color:#333}
+
+/*·ÖÒ³*/
+.epages {
+	text-align: center;width: 950px; float:right; padding-top:10px; padding-bottom:10px;
+	}
+.epages{margin:3px 0;font:11px/12px Tahoma}
+.epages *{vertical-align:middle;}
+.epages a{border:1px solid #9db3c5;text-align:center; padding:2px 8px 2px 8px;text-align:center;text-decoration:none; font-size:12px;}
+.epages a:hover{border:1px solid #0569C1;text-align:center; padding:2px 8px 2px 8px;text-decoration:none;color:#ffffff; font-size:12px;background:#0569C1;}
+.epages b{padding:2px 8px 2px 8px;text-decoration:none;color:#ffffff; font-size:12px;background:#0569C1;}
+.Total  b{padding:2px 8px 2px 8px;text-decoration:none;color:#ffffff; font-size:12px;}

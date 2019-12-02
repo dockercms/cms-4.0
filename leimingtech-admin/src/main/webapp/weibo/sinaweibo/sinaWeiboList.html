@@ -1,0 +1,109 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="row-fluid">
+	<div class="span12">
+		<!-- BEGIN SAMPLE FORM PORTLET-->   
+		<div class="portlet box blue tabbable">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-reorder"></i>
+					<span class="hidden-480">微博设置</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<div class="tabbable portlet-tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#portlet_tab1" data-toggle="tab">微博设置</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="portlet_tab1">
+							<!-- BEGIN FORM-->
+						<form id="sinaWeibo_form" class="form-horizontal">
+						        <div class="control-group">
+						        <input type="hidden" id="id" name="id" value="${sinaWeibo.id?if_exists}"/>
+								</div>
+								<div class="control-group">
+									<label class="control-label">App Key：</label>
+									<div class="controls">
+				                   <input type="text" id="clientId" name="clientId" class="span6 m-wrap" data-rule-required="true" value="${sinaWeibo.clientId?if_exists}"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">App Secret：</label>
+									<div class="controls">
+									<input type="text" id="clientSercret" name="clientSercret"data-rule-required="true" class="span6 m-wrap" value="${sinaWeibo.clientSercret?if_exists}"/>								
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">回调地址：</label>
+									<div class="controls">
+				                    <input type="text" id="redirectUri" name="redirectUri" data-rule-required="true" class="span6 m-wrap" value="${sinaWeibo.redirectUri?if_exists}"/>
+									</div>
+								</div>
+								<div class="form-actions">
+									<a href="javascript:void(0);" onclick="formSubmit('sinaWeiboController.do?save', 'sinaWeibo_form');" class="btn blue btn-sm"><i class="icon-ok"></i>保存并授权</a>
+								</div>
+							</form>
+							<!-- END FORM-->  
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+       <input type="hidden" id="return" />
+		<!-- END SAMPLE FORM PORTLET-->
+	</div>
+</div>
+<!-- END PAGE CONTENT--> 
+<script>
+	jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	});
+//保存并授权
+	function formSubmit(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	//if(ueditor){
+		//ueditor.sync();
+	//}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+			var codeUrl=obj.codeurl;	
+			var url = codeUrl;
+			/* var winArgs="dialogWidth=600px;dialogHeight=400px;help:0;status:0;scroll:1;center:1;resizable:1";
+			var win=window.open(url,'newwindow','height=440,width=630,top=150,left=300,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); */
+			openwin(url);
+			}else{
+				lmAlert("提交处理失败!");
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		}
+	});
+}
+
+function openwin(url){
+	var width  = "500px";
+	var height = "400px";
+	var leftm  ="300px";
+	var topm   ="200px";
+	var args = "toolbar=0,location=0,maximize=1,directories=0,status=0,menubar=0,scrollbars=0, resizable=1,left=" + leftm+ ",top=" + topm + ", width="+width+", height="+height;
+	var w = window.open(url,"",args);
+	if(!w){
+		Dialog.alert( "发现弹出窗口被阻止，请更改浏览器设置，以便正常使用本功能!" ) ;
+		return ;
+	}
+}
+</script>

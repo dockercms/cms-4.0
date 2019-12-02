@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>留言板</title>
+<link href="/pcstyle/main.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/view.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+<script src="${contextpath}/js/page.js" type="text/javascript"></script>
+<style type="text/css">
+	.message_content { 
+	
+	width:450px;
+	height:150px;
+	background-color:#FCFCFC;
+	} 
+	.button{width:38px;height:18px;line-height:18px;border:0;margin:4px 0 0 10px;background:#DDDDDD;} 
+</style>
+
+</head>
+<body>
+<div >
+<#include "wwwroot/${sitePath}/template/pc/section/menu.html">
+</div>
+		<div style="margin-left:185px;">
+			     	<#if guestBookList?exists && guestBookList?size gt 0>
+				     	<#list guestBookList as guestBook>
+					        <div>
+					          	<td >${guestBook.name?if_exists}:</td>
+					          	<td>&nbsp;</td>
+					          	<td >${guestBook.createdtime?if_exists}</td>
+					        </div>
+					          	<td >${guestBook.content?if_exists}</td>
+					        
+					        <div style="margin-left:30px; background-color:#DDDDDD;width:400px;height:70px;" >
+					        <div>
+					        	<td>${guestBook.replyUser?if_exists}</td>
+					        
+					        	<td>${guestBook.replyTime?if_exists}</td>
+					        
+					        	<td>回复：</td>
+					        </div>
+					        <td >${guestBook.reply?if_exists}</td>
+					        </div>
+				        </#list>
+			       <#include "common/page.html">
+			       </#if>
+		
+		</div>
+		<div style="margin-left:185px; word-wrap: break-word; word-break: normal;">
+		<form id="memberSearchForm">
+		<input type="hidden" id="boardId" name="boardId" value="${board.id?if_exists}"/>
+		<ul>
+		<li><textarea placeholder="在此处留言" style="border:5px dotted #DDDDDD;" type="text" class="message_content" id="content" name="content" clos="20" rows="5" Virtual></textarea></li>
+		</ul>
+		<button  type="button" style="width:66px;height:20px;" class="button" onclick="saveMessage('${contextpath}/front/messageBoardFrontController.do?messagesave', 'memberSearchForm');" >提交</button>
+		<input type="checkbox" id="anonymous" name="anonymous" value="1" checked="checked"/>匿名留言
+		</form>
+		</div>
+<div class="footer">
+<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+</div>
+</body>
+</html>
+
+<script>
+
+	//保存举报
+	function saveMessage(urlStr,form_message){
+		var r=document.getElementsByName("anonymous"); 
+		var anonymous='';
+			for(var i=0;i<r.length;i++){
+				if(r[i].checked){
+				anonymous=r[i].value;
+				}
+		}	
+			$.ajax({
+				type:'post',
+				url:urlStr+"&anonymous"+anonymous,
+				data:$('#' + form_message).serialize(),
+				dataType:'text',
+				success : function(msg) {
+					var obj = JSON.parse(eval(msg));
+					alert(obj.message);
+					if(obj.isSuccess==true){
+						location.href=""
+					}
+				},
+				error : function() {
+					alert("提交失败")
+	            }
+			});
+		
+	}
+	
+	
+</script>

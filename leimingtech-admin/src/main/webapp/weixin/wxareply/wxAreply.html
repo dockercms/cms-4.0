@@ -1,0 +1,84 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>关注回复</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">keyword</label>
+							<div class="controls">
+								<input type="text" id="keyword" name="keyword" class="span6 m-wrap" value="${page.keyword?if_exists}"/>
+								<span class="help-inline">填写关键字</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">内容</label>
+							<div class="controls">
+								<input type="text" id="content" name="content" class="span6 m-wrap" value="${page.content?if_exists}"/>
+								<span class="help-inline">填写内容</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">用户id</label>
+							<div class="controls">
+								<input type="text" id="uid" name="uid" class="span6 m-wrap" value="${page.uid?if_exists}"/>
+								<span class="help-inline">填写uid</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">用户姓名</label>
+							<div class="controls">
+								<input type="text" id="uname" name="uname" class="span6 m-wrap" value="${page.uname?if_exists}"/>
+								<span class="help-inline">填写uname</span>
+							</div>
+						</div>
+						
+						<!--<div class="control-group">
+						<label class="control-label">创建时间</label>
+						<div class="controls">
+							<input type="text" id="createtime" name="createtime" class="span6 m-wrap" value="${page.createtime}"/>
+							<span class="help-inline">填写创建时间</span>
+						</div>
+				    	</div>
+						<div class="control-group">
+						<label class="control-label">修改时间</label>
+						<div class="controls">
+							<input type="text" id="updatetime" name="updatetime" class="span6 m-wrap" value="${page.updatetime}"/>
+							<span class="help-inline">填写修改时间</span>
+						</div>
+					   </div>-->
+					   
+						<div class="control-group">
+							<label class="control-label">token</label>
+							<div class="controls">
+								<input type="text" id="token" name="token" class="span6 m-wrap" value="${page.token?if_exists}"/>
+								<span class="help-inline">填写token</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">是否回复多图</label>
+							<div class="controls">
+								<input type="text" id="home" name="home" class="span6 m-wrap" value="${page.home?if_exists}"/>
+								<span class="help-inline">填写是否回复多图</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('wxAreplyController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

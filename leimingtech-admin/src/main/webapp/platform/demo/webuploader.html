@@ -1,0 +1,230 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12 form-horizontal">
+			<div class="control-group">
+				<input type="text" name="imageurl" id="imageurl" value="" placeholder="上传后路径返回" class="form-control span9"/>
+				<span class="btn green" id="picker"  style="padding:0px !important;">上传图片</span>
+			</div>
+			<script type="text/javascript">
+				var uploader = WebUploader.create({
+				
+					// 选完文件后，是否自动上传。
+				    auto: true,
+				    
+				    // swf文件路径
+				    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+				
+				    // 文件接收服务端。
+				    server: 'controller.jsp?action=uploadimage',
+				
+				    // 选择文件的按钮。可选。
+				    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				    pick: '#picker',
+				
+				    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+				    resize: false,
+				    
+				    // 只允许选择图片文件。
+				    accept: {
+				        title: 'Images',
+				        extensions: 'gif,jpg,jpeg,bmp,png',
+				        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+				    }
+				});
+				
+				//当文件上传成功时触发
+				uploader.on('uploadSuccess', function(file, Object) {
+					$("#imageurl").val(Object.url);
+					uploader.removeFile(file,true);
+				});
+			</script>
+			
+			
+			
+			<div class="control-group">
+				<input type="text" name="imageurl2" id="imageurl2" value="" placeholder="上传后路径返回" class="form-control span9"/>
+				<div class="btn green" id="picker2"  style="padding:0px !important;">上传图片2</div>
+			</div>
+			
+			<script type="text/javascript">
+				var uploader2 = WebUploader.create({
+				
+					// 选完文件后，是否自动上传。
+				    auto: true,
+				    
+				    // swf文件路径
+				    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+				
+				    // 文件接收服务端。
+				    server: 'controller.jsp?action=uploadimage',
+				
+				    // 选择文件的按钮。可选。
+				    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				    pick: '#picker2',
+				
+				    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+				    resize: false,
+				    
+				    // 只允许选择图片文件。
+				    accept: {
+				        title: 'Images',
+				        extensions: 'gif,jpg,jpeg,bmp,png',
+				        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+				    }
+				});
+				
+				uploader2.on( 'uploadSuccess', function( file,Object ) {
+					$("#imageurl2").val(Object.url);
+					uploader2.removeFile(file,true);
+				});
+				
+			</script>
+			
+			<div class="control-group">
+				<div id="imageshow"></div>
+				<input type="text" name="imageurl3" id="imageurl3" value="" placeholder="上传图片后返回路径以及压缩后的预览图" class="form-control span9"/>
+				<div class="btn green" id="picker3"  style="padding:0px !important;">上传图片后返回路径以及压缩后的预览图</div>
+			</div>
+			
+			<script type="text/javascript">
+				var uploader3 = WebUploader.create({
+				
+					// 选完文件后，是否自动上传。
+				    auto: true,
+				    
+				    // swf文件路径
+				    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+				
+				    // 文件接收服务端。
+				    server: 'controller.jsp?action=uploadimage',
+				
+				    // 选择文件的按钮。可选。
+				    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				    pick: '#picker3',
+				
+				    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+				    resize: false,
+				    
+				    // 只允许选择图片文件。
+				    accept: {
+				        title: 'Images',
+				        extensions: 'gif,jpg,jpeg,bmp,png',
+				        mimeTypes: 'image/gif,image/jpg,image/jpeg,image/bmp,image/png'
+				    }
+				});
+				
+				uploader3.on( 'uploadSuccess', function( file,Object ) {
+					$("#imageurl3").val(Object.url);
+					var $li = $(
+				            '<div id="' + file.id + '">' +
+				                '<img>' +
+				                '<div class="info">' + file.name + '</div>' +
+				            '</div>'
+				            ),
+				        $img = $li.find('img');
+
+
+				    // $list为容器jQuery实例
+				    $("#imageshow").html( $li );
+
+				    // 创建缩略图
+				    // 如果为非图片文件，可以不用调用此方法。
+				    // thumbnailWidth x thumbnailHeight 为 100 x 100
+				    //uploader3.makeThumb( file, function( error, src ) {
+				       // if ( error ) {
+				         //   $img.replaceWith('<span>不能预览</span>');
+				        //    return;
+				       // }
+//
+				     //   $img.attr( 'src', src );
+				   // }, auto, 200 );
+				    $img.attr( 'src', Object.url+".thumb.jpg" );
+				    uploader3.removeFile(file,true);
+				});
+
+				
+			</script>
+			
+			<div class="control-group" id="uploadervideo" style="position: relative;">
+				<input type="text" name="videourl4" id="videourl4" value="" placeholder="上传后路径返回" class="form-control span9"/>
+				<div class="btn green" id="picker4"  style="padding:0px !important;">上传视频</div>
+				<div class="progress">
+                    <span class="text">0%</span>
+                    <span class="percentage"></span>
+                </div>
+			</div>
+			<script type="text/javascript">
+				var uploader4 = WebUploader.create({
+				
+					// 选完文件后，是否自动上传。
+				    auto: true,
+				    
+				    // swf文件路径
+				    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+				
+				    // 文件接收服务端。
+				    server: 'controller.jsp?action=uploadvideo',
+				
+				    // 选择文件的按钮。可选。
+				    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				    pick: '#picker4',
+				
+				    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+				    resize: false,
+				    
+				    // 只允许选择图片文件。
+				    accept: {
+				        title: 'video',
+				        extensions: "flv,swf,mkv,avi,rm,rmvb,mpeg,mpg,ogg,ogv,mov,wmv,mp4,webm,mp3,wav,mid",
+				        mimeTypes: 'video/*,audio/*'
+				    }
+				});
+				
+				uploader4.on( 'uploadStart', function( file,Object ) {
+					$(".progress").show();
+				});
+				
+				 uploader4.onUploadProgress = function( file, percentage ) {
+		            var $li = $('#uploadervideo'),
+		                $percent = $li.find('.progress .percentage'),$text=$li.find('.progress .text');
+
+		            $percent.css( 'width', percentage * 100 + '%' );
+		            $text.text(parseInt(percentage * 100) + '%');
+		        };
+		        
+		        uploader4.on( 'uploadSuccess', function( file,Object ) {
+					$("#videourl4").val(Object.url);
+					uploader4.removeFile(file,true);
+					$(".progress").hide();
+				});
+			</script>
+			<style>
+				#uploadervideo .progress {
+				    border: 1px solid #1483d8;
+				    width: 198px;
+				    background: #fff;
+				    height: 18px;
+				    position: absolute;
+				    text-align: center;
+				    line-height: 20px;
+				    color: #6dbfff;
+				    margin-right: 10px;
+				    display: none;
+				}
+				#uploadervideo .progress span.percentage {
+				    width: 0;
+				    height: 100%;
+				    left: 0;
+				    top: 0;
+				    background: #1483d8;
+				    position: absolute;
+				}
+				#uploadervideo .progress span.text {
+				    position: relative;
+				    z-index: 10;
+				}
+			</style>
+		</div>
+	</div>
+</div>
+

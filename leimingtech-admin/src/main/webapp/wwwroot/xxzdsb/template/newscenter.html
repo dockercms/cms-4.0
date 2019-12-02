@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://faneuro.cn/News_center.html -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title><#assign navTag =newTag("navTag")> <#assign navTagList
+	=navTag("{'name':'${catalogF.id}'}")> <#if navTagList?exists> <#list
+	navTagList as navTag> <#if catalogF.id==navTag.id> ${navTag.name}
+	</#if> </#list> </#if></title>
+
+<meta name="Description" content="${site.siteName} ">
+<meta name="Keywords" content="${site.siteName} ">
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/region.css">
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+<link href="/css/list.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="/css/nj_v2.css">
+<script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/tween.js"></script>
+<script src="/js/page.js"></script>
+<link rel="stylesheet" href="/css/page.css">
+<script type="text/javascript">
+	function selectNews(){
+		var url = window.location.href;
+		
+		var linkArry = $("#nj_navUl_v2").find("a");
+		
+		linkArry.each(function() {
+			var winurl = window.location.protocol + "//" + window.location.host
+					+ $(this).attr("href");
+
+			if (winurl == url) {
+				$(this).css("
+	background", "#26882b");
+			}
+		});
+
+	}
+</script>
+</head>
+
+<body onload="selectNews()">
+	<!-- 头部暂时引用↓↓↓↓↓ -->
+	<#include "/wwwroot/${sitePath}/template/common/index_nav.html"> 
+	<#assign name ="catalogTag">
+	<#assign catalogTag =newTag("${name}")>
+
+	<div class="nj_content_v2">
+		<div class="nj_con_v2">
+			<div class="nj_nav_v2">
+				<ul id="nj_navUl_v2" class="clearfix">
+					<#assign catalog =catalogTag("{'levels':'self','name':'4028818d518b5f0e01518b74d4980009'}")>
+					<#if catalog?exists>
+					<li>
+						<a href="${catalog.url!'javascript:void(0);'}" target="_self">${catalog.name!''}</a></li> 
+					</#if> 
+					<#assign catalogList =catalogTag("{'name':'4028818d518b5f0e01518b74d4980009','levels':'child'}")>
+					<#if catalogList?exists> 
+					<#list catalogList as catList>
+					<li>
+						<a href="${catList.url!'javascript:void(0);'}" target="_self">${catList.name!''}</a></li> 
+					</#list> 
+					</#if>
+				</ul>
+			</div>
+			<div class="nj_nav_v2Box"></div>
+
+			<div class="nj_left_v2">
+
+				<div class="nj_twoListv2_title">
+					<strong>最新</strong>
+				</div>
+
+				<div id="newsContent">
+					<#assign articleTag =newTag("articleTag")> <#assign articleList
+					=articleTag("{'name':'${catalogidF}','page':true,'pageindex':'${pageindexF}','level':'all'}")>
+					<#if articleList?exists && articleList?size gt 0> <#list
+					articleList as article>
+					<dl class="nj_indexList_v2 nj_twoList_v2">
+						<dd>
+
+							<div class="nj_indexListv2_img">
+								<a href="${article.url!'javascript:void(0);'}" target="_blank"><img
+									src="${article.thumb}"> </a>
+							</div>
+							<div class="nj_indexListv2_text">
+								<h2>
+									<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+								</h2>
+								<div class="nj_indexListv2_p">${article.digest}</div>
+								<a href="${article.url!'javascript:void(0);'}" target="_blank">[阅读全文]</a>
+								<div class="nj_indexListv2_time"><#if
+									article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+								</div>
+						</dd>
+					</dl>
+
+					</#list> <#else> 无数据 </#if> ${pagebar}
+				</div>
+			</div>
+
+
+
+
+			<!-- 热门新闻 -->
+			<div class="nj_right_v2 nj_rightTwo_v2">
+			<#include "/wwwroot/${sitePath}/template/common/hotnews.html">
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- 新版底部 start -->
+
+	<div class="footer f-tac">
+	<#include "/wwwroot/${sitePath}/template/common/footer.html">
+	</div>
+
+</body>
+</html>

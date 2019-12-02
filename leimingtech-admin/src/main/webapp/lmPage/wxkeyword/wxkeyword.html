@@ -1,0 +1,56 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">系统关键字</h4>
+</div>
+<div class="modal-body">
+	<!-- BEGIN FORM-->
+	<!--<form id="form" class="form-horizontal">-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+		<div class="alert alert-error hide">
+			<button class="close" data-dismiss="alert"></button>
+			有未填写项或错误项. 请检查后再提交.
+		</div>
+		<div class="alert alert-success hide">
+			<button class="close" data-dismiss="alert"></button>
+			表单验证成功!
+		</div>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*关键词</label>
+			<div class="controls">
+				<input type="text" id="keyword" name="keyword" class="form-control span3" data-rule-required="true" value="${page.keyword?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">关联Id</label>
+			<div class="controls">
+				<input type="text" id="pid" name="pid" class="form-control span3" data-rule-number="true" value="${page.pid?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">唯一标识</label>
+			<div class="controls">
+				<input type="text" id="token" name="token" class="form-control span3" value="${page.token?if_exists}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">表名</label>
+			<div class="controls">
+				<input type="text" id="module" name="module" class="form-control span3" value="${page.module?if_exists}"/>
+			</div>
+		</div>
+				
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" onclick="formSubmitModel('wxkeywordController.do?save', 'form_sample_2');" class="btn btn-primary">提交</button>
+	<button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+</div>
+<script>
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+</script>

@@ -1,0 +1,147 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>采集信息</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">标题</label>
+							<div class="controls">
+								<input type="text" id="title" name="title" class="span6 m-wrap" value="${page.title?if_exists}"/>
+								<span class="help-inline">填写标题</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">简短标题</label>
+							<div class="controls">
+								<input type="text" id="shortTitle" name="shortTitle" class="span6 m-wrap" value="${page.shortTitle?if_exists}"/>
+								<span class="help-inline">填写简短标题</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">作者</label>
+							<div class="controls">
+								<input type="text" id="author" name="author" class="span6 m-wrap" value="${page.author?if_exists}"/>
+								<span class="help-inline">填写作者</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">来源</label>
+							<div class="controls">
+								<input type="text" id="origin" name="origin" class="span6 m-wrap" value="${page.origin?if_exists}"/>
+								<span class="help-inline">填写来源</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">来源链接</label>
+							<div class="controls">
+								<input type="text" id="originUrl" name="originUrl" class="span6 m-wrap" value="${page.originUrl?if_exists}"/>
+								<span class="help-inline">填写来源链接</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<input type="text" id="description" name="description" class="span6 m-wrap" value="${page.description?if_exists}"/>
+								<span class="help-inline">填写描述</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">发布日期</label>
+							<div class="controls">
+								<div class="input-append date date-picker" data-date="2014-01-01" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+									<input class="m-wrap m-ctrl-medium date-picker" readonly size="20" type="text" id="releaseDate" name="releaseDate" value="${page.releaseDate?if_exists}"/>
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">媒体路径</label>
+							<div class="controls">
+								<input type="text" id="mediaPath" name="mediaPath" class="span6 m-wrap" value="${page.mediaPath?if_exists}"/>
+								<span class="help-inline">填写媒体路径</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">媒体类型</label>
+							<div class="controls">
+								<input type="text" id="mediaType" name="mediaType" class="span6 m-wrap" value="${page.mediaType?if_exists}"/>
+								<span class="help-inline">填写媒体类型</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题颜色</label>
+							<div class="controls">
+								<input type="text" id="titleColor" name="titleColor" class="span6 m-wrap" value="${page.titleColor?if_exists}"/>
+								<span class="help-inline">填写标题颜色</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">是否加粗</label>
+							<div class="controls">
+								<input type="text" id="isBold" name="isBold" class="span6 m-wrap" value="${page.isBold?if_exists}"/>
+								<span class="help-inline">填写是否加粗</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题图片</label>
+							<div class="controls">
+								<input type="text" id="titleImg" name="titleImg" class="span6 m-wrap" value="${page.titleImg?if_exists}"/>
+								<span class="help-inline">填写标题图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">内容图片</label>
+							<div class="controls">
+								<input type="text" id="contentImg" name="contentImg" class="span6 m-wrap" value="${page.contentImg?if_exists}"/>
+								<span class="help-inline">填写内容图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">类型图片</label>
+							<div class="controls">
+								<input type="text" id="typeImg" name="typeImg" class="span6 m-wrap" value="${page.typeImg?if_exists}"/>
+								<span class="help-inline">填写类型图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">外部链接</label>
+							<div class="controls">
+								<input type="text" id="link" name="link" class="span6 m-wrap" value="${page.link?if_exists}"/>
+								<span class="help-inline">填写外部链接</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">指定模板</label>
+							<div class="controls">
+								<input type="text" id="tplContent" name="tplContent" class="span6 m-wrap" value="${page.tplContent?if_exists}"/>
+								<span class="help-inline">填写指定模板</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">需要重新生成静态页</label>
+							<div class="controls">
+								<input type="text" id="needRegenerate" name="needRegenerate" class="span6 m-wrap" value="${page.needRegenerate?if_exists}"/>
+								<span class="help-inline">填写需要重新生成静态页</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('acquisitionContentController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

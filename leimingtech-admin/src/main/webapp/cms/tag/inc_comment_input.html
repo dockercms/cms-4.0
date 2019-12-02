@@ -1,0 +1,105 @@
+<div class="pinglun">
+	<div class="LanMu01-2">
+		<div class="LanMu01-1"></div>
+		<span>我来说两句</span>
+		<div class="LanMu01-3"></div>
+	</div>
+	<div class="clear-10"></div>
+	<div class="pltable">
+		<form id="commentForm">
+			<div class="plfl1">评论内容：</div>
+			<div class="plfr1">
+				<textarea name="text" id="t_text" class="cinput" cols="100" rows="3"></textarea>
+			</div>
+			<div class="clear"></div>
+			<div class="plfl2">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</div>
+			<div class="plfr1">
+				<div style="float: left; margin-top: 10px;">
+					<input name="captcha" type="text" id="captcha"
+						vld="{required:true}" class="plcode" />
+				</div>
+				<div style="float: left;">
+					<img id="randCodeImage" src="${contextpath}/randCodeImage"
+						onclick="reloadRandCodeImage()"
+						style="margin-top: 7px; cursor: pointer;" />
+				</div>
+			</div>
+			<div class="plfl2" style="float:right;">
+				
+				<input type="button" id="submitTxt" value=" 马上发表 " class="published" style="display:none;"/>
+				<input type="button" id="loginTxt" value=" 登录 " class="published" style="display:none;"/>
+			</div>
+			<div class="clear"></div>
+			<div class="clear-10"></div>
+			<div class="plfr1">
+				（网友评论仅供其表达个人看法，并不表明本站同意其观点或证实其描述。）
+			</div>
+		</form>
+	</div>
+	<#--登录评论，且未登录--> <#--
+	<div style="width: 96%; font-size: 14px; color: red; margin: 10px;">
+		您尚未登录，请登录后发布评论！ 【<a href="member/loginAct.do?login">马上登录</a>】
+	</div>
+	--> <#--不允许评论-->
+</div>
+<script type="text/javascript">
+	$(function() {
+		setTimeout('checktimeout()', 200);
+		
+		$("#loginTxt").click(function(){
+			var scrolltop = document.documentElement.scrollTop;
+			$("#yy").css("display", "block");
+			$(".table").css("top", scrolltop + 100);
+		});
+		
+		$("#submitTxt").click(function() {
+			if(islogin == 0){
+				alert("请先登录再进行评论");
+				return;
+			}
+			if (!$("#t_text").val()) {
+				alert("请您填写评论信息！");
+				return;
+			}
+			if (!$("#captcha").val()) {
+				alert("请您填写验证码！");
+				return;
+			}
+			Cms.comment( function(data) {
+				data = JSON.parse(eval(data));
+				if(data.isSuccess){
+					alert(data.msg);
+					location.reload();
+					//Cms.commentSize("s_commentsize");
+					//Cms.commentList("commentListContainer",{contentId:contentId,pageIndex:1,pageSize:5});
+				}else{
+					alert(data.msg);
+					reloadRandCodeImage();
+				}
+			});
+		});
+	});
+
+	//update-begin--Author:zhangguoming  Date:20140226 for：添加验证码
+	$('#randCodeImage').click(function() {
+		reloadRandCodeImage();
+	});
+	/**
+	 * 刷新验证码
+	 */
+	function reloadRandCodeImage() {
+		var date = new Date();
+		var img = document.getElementById("randCodeImage");
+		img.src = '${contextpath}/randCodeImage?a=' + date.getTime();
+	};
+	
+	function checktimeout(){
+		if(islogin == 1){
+			$("#submitTxt").css("display", "inline");
+			$("#loginTxt").css("display", "none");
+		}else if(islogin == 0){
+			$("#submitTxt").css("display", "none");
+			$("#loginTxt").css("display", "inline");
+		}
+	};
+</script>

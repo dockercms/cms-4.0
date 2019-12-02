@@ -1,0 +1,75 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>采集进度</div>
+			<div class="tools">
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">siteId</label>
+							<div class="controls">
+								<input type="text" id="siteId" name="siteId" class="span6 m-wrap" value="${page.siteId?if_exists}"/>
+								<span class="help-inline">填写siteId</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">栏目地址</label>
+							<div class="controls">
+								<input type="text" id="channelUrl" name="channelUrl" class="span6 m-wrap" value="${page.channelUrl?if_exists}"/>
+								<span class="help-inline">填写栏目地址</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">内容地址</label>
+							<div class="controls">
+								<input type="text" id="contentUrl" name="contentUrl" class="span6 m-wrap" value="${page.contentUrl?if_exists}"/>
+								<span class="help-inline">填写内容地址</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">标题</label>
+							<div class="controls">
+								<input type="text" id="title" name="title" class="span6 m-wrap" value="${page.title?if_exists}"/>
+								<span class="help-inline">填写标题</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">百分比</label>
+							<div class="controls">
+								<input type="text" id="percents" name="percents" class="span6 m-wrap" value="${page.percents?if_exists}"/>
+								<span class="help-inline">填写百分比</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">描述</label>
+							<div class="controls">
+								<input type="text" id="description" name="description" class="span6 m-wrap" value="${page.description?if_exists}"/>
+								<span class="help-inline">填写描述</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">顺序</label>
+							<div class="controls">
+								<input type="text" id="seq" name="seq" class="span6 m-wrap" value="${page.seq?if_exists}"/>
+								<span class="help-inline">填写顺序</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('acquisitionTempController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>                            
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+</script>

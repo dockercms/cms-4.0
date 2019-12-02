@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>耳机爱好者俱乐部-商业洽谈</title>
+    <link href="/css/CHINAiback.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        function $(id) { return document.getElementById(id); }
+
+        function addLoadEvent(func){
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function(){
+                    oldonload();
+                    func();
+                }
+            }
+        }
+
+        function moveElement(elementID,final_x,final_y,interval) {
+            if (!document.getElementById) return false;
+            if (!document.getElementById(elementID)) return false;
+            var elem = document.getElementById(elementID);
+            if (elem.movement) {
+                clearTimeout(elem.movement);
+            }
+            if (!elem.style.left) {
+                elem.style.left = "0px";
+            }
+            if (!elem.style.top) {
+                elem.style.top = "0px";
+            }
+            var xpos = parseInt(elem.style.left);
+            var ypos = parseInt(elem.style.top);
+            if (xpos == final_x && ypos == final_y) {
+                return true;
+            }
+            if (xpos < final_x) {
+                var dist = Math.ceil((final_x - xpos)/10);
+                xpos = xpos + dist;
+            }
+            if (xpos > final_x) {
+                var dist = Math.ceil((xpos - final_x)/10);
+                xpos = xpos - dist;
+            }
+            if (ypos < final_y) {
+                var dist = Math.ceil((final_y - ypos)/10);
+                ypos = ypos + dist;
+            }
+            if (ypos > final_y) {
+                var dist = Math.ceil((ypos - final_y)/10);
+                ypos = ypos - dist;
+            }
+            elem.style.left = xpos + "px";
+            elem.style.top = ypos + "px";
+            var repeat = "moveElement('"+elementID+"',"+final_x+","+final_y+","+interval+")";
+            elem.movement = setTimeout(repeat,interval);
+        }
+
+        function classNormal(iFocusBtnID,iFocusTxID){
+            var iFocusBtns= $(iFocusBtnID).getElementsByTagName('li');
+            var iFocusTxs = $(iFocusTxID).getElementsByTagName('li');
+            for(var i=0; i<iFocusBtns.length; i++) {
+                iFocusBtns[i].className='normal';
+                iFocusTxs[i].className='normal';
+            }
+        }
+
+        function classCurrent(iFocusBtnID,iFocusTxID,n){
+            var iFocusBtns= $(iFocusBtnID).getElementsByTagName('li');
+            var iFocusTxs = $(iFocusTxID).getElementsByTagName('li');
+            iFocusBtns[n].className='current';
+            iFocusTxs[n].className='current';
+        }
+
+        function iFocusChange() {
+            if(!$('ifocus')) return false;
+            $('ifocus').onmouseover = function(){atuokey = true};
+            $('ifocus').onmouseout = function(){atuokey = false};
+            var iFocusBtns = $('ifocus_btn').getElementsByTagName('li');
+            var listLength = iFocusBtns.length;
+            iFocusBtns[0].onmouseover = function() {
+                moveElement('ifocus_piclist',0,0,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',0);
+            }
+            if (listLength>=2) {
+                iFocusBtns[1].onmouseover = function() {
+                    moveElement('ifocus_piclist',0,-280,5);
+                    classNormal('ifocus_btn','ifocus_tx');
+                    classCurrent('ifocus_btn','ifocus_tx',1);
+                }
+            }
+            if (listLength>=3) {
+                iFocusBtns[2].onmouseover = function() {
+                    moveElement('ifocus_piclist',0,-560,5);
+                    classNormal('ifocus_btn','ifocus_tx');
+                    classCurrent('ifocus_btn','ifocus_tx',2);
+                }
+            }
+
+        }
+
+        setInterval('autoiFocus()',4000);
+        var atuokey = false;
+        function autoiFocus() {
+            if(!$('ifocus')) return false;
+            if(atuokey) return false;
+            var focusBtnList = $('ifocus_btn').getElementsByTagName('li');
+            var listLength = focusBtnList.length;
+            for(var i=0; i<listLength; i++) {
+                if (focusBtnList[i].className == 'current') var currentNum = i;
+            }
+            if (currentNum==0&&listLength!=1 ){
+                moveElement('ifocus_piclist',0,-280,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',1);
+            }
+            if (currentNum==1&&listLength!=2 ){
+                moveElement('ifocus_piclist',0,-560,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',2);
+            }
+            if (currentNum==2&&listLength!=3 ){
+                moveElement('ifocus_piclist',0,-840,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',3);
+            }
+            if (currentNum==3 ){
+                moveElement('ifocus_piclist',0,0,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',0);
+            }
+            if (currentNum==1&&listLength==2 ){
+                moveElement('ifocus_piclist',0,0,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',0);
+            }
+            if (currentNum==2&&listLength==3 ){
+                moveElement('ifocus_piclist',0,0,5);
+                classNormal('ifocus_btn','ifocus_tx');
+                classCurrent('ifocus_btn','ifocus_tx',0);
+            }
+        }
+        addLoadEvent(iFocusChange);
+    </script>
+</head>
+
+<body>
+        <!--导航开始-->
+            <#include "/wwwroot/${sitePath}/template/pc/section/index_nav.html"><!-- 导航 -->
+        <!--导航结束-->
+        <!--头部结束-->
+        <#assign name ="catalogTag">
+        <#assign catalogTag =newTag("${name}")>
+        <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5db927e0044'}")>
+<div class="blank10"></div>
+<div class="area">
+    <div class="lx990 left bgcolor">
+        <#assign name ="catalogTag">
+            <#assign catalogTag =newTag("${name}")>
+                <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5dcfe390049'}")>
+                    <#if catalog?exists>
+                        <h1>${catalog.name}</h1>
+                    </#if>
+        <div class="blank10"></div>
+        <div id="ifocus">
+            <div id="ifocus_pic">
+                <div id="ifocus_piclist">
+                    <!--============================图片巡展=====================-->
+                    <#assign articleTag =newTag("articleTag")>
+                    <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad607811d0057'}")>
+                    <#if articleList?exists && articleList?size gt 0>
+                        <ul>
+                            <#list articleList as article>
+                                <li><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}"/></a></li>
+                            </#list>
+                        </ul>
+                    </#if>
+                </div>
+                <div id="ifocus_opdiv"></div>
+
+                <!--============================图片巡展：标题=====================-->
+                <div id="ifocus_tx">
+                    <ul>
+                        <#assign articleTag =newTag("articleTag")>
+                            <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad607811d0057'}")>
+                                <#if articleList?exists && articleList?size gt 0>
+                                    <ul>
+                                        <#list articleList as article>
+                                            <#if article_index == 0>
+                                                    <li class="current">${article.title?if_exists}</li>
+                                                <#else>
+                                                    <li class="normal">${article.title?if_exists}</li>
+                                            </#if>
+                                        </#list>
+                                    </ul>
+                                </#if>
+                    </ul>
+                </div>
+            </div>
+            <div id="ifocus_btn">
+                <!--============================图片巡展：图片=====================-->
+                    <#assign articleTag =newTag("articleTag")>
+                    <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad607811d0057'}")>
+                    <#if articleList?exists && articleList?size gt 0>
+                        <ul>
+                            <#list articleList as article>
+                                <#if article_index == 0>
+                                    <li class="current"><img src="${article.thumb?if_exists}" alt="" /></li>
+                                    <#else>
+                                        <li class="normal"><img src="${article.thumb?if_exists}" alt="" /></li>
+                                </#if>
+                            </#list>
+                        </ul>
+                    </#if>
+            </div>
+        </div>
+        <div class="hz350 right">
+
+                <!--====================图片细查=============================-->
+                <#assign articleTag =newTag("articleTag")>
+                    <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad607ea480059'}")>
+                        <#if articleList?exists && articleList?size gt 0>
+                            <ul>
+                                <#list articleList as article>
+                                    <#if article_index % 2 == 0>
+                                        <li><a href="${article.url!'javascript:void(0);'}" target="_blank">   <img src="${article.thumb?if_exists}" alt="" /></a></li>
+                                        <#else>
+                                            <li style="float:right;"><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}" alt="" /></a></li>
+                                    </#if>
+                                </#list>
+                            </ul>
+                        </#if>
+
+        </div>
+
+        <div class="blank10"></div>
+        <!--====================================地区公告=======================================-->
+        <#assign articleTag =newTag("articleTag")>
+            <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad6092dae005d'}")>
+                <#if articleList?exists && articleList?size gt 0>
+                    <#list articleList as article>
+                            <#if (article_index + 1)% 3 != 0>
+                                <dl class="marright30">
+                                    <dt><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}"  width="100%" height="100%"/></a></dt>
+                                    <dd><span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title?if_exists}</a></span>
+                                        <p>
+                                            <#if article.digest?length gt 20>
+                                                ${article.digest?substring(0,20)}...
+                                                <a href="${article.url!'javascript:void(0);'}" target="_blank"></a>
+                                                <#else>
+                                                    ${article.digest}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank"></a>
+                                            </#if>
+                                        </p>
+                                    </dd>
+                                </dl>
+                            </#if>
+                            <#if (article_index + 1)% 3 == 0>
+                                <dl>
+                                    <dt><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}"  width="100%" height="100%"/></a></dt>
+                                    <dd><span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title?if_exists}</a></span>
+                                        <p>
+                                            <#if article.digest?length gt 20>
+                                                ${article.digest?substring(0,20)}...
+                                                <a href="${article.url!'javascript:void(0);'}" target="_blank"></a>
+                                                <#else>
+                                                    ${article.digest}...
+                                                    <a href="${article.url!'javascript:void(0);'}" target="_blank"></a>
+                                            </#if>
+                                        </p>
+                                    </dd>
+                                </dl>
+                            </#if>
+                    </#list>
+                </#if>
+    </div>
+    <div class="blank10"></div>
+    <div class="lx990 left bgcolor">
+        <!--==========================-->
+        <#assign name ="catalogTag">
+        <#assign catalogTag =newTag("${name}")>
+        <#assign catalog =catalogTag("{'levels':'self','name':'402881cc5ad58ad2015ad5dcfe390049'}")>
+        <#if catalog?exists>
+            <h1>${catalog.name}</h1>
+        </#if>
+        <div class="blank10"></div>
+            <!--====================================创业园=======================================-->
+            <#assign articleTag =newTag("articleTag")>
+            <#assign articleList =articleTag("{'name':'402881cc5ad58ad2015ad608a7f4005b'}")>
+            <#if articleList?exists && articleList?size gt 0>
+                <#list articleList as article>
+                    <#if article_index % 2 == 0>
+                        <div class="cy465 left">
+                            <dl>
+                                <dt><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}" /></a></dt>
+                                <dd>
+                                    <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title?if_exists}</a></span>
+                                    <p>${article.digest}</p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <#else>
+                            <div class="cy465 right">
+                                <dl>
+                                    <dt><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb?if_exists}" /></a></dt>
+                                    <dd>
+                                        <span><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title?if_exists}</a></span>
+                                        <p>${article.digest}</p>
+                                    </dd>
+                                </dl>
+                            </div>
+                    </#if>
+                    <#if article_index == (articleList?size+1)/2>
+                        <div class="blank10"></div>
+                    </#if>
+                </#list>
+            </#if>
+    </div>
+</div>
+
+<!--===========================页脚==================================-->
+<#include "/wwwroot/${sitePath}/template/pc/section/footer.html">
+<!--===========================页脚==================================-->
+</body>
+</html>

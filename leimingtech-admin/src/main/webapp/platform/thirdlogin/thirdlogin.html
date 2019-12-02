@@ -1,0 +1,59 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>第三方登录配置</div>
+			<div class="tools">
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+						<div class="control-group">
+							<label class="control-label">name</label>
+							<div class="controls">
+								<input type="text" id="name" name="name" class="span6 m-wrap" value="${page.name?if_exists}"/>
+								<span class="help-inline">填写name</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">是否开启</label>
+							<div class="controls">
+								<input type="radio" id="isopen" name="isopen" class="span1 m-wrap" value="1"/>是
+								<input type="radio" id="isopen" name="isopen" class="span1 m-wrap" value="0" <#if page.isopen=="0"> checked=checked</#if>/>否
+								<span class="help-inline">填写是否开启</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">id</label>
+							<div class="controls">
+								<input type="text" id="appid" name="appid" class="span6 m-wrap" value="${page.appid?if_exists}"/>
+								<span class="help-inline">填写id</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">key</label>
+							<div class="controls">
+								<input type="text" id="appkey" name="appkey" class="span6 m-wrap" value="${page.appkey?if_exists}"/>
+								<span class="help-inline">填写key</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">回调地址</label>
+							<div class="controls">
+								<input type="text" id="returnurl" name="returnurl" class="span6 m-wrap" value="${page.returnurl?if_exists}"/>
+								<span class="help-inline">填写回调地址</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('thirdloginController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>                          
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>

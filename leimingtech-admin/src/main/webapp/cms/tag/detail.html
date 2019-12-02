@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="media/dgsw/css/main.css"/>
+</head>
+<script>
+	function changepic(obj,img){
+		obj.src=img;
+	}
+</script>
+<body>
+	<#include "cms/tag/logoAndSearch.html">
+	<#include "cms/tag/nav.html">
+    <div class="div_l2mid">
+    	<div class="div_l2top"></div>
+    	<div class="div_l2main">
+			<div class="div_l2left">
+            	<div><img src="media/dgsw/img/l2-news.png" width="175" height="49" />
+                	<ul>
+                    	<li><a href="#"><span class="c">基地动态</span><span class="e">Base dynamic</span></a></li>
+                        <li><a href="#" class="noborder act"><span class="c">企业资讯</span><span class="e">Enterprise information</span></a></li>
+                    </ul>
+                </div>
+                <div><a href="#"><img src="media/dgsw/img/img_locate.png" width="175" height="32" /></a></div>
+                <div><img src="media/dgsw/img/img_800.png" width="175" height="37" /></div>
+                <div class="div_line1"></div>
+                <div>
+                	<table cellspacing="3">
+                    	<tr>
+                        	<td>关注我们：</td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_weibo.png" width="20" height="20" /></a></td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_qq.png" width="20" height="20" /></a></td>
+                            <td><a href="#"><img src="media/dgsw/img/ico_rss.png" width="19" height="20" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+          	</div>
+        <div class="div_l2right">
+            	<div><img src="media/dgsw/img/s_banner3.jpg" width="781" height="120" /></div>
+          <div class="div_newsmid">
+              	<div class="title">基地动态<span> 2012年</span></div>
+				<div class="navi"><a href="#">首页</a>--<a href="#" class="act">新闻资讯</a></div>
+              	<div class="line2 clear"></div>
+                <div class="div_l2content">
+                	<div id="btnfont">
+                		<a href="#"><img src="media/dgsw/img/ico_A-.png" width="24" height="24" /></a> 
+                		<a href="#"><img src="media/dgsw/img/ico_A+.png" width="24" height="24" /></a>
+            		</div>
+            		<#assign name ="articleTag">
+					<#assign articleTag =newTag("${name}")>
+					<#assign article =articleTag("{'name':'${articleid[0]}','level':'self'}")>
+					<#if article>
+						<h1>${article.title}</h1>
+	                    <h2><#if article.published>${article.published?string('yyyy-MM-dd')}</#if>    选自松山湖官网</h2>
+	                    <div class="div_line1"></div>
+	                   	${article.articleList[0].content}
+					</#if>
+                	
+                </div>
+                
+          </div>
+           	<div class="div_newsright">
+               	<div>
+               	  <input type="text" value="--全文关键字检索--" /><a href="#"><img src="media/dgsw/img/btn-search.png" width="24" height="22" onmouseover="changepic(this,'media/dgsw/img/go.png')" onmouseout="changepic(this,'media/dgsw/img/btn-search.png')"/></a></div>
+                <div class="year">
+                	<span>按年份查询</span>
+                    <ul>
+                    	<li><a href="#">2011</a></li>
+                        <li><a href="#" class="act">2012</a></li>
+                        <li><a href="#">全部新闻</a></li>
+                    </ul>
+                </div>
+            </div>
+	  	  </div>
+            <div class="clear"></div>
+           <#include "cms/tag/friend_link.html">
+		</div>
+    </div>
+<#include "cms/tag/footer.html">
+<#include "cms/tag/fbtn.html">
+<#include "cms/tag/login.html">
+</body>
+</html>

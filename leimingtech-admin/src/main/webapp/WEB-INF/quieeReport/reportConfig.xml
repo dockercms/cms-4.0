@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<reportConfig>
+   <!-- 配置加载快逸属性文件 --> 
+    <config> 
+      <name>logConfig</name> 
+      <value>/WEB-INF/quieeReport/runqianReportLog.properties</value> 
+    </config> 
+    <!-- 配置加载快逸授权文件 --> 
+    <config> 
+      <name>license</name> 
+      <value>/WEB-INF/quieeReport/quieeWindowServer.lic</value> 
+    </config> 
+    <!-- 配置加载快逸加载JSP文件的路径 --> 
+    <config> 
+      <name>reportFileHome</name> 
+      <value>/webcontent/quiee/reportFiles</value> 
+    </config> 
+   <!-- 配置快逸加载数据时候的datasource --> 
+   <config>
+      <name>JNDIPrefix</name>
+      <value>java:comp/env</value>
+    </config>
+    <config>
+      <name>dataSource</name>
+      <value></value>
+    </config>
+<!-- 配置加载快逸的字符集 --> 
+    <config> 
+      <name>jspCharset</name> 
+      <value>GBK</value> 
+    </config> 
+	<config>
+      <name>alwaysReloadDefine</name>
+      <value>yes</value>
+    </config>
+    <config>
+      <name>cachedParamsTimeout</name>
+      <value>120</value>
+    </config>
+    <config>
+      <name>cachedReportDir</name>
+      <value>E:\work\report\cached</value>
+    </config>
+    <config>
+      <name>cachedIdPrefix</name>
+      <value>A</value>
+    </config>
+    <config>
+      <name>cachedReportTimeout</name>
+      <value>120</value>
+    </config>
+    <config>
+      <name>maxCellNum</name>
+      <value>100000</value>
+    </config>
+    <config>
+      <name>maxConcurrentForReport</name>
+      <value></value>
+    </config>
+    <config>
+      <name>maxWaitForReport</name>
+      <value>10</value>
+    </config>
+    <config>
+      <name>maxWaitTimeForReport</name>
+      <value>30</value>
+    </config>
+    <config>
+      <name>appUrlPrefix</name>
+      <value></value>
+    </config>
+    <config>
+      <name>errorPage</name>
+      <value>/myError.jsp</value>
+    </config>
+</reportConfig>

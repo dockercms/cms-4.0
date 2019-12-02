@@ -1,0 +1,64 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">新增步骤</h4>
+</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<!--<form id="form" class="form-horizontal">-->
+			<form id="form_sample_2" class="form-horizontal">
+			<input type="hidden" name="id" value="${workFlowStep.id?if_exists}"/>
+			<input type="hidden" name="gid" value="${gid?if_exists}"/>
+						<div class="alert alert-error hide">
+							<button class="close" data-dismiss="alert"></button>
+							有未填写项或错误项. 请检查后再提交.
+						</div>
+						<div class="alert alert-success hide">
+							<button class="close" data-dismiss="alert"></button>
+							表单验证成功!
+						</div>
+						<div class="control-group">
+							<label class="control-label">&nbsp;</label>
+							<div class="controls">
+								<input type="hidden" id="step" name="step" value="${workFlowStep.step?if_exists}"/>
+								<span class="text stepVal"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label"><span class="required">*</span>权限</label>
+							<div class="controls">
+								<select id="gid" name="roleid">
+									<#list cmstoplist as cmstop>
+										<#if cmstop?exists>
+								        	<option value="${cmstop.id}" <#if workFlowStep.roleid?if_exists && workFlowStep.roleid=cmstop.id>selected="selected"</#if>>${cmstop.roleName}</option> 
+								        </#if>
+								    </#list>      
+				                </select>
+							</div>
+						</div>
+			</form>
+			<!-- END FORM-->       
+		</div>
+<div class="modal-footer">
+	<input type="button" onclick="formSubmitModelSub('workFlowController.do?saveSub', 'form_sample_2');" class="btn btn-primary" value="提交" /> 
+	<input type="button" class="btn" data-dismiss="modal" aria-hidden="true" value="关闭" />
+</div>
+<script type="text/javascript">
+$(function (){
+	var workFlowStepVal=$("#workFlowSteps td[workFlowStepVal]:last");
+	
+	var workFlowStepAttr=workFlowStepVal.attr("workFlowStepVal");
+	if(workFlowStepAttr){
+		$("#step").val(parseInt(workFlowStepAttr)+1);
+	}else{
+		$("#step").val(1);
+	}
+	
+	var workFlowStepHtml=workFlowStepVal.html();
+	if(workFlowStepHtml){
+		$(".stepVal").html("步骤  "+(parseInt(workFlowStepHtml)+1));
+	}else{
+		$(".stepVal").html("步骤  1");
+	}
+});
+</script>

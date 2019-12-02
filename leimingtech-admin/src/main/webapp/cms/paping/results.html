@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+	<title>一篇文章分页</title>
+	<meta content="linjm" name="description" />
+	<meta content="linjm" name="author" />
+</head>
+<link href="/upload/css/grid.css" rel="stylesheet" type="text/css" />
+<link href="/upload/css/search.css" rel="stylesheet" type="text/css" />
+<script src="/upload/css/pageControl_1.js" type="text/javascript"></script>
+<!-- END HEAD -->
+<body>
+
+<div class="container_25">
+	<div class="grid_25 mb0">
+		<div class="search-box clearfix">
+			<div class="search-result">
+				
+			</div>
+			<div class="search-cont">
+			</div>
+		</div>
+		<div class="result-box">
+			<div class="hd"> </div>
+			<div class="bd clearfix">
+				<div class="m">
+					<div>
+								${pagecontent}
+					</div>
+					
+					<!-- 分页条 -->	
+					<ul class="page_down">
+						<script>
+							var _sPageName = 'testController.do?paping&id=${id}&pageIndex=';
+							pageControl(${_nPageCount}, ${_nCurrIndex}, _sPageName, "tt", 10);
+						</script>
+					</ul>
+					
+				</div>
+				<div class="s">
+					<div class="more">
+						<ul>
+							<li class="cont">
+								<h4>排序方式</h4>
+								<div class="sift">·<a href="javascript:void(0)">相关度</a>·<a href="javascript:void(0)">发布时间</a></div>
+							</li>
+							<li class="cont">
+								<h4>按时间筛选结果</h4>
+								<div class="sift">·<a href="javascript:void(0)">一周内</a>·<a href="javascript:void(0)">一月内</a>·<a href="javascript:void(0)">三月内</a>·<a href="javascript:void(0)">全部</a></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

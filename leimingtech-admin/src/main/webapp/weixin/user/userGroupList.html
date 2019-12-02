@@ -1,0 +1,103 @@
+<link rel="stylesheet" type="text/css" href="media/css/search.css" />
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>前台用户组</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('userGroupController.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+			<div class="span12 booking-search">
+				<form id="search_form">
+					 <div class="clearfix">
+								<div class="control-group pull-left margin-right-20">
+									
+									<div class="left">
+									用户组	<input name="name" class="m-wrap" type="text" value="${searchMap["name"]?if_exists[0]}">
+									</div>
+								</div>
+								<div class="dataTables_filter pull-right">
+								<button type="button" class="btn blue"  onclick="toSearchMb('userGroupController.do?userGroup', 'search_form');">搜索  <i class="m-icon-swapright m-icon-white"></i></button>
+								<button type="button" class="btn" onclick="resetForm('search_form');">重置</button>
+								</div>
+					  </div>
+					  
+					
+				</form>
+			</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>用户组</th>
+							<th>自定义图文数</th>
+							<th>功能请求数</th>
+							<th>是否显示版权</th>
+							<th>活动创建数</th>
+							<th>价格</th>
+							<th>创建会员卡数量</th>
+							<th>公众号总数</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if userGroupList?exists>
+						  <#list userGroupList as userGroup>
+							<tr class="odd gradeX">
+								<td>${userGroup_index?if_exists+1}</td>
+								<td style="cursor:default;"
+								title="用户组：${userGroup.name?if_exists}&#13;自定义图文数：${userGroup.diynum?if_exists}&#13;功能请求数：${userGroup.connectnum?if_exists}&#13;是否显示版权：<#if userGroup.iscopyright==1>显示</#if><#if userGroup.iscopyright==0>不显示</#if>&#13;活动创建数：${userGroup.activitynum?if_exists}&#13;价格：${userGroup.price?if_exists}&#13;statisticsUser：${userGroup.statisticsUser?if_exists}&#13;创建会员卡数量：${userGroup.createCardNum?if_exists}&#13;公众号总数：${userGroup.wechatCardNum?if_exists}&#13;状态：<#if userGroup.status==1>启用</#if><#if userGroup.iscopyright==0>关闭</#if>"
+								>${userGroup.name?if_exists}</td>
+								<td>${userGroup.diynum?if_exists}</td>
+								<td>${userGroup.connectnum?if_exists}</td>
+								<td class="label-error"><#if userGroup.iscopyright==1>√</#if><#if userGroup.iscopyright==0>×</#if></td>
+								<td>${userGroup.activitynum?if_exists}</td>
+								<td>${userGroup.price?if_exists}</td>
+								<td>${userGroup.createCardNum?if_exists}</td>
+								<td>${userGroup.wechatCardNum?if_exists}</td>
+								<td><#if userGroup.status==1>√</#if><#if userGroup.iscopyright==0>×</#if></td>
+								<td>
+								<input type='button' title='修改' style=' width:16px; height:16px;  border:0; background:url(media/image/edit.gif) no-repeat left top' onclick="toEditModel('userGroupController.do?addOrUpdate&id=${userGroup.id?if_exists}')"></a> 
+								<input type='button' title='删除' style=' width:16px; height:16px;  border:0; background:url(media/image/del.gif) no-repeat left top' onclick="del('userGroupController.do?del', '${userGroup.id?if_exists}')"></a>
+								</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+
+<div id="editModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+<script>
+function toSearchMb(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dashboard').empty();
+			$('#dashboard').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>

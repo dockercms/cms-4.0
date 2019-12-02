@@ -1,0 +1,55 @@
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			<h4 class="modal-title">意见反馈</h4>
+		</div>
+		<div class="modal-body">
+			<!-- BEGIN FORM-->
+			<form id="form_sample_2" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${feedback.id?if_exists}"/>
+				<div class="alert alert-error hide">
+					<button class="close" data-dismiss="alert"></button>
+					有未填写项或错误项. 请检查后再提交.
+				</div>
+				<div class="alert alert-success hide">
+					<button class="close" data-dismiss="alert"></button>
+					表单验证成功!
+				</div>
+						<div class="control-group">
+							<label class="control-label">意见反馈内容</label>
+							<div class="controls">
+								<input type="text" id="content" name="content" class="span3 form-control" data-rule-required="true" value="${feedback.content?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">邮箱</label>
+							<div class="controls">
+								<input type="text" id="email" name="email" class="span3 form-control" data-rule-required="true" value="${feedback.email?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">应用版本</label>
+							<div class="controls">
+								<input type="text" id="version" name="version" class="span3 form-control" value="${feedback.version?if_exists}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">系统</label>
+							<div class="controls">
+								<input type="text" id="system" name="system" class="span3 form-control" value="${feedback.system?if_exists}"/>
+							</div>
+						</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+		<#if feedback.id lt 0 >
+			<input type="button" onclick="formSubmitModel('feedbackController.do?save', 'form_sample_2');" class="btn btn-primary" value="提交">
+		</#if>
+			<input type="button" class="btn" value="关闭" data-dismiss="modal">
+		</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+   App.init();
+   $("#form_sample_2").myValidate();
+});
+</script>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" verticalAlign="middle" horizontalAlign="center" backgroundAlpha="0" height="60" width="100%" styleName="plain" horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="init()">
+<mx:Style>
+Button{
+	themeColor:#C2E7FF;
+	fillAlphas:0.65, 0.4, 0.75, 0.65;
+	fillColors:#FEFFFF, #CCCCCC, #FFFFFF, #C2E7FF;	
+	font-size:12;
+	color:#0099DD;
+	fontWeight:normal;
+}
+
+ProgressBar {
+   	barColor: #99cc00;
+   	trackHeight: 22;
+   	fontWeight:normal;
+   	font-size:12;
+   	track-colors:#F7FAFC,#F7FAFC;
+}
+
+HBox {
+	borderStyle:solid;
+	borderThickness:0;
+	vertical-align:middle;
+	horizontal-align:left;
+	horizontal-gap:3;
+}
+
+VBox {
+	vertical-gap:10;
+}
+</mx:Style>
+<mx:Script>
+<![CDATA[
+	private var uploadStatus:String = "wait";
+	private var uploadLabel:String = "";
+	
+	private var uploadFile:FileReference=new FileReference();
+	
+	private var fileType:Array;
+	private var dontConvertType:Array;
+	private var dontConvertexts:String = "";
+	
+	private var actionURL:String = "";
+	private var values:String = "Tools=ZUploader_Video2.0";
+	private var completeFunction:String = "";
+	private var fileMaxSize:Number = 0;
+	
+	private var timer:Timer = new Timer(800); 
+	
+	private var taskID:Number = new Date().getTime();
+	private var FileIDs:String = "";
+	private var FileTypes:String = "";
+	private var FilePaths:String = "";
+	private var FileStatus:String = "";
+	private var convertPS:String = "0";
+	private var ShortNameLen:Number = 0;
+	private var overSize:Boolean = false;
+	private var selected:Boolean = false;
+	private var timeOut:Number = 0;
+	
+	private var barColor:String = "";
+	
+	[Bindable]
+	private var progressWidth:Number = 0;
+	
+	private function init():void{
+		var parameters:Object = Application.application.parameters;
+		barColor = parameters.barColor;
+		var exts:String = "*";
+		if(barColor&&barColor!=""){
+			uploadBar.setStyle("barColor","#"+barColor);
+		}else{
+			barColor = "99cc00";
+		}
+		if(parameters.actionURL){
+			actionURL = parameters.actionURL;
+		}
+		if(parameters.fileType){
+			exts = parameters.fileType;
+		}
+		if(parameters.dontConvertType){
+			dontConvertexts=parameters.dontConvertType;
+		}	
+		if(parameters.onComplete){
+			completeFunction = parameters.onComplete;
+		}
+		if(parameters.fileMaxSize){
+			fileMaxSize = parameters.fileMaxSize;
+		}
+		if(fileMaxSize>0){
+			uploadBar.label = "单文件最大 "+(fileMaxSize/1024/1024).toFixed(2)+" M";
+		}
+		fileType = exts.split(",");
+		exts = ""; 
+		for(var i:int = 0;i<fileType.length;i++){
+			exts += "*."+fileType[i];
+			if(i+1!=fileType.length){
+				exts += ";";
+			} 
+		}
+		var allowTypes:FileFilter = new FileFilter("支持上传的文件("+exts+")",exts);
+		fileType = new Array(allowTypes);
+		
+		ShortNameLen = Math.round(uploadBar.width/10)-Math.round(uploadBar.width/60*3);
+		progressWidth = uploadBar.width;
+		
+		//ExternalInterface 用来添加方法给js调用
+		
+		ExternalInterface.addCallback("addPostParam", addPostParam);  
+		ExternalInterface.addCallback("doUpload", doUpload);
+		ExternalInterface.addCallback("isComplete", isComplete);  
+		ExternalInterface.addCallback("hasFile", hasFile);  
+		ExternalInterface.addCallback("hasError", hasError); 
+		ExternalInterface.addCallback("setStatusStr", setStatusStr);  
+	}
+	
+	//js调用方法，用来存储表单页面填写内容组成的参数串(?后面的xx=yy&yy=zz)
+	private function addPostParam(QueryString:String):void{
+		this.values = QueryString;
+	}
+	
+	//返回上传完成状态的方法
+	private function isComplete():Boolean{
+		if(uploadStatus!="complete"){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	//返回文件选择状态，判断是否已经选择文件
+	private function hasFile():Boolean{;
+		return selected;		
+	}
+	
+	//返回错误状态，判断是否文件选择正确，是否文件大小超过可上传限制等
+	private function hasError():Boolean{
+		return overSize;
+	}
+	
+	//浏览文件方法
+	private function BrowseFile():void{
+		uploadFile = new FileReference();
+		uploadFile.addEventListener(Event.SELECT,selectHandler);
+		uploadFile.browse(fileType);
+	}
+	
+	//浏览文件监听方法
+	private function selectHandler(event:Event):void{
+	   if(uploadFile.size==0){
+	   	 return;
+	   }
+	   if(fileMaxSize>0&&uploadFile.size>fileMaxSize){
+	   	 overSize = true;
+	   }else{
+	   	 overSize = false;
+	   }
+	   selected = true;
+	   var lebel:String = uploadFile.name;
+	   if((lebel.substring(0,lebel.lastIndexOf("."))).length>ShortNameLen){
+		 lebel = lebel.substr(0,ShortNameLen)+".."+lebel.substring(lebel.lastIndexOf("."));
+	   }
+	   uploadLabel = lebel+"("+(uploadFile.size/1024/1024).toFixed(1)+"M)";
+	   if(overSize){
+		 uploadLabel = "错误:文件超过指定大小";
+		 uploadBar.setStyle("color","#FF0600");
+	   }else{
+	   	 uploadBar.setStyle("color","#0b333c");
+	   }
+	   uploadBar.label = uploadLabel;
+	}
+	
+	//doResize方法用来配合页面js方法，实现改变flash的显示大小，将flash下方的转换进度条显示出来
+	private function doResize():void{
+		ExternalInterface.call("doResize");
+	}
+	
+	
+	//上传方法
+	private function doUpload():void{
+		if(overSize){
+			return;
+		}
+		var request:URLRequest = new URLRequest(actionURL);
+        request.method = "POST";
+        request.contentType = "multipart/form-data";
+    	values = values+"&taskID="+taskID;
+        var variables:URLVariables = new URLVariables(values);
+    	request.data = variables;
+		uploadFile.addEventListener(ProgressEvent.PROGRESS, progressHandler);
+        uploadFile.addEventListener(Event.COMPLETE, completeHandler);
+        uploadFile.addEventListener(SecurityErrorEvent.SECURITY_ERROR,securityErrorHandler);
+        uploadFile.addEventListener(HTTPStatusEvent.HTTP_STATUS,httpStatusHandler);
+        uploadFile.addEventListener(IOErrorEvent.IO_ERROR,ioErrorHandler);
+        uploadFile.upload(request);
+        selectBtn.enabled = false;
+        uploadStatus = "uploading";
+        timer.addEventListener(TimerEvent.TIMER,getZUploaderTaskStatus);
+   		timer.start(); 
+	}
+	
+    private function securityErrorHandler(event:SecurityErrorEvent):void{
+       uploadBar.label = "Security Error";
+    }
+	
+    private function httpStatusHandler(event:HTTPStatusEvent):void {
+    	uploadBar.label = "网络错误";
+    }
+    
+    private function ioErrorHandler(event:IOErrorEvent):void{
+        uploadBar.label = "ioError";
+    }
+    
+    //进度条监听方法
+	private function progressHandler(e: ProgressEvent): void{
+		uploadBar.setProgress(e.bytesLoaded,e.bytesTotal);
+		var ps:Number = Math.round(e.bytesLoaded/e.bytesTotal*100);
+		uploadBar.label= uploadLabel+"   上传进度: "+ps+"%";
+		if(ps==100){
+			uploadBar.mode = "event";
+			uploadBar.indeterminate = true;
+			if(uploadFile.name.substring(uploadFile.name.lastIndexOf(".")).toLowerCase()!=".flv"){
+				doResize();
+			}
+		}
+	}
+	
+	private function getZUploaderTaskStatus(event:TimerEvent):void{
+		ExternalInterface.call("getZUploaderTaskStatus",taskID);
+	}
+	
+	private function setStatusStr(Str:Array):void{
+		this.FileIDs = Str[0];
+		this.FileTypes = Str[1];
+		this.FilePaths = Str[2];
+		this.FileStatus = Str[3];
+		if(this.FileStatus!=null){
+			var st:Array = this.FileStatus.split(",");
+			var progress:String = st[0].toString();
+			var flag:String ="false";
+			var currentext:String ="";
+			currentext=uploadFile.name.substring(uploadFile.name.lastIndexOf(".")).toLowerCase();
+			dontConvertType = dontConvertexts.split(",");
+			for(var i:int = 0;i<dontConvertType.length;i++){
+				if(currentext==dontConvertType[i]){
+					flag="true";
+					break;
+				}	
+			}
+			if(new Number(convertPS)!=100&&uploadFile.name.substring(uploadFile.name.lastIndexOf(".")).toLowerCase()!=".flv"&&flag!="true"){
+				if(new Number(convertPS)==0&&uploadStatus=="operating"){
+					timeOut++;
+				}
+				if(timeOut>=30){
+					uploadBar.label="获取转换进度失败,转换完成后上传界面将自动关闭"
+				}
+				if(timeOut>=90){
+					if(progress.indexOf("完成")!=-1){
+						uploadStatus = "complete";
+						timer.stop();
+						if(completeFunction!=""){
+							ExternalInterface.call(completeFunction,FileIDs,FileTypes,FilePaths,FileStatus);
+						}
+					}
+				}
+				if(progress.indexOf("%)")!=-1){
+					convertPS = progress.substring(progress.indexOf("(")+1,progress.indexOf(")")-1);
+					progress = getPgStr(progress);
+					if(new Number(convertPS)>=98){
+						convertPS = "100";
+					}
+					convertBar.setProgress(new Number(convertPS),100)
+					convertBar.label= "转换进度："+progress+"     "+convertPS+"%";
+					if(new Number(convertPS)>=98){
+						convertBar.mode = "event";
+						convertBar.indeterminate = true;
+					}
+				}
+			}else{
+				if(progress.indexOf("完成")!=-1){
+					uploadStatus = "complete";
+					timer.stop();
+					if(completeFunction!=""){
+						ExternalInterface.call(completeFunction,FileIDs,FileTypes,FilePaths,FileStatus);
+					}
+				}
+			}
+		}
+	}
+	
+	private function getPgStr(Str:String):String{
+		var tempStr:String = "";
+		tempStr += Str.substring(Str.indexOf("Pos:")+4,Str.indexOf("s ")+1);
+		tempStr += Str.substring(Str.indexOf("s ")+1,Str.indexOf("f")+1)+"  ";
+		tempStr += Str.substring(Str.indexOf("%)")+2,Str.indexOf("mb")+2);
+		return tempStr;
+	}
+	
+	private function completeHandler(event:Event):void{
+		uploadStatus = "operating";
+		var uploadCompleted:Event = new Event(Event.COMPLETE);
+    	dispatchEvent(uploadCompleted);
+	}
+]]>
+</mx:Script>
+<mx:VBox width="100%" height="100%" horizontalScrollPolicy="off">
+<mx:HBox width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	<mx:ProgressBar id="uploadBar" width="92%" mode="manual" labelPlacement="center" label="" minimum="0" maximum="100"/>
+	<mx:Button id="selectBtn" label="浏览.." height="22" click="BrowseFile()"/>
+</mx:HBox>
+<mx:ProgressBar id="convertBar" barColor="#FF9900" width="{progressWidth}" mode="manual" label="" labelWidth="{progressWidth}" fontSize="10" verticalGap="0" labelPlacement="bottom" minimum="0" maximum="100" trackHeight="5" height="5"/>
+</mx:VBox>
+</mx:Application>

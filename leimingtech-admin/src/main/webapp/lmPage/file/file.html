@@ -1,0 +1,241 @@
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+						
+				
+<div class="portlet-body">
+			<div>
+			
+							<input type="file" name="files" id="files"  style="border: 1px  solid #667788 ;width: 122px;" />
+							<a href="javascript:void(0)"  class="btn blue btn-sm" onclick="introduction()"><span class="icon-signin"><b style="margin-left:10px">导入</b></span></a>
+							<input type="text" style="margin-top: 10px;width:50px" id="catalog" name="catalog" />
+							<a href="javascript:void(0)" class="btn blue btn-sm"onclick="saveCatalog()"><span class="icon-plus"><b style="margin-left:10px">新建目录</b></span></a>
+							<a href="javascript:void(0)" class="btn blue btn-sm" onclick="saveTpl()"><span class="icon-plus"><b style="margin-left:10px">新建模板</b></span></a>
+							<a href="javascript:void(0)"  class="btn blue btn-sm" onclick="delFile('fileController.do?delcheckbox&parentPath=${parentPath}')"><span class="icon-remove"><b style="margin-left:10px">删除</b></span></a>
+							
+			<a href="fileController.do?downFileZip&parentPath=${parentPath}&parentPathName=${parentPathName}"  class="btn blue btn-sm"><span class="icon-signin"><b style="margin-left:10px">下载</b></span></a>					
+			</div>
+	<input type="hidden" id="parentPath" name="parentPath" value="${parentPath}">
+	<input type="hidden" id="parentPathName" name="parentPathName" value="${parentPathName}">
+	<#if (list?exists && list?size > 0)>
+	<table class="table table-striped table-bordered table-hover" id="sample_1">
+		<thead>
+			<tr style="background-color:#CCCCFF;">
+				<td width="10px"> <input id="checkAll" type="checkbox" /></td>
+				<td style="text-align:center;">文件名</td>
+				<td width="60" style="text-align:center;">文件大小</td>
+				<td width="135" style="text-align:center;">最后修改时间</td>
+		
+				<th width="150" style="text-align:center;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <#list list as territor>
+			<tr class="odd gradeX">
+				<td><input type="checkbox" name="pathId"  value="${territor.path}"></td>
+				<td ><img src="media/image/file/${territor.ico}.gif"/>${territor.fileName}</td>
+				<td >${territor.size}</td>
+				<td >${territor.lastModifiedDate}</td>
+				
+				
+				<td style="text-align:center;">
+				<#if territor.file==1>
+					<a href="fileController.do?downFileZip&parentPath=${parentPath}&parentPathName=${territor.fileName}">下载</a>	
+				<#elseif territor.file==2>
+					<a href="fileController.do?download&path=${territor.path?if_exists}">下载</a>
+				<#elseif territor.file==0>
+					<a href="fileController.do?download&path=${territor.path?if_exists}">下载</a>
+				
+				</#if>
+					<a href="javascript:void(0)" onclick="rename('fileController.do?rename&path=${territor.path?if_exists}&fileName=${territor.fileName?if_exists}&parentPath=${parentPath}')">重命名</a>
+						<#if territor.file==1>
+						<!--  <input type='button' title='修改' class="editbtn"/> -->
+						<#elseif territor.file==2>
+						<!--  <input type='button' title='修改' class="editbtn"/> -->
+						<#elseif territor.file==0>
+						<input type='button' title='修改' class="editbtn"  onclick="toEditModel('fileController.do?editModelPage&fileName=${territor.fileName?if_exists}&filePath=${territor.path?if_exists}')"/>
+						 </#if>
+					
+					
+					<input type='button' title='删除' class="delbtn"  onclick="delOnly('fileController.do?delOnly&path=${territor.path?if_exists}&parentPath=${parentPath}')"   />
+				</td>
+			</tr>
+		  </#list>
+		</tbody>
+	</table>
+	</#if>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="80%">
+</div>
+<div id="renameModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="50%">
+</div>
+<script type="text/javascript">
+//全选按钮
+	 $(function() {
+           $("#checkAll").click(function() {
+                $('input[name="pathId"]').attr("checked",this.checked); 
+            });
+            var $subBox = $("input[name='subBox']");
+            $subBox.click(function(){
+                $("#checkAll").attr("checked",$subBox.length == $("input[name='pathId']:checked").length ? true : false);
+            });
+        });
+        //多个删除
+        function delFile(urlStr){
+        	 var str="";
+            $("input[name='pathId']:checkbox").each(function(){ 
+                if($(this).attr("checked")){
+                    str += $(this).val()+","
+                }
+            })
+            if(str==''){
+            	alert("请至少选择一个选项!");
+            }else{
+            lmConfirm("是否删除该记录？","",function (){
+            	$.ajax({
+					type:'post',
+					url:urlStr,
+					data:{"strChebox":str},  
+					dataType:'text',
+					success:function(msg){
+					var obj = JSON.parse(eval(msg));
+						if(obj.isSuccess==true){
+						lmAlert(obj.msg);
+						changeDivBody('fileController.do?Table&id=' + obj.parentPath, 'divBody');
+					}else{
+						lmAlert(obj.msg);
+					}
+				},
+				error:function(data){ //服务器响应失败时的处理函数
+		        	lmAlert("提交处理失败!");
+		        }
+				}); 
+				}); 
+            }
+        }
+        //单个删除
+        function delOnly(urlStr){
+        lmConfirm("是否删除该记录？","",function (){
+        	$.ajax({
+					type:'post',
+					url:urlStr, 
+					success:function(msg){
+					var obj = JSON.parse(eval(msg));
+						if(obj.isSuccess==true){
+						lmAlert(obj.msg);
+						changeDivBody('fileController.do?Table&id=' + obj.parentPath, 'divBody');
+					}else{
+						lmAlert(obj.msg);
+					}
+				},
+				error:function(data){ //服务器响应失败时的处理函数
+		        	lmAlert("提交处理失败!");
+		        }
+				}); 
+			 });  	
+        }
+        //重命名
+         function rename(urlStr){
+        	
+        	$.ajax({
+					type:'post',
+					url:urlStr, 
+					success:function(msg){
+					$("#renameModel").empty();
+					$("#renameModel").append(msg);
+					$("#renameModel").modal('show');
+				},
+				error:function(data){ //服务器响应失败时的处理函数
+		        		lmAlert("load page error, page url is " + urlStr);
+		        }
+				}); 
+			 	
+        }
+        
+        //导入文件
+function introduction(){
+			
+		var file = document.getElementById("files");	
+
+		var filePathId=$("#parentPath").val();
+
+		if($("#files").val()=='' || filePathId==''){
+			alert("请选择文件或文件传入的路径!");
+			}else{
+				$.ajaxFileUpload({
+	        //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)
+		        url:"fileController.do?uploadFile",
+		        secureuri:false,                       //是否启用安全提交,默认为false
+		        fileElementId:'files',           //文件选择框的id属性
+		        dataType:'json',                       //服务器返回的格式,可以是json或xml等
+		  		data:{filePathId:filePathId},		   
+		        success:function(data){        //服务器响应成功时的处理函数
+					var json =JSON.parse(data);
+					if(json.isSuccess==true){
+					lmAlert(json.msg);
+					 changeDivBody('fileController.do?Table&id=' + json.filePathId, 'divBody');
+					}else{
+					
+						lmAlert(json.msg);
+					}
+		        },
+		        error:function(data){ //服务器响应失败时的处理函数
+		        	lmAlert("提交处理失败!");
+		        }
+		    });	
+		}
+}
+	//添加目录
+		function saveCatalog(){
+		
+			var filePathId=$("#parentPath").val();
+			var catalog=$("#catalog").val();
+			if(filePathId=='' || catalog==''){
+				alert("请选择文件目录或填写目录名!");
+			}else{
+				$.ajax({
+					type:'post',
+					url:'fileController.do?saveCatalog',
+					data:{"filePathId":filePathId,"catalog":catalog,},  
+					dataType:'text',
+					success:function(msg){
+					var obj = JSON.parse(eval(msg));
+						if(obj.isSuccess==true){
+						lmAlert(obj.msg);
+						changeDivBody('fileController.do?Table&id=' + obj.filePathId, 'divBody');
+					}else{
+						lmAlert(obj.msg);
+					}
+				},
+				error:function(data){ //服务器响应失败时的处理函数
+		        	lmAlert("提交处理失败!");
+		        }
+					
+				}); 
+				
+			}
+		}
+	//添加模板
+		function saveTpl(){
+			var filePathId=$("#parentPath").val();
+			if(filePathId==''){
+				alert("请选择文件目录!");
+			}else{
+				$.ajax({
+					type:'post',
+					url:'fileController.do?addSource',
+					data:{"filePathId":filePathId,},  
+					dataType:'text',
+					success:function(msg){
+					$("#saveModel").empty();
+					$("#saveModel").append(msg);
+					$("#saveModel").modal('show');
+				},
+				error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+				}
+					
+				}); 
+				
+			}
+		}
+      
+</script>

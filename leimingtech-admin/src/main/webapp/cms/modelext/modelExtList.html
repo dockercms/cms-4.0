@@ -1,0 +1,103 @@
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
+<link rel="stylesheet" type="text/css" href="media/css/search.css" />
+ <div class="row-fluid">
+	<div class="span12">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>选项内容</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('modelExtController.do?addPageModel')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form">
+						<div class="clearfix">
+								<div class="control-group pull-left margin-right-20">
+									<label>模型id</label>
+									<div class="left">
+										<input name="modelId" class="m-wrap" type="text" value="${searchMap["modelId"]?if_exists[0]}">
+									</div>
+								</div>
+								<div class="control-group pull-left margin-right-20">
+									<label>栏目id</label>
+									<div class="left">
+										<input name="channelId" class="m-wrap" type="text" value="${searchMap["channelId"]?if_exists[0]}">
+									</div>
+								</div>
+						</div>
+						<button type="button" class="btn blue" onclick="toSearch('modelExtController.do?table', 'search_form');">搜索  <i class="m-icon-swapright m-icon-white"></i></button>
+						<button type="button" class="btn" style="width:9%" onclick="resetForm('search_form');">重置</button>
+					</form>
+				</div>
+				
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+								<th>模型id</th>
+								<th>栏目id</th>
+								<th>内容id</th>
+								<th>类型名称</th>
+								<th>类型值</th>
+								<th>标记</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if pageList?exists>
+						  <#list pageList as page>
+							<tr class="odd gradeX">
+										<td class="center">
+												${page.modelId}
+										</td>
+										<td class="center">
+												${page.channelId}
+										</td>
+										<td class="center">
+												${page.contentId}
+										</td>
+										<td class="center">
+												${page.attrName}
+										</td>
+										<td class="center">
+												${page.attrValue}
+										</td>
+										<td class="center">
+												${page.attrToken}
+										</td>
+								<td>
+									<a href="javaScript:void(0)" onclick="toEditModel('modelExtController.do?updatePageModel&id=${page.id?if_exists}')">修改</a>|
+									<a href="javaScript:void(0)" onclick="del('modelExtController.do?del', '${page.id?if_exists}')">删除</a>
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>

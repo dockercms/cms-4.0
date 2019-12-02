@@ -1,0 +1,30 @@
+.clearbox{clear:both;}
+.s{ width:1000px; height:55px; border-bottom:3px solid #2389F8;margin:0 auto; padding-top:50px;}
+.logo{ width:145px; height:35px; float:left; padding-top:15px;}
+.wei{ width:315px; height:26px; float:left; padding-top:25px; color:#333}
+.wei a{ color:#333}
+.wei a:hover{ color:#c00}
+
+
+.main{ width:1000px; margin:0 auto; margin-top:10px;}
+.side-left{width:180px; float:left;}
+.sub-left{width:180px;height:500px;background:url(newimg/side-leftbg.gif) no-repeat;padding-top:12px;}
+.sub-left li{float:left;width:124px;height:40px;line-height:40px;padding-left:56px;}
+.sub-left li a{font-size:14px;color:#000;}
+.sub-left li a:hover{color:#e9180a;}
+.sub-left li a.current{font-weight:bold;color:#e9180a;}
+
+
+.side-right{width:807px; margin-left:12px; display:inline; float:right;}
+.side-title{width:784px;height:43px;line-height:43px;background:url(newimg/column-bg.gif) no-repeat;padding-right:23px;margin-top:6px;}
+.title1{ background-position:0px 0px;}
+.title2{ background-position:0px -43px;}
+.title3{ background-position:0px -86px;}
+.title4{ background-position:0px -129px;}
+.title5{ background-position:0px -172px;}
+
+.side-title a{float:right;color:#2b2b2b;font-size:14px;}
+.pager{padding-top:17px;}
+.pager p,.contact p{font-size:14px;line-height:30px;color:#404040;text-indent:2em; padding-left:3px;}
+.contact{padding-left:27px;padding-top:21px;width:780px;}
+.contact p{text-indent:2em; padding-bottom:10px;}

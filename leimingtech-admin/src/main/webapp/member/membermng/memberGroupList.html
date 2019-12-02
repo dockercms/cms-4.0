@@ -1,0 +1,88 @@
+
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>前台用户组</div>
+				
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditModel('memberGroupController.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class="span4">
+								<label >
+									名称：
+									<input name="usergroupsname" class="form-control span7" type="text" value="${searchMap["usergroupsname"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearchMb('memberGroupController.do?memberGroup', 'search_form')">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form')">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th width="100" >名称</th>
+							<th>备注</th>
+							<th width="40" >个数</th>
+							<th width="40" >状态</th>
+							<th width="40" >默认</th>
+							<th width="60" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if memberGroupList?exists>
+						  <#list memberGroupList as memberGroup>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+memberGroup_index?if_exists+1}</td>
+								<td >${memberGroup.usergroupsname?if_exists}</td>
+								<td >${memberGroup.remark?if_exists}</td>
+								<td >${memberGroup.numbers?if_exists}</td>
+								<#if memberGroup.state==1><td style="color:green;">√</td><#else><td style="color:red;">×</td></#if>
+								<#if memberGroup.defalutLv==1><td style="color:green;">√</td><#else><td style="color:red;">×</td></#if>
+								<td style="text-align:center;">
+									<input type='button' title='修改' href="javaScript:void(0)"  class="editbtn"  onclick="toEditModel('memberGroupController.do?addOrUpdate&id=${memberGroup.id?if_exists}')"/>
+									<input type='button' title='删除' href="javaScript:void(0)" class="delbtn"  onclick="del('memberGroupController.do?del', '${memberGroup.id?if_exists}')"/>
+								</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="700">
+</div>
+<script>
+function toSearchMb(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dashboard').empty();
+			$('#dashboard').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>

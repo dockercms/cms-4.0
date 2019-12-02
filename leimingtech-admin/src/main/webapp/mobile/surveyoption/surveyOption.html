@@ -1,0 +1,134 @@
+<div class="row-fluid">
+<div class="span12">
+	<div class="portlet box blue">
+		<div class="portlet-title">
+			<div class="caption"><i class="icon-reorder"></i>调查选项</div>
+			<div class="tools">
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form id="form" class="form-horizontal">
+				<input type="hidden" id="id" name="id" value="${page.id?if_exists}"/>
+				<input type="hidden" id="surveyId" name="surveyId" value="${surveyId}"/>
+				<input type="hidden" id="optionVId" name="optionVId" value="${temporary}"/>
+				<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCatId}"/>
+				<input type="hidden" id="contentsId" name="contentsId" value="${contentsId}"/>
+				<input type="hidden" id="mark" name="mark" value="${mark}"/>
+				
+						<div class="control-group" style="display:none">
+							<label class="control-label">调查ID</label>
+							<div class="controls">
+								<input type="text" id="surveyid" name="surveyid" class="span6 m-wrap" value="<#if page.surveyid=="">${surveyId}</#if><#if page.surveyid!="">${page.surveyid?if_exists}</#if>"/>
+								<span class="help-inline">填写调查ID</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">选项名称</label>
+							<div class="controls">
+								<input type="text" id="optionname" name="optionname" class="span6 m-wrap" value="${page.optionname?if_exists}"/>
+								<span class="help-inline">填写选项名称</span>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label">图片</label>
+							<div class="controls">
+								<input type="text" id="picture" name="picture" class="span6 m-wrap" value="${page.picture?if_exists}"/>
+								<span class="help-inline">填写图片</span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">说明</label>
+							<div class="controls">
+								<input type="text" id="interpretation" name="interpretation" class="span6 m-wrap" value="${page.interpretation?if_exists}"/>
+								<span class="help-inline">填写说明</span>
+							</div>
+						</div>
+						<#if mark=="text">
+							<div class="control-group">
+								<label class="control-label">内容</label>
+								<div class="controls">
+									<input type="text" id="optionContent" name="optionContent" class="span6 m-wrap" value="${page.optionContent?if_exists}"/>
+								</div>
+							</div>
+						</#if>
+						<#if mark="checkbox">
+							<div class="control-group">
+								<label class="control-label">选项</label>
+								<div class="controls">
+									<div id="optionDiv">
+									</div>
+									<input type="button" class="btn green" value="增加选项" onclick="toEditOption('surveyOptionExtController.do?addPageModel&optionVId=${temporary}&surveyOptionId=${page.id?if_exists}')"/>
+								</div>
+							</div>
+						</#if>
+						<#if mark=="textarea">
+							<div class="control-group">
+								<label class="control-label">内容</label>
+								<div class="controls">
+									<textarea id="optionContent" name="optionContent" class="span6 m-wrap" rows="3" style="width:600px">${page.optionContent?if_exists}</textarea>
+								</div>
+							</div>
+						</#if>
+						<div class="control-group">
+							<label class="control-label">排序</label>
+							<div class="controls">
+								<input type="text" id="optionsort" name="optionsort" class="span6 m-wrap" value="${page.optionsort?if_exists}"/>
+								<span class="help-inline">填写排序</span>
+							</div>
+						</div>
+				<div class="form-actions">
+					<button type="button" onclick="formSubmitModel('surveyOptionController.do?save', 'form');" class="btn blue">提交</button>
+					<button type="reset" class="btn" data-dismiss="modal">重置</button>    
+					<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>                          
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+<div id="editOption" class="modal hide fade" tabindex="-1" data-focus-on="input:first" data-width="700">
+<script>
+$('.date-picker').datepicker({
+    rtl : App.isRTL()
+});
+
+	var initSWFUload = function () {
+		$.ajax({
+			type:'post',
+			url:'surveyOptionController.do?jumpOption&optionVId=${temporary}&surveyOptionId=${page.id?if_exists}',
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#optionDiv').empty();
+				$('#optionDiv').append(msg);
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+		
+	};
+	function toEditOption(urlStr){
+		initSWFUload = null;
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				$('#editOption').empty();
+				$('#editOption').append(msg);
+				$('#editOption').modal('show');
+				if(initSWFUload){
+					initSWFUload();
+				}
+			},
+			error:function(){
+				alert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+</script>

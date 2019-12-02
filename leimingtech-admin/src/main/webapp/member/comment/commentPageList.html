@@ -1,0 +1,101 @@
+<script type="text/javascript">
+    var i=0;
+    var commentTimeList = new Array();
+</script>
+<#if commentaryList?exists && commentaryList?size gt 0>
+    <input type="hidden" id="commentCount_${pageNo}" value="${commentCount?if_exists}">
+    <#list commentaryList as comment>
+        <script type="text/javascript">
+            commentTimeList[i] = '${comment.commentTime?string("yyyy-MM-dd HH:mm:ss")}';
+            i++;
+            var t;
+            var nowTime = new Date().getTime();
+            var commentTime  = '${comment.commentTime?string("yyyy-MM-dd HH:mm:ss")}';
+            var date1 = new Date(commentTime).getTime();
+            var secend = Math.floor((nowTime-date1)/(1000));
+            var min = Math.floor((nowTime-date1)/(1000*60));
+            var hour = Math.floor((nowTime-date1)/(1000*60*60));
+            var day = Math.floor((nowTime-date1)/(1000*60*60*60));
+
+            if(secend<60){
+                document.getElementById('time_'+commentTime).innerHTML =secend+" 秒前";
+            }else if(min<60){
+                document.getElementById('time_'+commentTime).innerHTML =min+" 分钟前";
+            }else if(hour<24){
+                document.getElementById('time_'+commentTime).innerHTML =hour+" 小时前";
+            }else {
+                document.getElementById('time_'+commentTime).innerHTML =day+" 天前";
+            }
+        </script>
+        <input type="hidden" id="time_${pageNo}_${comment_index+1}" value="${comment.commentTime?string('yyyy-MM-dd HH:mm:ss')}">
+        <li class="np-post topAll" style="width: 520px">
+            <#if comment.memberPic?if_exists>
+                <img class="np-avatar popClick" src="${contextpath}/${comment.memberPic}">
+             <#else>
+                 <img class="np-avatar popClick" src="${contextpath}/member/pic/face.jpg">
+            </#if>
+
+            <div class="np-post-body">
+                <div class="np-post-header">
+								<span class="">
+									<a href="javascript:void(0)" title="${comment.username}" class="np-user popClick " >${comment.memberName}</a>
+								</span>
+                    <a href="javascript:void(0)" class="replywho np-icon-reply-weak np-user" style="display:none"></a>
+                    <span class="np-time" id="time_${comment.commentTime?string('yyyy-MM-dd HH:mm:ss')}">${comment.commentTime?string('yyyy-MM-dd HH:mm:ss')}</span>
+                </div>
+                <div class="np-post-content" data-height="5">
+                    <p>${comment.content}</p>
+                </div>
+                <div class="np-post-footer" id="r_${comment.commentId}">
+                    <a href="javascript:void(0)" ><img src="/pcstyle/images/content-ups.png" style="align-content: center" title="赞同" onclick="addSupport('${comment.commentId}')" /></a>
+                    (<em id="zantong_commentcount_${comment.commentId}">${comment.supportcount}</em>)&nbsp
+                    <a href="javascript:void(0)" ><img src="/pcstyle/images/content-downs.png" style="align-content: center" title="不赞同" onclick="deleteSupport('${comment.commentId}')"/></a>(<em id="fandui_commentcount_${comment.commentId}">${comment.opposecount}</em>)&nbsp
+                    <a href="javascript:void(0)" class="np-btn np-btn-reply reply" onclick="showreply('${comment.commentId}')">回复</a>
+                    <#if comment.replycount gt 0>
+                    <a class="np-postlink np-btn"  href="javascript:void(0)"
+                       onclick="showAllReply('${contextpath}/front/replyFrontController.do?showList&commentid=${comment.commentId}')">
+                        <img src="/pcstyle/images/transparent.gif">查看回复(<em id="flushReplyTotalCount_${comment.commentId}">${comment.replycount}</em>)
+                    </a>
+                </#if>
+
+<a href="javascript:void(0)" class="np-btn np-btn-newreply"></a>
+</div>
+
+<form class="reply_form_${comment.commentId}" style="display: none">
+    <input type="hidden" name="commentid" value="${comment.commentId}" />
+    <input type="hidden" name="memberid" value="${comment.memberid}" />
+    <textarea tabindex="1" id="replycontent_${comment.commentId}" name="content" class="comment-text" onkeyup="javascript:chkmaxsms(this,'80')" placeholder="(请勿超过80字)"></textarea>
+    <div class="commtSub np-reply-box-footer comment-div">
+        <div class="submitBtn">
+            <a href="javascript:void(0)" class="np-btn np-btn-submit" onclick="addReply('${comment.commentId}')" >发表跟帖</a>
+        </div>
+    </div>
+</form>
+</div>
+</li>
+</#list>
+</#if>
+
+<script type="text/javascript">
+    setInterval("clock()",5000);
+    function clock(){
+        for (i=0;i<commentTimeList.length;i++) {
+            var nowTime = new Date().getTime();
+            var commentTime = commentTimeList[i];
+            var date1 = new Date(commentTime).getTime();
+            var second = Math.floor((nowTime - date1) / (1000));
+            var min = Math.floor((nowTime - date1) / (1000 * 60));
+            var hour = Math.floor((nowTime - date1) / (1000 * 60 * 60));
+            var day = Math.floor((nowTime - date1) / (1000 * 60 * 60 * 60));
+            if(second<60){
+                document.getElementById('time_'+commentTime).innerHTML =second+" 秒前";
+            }else if(min<60){
+                document.getElementById('time_'+commentTime).innerHTML =min+" 分钟前";
+            }else if(hour<24){
+                document.getElementById('time_'+commentTime).innerHTML =hour+" 小时前";
+            }else {
+                document.getElementById('time_'+commentTime).innerHTML =day+" 天前";
+            }
+        }
+    }
+</script>

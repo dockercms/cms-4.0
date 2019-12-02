@@ -1,0 +1,10 @@
+.comp-navTop{width:100%;-webkit-box-flex:0;-moz-box-flex:0;-ms-box-flex:0;box-flex:0;height:40px;}
+.comp-navTop ul{display:-webkit-inline-box;padding:4px 4px 0;display: -moz-inline-box;}
+.comp-navTop ul li{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:block;min-width:60px;height:36px;text-align:center;font-size:15px;line-height:34px;}
+.comp-navTop ul li.active{border-bottom:2px solid #F00;color:#F00}
+.comp-navTop ul li.active a.ui-link{color:#F00;padding: 0px 10px;}
+.comp-navTop ul li a.ui-link{color:#999;text-decoration: none;display: block;padding: 0px 5px;}
+.comp-navTop ul li a.ui-link:visited{color:#999;}
+.comp-navTop ul li.active a.ui-link:visited{color:#F00;}
+.comp-navTop ul.widthFull li{-webkit-box-flex:1}
+.comp-navTop.activeRound li.active{border-radius:3px;background:#c00000;text-shadow:0 1px 0 rgba(0,0,0,0.5);padding:0 5px;border-bottom:none;height:26px;line-height:26px;color:#fff}

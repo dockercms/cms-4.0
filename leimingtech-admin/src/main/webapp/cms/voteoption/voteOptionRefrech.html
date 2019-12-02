@@ -1,0 +1,40 @@
+<table class="table table-striped table-bordered table-hover voteOptionTable" style="margin-bottom:0px;">
+     <tbody>
+         <tr>
+             <th  style="text-align:center">选项</th>
+             <th width="215" style="text-align:center">图片</th>
+             <th width="60" style="text-align:center">当前票数</th>
+             <th width="55" style="text-align:center">操作</th>
+         </tr>
+         <#if voteOptionList?exists && voteOptionList?size gt 0>
+             <#list voteOptionList as voteOption>
+                 	<#assign option=voteOption_index>
+       				<#include "/cms/voteoption/voteOptionItem.html">
+             </#list>
+         <#else>
+        <#assign option="1">
+        <#include "/cms/voteoption/voteOptionItem.html">
+        <#assign option="2">
+        <#include "/cms/voteoption/voteOptionItem.html">
+         </#if>
+      	
+     </tbody>
+ </table>
+
+<script>
+	$(function (){
+		$(".voteOptionTable").on("click",".delVoteOption",function (){
+			if($(".voteOptionTable tr").length<=3){
+				lmAlert("至少保留两个投票选项！");
+			}else{
+				$(this).parent().parent().remove();
+			}
+		});
+		
+		$(".voteOptionTable").on("click",".voteImg",function (){
+			var $td= $(this).parent();
+			toEditModel('attachPictureController.do?tableDialog&requestCode=voteOption_'+$td.attr("mark"))
+		});
+	});
+	
+</script>

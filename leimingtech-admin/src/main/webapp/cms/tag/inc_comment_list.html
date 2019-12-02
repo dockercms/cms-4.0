@@ -1,0 +1,17 @@
+<div class="LanMu01-2">
+	<div class="LanMu01-1"></div>
+	<span>评论列表</span>
+	<div id="commentList">
+		已有<span id="s_commentsize">0</span>条评论<a href="${contextpath}/front/commentaryTagAct.do?commentList&contentId=${articleidF}" target="_blank">（查看更多评论）</a>
+	</div>
+
+</div>
+
+<div id="commentListContainer"></div>
+
+<script type="text/javascript">
+$(function(){
+	Cms.commentSize("s_commentsize");
+	Cms.commentList("commentListContainer",{contentId:contentId,pageIndex:1,pageSize:5});
+});
+</script>

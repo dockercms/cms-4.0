@@ -1,0 +1,73 @@
+<#--<div class="div_zsyz left">
+	<div class="zsyz_title"> 
+		<span class="line"><img src="media/dgsw/img/plus.png" /></span> 
+		<span class="line">招商引资</span> 
+		<span class="readall zsyz"><a href="#">Read All News</a></span> 
+	</div>
+	<div class="div_lbl"> 
+		<a href="#" class="act" id="xbingjs1" onmouseover="settab_xbingjs('xbingjs',1,2)" onmouseout="this.className='act'">招商动态</a> 
+		<a href="#" id="xbingjs2" onmouseover="settab_xbingjs('xbingjs',2,2)" onmouseout="this.className='act'">投资政策</a> 
+	</div>
+	<div class="clear"></div>
+	<div class="div_news_list block" id="xbingjs_xbingjs1">
+	  <ul>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·1科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	  </ul>
+	</div>
+	<div id="xbingjs_xbingjs2" class="div_news_list block" style="display:none;">
+	  <ul>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·2科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	    <li><a href="#"><span class="right">[12/14/2012]</span><span class="left">·中科院云计算产业技术创新与育成中心奠基...</span></a></li>
+	  </ul>
+	</div>
+</div>-->
+<#assign name ="catalogTag">
+<#assign catalogTag =newTag("${name}")>
+<div class="div_zsyz left">
+	<div class="zsyz_title"> 
+		<span class="line"><img src="media/dgsw/img/plus.png" /></span> 
+		<span class="line">
+			<#assign catalog =catalogTag("{'level':'self','name':'8'}")>
+			<#if catalog?exists>
+					${catalog.name}
+			</#if>
+		</span> 
+		<span class="readall zsyz"><a href="/templatePreViewAction.do?list&catalogid=${catalog.id}" target="_blank">Read All News</a></span> 
+	</div>
+	<div class="div_lbl"> 
+		<#assign catalogList =catalogTag("{'name':'8'}")>
+		<#if catalogList?exists>
+			<#list catalogList as catalog>
+				<a href="#" <#if catalog_index==0> class="act"</#if> id="xbingjs${catalog_index+1}" onmouseover="settab_xbingjs('xbingjs',${catalog_index+1},${catalogList?size})" onmouseout="this.className='act'">
+					${catalog.name}
+				</a>
+            </#list>
+		</#if>
+	</div>
+	<div class="clear"></div>
+	<#if catalogList?exists>
+		<#list catalogList as catalog>
+			<div class="div_news_list block" id="xbingjs_xbingjs${catalog_index+1}" <#if catalog_index!=0> style="display:none;"</#if>>
+			  	<ul>
+					<#assign name ="articleTag">
+					<#assign articleTag =newTag("${name}")>
+					<#assign articleList =articleTag("{'name':'${catalog.id}','count':'6'}")>
+					<#if articleList?exists>
+						<#list articleList as article>
+							<li><a href="/templatePreViewAction.do?detail&articleid=${article.id}" target="_blank"><span class="right"><#if article.published?exists>[${article.published?string('dd/MM/yyyy')}]</#if></span><span class="left">${article.title}</span></a></li>
+						</#list>
+					</#if>
+				</ul>
+			</div>
+        </#list>
+	</#if>
+</div>

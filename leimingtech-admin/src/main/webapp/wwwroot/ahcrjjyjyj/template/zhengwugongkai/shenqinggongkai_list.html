@@ -1,0 +1,209 @@
+
+<!-- saved from url=(0036)http://data.ahciq.gov.cn/sheng.shtml -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>${site.siteName}</title>
+<link rel="stylesheet" href="/zfxxgk/css/zwmain.css" type="text/css">
+<script src="/js/jquery.js"></script>
+<script src="${contextpath}/js/page.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	function displayTip(id) {
+		var x = event.x;
+		document.getElementById(id).style.left = x + 20;
+		document.getElementById(id).style.display = 'block';
+	}
+	function hideTip(id) {
+		document.getElementById(id).style.display = 'none';
+	}
+	function list(id) {
+		for ( var i = 1, len = 7; i < len; i++) {
+			document.getElementById('cd_' + i).className = "font9";
+		}
+		//document.getElementById('ml').style.display="none";
+		if (id == 2) {
+			document.getElementById('ml').style.display = "block";
+		}
+		document.getElementById('cd_' + id).className = "font9red";
+	}
+</script>
+
+<style>
+.Tip {
+	width: 500;
+	z-index: 999;
+}
+
+.Tip table {
+	width: 100%;
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none
+}
+
+.white,.white a {
+	color: #fff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.font9 {
+	background-image:url(/zfxxgk/images/left_off.jpg);
+	padding-left: 60px
+}
+
+.font9,.font9 a,.font9red,.font9red a {
+	font-size: 13px;
+	line-height: 35px;
+	overflow: hidden;
+	text-decoration: none
+}
+
+.font9 a {
+	color: black
+}
+
+.font9red a {
+	color: #B9000A;
+	font-weight: bold
+}
+
+.font9red {
+	background-image:background-image: url(/zfxxgk/images/left_on.jpg);
+	padding-left: 60px
+}
+
+.font10,.font10 td,.font10 a {
+	font-size: 13px;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0"
+	marginwidth="0" marginheight="0">
+
+	<#include "/wwwroot/${sitePath}/template/common/head_gov.html">
+
+	<table width="1000" border="0" cellspacing="0" cellpadding="0"
+		align="center" style="margin-top:15px;">
+		<tbody>
+			<tr>
+				<td valign="top" align="right">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0"
+						style="margin-bottom:10px;">
+						<tbody>
+							<tr>
+								<td height="35" background="/zfxxgk/images/msgbg.gif"
+									style="padding-left:20px;">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										
+										<tbody>
+											<tr>
+												<td>
+													<table width="100%" border="0" cellspacing="0"
+														cellpadding="0">
+														<tbody>
+															<tr>
+																
+
+																<td width="30%" align="right">
+																<a href="${contextpath}/front/applyPublicFrontController.do?addApplyPublic" target="_blank">
+																<img src="/zfxxgk/images/zwsq.gif" width="85" height="27" border="0">
+																</a>&nbsp;</td>
+															</tr>
+														</tbody>
+													</table></td>
+											</tr>
+
+										</tbody>
+									</table></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<table width="100%" border="0" cellpadding="10" cellspacing="1"
+						bgcolor="#bed8f1">
+						<tbody>
+							<tr>
+								<td bgcolor="#FFFFFF">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										style="border-bottom: 1px solid #bed8f1; margin-bottom:10px;">
+										<tbody>
+											<tr>
+												<td width="30" height="30" align="center"><img
+													src="/zfxxgk/images/ico8.gif" width="12"
+													height="11">
+												</td>
+												<td class="blue">当前位置：<a href="/">首页</a> &gt; 
+													<#assign name="catalogTag"> 
+													<#assign catalogTag=newTag("${name}")>
+													<#assign catalog=catalogTag("{'levels':'self','name':'297e501853bbaffe0153bbbaadb60005'}")>
+													<#if catalog?exists>
+														<a href="${catalog.url!'javascript:void(0);'}">政务公开</a>
+													</#if>
+													 &gt; 依申请公开
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<table width="100%" border="0" cellpadding="5" cellspacing="1"
+										bgcolor="#BED8F1" style="margin-bottom:10px;">
+										<tbody>
+										
+												<tr bgcolor="#F6F6F6">
+													<td align="center" width="8%">序号</td>
+													<td width="62%" align="center">申请内容</td>
+													<td width="15%" align="center">申请时间</td>
+													<td width="15%" align="center">当前状态</td>
+												</tr>
+										<#if pageList?exists>
+				 							<#list pageList as applyPublic>
+												<tr bgcolor="#FFFFFF">
+													<td align="center" width="8%">${(pageNo-1)*pageSize+applyPublic_index?if_exists+1}</td>
+													<td width="62%" align="center"><a
+														href="${contextpath}/front/applyPublicFrontController.do?ApplyPublicDetail&id=${applyPublic.id}"
+														target="_blank">${applyPublic.content}</a>
+													</td>
+													<td width="15%" align="center">${applyPublic.datetime?string("yyyy-MM")}</td>
+													<td width="15%" align="center">
+														<#if statusList?exists>
+															<#list statusList as status>
+																<#if applyPublic.isstat==status.typecode>
+																	${status.typename}
+																</#if>
+															</#list>
+														</#if>
+													</td>
+												</tr>
+										</#list>
+										</#if>
+											
+
+										</tbody>
+									</table>
+									<div style="margin-left: 560px">
+										 <#include "common/page.html">
+									</div>
+									</td>
+							</tr>
+						</tbody>
+					</table></td>
+			</tr>
+		</tbody>
+	</table>
+	<table width="1000" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tbody>
+			<tr>
+				<td>
+					<hr size="1" color="#bed8f1" noshade=""></td>
+			</tr>
+		</tbody>
+	</table>
+	<#include "/wwwroot/${sitePath}/template/common/foot_gov.html">
+
+
+</body>
+</html>

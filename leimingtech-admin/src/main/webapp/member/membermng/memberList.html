@@ -1,0 +1,113 @@
+<!-- <link rel="stylesheet" type="text/css" href="media/css/search.css" />
+ --><div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>前台用户</div>
+				<#--
+				<div class="tools">
+					<a href="javascript:;" class="collapse"></a>
+				</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow" onclick="toEditModel('memberController.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+				-->
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<div class="span4">
+								<label >
+									用户名：
+									<input name="username" class="form-control span7" type="text"  value="${searchMap["username"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="span4">
+								<label >
+									会员级别：
+									<select name="membergroupsid" class="form-control span7">
+										<option value="">请选择</option>
+										<#list memberlvList as lv>
+											<option <#if searchMap["membergroupsid"]?if_exists[0]==lv.id>selected="selected"</#if>  value="${lv.id}">${lv.usergroupsname}</option>
+										</#list>
+									</select>
+								</label>
+							</div>
+							<div class="pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearchMb('memberController.do?member', 'search_form')">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form')">重置<i class="icon-repeat m-icon-white"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th width="40" style="text-align:center;">序号</th>
+							<th width="" >用户名</th>
+							<th width="100" >真实姓名</th>
+							<th width="200" >邮箱</th>
+							<th width="100" >出生日期</th>
+							<!-- <th>性别</th>
+							<th>地址</th>
+							<th>QQ</th>
+							<th>手机</th>
+							<th>电话</th> -->
+							<th width="70" >会员级别</th>
+							<th width="40" style="text-align:center;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if memberList?exists>
+						  <#list memberList as member>
+							<tr class="odd gradeX">
+								<td style="text-align:center;">${(pageNo-1)*pageSize+member_index?if_exists+1}</td>
+									<td class="center">${member.username?if_exists}</td>
+									<td class="center">${member.realname?if_exists}</td>
+									<td class="center">${member.email?if_exists}</td>
+									<td class="center"><#if member.birthday?exists>${member.birthday?string('yyyy-MM-dd')}</#if></td>
+									<!-- <td class="center"><#if member.sex==1>男<#else>女</#if></td>
+									<td class="center">${member.address?if_exists}</td>
+									<td class="center">${member.qq?if_exists}</td>
+									<td class="center">${member.cellphone?if_exists}</td>
+									<td class="center">${member.telephone?if_exists}</td> -->
+									<td class="center">${member.memberlevel?if_exists}</td>
+								<td style="text-align:center;">
+									<input type='button' title='修改' href="javaScript:void(0)" class="editbtn"  onclick="toEditModel('memberController.do?addOrUpdate&id=${member.id?if_exists}')"/>
+									<input type='button' title='删除' href="javaScript:void(0)" class="delbtn"  onclick="del('memberController.do?del', '${member.id?if_exists}')"/>
+								</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="600">
+</div>
+<script>
+function toSearchMb(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dashboard').empty();
+			$('#dashboard').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>

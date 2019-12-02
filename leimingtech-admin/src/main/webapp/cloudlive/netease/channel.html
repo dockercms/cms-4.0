@@ -1,0 +1,65 @@
+<#setting datetime_format="yyyy-MM-dd HH:mm"/>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true"></button>
+	<h4 class="modal-title">网易云直播-直播频道</h4>
+</div>
+<div class="modal-body">
+	<#if errorMessage?exists && errorMessage!=''>
+		${errorMessage}
+	<#else>
+	<!-- BEGIN FORM-->
+	<form id="form_sample_2" class="form-horizontal">
+		<input type="hidden" id="cid" name="cid" value="${channel.cid}"/>
+		<div class="control-group">
+			<label class="control-label"><span class="required">*</span>频道名称</label>
+			<div class="controls">
+				<input class="form-control"  type="text" id="name" name="name" data-rule-required="true" value="${channel.name}"/>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">频道类型</label>
+			<div class="controls">
+				<#if channel.type!=null>
+					<span class="text">
+					<#if channel.type == 0 >
+					RTMP
+					<#elseif channel.type == 1 >
+					HLS
+					<#elseif channel.type == 2 >
+					HTTP
+					</#if>
+					</span>
+					<input type="hidden" name="type" value="${channel.type}" />
+				<#else>
+				<label class="radio"><input type="radio"  name="type" checked value="0"/>RTMP</label>
+				<label class="radio"><input type="radio"  name="type" value="1"/>HLS</label>
+				<label class="radio"><input type="radio"  name="type" value="2"/>HTTP</label>
+				</#if>
+			</div>
+		</div>
+		<#if channel.ctime?exists && channel.ctime!=0>
+		<div class="control-group">
+			<label class="control-label">创建时间</label>
+			<div class="controls">
+				<span class="text">${channel.ctime?number_to_datetime}</span>
+			</div>
+		</div>	
+		</#if>
+	</form>
+	<!-- END FORM-->  
+	</#if>     
+</div>
+<div class="modal-footer">
+	<input  type="button" onclick="formSubmitModel('netEaseColudLiveController/save.do', 'form_sample_2');" class="btn btn-primary" value="提交">  
+          <input type="button" class="btn" value="关闭" data-dismiss="modal"> 
+</div>
+<script>
+//校验
+jQuery(document).ready(function() {   
+	   // initiate layout and plugins
+	   App.init();
+	   $("#form_sample_2").myValidate();
+	});
+	
+</script>

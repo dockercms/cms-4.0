@@ -1,0 +1,140 @@
+.clear{ clear:both; padding:0; margin:0; list-style: none; font-size: 0px;}
+
+/*农技中心v2.0	导航*/
+.nj_content_v2{ background:#f4f4f4; overflow:hidden; padding-bottom: 50px;}
+.nj_con_v2{ width:1190px; margin:0 auto;}
+.nj_nav_v2{ height:38px; background:#2b922f; width:1190px; z-index: 200;}
+.nj_nav_v2Box{ width:1190px; height: 38px; display: none;}
+.nj_nav_v2 ul{}
+.nj_nav_v2 ul li{ width:95px; text-align: center; float:left; line-height: 38px; font-size: 16px; position:relative; z-index: 200;}
+.nj_nav_v2 ul li a{ color:#fff; display: inline-block; width: 95px; height: 38px;}
+.nj_nav_v2 ul li.on a{ background:#26882b; display: inline-block; width: 95px; height: 38px;}
+.nj_nav_v2 ul li a:hover{ color:#fff; background:#05542e;}
+.nj_nav_v2 ul li ul{ display: none; position:absolute; top:38px; left:0px; z-index: 200;}
+.nj_nav_v2 ul li ul li{ float:none; border-top: 1px solid #247f27; background:#2b922f;}
+.nj_nav_v2 ul li ul li a:hover{ background:#05542e;}
+
+/*农技中心v2.0	焦点图*/
+.nj_left_v2{ width:842px; float:left;}
+.nj_banner_v2{ width: 842px; height: 325px; overflow:hidden; position:relative; margin-top: 12px; margin-bottom: 18px;}
+.nj_banv2_img{ position:absolute; left:0px; top:0px;}
+.nj_banv2_img li{ width: 842px; height: 325px; overflow:hidden; position:absolute; left:0px; top:0px; z-index: 10;}
+.nj_banv2_bg{ position:absolute; width:842px; height:46px; left:0px; bottom:0px; background:#000; opacity: 0.6; filter: alpha(opacity=60); z-index: 100;}
+.nj_banv2_text{ width:842px; height:46px; line-height: 46px; overflow:hidden; text-align: right; color:#fff; position: absolute; right:10px; bottom:0px; z-index: 101; font-size: 18px;}
+.nj_banv2_num{ position:absolute; left:20px; bottom:13px; z-index: 101;}
+.nj_banv2_num li{ float:left; margin-right: 5px; background:url(../images/ban_list_v2.png) no-repeat 0px -17px; width:18px; height:17px; line-height: 17px; text-align: center; color:#fff; cursor: pointer;}
+.nj_banv2_num li.on{ background-position: 0px 0px; color:#000;}
+
+/*农技中心v2.0	资讯*/
+.nj_indexList_v2{ overflow:hidden; background:#fff; border:1px solid #eeeeee; width:840px; margin-bottom: 18px;}
+.nj_indexList_v2 dt{ height: 38px; border-bottom: 1px solid #eee; overflow: hidden;}
+.nj_indexList_v2 dt strong{ color:#000; font-size: 16px; float: left; line-height: 38px; margin-left: 15px;}
+.nj_indexList_v2 dt a{ float: right; margin-right: 15px; color:#979797; line-height: 38px; font-size: 14px;}
+.nj_indexList_v2 dt strong a{ color:#000; font-size: 16px;}
+.nj_indexList_v2 dt a:hover{ color:#05780a;}
+.nj_indexList_v2 dd{ overflow:hidden; padding-bottom: 15px;}
+.nj_indexListv2_img{ float: left; width: 165px; height: 120px; margin-left: 15px; margin-top: 15px;}
+.nj_indexListv2_img img{ width: 165px; height: 120px;}
+.nj_indexListv2_text{ float: left; margin-left: 15px; width:630px; margin-top: 15px;}
+.nj_indexListv2_text h2{ font-size: 16px; color:#333; height: 20px; line-height: 20px;}
+.nj_indexListv2_text h2 a{ color:#333;}
+.nj_indexListv2_text h2 a:hover{ color:#05780a;}
+.nj_indexListv2_p{ font-size: 12px; color:#666; line-height: 22px; height: 66px; overflow:hidden; margin-top: 10px;}
+.nj_indexListv2_time{ font-size: 12px; color:#999; text-align: right; margin-top: 8px;}
+
+.nj_right_v2{ width:328px; float:right; margin-top: 12px;}
+/*农技中心v2.0	今日关注*/
+.nj_guanzhuv2{}
+.nj_guanzhu_titlev2{ height:40px; width:328px; background:#eee; line-height: 40px;}
+.nj_guanzhu_titlev2 strong{ margin-left: 10px; font-size: 18px; color:#05780a;}
+.nj_guanzhu_conv2{ width:326px; height:283px; border:1px solid #eee; background:#fff; overflow:hidden;}
+.nj_guanzhu_conv2 dl{ width:290px; border-bottom: 1px dashed #eee; margin:8px auto 0; padding-bottom: 8px;}
+.nj_guanzhu_conv2 dt{ font-size: 14px; font-weight: bold; color:#000; height:20px; line-height: 20px; overflow: hidden;}
+.nj_guanzhu_conv2 dt a{ color:#333;}
+.nj_guanzhu_conv2 dt a:hover{ color:#05780a;}
+.nj_guanzhu_conv2 dd{ font-size: 12px; color:#666; height: 20px; line-height: 20px; overflow: hidden;}
+
+/*农技中心v2.0	搜索*/
+.nj_search_v2{ overflow:hidden; margin-top: 18px;}
+.nj_search_v2 input{ float: left;}
+.nj_search_v2 input.nj_searchv2_text{ height: 16px; border:1px solid #eee; border-right: none; width: 223px; height: 16px; padding:11px 0px 11px 3px; font-size: 14px; color:#333;}
+.nj_search_v2 input.nj_searchv2_btn{ width:100px; height:40px; background:#2b922f; color:#fff; text-align: center; line-height: 40px; font-size: 14px; cursor: pointer;}
+.nj_search_v2 input.nj_searchv2_btn:hover{ background:#26882b;}
+
+/*农机中心v2.0	右侧广告*/
+.nj_adRight_v2{ width: 328px; height:248px; margin-top: 12px;}
+.nj_adRight_v2 img{ width:328px; height: 248px;}
+
+/*农技中心v2.0	热门文章*/
+.nj_hotText_v2{ width:326px; border:1px solid #eee; margin-top: 12px; background:#fff; overflow: hidden;}
+.nj_hotTextv2_title{ height:38px; line-height: 38px; border-bottom: 1px solid #eee;}
+.nj_hotTextv2_title strong{ margin-left: 10px; font-size: 14px;}
+.nj_hotText_ul{ padding-bottom: 10px;}
+.nj_hotText_ul li{ width:290px; margin:0 auto; overflow:hidden; border-bottom: 1px dashed #eee; position:relative; padding:10px 0 11px; *padding-top:8px; *padding-bottom: 9px;}
+.nj_hotText_ul li em{ display: inline-block; position:absolute; width:15px; height: 15px; line-height: 15px; text-align: center; color:#fff; background:#afaeae; left:0px; top:10px;}
+.nj_hotText_ul li.nj_hotTextv2_three em{ background:#dd0000;}
+.nj_hotTextv2_img{ width: 88px; height: 65px; float: left;}
+.nj_hotTextv2_img img{ width: 88px; height: 65px;}
+.nj_hotTextv2_text{ width:190px; float: left; margin-left: 10px;}
+.nj_hotTextv2_text h2{ font-size: 14px; color:#000; line-height: 20px; height: 40px; overflow: hidden;}
+.nj_hotTextv2_text h2 a{ color:#000;}
+.nj_hotTextv2_text h2 a:hover{ color:#05780a;}
+.nj_hotTextv2_text2{ float: left; width:100%}
+.nj_hotTextv2_text2 h2{ font-size: 14px; color:#000; line-height: 20px; height: 40px; overflow: hidden;}
+.nj_hotTextv2_text2 h2 a{ color:#000;}
+.nj_hotTextv2_text2 h2 a:hover{ color:#05780a;}
+.nj_hotTextv2_time{ text-align: right; display: block; color:#666; margin-top: 10px;}
+
+/*农技中心v2.0	面包屑*/
+.bread_nav_v2{ height: 36px; line-height: 36px; color:#666; overflow: hidden;}
+.bread_nav_leftv2{ float: left;}
+.bread_nav_v2 a{ color:#666; margin-right: 5px;}
+.bread_nav_v2 a:hover{ color:#05780a;}
+.bread_nav_v2 span{ margin-right: 5px;}
+.bread_nav_rightv2{ float: right;}
+
+/*农技中心v2.0	列表*/
+.nj_twoListv2_title{ height: 38px; line-height: 38px; background:#fff; border:1px solid #eee; width: 840px;}
+.nj_twoListv2_title strong{ color:#000; font-size: 14px; margin-left: 10px;}
+.nj_twoList_v2{ margin-bottom: 0px; border-top: 1px solid #fff;}
+.nj_listMore_v2{ height: 30px; width:842px; background:#dcdcdc; text-align: center; color:#666666; margin-top: 15px; line-height: 30px;}
+.nj_listMore_v2 a{ color:#666666; font-size: 14px; background:url(../images/more_bottom_bg.png) no-repeat right center; padding-right: 10px;}
+.nj_listMore_v2 a:hover{ color:#05780a;}
+.nj_rightTwo_v2{ margin-top: 0;}
+.nj_searchTwo_v2{ margin-top: 12px;}
+
+/*农技中心v2.0	文章页*/
+.nj_textv2_con, .nj_pinglun_v2{ width:760px; border:1px solid #eee; background:#fff; overflow: hidden; padding:0 40px; padding-bottom: 40px;}
+.nj_textv2_title{ text-align: center; font-size: 24px; color:#000; font-weight: 500; margin-top: 35px;}
+.nj_textv2_about{ overflow:hidden; margin-top: 35px;}
+.nj_aboutv2_left{ float: left; font-size: 14px; color:#666;}
+.nj_aboutv2_left a{ color:#666; margin-right: 5px;}
+.nj_aboutv2_left a:hover{ color:#05780a;}
+.nj_aboutv2_right{ float: right; color:#999; font-size: 14px;}
+.nj_textv2_p{ font-size: 16px; color:#000; line-height: 28px; margin-top: 30px;}
+.nj_textv2_p img{ max-width:100%; height:auto; display: block; margin:20px auto;}
+.nj_textv2_page{ overflow: hidden; font-size: 14px; color:#666; margin-top: 30px;}
+.nj_textv2_page a{ color:#666; width:360px; height:20px; line-height: 20px; overflow:hidden;}
+.nj_textv2_page a:hover{ color:#05780a;}
+.nj_textv2_page a.nj_pagev2_prev{ float: left;}
+.nj_textv2_page a.nj_pagev2_next{ float: right;}
+.nj_textv2_share{ height: 30px; line-height: 30px; overflow: hidden; margin-top: 8px; border-bottom: 1px dashed #eee; padding-bottom: 8px;}
+.nj_textv2_share span{ float: left; color:#666; font-size: 14px;}
+.nj_textv2_shareRight{ float: left;}
+.nj_textv2_tuijian{ margin-top: 20px;}
+.nj_textv2_tuijian strong{ display: block; font-size: 18px; color:#333;}
+.nj_textv2_tuijian ul{ overflow:hidden; margin-top: 10px;}
+.nj_textv2_tuijian ul li{ width:350px; height: 26px; line-height: 26px; float: left; font-size: 14px; overflow:hidden; margin-right: 20px; background:url(../images/tuijian_li_bg.png) no-repeat left center; padding-left: 10px;}
+.nj_textv2_tuijian ul li a{ color:#333;}
+.nj_textv2_tuijian ul li a:hover{ color:#05780a;}
+.nj_pinglun_v2{ margin-top: 20px; padding-bottom: 20px;}
+.nj_pinglunv2_num{ height: 74px; line-height: 74px; font-size: 24px; font-weight: 500; display: block; color:#000;}
+.nj_pinglunv2_text{ width:740px; height: 70px; background:#f2f2f2; border:none; font-size: 14px; padding:10px;}
+.nj_pinglun_loginv2{ width:760px; height: 50px; background:#f2f2f2; margin-top: 5px; overflow: hidden;}
+.nj_pinglunv2_name, .nj_pinglunv2_pass{ float: left; height: 36px; width: 200px; padding-left: 5px; font-size: 14px; background:#fff; border:none; margin-top: 7px; margin-left: 15px; float: left;}
+.nj_pinglunv2_zhuce{ float: left; font-size: 16px; color:#666; line-height: 50px; margin-left: 25px;}
+.nj_pinglunv2_zhuce a, .nj_pinglunv2_zhuce span{ float: left; color:#666;}
+.nj_pinglunv2_zhuce a:hover{ color:#05780a;}
+.nj_pinglunv2_loginBtn{ float: left;}
+.nj_pinglunv2_sub{ width:122px; font-size: 16px; color:#333; height: 36px; margin-top: 7px; margin-left: 25px; background:url(../images/pinglun_btn.png) no-repeat; cursor: pointer;}
+.nj_pinglunv2_sub:hover{ background-position: 0px -36px; color:#000;}

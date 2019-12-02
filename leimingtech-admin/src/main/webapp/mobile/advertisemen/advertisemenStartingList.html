@@ -1,0 +1,190 @@
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-globe"></i>启动画面广告
+				</div>
+				
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow-stripe"
+						onclick="showEditModel('advertisemenStartingController.do?add')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+					<form id="search_form" class="form-horizontal">
+						<div class="clearfix">
+							<!-- <div class="dataTables_filter span4">
+								<label> 图片高度： <input name="imgHeight"
+									class="form-control" type="text" value="${searchMap["imgHeight"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="dataTables_filter span4">
+								<label> 图片宽度： <input name="imgWidth"
+									class="form-control" type="text" value="${searchMap["imgWidth"]?if_exists[0]}">
+								</label>
+							</div>
+							<div class="dataTables_filter pull-right">
+								<button type="button" class="btn blue"
+									onclick="toSearch('advertisemenStartingController.do?advertisemenStarting', 'search_form');">
+									搜索 <i class="icon-search m-icon-white"></i>
+								</button>
+								<button type="button" class="btn red"
+									onclick="resetForm('search_form');">
+									重置<i class="icon-repeat m-icon-white"></i>
+								</button>
+							</div> -->
+						</div>
+					</form>
+				</div>
+				<div class="actions row-fluid">
+					<#if pageList?exists && pageList?size gt 0> 
+					   <#list pageList as page>
+					  <div style="width: 105px; height:200px; float: left; margin: 15px;">
+						<div style="width:100px; height: 177px;">
+							<img alt="${page.imgUrl}" src="${page.imgUrl}" width="100"
+								height="150">
+						</div>
+						<div>
+							 <input type='button' title='修改' class="editbtn"
+								onclick="showEditModel('advertisemenStartingController.do?update&id=${page.id?if_exists}')"/>
+								<input type='button' title='删除' class="delbtn"
+								onclick="del('advertisemenStartingController.do?del', '${page.id?if_exists}')"/>
+						</div>
+					  </div>
+					 </#list> 
+					<#else>
+					<div style="width: 105px; height: 200px; float: left; margin: 15px;">
+						<div style="width:100px; height: 177px;">
+							<img alt="没图啦！" src="/static/images/none.jpg" width="100"
+								height="150">
+						</div>
+						<div>
+							 <input type='button' title='修改' class="editbtn"
+								onclick="showEditModel('advertisemenStartingController.do?add')"/>
+						</div>
+					</div>
+					</#if>
+				</div>
+				
+				 
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="showeditModel" class="modal fade" tabindex="-1"
+	data-backdrop="static" data-focus-on="input:first" data-width="800">
+</div>
+<style type="text/css">
+
+#livetip {
+	position: absolute;
+	background-color: #cfc;
+	padding: 4px;
+	border: 2px solid #9c9;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+</style>
+<script>
+function liveTip(){
+	var $liveTip = $('<div id="livetip"></div>').hide().appendTo('body');
+	$('.left').bind('mouseover mouseout mousemove',
+	function(event) {
+		var $link = $(event.target).closest('input');
+		if (!$link.length) {
+			return;
+		}
+		var link = $link[0];
+		if(!link.value){
+			return;
+		}
+		var modalindex = $(link).parents(".modal-scrollable").css("z-index");
+		$($liveTip).css("z-index",modalindex+10);
+		if (event.type == 'mouseover'|| event.type == 'mousemove') {
+			$liveTip.css({
+				top : event.pageY + 12,
+				left : event.pageX + 12
+			});
+		};
+		var srcValue=link.value+".thumb.jpg";
+		if (event.type == 'mouseover') {
+			$liveTip.html('<div><img src=' + srcValue + ' /></div>').show();
+		};
+		if (event.type == 'mouseout') {
+			$liveTip.hide();
+		};
+	});
+}
+var pathid;
+function toSearchMb(urlStr, formName){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			$('#dashboard').empty();
+			$('#dashboard').append(msg);
+		},
+		error:function(){
+			alert("load page error, page url is " + urlStr);
+		}
+	})
+}
+
+function showEditModel(urlStr) {
+	$.ajax({
+		type : 'post',
+		url : urlStr,
+		data : 't=' + new Date().getTime(),
+		dataType : 'text',
+		success : function(msg) {
+			$('#showeditModel').empty();
+			$('#showeditModel').append(msg);
+			$('#showeditModel').modal('show');
+		},
+		error : function() {
+			alert("load page error, page url is " + urlStr);
+		}
+	});
+}
+
+function formSubmitadver(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				
+				$('#showeditModel').modal('hide');
+				$('#showeditModel').empty();
+				lazyChangePage(toUrl);
+			}else{
+				alert("提交处理失败!");
+			}
+		},
+		error:function(){
+			alert("提交通讯失败!");
+		}
+	});
+}
+</script>

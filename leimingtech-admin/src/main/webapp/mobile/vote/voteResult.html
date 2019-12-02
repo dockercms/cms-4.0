@@ -1,0 +1,35 @@
+<style type="text/css">
+	.portlet-body li{list-style-type: none;}
+	.portlet-body vote_name{margin-top:0px;font-size: 20px;float: left;}
+	.portlet-body vote_result{float:right;}
+	.anote{margin-left:50px;color:#1c77ba;}
+	.progress{width:700px;background-color: #eee;float:left;margin-bottom: 0px;height: 18px;margin-top: 6px;margin-right: 7px;}
+	.per{background-color: #3C6CAC;height: 18px;}
+</style>
+	<div class="portlet-title" style="background-color:#ccc;">
+		<div class="caption"><i class="icon-bar-chart"></i>投票结果</div>
+	</div>
+	<div class="portlet-body">
+		<ul>
+			<#list voteOptionList as voteOption>
+				<li>
+					<#list mapList as map>
+						<#if voteOption.optionid==map.ids>
+							<div class="vote_name">
+								<h4>${voteOption_index+1}.${voteOption.optionname}</h4>
+							</div>
+							<div class="vote_result">
+								<div class="progress" title="${map.poll}票">
+									<div style="width:${map.count*700}px;" class="per" id="w1"></div>
+								</div>
+								<p id="p1">${map.count*100}%<#if map.count*100<10>&nbsp;</#if>&nbsp;(${map.poll})
+								
+								<a class="anote" style="color:#1c77ba" href="javaScript:void(0)" onclick="toEditModel('${conpath}/front/voteLogController.do?queryAloneLog&voteOptionId=${voteOption.optionid}')" >查看记录</a></p>
+							</div>
+						</#if>
+					</#list>
+				</li>
+			</#list>
+		</ul>
+	</div>
+	

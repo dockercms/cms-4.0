@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* CSS Document */
+.progressBar {
+	background-color:#E4E4E4;
+	width: 1024px;
+	height: 62px;
+	border: 1px solid #CCC;
+	padding: 3px;
+	z-index: 9999;
+}
+.background {
+	background-color: #FFFFFF;
+	height: 60px;
+	border: 1px solid #CCC;
+}
+.progress {
+	position: relative;
+	background-color: #01E244;
+	width: 0px;
+	height: 60px;
+	top: -62px;
+	border: 1px solid #CCC;
+	border-left:none;
+	border-right:none;
+	display: none;
+	z-index: 8;
+}
+.hint {
+	position: relative;
+	font-size: 32px;
+	color: #473F77;
+	font-weight: bold;
+	top: -120px;
+	display: none;
+	z-index: 9;
+}
+

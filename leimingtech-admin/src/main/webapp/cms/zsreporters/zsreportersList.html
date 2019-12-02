@@ -1,0 +1,351 @@
+ <div class="row-fluid">
+	<div class="span12" style="margin-bottom: 75px;">
+		<div class="portlet box green">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>采编系统</div>
+			</div>
+			<div class="portlet-body">
+				<table class="table table-striped table-bordered table-hover" id="sample_1" >
+					<thead>
+						<tr style="background-color:#CCCCFF;">
+							<th width="12" style="text-align:center;">
+								<input type="checkbox" onclick="checkall(this)">
+							</th>
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="text-align:center;">标题</th>
+							<th width="110" style="text-align:center;">出版报纸</th>	
+							<th width="160" style="text-align:center;">作者</th>
+							<th width="70" style="text-align:center;">所在板块</th>
+							<th width="80" style="text-align:center;">版本号</th>
+							<th width="100" style="text-align:center;">发布时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if modelsList?exists>
+						  <#list modelsList as model>
+							<tr class="odd gradeX">
+								<td class="center">
+										<input type="checkbox" name="zsreportersids" value="${model.reportid}">
+								</td>
+								<td class="center">
+									${(pageNo-1)*pageSize+model_index?if_exists+1}
+								</td>
+								<td class="center" style="text-align:center;">
+									${model.title}
+								</td>
+								<td class="center" style="text-align:center;">
+									${model.papername}
+								</td>
+								<td class="center" style="text-align:center;">
+									${model.author}
+								</td>
+								<td class="center" style="text-align:center;">
+									${model.channel}
+								</td>
+								<td class="center" style="text-align:center;">
+									第${model.editon}版
+								</td>
+								<td class="center" style="text-align:center;">
+									${model.pubdate}
+								</td>
+							</tr>
+						  </#list> 
+						</#if>
+						<tr>
+							<td colspan="8">
+								<a class="btn mini" href="javascript:void(0);" onclick="toContent('copy')">
+									<span class="icon-copy"><b style="margin-left:10px">复制</b></span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	</div>
+</div>
+<div id="editModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800">
+<div id="mobileModel" class="modal hide fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="482"></div>
+</div>
+<script type="text/javascript" src="media/js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+<script><!--
+	function checkall(obj){
+		if(obj.checked==true){
+			$("input[name='zsreportersids']").each(function(){
+	            $(this).attr("checked", "checked"); 
+	        });
+		}else{
+			$("input[name='zsreportersids']").each(function(){
+	            $(this).attr("checked", false); 
+	        });
+		}
+	}
+	var contentCatId = "${contentCat?if_exists.id}";
+	function toContent(type){
+		var ids="";
+        $("input[name='zsreportersids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(ids==""){
+        	lmAlert(" 请选择要操作的记录");
+        }else{
+        	var urlS = "queryZspFroJDBCController.do?mobiles";
+        	$.ajax({
+    			type:'post',
+    			url:urlS,
+    			data:{'ids':ids,'toType':type},
+    			dataType:'text',
+    			success:function(msg){
+    				$('#mobileModel').empty();
+    				$('#mobileModel').append(msg);
+    				$('#mobileModel').modal('show');
+    			}
+    		});
+        }
+	}
+	
+	function workFlow(ids,classify,token){
+		var urlStr = "contentsController.do?songshen";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + ids + '&token=' + token+'&contentCatId='+contentCatId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					if(classify==""){
+						var toUrl = obj.toUrl;
+						if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+						{
+						    toUrl = arguments[2] + '';
+						}
+						lmAlert(obj.msg);
+						changePage(toUrl);
+					}else{
+						toEditModel("contentsController.do?pushView&contentsId="+ids+"&contentCatId="+contentCatId+"&classify="+classify+"&flag=");
+					}
+				}else{
+					lmAlert("提交失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交审核失败!");
+			}
+		});
+	}
+	
+	
+	function songshen(contentsId,classify,token){
+		var ids="";
+		if(contentsId && contentsId != 0){
+			ids=contentsId;
+		}else{
+	        $("input[name='contentsids']:checkbox").each(function(){
+	            if($(this).attr("checked")){
+	                ids += $(this).val()+","
+	            }
+	        })
+		}
+		
+        if(ids==""){
+        	lmAlert(" 请选择要操作的记录");
+        }else{
+			if(token=="0"){
+				lmConfirm("是否确定送审？","",function (){
+					workFlow(ids,classify,token);
+				});
+			}else{
+				lmConfirm("是否确定发布？","",function (){
+					workFlow(ids,classify,token);
+				});
+			}
+        }
+	}
+	
+	function execDelContent(ids,urlStr,result){
+		 $.ajax({
+				type:'post',
+				url:urlStr,
+				data:'id=' + ids,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						var toUrl = obj.toUrl;
+						if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+						{
+						    toUrl = arguments[2] + '';
+						}
+						/*alert(obj.msg);*/
+						changePage(toUrl);
+					}else{
+						lmAlert("删除处理失败!");
+					}
+				},
+				error:function(){
+					lmAlert("提交通讯失败!");
+				}
+			});
+	}
+	
+	function delContent(urlStr,result){
+		var ids="";
+        $("input[name='contentsids']:checkbox").each(function(){
+            if($(this).attr("checked")){
+                ids += $(this).val()+","
+            }
+        })
+        if(ids==""){
+        	lmAlert(" 请选择要操作的记录");
+        	return ;
+        }else{
+			if(result=='-1'){
+				urlStr=urlStr+"&result="+result+"&contentCatId="+contentCatId;
+				lmConfirm("是否确定放入回收站？","",function (){
+					execDelContent(ids,urlStr,result)
+				});
+			}if(result=="1"){
+				urlStr=urlStr+"&result="+result+"&contentCatId="+contentCatId;
+				lmConfirm("是否确定还原？","",function (){
+					execDelContent(ids,urlStr,result)
+				});
+			}else if(result!='-1'&&result!="1"){
+				lmConfirm("是否删除所选记录？","",function (){
+					execDelContent(ids,urlStr,result)
+				});
+			}
+        }
+	}
+	function audit(contentsId,result){
+		
+        if(!confirm("是否确定审核？")){
+			return;
+		}
+		var urlStr = "contentsController.do?contentsAudit";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'ids=' + contentsId + '&result=' + result+'&contentCatId='+contentCatId,
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					lmAlert(obj.msg);
+					changePage(toUrl);
+				}else{
+					lmAlert("审核失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交审核失败!");
+			}
+		});
+        
+	}
+	
+	function execDown(contentsId,result){
+		var urlStr = "contentsController.do?downContent";
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:{'id':contentsId,'result':result,'contentCatId':contentCatId},
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					lmAlert(obj.msg);
+					changePage(toUrl);
+				}else{
+					lmAlert("操作失败!");
+				}
+			},
+			error:function(){
+				lmAlert("提交操作失败!");
+			}
+		});
+	}
+	
+	function down(contentsId,result){
+		if(result=="60"){
+	        lmConfirm("是否确定下线？","",function (){
+	        	execDown(contentsId,result);
+	        });
+		}
+		if(result=="-1"){
+			lmConfirm("是否确定放入回收站？","",function (){
+	        	execDown(contentsId,result);
+	        });
+		}
+		if(result=="1"){
+			lmConfirm("是否确定还原？","",function (){
+				execDown(contentsId,result);
+			});
+		}
+	}
+	//建立索引	
+	function createIndex(urlStr){
+		$.ajax({
+			type:'post',
+			url:urlStr,
+			data:'data=0',
+			dataType:'text',
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					lmAlert(obj.msg);
+				}else{
+					lmAlert("生成失败!");
+				}
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		});
+	}
+	function checkContribute(){
+		var checked = document.getElementById('contribute').checked;
+		if(checked){
+			$('#contribute').attr('value',1);
+		}else{
+			$('#contribute').attr('value',0);
+		}
+	}
+	function disableEdit(){
+		lmAlert("已下线,无法进行修改操作！");
+	}
+	//生成二维码
+	function enCode(urlStr,contentId){
+		/* if(!confirm("是否确定生成二维码？")){
+			return;
+		} */
+		 lmConfirm("是否确定生成二维码？","",function (){
+			 $.ajax({
+				type:'post',
+				url:urlStr,
+				data:'contentId='+contentId,
+				success:function(msg){
+					var obj = JSON.parse(eval(msg));
+					if(obj.isSuccess){
+						lmAlert(obj.msg);
+					}else{
+						lmAlert("删除处理失败!");
+					}
+				},
+				error:function(){
+					lmAlert("提交通讯失败!");
+				}
+			});
+        });
+		
+	}
+--></script>

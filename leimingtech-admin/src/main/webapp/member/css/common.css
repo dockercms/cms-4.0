@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+
+<!--表单-->
+.form{width:320px;position:absolute;top:37px;right:40px;height:362px; }
+.item span{color:#666;background:#fff;}
+item{width:303px;height:66px;background:#fff;!important}
+.m-wrap{color: #333;outline: 0px none;height: 20px;padding: 6px !important;line-height: 20px;font-size: 14px;font-weight: normal;vertical-align: top;background-image: none !important;filter: none !important;box-shadow: none !important;
+border-radius: 0px;background-color: transparent;background-repeat: repeat;background-attachment: scroll;background-position: 0% 0%;background-clip: border-box;background-origin: padding-box;background-size: auto auto;
+border: 1px solid #E5E5E5;background:#fff;} 
+.m-wraa{color: #333;outline: 0px none;height: 20px;padding: 6px !important;line-height: 20px;font-size: 14px;font-weight: normal;vertical-align: top;background-image: none !important;filter: none !important;box-shadow: none !important;
+border-radius: 0px;background-color: transparent;background-repeat: repeat;background-attachment: scroll;background-position: 0% 0%;background-clip: border-box;background-origin: padding-box;background-size: auto auto;
+border: 1px solid red;background:#fff;}  
+.span6 {width:290px;background:#fff;}
+.m-wrap:focus{border-color: #999;outline: 0px none !important;float: none;background:#fff;}
+.span7 {width:290px;background:#fff;}
+.m-wraa:focus{border-color: #999;outline: 0px none !important;float: none;background:#fff;}
+.controls{ background:#FFF;}
+.control-label {float: none; width: auto;padding-top: 0;text-align: left;margin-top: 10;width: 170px; background:#FFF; line-height:28px; height:28px; font-size:16px;}
+.required {color: #e02222;font-size: 14px;padding-left: 2px; background:#fff;}
+.control-group, .form-actions{ background:#FFF;}		
+.form-horizontal{ margin-top:20px;}
+form-actions { margin-top: 40px;padding-right:10px;padding-left:10px}
+
+/*错误*/
+.control-group.error .help-inline{ color:#b94a48; background:#FFF; border-color:#b94a48}
+.control-group.error input{ border-color:#b94a48; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075) }
+.control-group.error input:focus{ border-color:#953b39; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392; -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392; box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392 }
+.help-inline { display:inline-block; *display:inline;padding-left:5px; vertical-align:middle; *zoom:1; margin-top:6px;}
+.control-group.error textarea {border-color:#b94a48; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075)}
+.control-group.error textarea:focus{ border-color:#953b39; -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392; -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392; box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392 }
+
+.help-inline{ color:#b94a48; background:#FFF; border-color:#b94a48}
+
+ /* 按钮*/
+.btn.purple {color: white; text-shadow: none;	 background-color: #0052b5;}
+.btn { margin-top:20px;width:303px;background-color: #e5e5e5;background-image: none;filter: none;border: 0;padding: 7px 14px; text-shadow: none;font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+font-size: 14px; color: #333333;cursor: pointer;outline: none;-webkit-box-shadow: none !important; -moz-box-shadow: none !important;
+ box-shadow: none !important; -webkit-border-radius: 0 !important; -moz-border-radius: 0 !important;border-radius: 0 !important;}
+.btn:hover, 
+.btn:focus, 
+.btn:active,
+.btn.active,
+.btn[disabled],
+.btn.disabled {  
+  color: #fff;
+  background-color: #2285fc !important;
+}
+.ifb{ background:#FFF; padding-top:10px;}
+

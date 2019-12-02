@@ -1,0 +1,164 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<title>${contentF.title!''}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- 引入 WeUI -->
+        <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/0.4.1/weui.css"/>
+		<link href="/css/mobile_style.css" rel="stylesheet" type="text/css" />
+		<script src="/js/jquery-1.10.1.min.js"></script>
+		<#setting number_format="#">
+		<script type="text/javascript">var contextpath='${contextpath}';var contentId='${contentidF}';$.get(contextpath + "/contentsMobileController.do?addPv&contentId="+contentId);</script>
+
+	</head>
+	<body class="vote_view">
+		<div>
+			<!-- 投票开始时间 -->
+			<input type="hidden" id="voteStartTime"
+			value="<#if voteF.votestarttime?exists>${voteF.votestarttime?string('yyyy-MM-dd HH:mm')}</#if>" />
+			<!-- 投票结束时间 -->
+			<input type="hidden" id="voteEndTime"
+			value="<#if voteF.voteendtime?exists>${voteF.voteendtime?string('yyyy-MM-dd HH:mm')}</#if>" />
+			<!-- 当前时间 -->
+			<input type="hidden" id="sysdate"
+			value="<#if sysdate?exists>${sysdate?string('yyyy-MM-dd HH:mm')}</#if>" />
+		</div>
+		<#if  contentF.thumb?exists && contentF.thumb!=''><div class="vote_thumb"><img src="${contentF.thumb}.450_450.jpg"/></div></#if>
+		<div class="vote_title">${contentF.title!''}</div>
+		<#--<span style="color: #BABABA;font-size: 10px;float: right">已<b style="color: red;margin: 0px 2px;">0</b>人参与投票</span>-->
+		<span class="vote_publish_date"><#if contentF.published?exists>${contentF.published?string('yyyy-MM-dd')}</#if></span>
+		<div>
+		<#if contentF.thumb!=''><div class="vote_thumb"><img src="${contentF.thumb}"/></div></#if>
+		<#if contentF.digest !=''>
+		<div class="vote_digest">
+			${contentF.digest!''}
+		</div>
+		</#if>
+		<#if voteOptionListF?exists && voteOptionListF?size gt 0>
+		<div class="vote_content">
+		<#if voteF.votepattern=="10">
+			<#list voteOptionListF as voteOption>
+			<input type="<#if voteF.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"/><label>${voteOption.optionname}</label><br/>
+			</#list>
+		</#if>
+			<#if voteF.votepattern=="20">
+				<#list voteOptionListF as voteOption>
+				<#if voteOption_index%2==0><div style="margin-bottom:25px;"><ul></#if>
+				<li style="width:49%;<#if voteOption_index%2==0>margin-right:2%<#else>margin:0px;</#if>">
+					<img src="${voteOption.optionimg}.450_450.jpg" alt="${voteOption.optionname}" style="display: block;margin-bottom: 7px;"/>
+					<input type="<#if voteF.votetype='20'>checkbox<#else>radio</#if>" name="voteitem" id="${voteOption.id}" value="${voteOption.id}"  style="vertical-align: middle;"/>
+					<label style="height: 25px;line-height: 25px;">
+					${voteOption.optionname}
+					</label>
+				</li>
+					<#if voteOption_index%2==1 || voteOption_index==(voteOptionListF?size-1)></ul><div style="clear:both;"></div></div></#if>
+				</#list>
+			</#if>
+			<div class="vote_footer">
+				<input class="submitBtn" type="button" value="投 票" />
+			</div>
+		</div>
+		</#if>
+		</div>
+		<script type="text/javascript">
+		
+			var storage = window.localStorage;
+			var is_vote=storage.getItem("${(contentF.id)?string}_${contentF.title}_is_vote");
+				
+			function getResult(){
+				$(".vote_content").show();
+				$(".vote_content").html("投票结果获取中...");
+				$("<span class='vote_publish_date' style='margin-left:10px;'>你已经投票</span>").insertAfter(".vote_publish_date");
+				var url="${contextpath}/front/voteLogController.do?queryVoteLog&contentId=${contentidF!''}&voteId=${voteF.voteid}";
+				
+				$.ajax({
+					type:'post',
+					url:url,
+					dataType:'text',
+					success:function(view){
+						$(".vote_content").html(view).show();
+					},
+					error:function(){
+						$(".vote_content").html("获取投票结果失败");
+					}
+				});
+			}
+			
+			if(is_vote && is_vote=='true'){
+				//显示结果
+				getResult();
+			}else{
+				$(".vote_content").show();
+				$(".submitBtn").click(function (){
+					var submitUrl="${contextpath}/front/voteLogController.do?voteLogTag&voteId=${voteF.voteid}";
+					var voteStartTime=document.getElementById("voteStartTime").value;//投票开始时间
+					var start  = new Date(voteStartTime);
+					var voteEndTime=document.getElementById("voteEndTime").value;//投票结束时间
+					var end= new Date(voteEndTime);
+					var sysdate=document.getElementById("sysdate").value;//当前时间
+					var date=new Date(sysdate);
+					var cheradio = new Array();
+					var radio = document.getElementsByName('voteitem');
+					var arr = radio.length;
+					for(var i=0;i<arr;i++){
+						if(radio[i].checked == true){
+							cheradio.push(radio[i].value);
+						}
+					}
+					if(cheradio==""){
+						$('#dialog').show().find(".weui_dialog_bd").html("请先选择选项～！");
+						return;
+					}
+					if(date < start || date > end){
+					$('#dialog').show().find(".weui_dialog_bd").html("投票已结束~！");
+					return false;
+					}
+					$(".submitBtn").val("正在提交...").attr("disabled","disabled");
+					$.ajax({
+						type:'post',
+						url:submitUrl,
+						data:{'cheradio':cheradio.join(",")},
+						dataType:'text',
+						success:function(data){
+							var obj = JSON.parse(eval(data));
+							if(obj.isSuccess){
+								storage.setItem("${contentF.id!''}_${contentF.title}_is_vote","true");
+								getResult();
+							}else{
+								$('#dialog').show().find(".weui_dialog_bd").html(obj.msg);
+								$(".submitBtn").val("投 票").removeAttr("disabled");
+							}
+						},error:function (){
+							$('#dialog').show().find(".weui_dialog_bd").html("提交失败");
+							$(".submitBtn").val("投 票").removeAttr("disabled");
+						}
+					});
+				});
+			}
+		</script>
+		
+		<div class="weui_dialog_alert" style="display:none;" id="dialog">
+            <div class="weui_mask">
+            </div>
+            <div class="weui_dialog">    
+            	<div class="weui_dialog_hd">	
+                    <strong class="weui_dialog_title">提示</strong>
+                </div>            
+                <div class="weui_dialog_bd">
+                    弹窗内容，告知当前页面信息等
+                </div>
+                <div class="weui_dialog_ft">
+                    <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        	$(function (){
+        		$('#dialog').on('click', '.weui_btn_dialog', function(){
+                   	$('#dialog').hide();
+              	});
+        	});
+        </script>
+	</body>
+</html>

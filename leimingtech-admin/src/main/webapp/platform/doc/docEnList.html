@@ -1,0 +1,85 @@
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+			<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>文档引用实体表</div>
+				
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditModel('docEnController.do?addOrUpdate')">
+						新增 <i class="icon-plus"></i>
+					</button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+			<div class="span12 booking-search">
+				<form id="search_form" class="form-horizontal">
+					 <div class="clearfix">
+						<div class="span4">
+							<label>实体名
+								<input name="name" class="form-control span7" type="text" value="${searchMap["name"]?if_exists[0]}">
+							</label>
+						</div>
+						<div class="span4">
+							<label>代码
+								<input name="code" class="form-control span7" type="text" value="${searchMap["code"]?if_exists[0]}">
+							</label>
+						</div>
+						<div class=" pull-right">
+						<button type="button" class="btn yellow btn-sm" onclick="toSearch('docEnController.do?docEn', 'search_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+						<button type="button" class="btn yellow btn-sm" onclick="resetForm('search_form');">重置<i class="icon-repeat m-icon-white"></i></button>
+					</div>
+				</div>
+				</form>
+			</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						<tr>
+							<th style="width:40px;text-align:center">序号</th>
+							<th style="width:150px;">实体名</th>
+							<th style="width:150px;">代码</th>
+							<th>描述</th>
+							<#--<th>排序</th>
+							<th>状态</th>
+							<th>添加时间</th>
+							<th>添加人</th>
+							<th>修改次数</th>
+							<th>修改时间</th>
+							<th>修改人</th>-->
+							<th style="width:80px;text-align:center">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<#if docEnList?exists>
+						  <#list docEnList as docEn>
+							<tr class="odd gradeX">
+								<td style="text-align:center">${(pageNo-1)*pageSize+docEn_index?if_exists+1}</td>
+								<td>${docEn.name?if_exists}</td>
+								<td <a href="docs/docAct.do?getEntityInfo&entityName=${docEn.code!''}" target="_blank">${docEn.code?if_exists}</a></td>
+								<td class="center">${docEn.description?if_exists}</td>
+								<#--<td >${docEn.sort?if_exists}</td>
+								<td >${docEn.status?if_exists}</td>
+								<td >${docEn.createdtime?if_exists}</td>
+								<td >${docEn.createdby?if_exists}</td>
+								<td >${docEn.updatecount?if_exists}</td>
+								<td >${docEn.updatetime?if_exists}</td>
+								<td>${docEn.updateby?if_exists}</td>-->
+								<td style="text-align:center">
+									<input type='button' title='修改' class="editbtn"   onclick="toEditModel('docEnController.do?addOrUpdate&id=${docEn.id?if_exists}')"/>
+									<input type='button' title='删除' class="delbtn"   onclick="del('docEnController.do?del', '${docEn.id?if_exists}')"   />
+									<input type='button' title='管理实体属性' class="managerbtn" onclick="toEditModel('docEnController.do?docEnPro&entityid=${docEn.id?if_exists}')">
+								</td>
+							</tr>
+						 </#list> 
+					   </#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/page.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+<div id="editModel" class="modal hide fade"  data-backdrop="static" tabindex="-1" data-focus-on="input:first" data-width="800">
+</div>

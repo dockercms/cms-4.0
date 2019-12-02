@@ -1,0 +1,55 @@
+<#if modelItemList?exists && modelItemList?size gt 0>
+	<#list modelItemList as modelItem>
+		<div class="control-group">
+			<label class="control-label">${modelItem.itemLabel}：</label>
+			<div class="controls">
+				<#if extMap?exists && extMap[modelItem.id]?exists>
+					<input type="hidden" name="extid" value="${extMap[modelItem.id].id}">
+				<#else>
+					<input type="hidden" name="extid" value="">
+				</#if>										
+					<input type="hidden"  name="field"  value="${modelItem.field}"/>
+					<input type="hidden"  name="dataType"  value="${modelItem.dataType}"/>
+					<input type="hidden"  name="attrName"  value="${modelItem.itemLabel}"/>
+					<input type="hidden"  name="extFieldModelid" value="${modelItem.modelId}"/>
+					<input type="hidden"  name="modelItemId" value="${modelItem.id}"/>
+				
+				<#if modelItem.dataType=="2">
+					<textarea name="attrvalue" class="span6 form-control"  rows="3"><#if extMap?exists && extMap[modelItem.id]?exists>${extMap[modelItem.id].attrValue}</#if></textarea>
+				<#elseif modelItem.dataType=="3">
+                    <input type="text" id="upload_${modelItem_index}_val"  name="attrvalue" class="span6 form-control" value="<#if extMap?exists && extMap[modelItem.id]?exists>${extMap[modelItem.id].attrValue}</#if>"/>
+                    <div class="btn green" style="padding:0px !important;" id="upload_${modelItem_index}" >上传</div>
+                    
+					<script>
+					   	var upload_${option} = WebUploader.create({
+					
+							// 选完文件后，是否自动上传。
+						    auto: true,
+						    
+						    // swf文件路径
+						    swf: 'plug-in/ueditor/third-party/webuploader/Uploader.swf',
+						
+						    // 文件接收服务端。
+						    server: 'controller.jsp?action=uploadfile',
+						
+						    // 选择文件的按钮。可选。
+						    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+						    pick: '#upload_${modelItem_index}',
+						
+						    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+						    resize: false,
+						    
+						});
+					
+						//当有文件添加进来的时候
+						upload_${option}.on( 'uploadSuccess', function( file,Object ) {
+							$("#upload_${modelItem_index}_val").val(Object.url);
+						});
+					</script>
+				<#else>
+				<input type="text"  name="attrvalue" class="span6 form-control" value="<#if extMap?exists && extMap[modelItem.id]?exists>${extMap[modelItem.id].attrValue}</#if>"/>
+				</#if>
+			</div>
+		</div>
+	</#list>
+</#if>

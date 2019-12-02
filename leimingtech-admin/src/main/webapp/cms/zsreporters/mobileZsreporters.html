@@ -1,0 +1,88 @@
+
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title"><#if toType=="mobile">移动内容</#if><#if toType=="copy">复制内容</#if><#if toType=="cite">引用内容</#if></h4>
+</div>
+<div class="portlet-body form">
+	<div class="clearfix">
+		<ul id="treeDemo" class="ztree span5" style="height:400px;border:28px;margin-top:0px;overflow-y:scroll;overflow-x:auto;">
+		</ul>
+		<input type="hidden" id="funVal" name="funVal"/>
+		<input type="hidden" id="ids" name="ids" value="${ids}"/>
+		<input type="hidden" id="toType" name="toType" value="${toType}"/>
+	</div>
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="saveMobile()" class="btn btn-primary" value="确定">  
+    <input type="button" class="btn" value="取消" data-dismiss="modal">  
+</div>
+<SCRIPT type="text/javascript">
+	//加载栏目
+	var setting = {
+		check: {
+			enable: true,
+			chkStyle: "radio",
+			radioType: "all"
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	var zNodes1 = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'contentsMobileController.do?loadmobile',
+		data:'data=0',
+		success:function(data){
+			 zNodes1 = data;
+		}
+	});
+	var json1 = JSON.parse(zNodes1);
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo"), setting,json1);
+		$('#treeDemo').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var checked=zTree.getCheckedNodes(true);//已经选中的对象 
+			if(checked.length!=0){
+				$('#funVal').attr("value",checked[0].id);
+			}
+		});		
+	});
+		
+	function saveMobile(){
+		var funVal = $('#funVal').val();
+		var ids = $('#ids').val();
+		var toType = $('#toType').val();
+		$.ajax({
+			type:'post',
+			url:'queryZspFroJDBCController.do?toContents&funVal='+funVal+'&ids='+ids+"&toType="+toType,
+			data:null,//{'funVal':funVal,'ids':ids,'toType':toType},
+			//dataType:'text',
+			success:function(msg){
+				var obj = JSON.parse(eval(msg));
+				if(obj.isSuccess){
+					var toUrl = obj.toUrl;
+					if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+					{
+					    toUrl = arguments[2] + '';
+					}
+					$('#mobileModel').modal('hide');
+					lmAlert(obj.msg);
+					changePage(toUrl);
+				}else{
+					lmAlert("提交处理失败!");
+				}
+			},error:function (a){
+				lmAlert("提交处理失败!");
+			}
+		});
+	}
+</SCRIPT>
+

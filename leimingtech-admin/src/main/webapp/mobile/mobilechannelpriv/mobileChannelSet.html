@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<h4 class="modal-title">移动栏目权限设置</h4>
+</div>
+<div class="portlet-body form">
+	<form id="roleForm" method="post" class="form-horizontal">
+		<ul id="modelChannelTree" class="ztree" style="width:337px;height:400px;border:28px;margin-top:0px;overflow-y:scroll;overflow-x:auto;">
+		</ul>
+		<div class="right" style="display:none">
+			<input type="button" value="获取选中的值" id="button"/>
+			<input type="text" id="funVal" name="funVal"/>
+			<ul class="info">
+				<li class="title"><h2>1、setting 配置信息说明</h2>
+					<ul class="list">
+						<li class="highlight_red">使用 checkbox，必须设置 setting.check 中的各个属性，详细请参见 API 文档中的相关内容</li>
+						<li><p>父子关联关系：<br/>
+							被勾选时：<input type="checkbox" id="py" class="checkbox first" checked /><span>关联父</span>
+							<input type="checkbox" id="sy" class="checkbox first" checked /><span>关联子</span><br/>
+							取消勾选时：<input type="checkbox" id="pn" class="checkbox first" checked /><span>关联父</span>
+							<input type="checkbox" id="sn" class="checkbox first" checked /><span>关联子</span><br/>
+							<ul id="code" class="log" style="height:20px;"></ul></p>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</form>	
+</div>
+<div class="modal-footer">  
+    <input  type="button" onclick="formSubmitModelRole('mobileChannelPrivController.do?saveMobileChannelPriv&roleId=${role.id}', 'roleForm');" class="btn btn-primary" value="提交">  
+    <input type="button" class="btn" value="取消" data-dismiss="modal">  
+</div>
+<SCRIPT type="text/javascript">
+function formSubmitModelRole(urlStr, formName){
+	if(!$('#' + formName).valid()){
+		return false;
+  	}
+	var el = $(".page-header-fixed");
+	App.blockUI(el);
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:$('#' + formName).serialize(),
+		dataType:'text',
+		success:function(msg){
+			var obj = JSON.parse(eval(msg));
+			lmAlert(obj.msg);
+			if(obj.isSuccess){
+				var toUrl = obj.toUrl;
+				if (!toUrl && typeof(toUrl)!="undefined" && toUrl!=0 && toUrl != '')
+				{
+				    toUrl = arguments[2] + '';
+				}
+				$('#PCRoleModel').modal('hide');
+				$('#PCRoleModel').empty();
+				lazyChangePage(toUrl);
+			}
+		},
+		error:function(){
+			lmAlert("提交通讯失败!");
+		},
+		complete:function (){
+			App.unblockUI(el);
+		}
+	});
+}
+	
+	var setting = {
+		check: {
+			enable: true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+	var code;
+	function setCheck() {
+		var zTree = $.fn.zTree.getZTreeObj("modelChannelTree"),
+		py = $("#py").attr("checked")? "p":"",
+		sy = $("#sy").attr("checked")? "s":"",
+		pn = $("#pn").attr("checked")? "p":"",
+		sn = $("#sn").attr("checked")? "s":"",
+		type = { "Y":py + sy, "N":pn + sn};
+		zTree.setting.check.chkboxType = type;
+		showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+	}
+	function showCode(str) {
+		if (!code) code = $("#code");
+		code.empty();
+		code.append("<li>"+str+"</li>");
+	}
+	
+	var json = JSON.parse('${roleJson!''}');
+	$(document).ready(function(){
+		$.fn.zTree.init($("#modelChannelTree"), setting,json);
+		setCheck();
+		$("#py").bind("change", setCheck);
+		$("#sy").bind("change", setCheck);
+		$("#pn").bind("change", setCheck);
+		$("#sn").bind("change", setCheck);
+		//加载页面时要赋值于funVal用于在不选择任何菜单提交之后当前菜单不变
+		var zTree = $.fn.zTree.getZTreeObj("modelChannelTree");
+		var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+		var checkCount = checked.length;
+		var v="";
+		for(var i=0;i<checkCount;i++){
+			v+=checked[i].id+",";//获取的是值
+		}
+		$('#funVal').attr("value",v);
+		$('#modelChannelTree').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("modelChannelTree");
+			var checked=zTree.getCheckedNodes(true);//所有已经选中的对象 
+			var checkCount = checked.length;
+			var v="";
+			for(var i=0;i<checkCount;i++){
+				v+=checked[i].id+",";//获取的是值
+				//v+=checked[i].name+",";//获取的是名称
+			}
+			$('#funVal').attr("value",v);
+		});
+	});
+</SCRIPT>
+
+

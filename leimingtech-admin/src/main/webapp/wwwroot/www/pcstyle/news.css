@@ -1,0 +1,99 @@
+/***
+ * @website
+ * http://www.jzread.com
+ * @QQ：568245346
+ * @author：jsjlsf
+ * @e-mail: jsjlsf@163.com
+ */
+.content1{ width:1000px;margin:0 auto; margin-bottom:20px;}
+.content1_left{ width:680px;float:left;overflow:hidden;}
+.focus{ width:680px;float:left; padding-top:15px;overflow:hidden;}
+.zbtj{width:520px; height:45px; line-height:45px; font-size:16px; background:url(newimg/zbtj.png) no-repeat left;float:left; margin-top:20px; overflow:hidden; padding-left:160px;}
+.zbtj a{color:#CD0000; padding-right:15px;}
+
+.left_001{ width:680px;float:left;overflow:hidden;}
+.xwt{ width:680px; height:120px;float:left;}
+.xwt_left{ width:120px; padding-top:15px;float:left;}
+.xwt_left img{ width:120px; height:90px;}
+.xwt_right{ width:540px; float:right;padding-top:15px; line-height:20px;}
+.xwt_right h3{ padding-top:5px; padding-bottom:5px; line-height:26px;font-size:20px; text-align:left; font-family:"黑体"; font-weight:200;}
+.xwt_right h3 a{color:#1F376D;}
+.xwt_right li{ width:520px; height:28px; line-height:28px; font-size:14px; background:url(newimg/sa.jpg) no-repeat 0px 11px;padding-left:13px; float:left;}
+
+.title1{width:680px; height:40px; line-height:40px; background:url(newimg/title1_bg.jpg)  repeat-x bottom; margin-top:10px; float:left;overflow:hidden;}
+.title1 .p1{ height:40px; line-height:40px;font-size:20px; font-family:"黑体"; font-weight:200;background:url(newimg/title2_bg.jpg)  repeat-x bottom;float:left;}
+.title1 .p1 a{color:#000; padding-left:5px; padding-right:5px; color:#555555;}
+.title1 .p2{ height:40px; line-height:40px;font-size:12px; padding-right:10px; float:right;}
+.title1 .p2 a{color:#555555;}
+
+.new1{ width:300px; padding-top:15px;float:left;}
+.new1_a{ width:300px;height:250px;float:left;}
+.new1_a img{ width:300px; height:220px;}
+.new1_a p{ height:20px; padding-top:5px;text-align:center; font-size:14px; line-height:18px; background:#333333;}
+.new1_a a{color:#ffffff}
+
+.new1_b{ width:300px; padding-top:15px;float:left;}
+.new1_b ul{float:left;}
+.new1_b li{ width:140px; height:150px; float:left; margin-right:20px;display:inline}
+.new1_b li img{ width:140px; height:105px;}
+.new1_b p{ padding-top:10px; text-align:center; font-size:12px; line-height:18px;}
+.new1_b ul li a{color:#333333}
+
+.new2{ width:360px; padding-top:15px;float:right;}
+.new2 h3{ height:30px; padding-top:5px;font-size:20px; font-family:"黑体"; font-weight:200;}
+.new2 h3 a{color:#1F376D;}
+.new2 li{ width:345px; height:28px; line-height:28px; font-size:14px; background:url(newimg/sa.jpg) no-repeat 0px 11px;padding-left:13px; float:left;}
+.no_bottom{border-bottom-style:none;}
+
+
+
+
+
+.content1_right{ width:300px;float:right;overflow:hidden;}
+.right_001{ width:300px;float:left;overflow:hidden;}
+.right_ad1{ width:300px; margin-top:15px;float:left;overflow:hidden;}
+.title2{width:300px; height:40px; line-height:40px; background:url(newimg/title1_bg.jpg)  repeat-x bottom; margin-top:10px; float:left;overflow:hidden;}
+.title2 .p1{ height:40px; line-height:40px;font-size:20px; font-family:"黑体"; font-weight:200;background:url(newimg/title2_bg.jpg)  repeat-x bottom;float:left;}
+.title2 .p1 a{color:#000; padding-left:5px; padding-right:5px; color:#555555;}
+.title2 .p2{ height:40px; line-height:40px;font-size:12px; padding-right:10px; float:right;}
+.title2 .p2 a{color:#555555;}
+
+.xwt2{ width:300px; height:65px; padding-top:10px; border-bottom:1px solid #E8E8E8; float:left; overflow:hidden;}
+.xwt2_left{ width:74px; height:56px;float:left; overflow:hidden;}
+.xwt2_left img{ width:74px; height:56px; border:0px;}
+.xwt2_right{ width:210px; height:130px;color:#666666;float:right;overflow:hidden;}
+.xwt2_right_a{ width:210px; line-height:20px;font-size:14px; float:left;}
+.xwt2_right_b{ width:210px; font-size:12px;float:left; color:#AAAAAA; padding-top:4px;}
+
+.new3{ width:300px;float:left; padding-top:10px;overflow:hidden;}
+.new3 li{ width:290px; height:26px; line-height:26px; background:url(newimg/sa.jpg) no-repeat 0px 10px; padding-left:9px; font-size:14px; float:left;}
+
+.new4{ width:300px; float:left; padding-top:10px;overflow:hidden;}
+.new4 li{ width:140px;height:165px;float:left; display:inline}
+.m_R{margin-right:20px;}
+.new4 li img{ width:140px; height:105px;}
+.new4 p{ padding-top:7px; text-align:center; font-size:14px;line-height:20px;}
+
+.new5{ width:300px; height:356px; background:url(newimg/num_bg.png) no-repeat 0px 16px;float:left; padding-top:10px; padding-bottom:10px; overflow:hidden;}
+.new5 ul{float:left;}
+.new5 li{ width:270px; height:36px;line-height:36px;padding-left:30px;background:url(newimg/dotline.gif) repeat-x bottom; font-size:12px; float:left;overflow:hidden;}
+
+
+/* 幻灯 */
+#triggers span{text-indent:-999em;overflow:hidden}
+#triggers span{background: url(newimg/search2013.png) no-repeat}
+.slideone{width:680px;height:380px;overflow:hidden;position:relative}
+.contents li{position:relative}
+.contents img{width:680px;height:380px}
+.contents h3{font:18px/50px \5FAE\8F6F\96C5\9ED1;height:50px;overflow:hidden;padding-left:30px;position:absolute;left:0;bottom:0;width:650px}
+.contents h3,.tx{background:rgba(0, 0, 0, 0.6);filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#99000000', EndColorStr='#99000000');}
+.photo295 a,.photo295 a:hover,.contents h3 a,.contents h3 a:hover,.v_fontimgsthree a:hover,.js_fontsone,.js_fontsone a,.js_fontsone a:hover,.slide-content .JQ-slide-nav a:hover{color:#fff;text-decoration:none}
+#triggers{position:absolute;right:7px;bottom:20px}
+#triggers span{float:left;width:11px;height:10px;margin-right:5px;cursor:pointer}
+#triggers span{background-position:-80px -40px}
+#triggers span.cur{background-position:-80px -60px}
+#pre_down,#next_down{cursor:pointer;height:50px;position:absolute;top:155px;width:30px}
+#pre_down{left:0;background:url(newimg/news_pervout2013.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="newimg/news_pervout2013.png");_background:none}
+#next_down{right:0;background:url(newimg/news_nextout2013.png) no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src="newimg/news_nextout2013.png");_background:none}
+
+

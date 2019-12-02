@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><#assign navTag =newTag("navTag")>
+	<#assign navTagList =navTag("{'name':'${catalogF.id}'}")>
+	<#if navTagList?exists>
+		<#list navTagList as navTag>
+			
+			<#if catalogF.id==navTag.id>
+				${navTag.name}
+			</#if>
+		</#list>
+	</#if></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="/pcstyle/main.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+</head>
+<body>
+<!--头部 -->
+<#include "/wwwroot/${sitePath}/template/pc/section/menu.html">
+<!--主题 -->
+<div class="content2">
+<div class="content2_left">
+<div class="dh_a">当前位置：<a href="/">首页</a>
+	<#assign navTag =newTag("navTag")>
+	<#assign navTagList =navTag("{'name':'${catalogF.id}'}")>
+	<#if navTagList?exists>
+		<#list navTagList as navTag>
+			
+			<#if catalogF.id==navTag.id>
+				<a href="${navTag.url!'javascript:void(0);'}" class="act">>${navTag.name}</a>
+			</#if>
+		</#list>
+	</#if>
+</div>
+<#assign articleTag =newTag("articleTag")>
+<#assign articleList =articleTag("{'name':'${catalogidF}','page':true,'pageindex':'${pageindexF}'}")>
+<#if articleList?exists && articleList?size gt 0>
+	<#list articleList as article>
+		<#if article.thumb?exists && article.thumb!="">
+		<div class="xwt">
+			    <div class="xwt_left">
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">
+					<img  src='<#if article.thumb?exists>${article.thumb}</#if>'  />
+					</a>
+				</div>
+			<div class="xwt_right">
+				<div class="xwt_a" style="height: 44px;width: 480px;">
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</div>
+				<div class="xwt_b" style="width:462px;">
+					<#if article.digest?exists>
+						<#if article.digest?length gt 100>
+						${article.digest?substring(0,100)}
+						<#else>
+						${article.digest!''}
+						</#if>
+					</#if>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">[更多详细]</a>
+				</div>
+				<div class="xwt_c">
+					发布日期：<#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if>
+				</div>
+			</div>
+		</div>
+		
+		<#else>
+		<div class="xwt">
+			  
+			<div>
+				<div class="xwt_a" style="height: 44px;">
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a>
+				</div>
+				<div class="xwt_b" style="width:637px;">
+					<#if article.digest?exists>
+						<#if article.digest?length gt 100>
+						${article.digest?substring(0,100)}
+						<#else>
+						${article.digest!''}
+						</#if>
+					</#if>
+					<a href="${article.url!'javascript:void(0);'}" target="_blank">[更多详细]</a>
+				</div>
+				<div class="xwt_c">
+					发布日期：<#if article.published?exists>${article.published?string('yyyy-MM-ddHH:mm')}</#if>
+				</div>
+			</div>
+		</div>
+		</#if>
+		
+	
+	</#list>
+<#else>
+无数据
+</#if>
+${pagebar}
+</div>
+<div class="content2_right">
+<#assign advTag =newTag("advTag")> 
+<#assign advList=advTag("{'name':'402881965238ba380152393d4b49005f','count':'1'}")>
+<#if advList?exists && advList?size gt 0> 
+<#list advList as adv> 
+	<div class="right1">
+	<a <#if adv.urladress?exists> href="${adv.urladress!''}" </#if>  <#if adv.urltarget==0>target='_blank'</#if> >
+	<img src="${adv.imgUrl}" border="0">
+	</a>
+	</div>
+</#list>
+</#if>
+<#--<div class="right2">
+<div class="title1">
+<p class="p1">新闻爆料</p>
+<p class="p2"><a href="/baoliao/">更多</a></p>
+</div>
+<div class="new1">
+<ul>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'31','count':'10','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+				<li class="ellipsis_div" style="width:250px;"><a href="/baoliao/2013-12-25/2418.html" target="_blank">${article.title}</a></li>
+		</#list>
+	</#if>
+</ul>
+</div>
+</div>
+
+<div class="right2">
+<div class="title1">
+<p class="p1">新闻热点</p>
+<p class="p2"><a href="/">更多</a></p>
+</div>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'31','count':'6','level':'all'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<div class="xwt2">
+			<div class="xwt2_left"><a href="${article.url!'javascript:void(0);'}" target="_blank"><img src="${article.thumb}"></a></div>
+			<div class="xwt2_right">
+			<div class="xwt2_right_a  ellipsis_div" style="width:200px;"><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title}</a></div>
+			<div class="xwt2_right_b"><#if article.published?exists>${article.published?string('yyyy-MM-dd')}</#if></div>
+			</div>
+			</div>
+		</#list>
+	</#if>
+</div>
+-->
+<div class="right2">
+<div class="title1">
+<p class="p1">今日推荐</p>
+</div>
+<div class="zw iconList">
+	<ul>
+		<#assign articleTag =newTag("articleTag")>
+			<#assign articleList =articleTag("{'count':'5','weight':'80-90'}")>
+				<#if articleList?exists && articleList?size gt 0>
+					<#list articleList as article>
+						<li class="ellip_div" style="width:282px;">
+							<a href="${article.url!'javascript:void(0);'}" target="_blank">
+								<span style="color:${article.color!''}" >${article.title}</span>
+							</a></li>
+					</#list>
+				</#if>
+	</ul>
+</div>
+</div>
+
+
+
+<div class="right1">
+<div class="title1">
+<p class="p1">点击排行</p>
+<#assign navTag =newTag("navTag")>
+	<#assign navTagList =navTag("{'name':'${catalogF.id}'}")>
+	<#if navTagList?exists>
+		<#list navTagList as navTag>
+			
+			<#if catalogF.id==navTag.id>
+				<p class="p2"><a href="${navTag.url!'javascript:void(0);'}" class="act">更多</a></p>
+			</#if>
+		</#list>
+	</#if>
+</div>
+</div>
+<div class="new3">
+<ul>
+<#assign articleTag =newTag("articleTag")>
+	<#assign articleList =articleTag("{'name':'${catalogidF}','count':'10','level':'all','order':'pv'}")>
+	<#if articleList?exists && articleList?size gt 0>
+		<#list articleList as article>
+			<li class="ellipsis_div" style="width:300px;"><div class="yuan">${article_index+1}</div><a href="${article.url}" target="_blank">${article.title}</a></li>
+		</#list>
+	</#if>
+</ul>
+</div>
+</div>
+</div>
+<div class="h20"></div>
+
+<!--footer-->
+<div class="footer">
+<#include "/wwwroot/${sitePath}/template/pc/section/footer.html"><!-- 页脚 -->
+</div>
+<!--footer end-->
+
+
+<!--<div class="t_line sxtq" style=" display: none">-->
+<!--<span class="mycity_cs" id="mycity_0">&#45;&#45;</span>-->
+<!--<span style="cursor:pointer;margin-left:10px;color:#003368;" id="ordercity"></span>-->
+<!--<br>-->
+<!--<span id="mycity_1" style="display: none;"></span>-->
+<!--<span id="mycity_5">&#45;&#45;</span><br>-->
+<!--<span id="mycity_2">&#45;&#45;</span><br>-->
+<!--<span id="mycity_3">&#45;&#45;</span><br>-->
+<!--<span id="mycity_4">&#45;&#45;</span>-->
+<!--</div>-->
+<script src="/pcstyle/base-min.js" type="text/javascript"></script>
+<script src="/pcstyle/plugin-mod.min.js" type="text/javascript"></script>
+</body>
+</html>

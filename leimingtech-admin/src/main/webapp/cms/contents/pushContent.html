@@ -1,0 +1,420 @@
+<!-- ztree -->
+<link rel="stylesheet" href="tree/css/demo.css" type="text/css"> 
+<link rel="stylesheet" href="tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="tree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="tree/js/jquery.ztree.excheck-3.5.js"></script>
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h3 class="modal-title">
+			<#if flag!=''>
+				恭喜，内容<#if flag=='add'>添加</#if><#if flag=='edit'>修改</#if>成功
+			</#if>
+			<#if flag==''>
+				恭喜，内容<span style="font-size: 14px;"> ${content.title} </span>发布成功
+			</#if>
+		</h3>
+	</div>
+	<div class="modal-body" id="body" <#if (content.constants != '50' && contentCat.workflowid != '0') ||  tab=='1'>style="display:none"</#if>>
+		<form id="form_sample_2" class="form-horizontal">
+			<input type="hidden" id="contentCatId" name="contentCatId" value="${contentCat.id}"/>
+			<input type="hidden" id="workflowid" name="workflowid" value="${contentCat.workflowid}"/>
+			<input type="hidden" id="contentid" value="${content.id}">
+			<input type="hidden" id="input0"  value="${tab}">
+			<div class="control-group">
+				<label class="control-label">标题：</label>
+				<div class="controls">
+					<span class="help-inline">${content.title}</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">推送到移动：</label>
+				<div class="controls">
+					<div class="input-cont" style="position: relative; z-index:200">
+						<input class="m-wrap" style="width: 230px;" type="text" id="mobileChannel" name="mobileChannel" readonly onclick="showMenu()" onchange="clearId()" placeholder="请选择要推送的移动栏目" />
+						<div id="menuContent2" class="menuContent" style="display:none; position: absolute;">
+							<ul id="treeDemo2" class="ztree" style="width:230px; height: 140px;margin-top: 0px;"></ul>
+						</div>
+						<input type="hidden" id="funVal2" name="funVal2"/>
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">推送到专题：</label>
+				<div class="controls">
+					<div class="input-cont" style="position: relative;">
+						<input id="attributeSpecial" style="width: 230px;" name="attributeSpecial" type="text" class="m-wrap" readonly value="${specialNames?if_exists}" onclick="showMenuSpecial();" placeholder="请选择要专题"  />
+						<input id="specialids" name="specialids" type="hidden" class="m-wrap" readonly value="${specialId?if_exists}" />
+						<div id="menuContentSpecial" class="menuContentSpecial" style="display:none;z-index:999999; position: absolute;">
+							<ul id="treeDemoSpecial" class="ztree" style="margin-top:0; width:250px; height: 140px">
+							<ul id="codeSpecial" class="log" style="height:20px;"></ul></p></ul>
+						</div>
+					</div>
+				</div>
+			</div>			
+
+			<div class="control-group" >
+				<label class="checkbox control-label" style="margin-left:156px;"">
+	            	<input type="checkbox" id="goEdit" value="1" style="margin-left:60px;margin-right:3px" title="勾选继续编辑"/>是否继续编辑
+	          		<!-- <div class="btn-cont" style="width: 60px; margin-left:150px;float: left;"><span class="arrow" style="right: 60px;"></span><a href="javascript:void(0);" class="btn blue"  onclick="pushMobile()">转发</a></div> -->
+	          	</label>
+	          	
+			</div>
+			<div class="control-group">
+				<label class="control-label"><img src="media/image/WB_logo.png" alt="发布到新浪微博"/></label>
+				<div class="controls">
+					<div class="input-cont" style="position: relative;padding-top: 5px;">
+						<input type="button" class="btn btn-primary blue pushBtn" onclick="toShowSian('sinaWeiboController.do?toShowSian&countId=${content.id?if_exists}');" value="发布到新浪微博">
+					</div>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">发布到区块</label>
+				<div class="controls">
+					<div class="input-cont" style="position: relative;padding-top: 5px;">
+						<input type="button" class="btn btn-primary blue pushBtn" onclick="toSection('sectionController.do?toSection&countId=${content.id?if_exists}');" value="发布到区块">
+					</div>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">发布到其他站点</label>
+				<div class="controls">
+					<div class="input-cont" style="position: relative;padding-top: 5px;">
+						<input type="button" class="btn btn-primary blue pushBtn" onclick="toSite('contentsController.do?operate&ids=${content.id?if_exists}&toType=toOtherSite');" value="发布到其他站点">
+					</div>
+				</div>
+			</div>
+
+
+		</form>
+	</div>
+	<div class="modal-footer">  
+        <!-- <input  type="button" class="btn btn-primary" onclick="toModel('contentsController.do?updatePageModel&id=${content.id?if_exists}')" value="继续修改">  --> 
+        <input type="button" class="btn btn-primary blue pushBtn" onclick="pushMobile()" value="推送" <#if (content.constants != '50' && contentCat.workflowid != '0') ||  tab=='1'>style="display:none"</#if>>
+        <input type="button" class="btn btn-primary" data-dismiss="modal" value="关闭">
+    </div>
+<div id="showSinaModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<div id="showSectionModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="800"></div>
+<div id="mobileModel" class="modal fade" tabindex="-1" data-backdrop="static" data-focus-on="input:first" data-width="350"></div>
+
+<script>
+
+<#if !((content.constants != '50' && contentCat.workflowid != '0') ||  tab=='1')>
+//展示新浪微博的界面
+	function toShowSian(urlStr){
+	
+		$.ajax({
+		type:'post',
+		url:urlStr,
+		
+			success:function(msg){
+				$('#showSinaModel').empty();
+				$('#showSinaModel').append(msg);
+				$('#showSinaModel').modal('show');
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		})
+		
+	}
+
+
+	//展示页面模板的界面
+	function toSection(urlStr){
+
+		$.ajax({
+			type:'post',
+			url:urlStr,
+
+			success:function(msg){
+				$('#showSectionModel').empty();
+				$('#showSectionModel').append(msg);
+				$('#showSectionModel').modal('show');
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		})
+
+	}
+//发布到其他的站点
+	function  toSite(urlStr){
+
+		$.ajax({
+			type:'post',
+			url:urlStr,
+
+			success:function(msg){
+				$('#mobileModel').empty();
+				$('#mobileModel').append(msg);
+				$('#mobileModel').modal('show');
+			},
+			error:function(){
+				lmAlert("load page error, page url is " + urlStr);
+			}
+		})
+	}
+
+//ztree属性下拉树选择
+	var setting1 = {
+		check: {
+			enable: true
+		},
+		view: {
+			dblClickExpand: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick1,
+			onCheck: onCheck1
+		}
+	};
+	var zNodesSpecia = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'contentsController.do?getSpecialAllArray&contentid=${contentsId}',
+		data:'data=0',
+		success:function(data){
+			 zNodesSpecia = data;
+		}
+	}); 
+	
+	var codeSpecia;
+
+	function setCheckSpecia() {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemoSpecial"),
+		py = $("#py").attr("checked")? "p":"",
+		sy = $("#sy").attr("checked")? "s":"",
+		pn = $("#pn").attr("checked")? "p":"",
+		sn = $("#sn").attr("checked")? "s":"",
+		type = { "Y":py + sy, "N":pn + sn};
+		zTree.setting.check.chkboxType = type;
+		showCodeSpecia('setting1.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+	}
+	function showCodeSpecia(str) {
+		if (!codeSpecia) codeSpecia = $("#codeSpecia");
+		codeSpecia.empty();
+		codeSpecia.append("<li>"+str+"</li>");
+	}
+	var jsonSpecia = JSON.parse(zNodesSpecia);
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemoSpecial"), setting1,jsonSpecia);
+		setCheckSpecia();
+		/* $("#py").bind("change", setCheckSpecia);
+		$("#sy").bind("change", setCheckSpecia);
+		$("#pn").bind("change", setCheckSpecia);
+		$("#sn").bind("change", setCheckSpecia); */
+		$('#treeDemoSpecial').click(function(){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemoSpecial");
+			var checked=zTree.getCheckedNodes(true);//已经选中的对象 
+		});		
+	});
+
+	function beforeClick1(treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemoSpecial");
+		zTree.checkNode(treeNode, !treeNode.checked, null, true);
+		return false;
+	}
+function onCheck1(e, treeId, treeNode) {
+	var zTree = $.fn.zTree.getZTreeObj("treeDemoSpecial"),
+	nodes = zTree.getCheckedNodes(true),
+	v = "";
+	ids = "";
+	for (var i=0, l=nodes.length; i<l; i++) {
+		v += nodes[i].name + ",";
+		ids += nodes[i].id + ",,,";
+	}
+	if (v.length > 0 ) v = v.substring(0, v.length-1);
+	var cityObj = $("#attributeSpecial");
+	var cityids = $("#specialids");
+	cityObj.attr("value", v);
+	cityids.attr("value", ids);
+}
+
+function showMenuSpecial() {
+	var cityObj = $("#attributeSpecial");
+	var cityOffset = $("#attributeSpecial").offset();
+	$("#menuContentSpecial").css({left:"0px", top:cityObj.outerHeight()+ "px"}).slideDown("fast");
+//{left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}
+	$("body").bind("mousedown", onBodyDownSpecial);
+}
+function hideMenuSpecial() {
+	$("#menuContentSpecial").fadeOut("fast");
+	$("body").unbind("mousedown", onBodyDownSpecial);
+}
+function onBodyDownSpecial(event) {
+	if (!(event.target.id == "menuBtn" || event.target.id == "attributeSpecial" || event.target.id == "menuContentSpecial" || $(event.target).parents("#menuContentSpecial").length>0)) {
+		hideMenuSpecial();
+	}
+} 
+
+	//ztree属性下拉树选择
+	var setting = {
+			check: {
+				enable: false
+			},
+		view: {
+			dblClickExpand: false,
+			showLine: false
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onClick: onClick
+		}
+	};
+	function onClick(e,treeId, treeNode) {
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo2");
+		zTree.expandNode(treeNode);
+		var nodes = zTree.getSelectedNodes()[0].name;
+		var nodesId = zTree.getSelectedNodes()[0].id;
+		$('#mobileChannel').attr('value',nodes);
+		$('#funVal2').attr('value',nodesId);
+	}
+	var zNodes = new Array();
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'contentsController.do?loadmobile',
+		data:'data=0',
+		success:function(data){
+			 zNodes = data;
+		}
+	})
+	var json = JSON.parse(zNodes);
+	$(document).ready(function(){
+		$.fn.zTree.init($("#treeDemo2"), setting,json);
+		var isSendMobile = '${contentCat.isSendMobile}';
+		if(isSendMobile=="1"){
+			$("#mobileChannel").attr("value","${mobileChannel.name?if_exists}");
+			$("#funVal2").attr("value","${mobileChannel.id?if_exists}");
+		}
+	});
+	function showMenu() {
+		var cityObj = $("#mobileChannel");
+		var cityOffset = $("#mobileChannel").offset();
+		$("#menuContent2").css({left:"0px", top:cityObj.outerHeight()+ "px"}).slideDown("fast");
+
+		$("body").bind("mousedown", onBodyDown);
+
+		//$('#attributeSpecial').hide();
+	}
+	function hideMenu() {
+		$("#menuContent2").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "mobileChannel" || event.target.id == "menuContent2" || $(event.target).parents("#menuContent2").length>0)) {
+			hideMenu();
+			//$('#attributeSpecial').show();
+		}
+	}
+	
+	//关闭
+	function toModel(urlStr){
+		$('#editModel').empty();
+		$('#editModel').modal('hide');
+		setTimeout(function (){
+			$.ajax({
+				type:'post',
+				url:urlStr,
+				data:'data=0',
+				dataType:'text',
+				success:function(msg){
+					$('#dashboard').empty();
+					$('#dashboard').append(msg);
+				},
+				error:function(){
+					lmAlert("load page error, page url is " + urlStr);
+				}
+			});
+		},500);
+	}
+	var classify = '${classify}';
+	function pushMobile(){
+		var check = document.getElementById("goEdit").checked;
+		var funVal2 = $('#funVal2').val();
+		var specialids = $('#specialids').val();
+		var contentId = $('#contentid').val();
+		var urlStr = "";
+		if(funVal2==""&&specialids==""){
+			lmAlert("请选择转发频道或者专题!");
+		}else{
+			if(check){
+				if(classify==${article_stat}){
+					urlStr = 'articleMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				if(classify==${picture_stat}){
+					urlStr = 'pictureGroupMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				if(classify==${link_stat}){
+					urlStr = 'contentLinkMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				if(classify==${video_stat}){
+					urlStr = 'contentVideoMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				if(classify==${survey_stat}){
+					urlStr = 'surveyMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				if(classify==${vote_stat}){
+					urlStr = 'voteMobileController.do?addPageModel&mobileChannelId='+funVal2+'&contentId='+contentId+'&specialids='+specialids;
+				}
+				$('#editModel').empty();
+				$('#editModel').modal('hide');
+				setTimeout(function (){
+					$.ajax({
+						type:'post',
+						url:urlStr,
+						data:'&data=0',
+						dataType:'text',
+						success:function(msg){
+							$('#dashboard').empty();
+							$('#dashboard').append(msg);
+						},
+						error:function(){
+							lmAlert("load page error, page url is " + urlStr);
+						}
+					});
+				},500);
+			}else{
+				urlStr = 'contentsMobileController.do?savePushMobile&mobileChannelId='+funVal2+'&contentId='+contentId+'&classify='+classify +'&specialids='+specialids;
+				$.ajax({
+					type:'post',
+					url:urlStr,
+					data:'&data=0',
+					dataType:'text',
+					success:function(msg){
+						var obj = JSON.parse(eval(msg));
+						if(obj.isSuccess){
+							toModel('contentsController.do?table&tab=alone&contentCatId=${contentCat.id}');
+						}
+						lmAlert(obj.msg);
+					},
+					error:function(){
+						lmAlert("load page error, page url is " + urlStr);
+					}
+				});
+			}
+		}
+	}
+	
+	//清空频道
+	function clearId(){
+		var mobileChannel = $("#mobileChannel").val();
+		if(mobileChannel==""){
+			$("#funVal2").attr("value","");
+		}
+	} 
+	</#if>
+</script>

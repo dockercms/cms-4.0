@@ -1,0 +1,5 @@
+使用网编工具出现乱码情况，是由于Tomcat没有配置编码，在tomcat文件 的conf处的server.xml处
+设置编码   <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443"  URIEncoding="UTF-8" />
+URIEncoding="UTF-8"  加上这段代码即可

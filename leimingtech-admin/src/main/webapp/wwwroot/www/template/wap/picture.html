@@ -1,0 +1,151 @@
+ 
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+<title><#if contentF?exists> ${contentF.title}</#if></title>
+<meta name="Description" content="  "  />
+<meta name="Keywords" content="  " />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+<script type="text/javascript" src="/wapStyle/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="/wapStyle/js/jquery.swipebox.js"></script>
+<link rel="stylesheet" href="/wapStyle/css/swipebox.css" />
+<script src="/wapStyle/js/jquery.mobile-1.3.2.min.js"></script>
+<link href="/wapStyle/css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/wapStyle/js/yuxi.js"></script>
+<link href="/wapStyle/css/yuxi.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+function swipeboxClose(){
+	goBack();
+}
+
+function swipeboxOpen(){
+	$("#swipebox-overlay").css("height",parseInt($("#swipebox-overlay").css("height"))-100);
+}
+         
+$(function(){
+	var Content="<#list pictureAloneListF as p>${contentF.title!'没有标题'}:::${p.pictureMessage!'没有图片介绍'}:::${p.pictureUrl!'没有图片链接'}::::</#list>";
+	var list=Content.split("::::");
+	var length=list.length;
+	var infoArray=[length];
+	for(var i=0;i<length;i++){
+		var img_content=list[i].split(":::");
+	 	infoArray[i]={
+			title:img_content[0],
+			content:img_content[1],
+			href:img_content[2]
+		}; 
+	}
+    $.swipebox(infoArray, 
+    	{
+            hideCloseButtonOnMobile: true,
+            afterClose: swipeboxClose,
+			afterOpen:swipeboxOpen
+    	});
+});
+window.onload = function(){
+	var contentid = "${contentF.id?if_exists}";
+	$.ajax({
+		type:'post',
+		url:contextpath + "/contentsController.do?addPv",
+		data:"contentId="+contentid,
+		success:function(msg){
+		}
+	});
+}
+//----------------------------------------------------------------------------发帖----------------------------------------------------------------------------------
+function comment(){
+    var content = $("#CmntContent").val();
+    if(content.length!=0){
+	$.ajax({
+		type:"POST",
+		url:"${contextpath}/front/myInvitationMobileApi/saveInvitationWap.do?contentsMobileId=${contentF.id}&content="+ content+"&userId=&all=",
+		dataType:"JSON",
+		success:function (result){
+		  alert(result.resultMsg);
+		  window.location.reload();//------返回到首页------
+		}
+	});
+    }else{
+    $("#CmntContent").val("").attr("placeholder","写几句话呗！");
+    }
+}
+</script>
+</head>
+<body>
+<input type="hidden" name="title" id="title" value="${contentF.title}"/>
+<input type="hidden" name="url" id="url" value=""/>
+<input type="hidden" name="image" id="image" value="" />
+<input type="hidden" name="Summary" id="Summary" value="" />
+<div data-role="page">
+    <div data-role="header" data-position="fixed" style="height: 50px;line-height: 30px;background-color: #000;border: none;">
+       <a href="javascript:goBack();"  data-ajax=false data-role='none' class="top_back"><img src="/wapStyle/images/4shizheng_03.png"></a>
+       <h1></h1>
+       <a href="#setting" data-rel="dialog" data-role='none' class="right_setting"><img src="/wapStyle/images/5zhengwen_03.png"></a>
+    </div>
+    <div class="content">
+    </div>
+    <div data-role="footer"data-position="fixed" style="background-color: #302A2A;height: 50px;line-height: 50px;border: none;" >
+         	<div style="float:right;padding-right: 20px;padding-left: 10px;"  onclick="share()">
+            <img   height="25px" src="/wapStyle/images/5zhengwen_14.png" 
+            	style="vertical-align: middle;">
+    			</div>
+            <a href="${contextpath}/front/frontDataController.do?toComment&contentsMobileId=${contentF.id}" 
+            	data-ajax=false  data-inline="true" data-role='none' style="float: right;text-decoration: none;color:#8F8F8F;padding-right: 10px;padding-left: 15px;">
+            	  <img src="/wapStyle/images/5zhengwen_09.png" height="25px" style="vertical-align: middle;">
+             <small data-inline="true" id="CmntCount">
+             	<script src="/UCM/Services/MobileCommentCount.jsp?RelaID=3484437&SiteID=279"></script>
+             </small>
+            </a>
+            <a href="#message" id="showmessage" data-rel="dialog" data-role='none' style="text-decoration: none;color:#8F8F8F;">
+            <div style="height: 30px;background-color: #fff;line-height: 30px;margin-right: 133px;margin-top: 10px;margin-left: 10px;padding-left: 7px;">说点什么吧...</div>
+            </a>
+    </div>
+</div>
+ <!--弹出框-->
+     <div data-role="dialog" id="setting">
+           <div data-role="conter" style="border-top:#F00 3px solid; padding:20px;">
+           <form method="post" style="width:100%;" id="favoriteform">
+           	<input type="hidden" name="SiteID" value="279" />
+           	<input type="hidden" name="GoodsID" value="3484437" />
+           	<input type="hidden" name="PriceNote" value="Y" />
+           	<input type="hidden" name="MemberName" value="admin"/>
+              <p><img src="/wapStyle/images/aa.png">字体大小</p>
+              <input type="range" name="points" id="points" onchange="getpointsValue()" style="display: none;width: 100%;" value="1" min="1" max="3">
+              <div style="width: 100%;margin: 10px 0px;">
+              	<span style="float: left;margin-left: 10px">小</span>
+              	<span style="float: right;margin-right: 10px;">大</span>
+              	<span style="display: block;text-align: center;">中</span>
+              </div>
+              <div>
+              	<img src="/wapStyle/images/xin.png" style="vertical-align: middle;">
+              	<a href="javascript:void(0);" id="favoritebtn">收藏</a>
+              	<img src="/wapStyle/images/star.png" style="float:right;">
+              </div>
+              <a data-role="button" data-rel="back">完成</a>
+           </form>
+           </div>
+     </div>
+     
+      <!--弹出框-->
+     <div data-role="dialog" id="message">
+           <div data-role="conter" style="border-top:#F00 3px solid; padding:20px;">
+           <form method="post" style="width: 100%;" id="commentform">
+				<input id="RelaID" type="hidden" value="3484437" name="RelaID">
+				<input id="CatalogID" type="hidden" value="19931" name="CatalogID">
+				<input id="CatalogType" type="hidden" value="1" name="CatalogType">
+				<input id="SiteID" type="hidden" value="279" name="SiteID">
+				<textarea id="CmntContent" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset" name="CmntContent"></textarea>
+           		<a data-role="button" id="" onclick="comment();" >发表</a>
+           		<a data-role="button" data-rel="back">取消</a>
+           </form>
+           </div>
+     </div>
+     <div style="display: none;">
+   	  	<script src="http://s95.cnzz.com/stat.php?id=1253598148&web_id=1253598148" language="JavaScript"></script>
+     </div>
+</body>
+</html>

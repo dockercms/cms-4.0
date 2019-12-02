@@ -1,0 +1,86 @@
+<div class="modal-body">
+<div class="row-fluid">
+	<div class="span12">
+	<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet">
+				<div class="portlet-title">
+				<div class="caption"><i class="icon-globe"></i>类型列表</div>
+				<div class="actions">
+					<button id="sample_editable_1_new" class="btn yellow-stripe" onclick="toEditUserModel('systemAction.do?addOrUpdateType&typegroupid=${typegroupid?if_exists}')">
+						新增 <i class="icon-plus"></i>
+					</button>
+						<button  class="btn yellow-stripe"  data-dismiss="modal" aria-hidden="true"> 关闭 </button>
+				</div>
+			</div>
+			
+			<div class="portlet-body">
+				<div class="span12 booking-search">
+				<form id="searchSub_form">
+					 <div class="clearfix">
+								<div class="span4">
+									<label>字典名称：
+										<input name="typename" class="form-control span7" type="text" value="${searchMap["typename"]?if_exists[0]}"/>
+									</label>
+								</div>
+								<div class="span4">
+									<label>字典编码：
+										<input name="typecode" class="form-control span7" type="text" value="${searchMap["typecode"]?if_exists[0]}"/>
+									</label>
+								</div>
+							<div class=pull-right">
+								<button type="button" class="btn yellow btn-sm" onclick="toSearchSub('${actionUrl?if_exists}&typegroupid=${typegroupid?if_exists}', 'searchSub_form');">搜索  <i class="icon-search m-icon-white"></i></button>
+								<button type="button" class="btn yellow btn-sm" onclick="resetForm('searchSub_form');">重置 <i class="icon-repeat m-icon-white"></i></button>
+							</div>
+					  </div>
+				</form>
+			</div>
+				<table class="table table-striped table-bordered table-hover" id="sample_1">
+					<thead>
+						
+							<th width="40" style="text-align:center;">序号</th>
+							<th style="">字典名称</th>
+							<th  style="">字典编码</th>
+							<th width="40" style="text-align:center;">操作</th>
+						
+					</thead>
+					<tbody>
+					<#if typeList?exists>
+					  <#list typeList as type>
+						<tr class="odd gradeX">
+							<td class="center">${(pageNo-1)*pageSize+type_index?if_exists+1}</td>
+							<td class="center">${type.typename?if_exists}</td>
+							<td >${type.typecode?if_exists}</td>
+							<td style="text-align:center;">
+								<input type="button" class="editbtn" onclick="toEditUserModel('systemAction.do?addOrUpdateType&id=${type.id?if_exists}&typegroupid=${typegroupid?if_exists}')"/>
+								<input type="button" class="delbtn" onclick="delSub('systemAction.do?delType', '${type.id?if_exists}')"/>
+							</td>
+						</tr>
+					  </#list> 
+					</#if>
+					</tbody>
+				</table>
+				<#include "/lmPage/common/pageSub.html">
+			</div>
+		</div>
+	<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+</div>
+<script>
+function toEditUserModel(urlStr){
+	$.ajax({
+		type:'post',
+		url:urlStr,
+		data:'data=0',
+		dataType:'text',
+		success:function(msg){
+			$('#toEditModelSub').empty();
+			$('#toEditModelSub').append(msg);
+			$('#toEditModelSub').modal('show');
+		},
+		error:function(){
+			lmAlert("load page error, page url is " + urlStr);
+		}
+	})
+}
+</script>
