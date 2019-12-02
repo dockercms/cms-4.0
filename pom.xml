@@ -92,7 +92,7 @@
         <xwork-core.version>2.1.6</xwork-core.version>
         <jurt.version>3.2.1</jurt.version>
         <lucene-analyzers-common.version>4.7.2</lucene-analyzers-common.version>
-        <lucene-core.version>4.7.2</lucene-core.version>
+        <lucene-core.version>7.1.0</lucene-core.version>
         <lucene-facet.version>4.7.2</lucene-facet.version>
         <lucene-highlighter.version>4.7.2</lucene-highlighter.version>
         <lucene-queries.version>4.7.2</lucene-queries.version>
