@@ -43,7 +43,7 @@
         <hibernate-core.version>4.2.3.Final</hibernate-core.version>
         <hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 
-        <spring.version>3.2.9.RELEASE</spring.version>
+        <spring.version>5.2.1.RELEASE</spring.version>
         <!-- 主要依赖库的版本定义 end -->
 
         <!-- 工作流 begin -->
