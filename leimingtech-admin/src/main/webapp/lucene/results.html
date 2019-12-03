@@ -1,116 +1,71 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>
-
-${keyword}_雷铭新闻搜索
-</title>
-<link rel="stylesheet" type="text/css" href="/pcstyle/main.css" />
-<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
-<link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
-<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/pcstyle/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="/static/js/front.js"></script>
-<link href="/pcstyle/global.css" rel="stylesheet" type="text/css" />
-<link href="/pcstyle/reg.css" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
-
-
-<script>
-var contextpath="${contextpath}";
-	function changepic(obj, img) {
-		obj.src = img;
-	}
-</script>
-
-<!--关键字高亮处-->
-<style type="text/css">
-<!--
-.highlight {color:#ff0000;font-size:16px;}
-
-.r {
-    float: right;
-    width: 160px;
-    padding:0px;
-}
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<!--[if lt IE 9]>
+	<script src="/js/html5shiv.min.js"></script>
+	<script src="/js/respond.min.js"></script>
+	<![endif]-->
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/common.min.css" rel="stylesheet">
+	<link href="/css/notice-announcement.min.css" rel="stylesheet">
 </head>
 <body>
-<#include "wwwroot/${sitePath}/template/pc/section/menu.html">
-	<div id="maincontent" style="
-    width: 970px;>
-		<h2 style="line-height: 35px;">搜索结果</h2>
-		<span class="bg s_ipt_wr">
-			<input id="keyword3" class="s_ipt" value="${keyword?if_exists}" name="keyword"  autocomplete="off"></input> 
-		</span> 
-		<span class="bg s_btn_wr"> 
-			<input id="su" class="bg s_btn" type="button" onclick="toSearch('${contextpath}/front/frontController.do?search');" value="搜索"></input> 
-		</span>
-		<br />
-		<span style="float:left;">
-			<input type="radio" name="classify" value="0" <#if classify == 0 || classify == ''>checked</#if>/>全部
-			<input type="radio" name="classify" value="1" <#if classify == 1>checked</#if>/>新闻
-			<input type="radio" name="classify" value="2" <#if classify == 2>checked</#if>/>组图
-			<input type="radio" name="classify" value="4" <#if classify == 4>checked</#if>/>视频
-			
-			<select name="catid" id="catid">
-				<option value="0">频道</option>
-				<#list catList as cat>
-					<option value="${cat.id}" <#if catid == cat.id>selected </#if> >
-					 	${cat.name}
-					</option>
+<!-- 头部区域 -->
+<div class="header-bg">
+	<#include "wwwroot/${sitePath}/template/header.html">
+	<div class="breadcrumb-unified container">
+		<p style="font-size: 18px;font-weight: bold;">搜索“${keyword!''}”共${totalSize!''}条结果</p>
+		<input type="hidden" id="keywords" value="${keyword!''}">
+		<div class="notice-announcement-list">
+			<ul>
+				<#if pageList?exists>
+				<#list pageList as page>
+				<li>
+					<a href="${page.url?if_exists}">${page.title?if_exists}</a>
+					<span class="time">${page.publishdate?if_exists?date('yyyy-MM-dd')}</span>
+				</li>
 				</#list>
-			</select>
-		</span>
-		<div class="l" style="margin-top: 20px; clear: both;">
-			<div class="menulist">
-			<#if pageList?exists>
-			 	<#list pageList as page>
-				<dl>
-					<dt>
-						<a href="${page.url?if_exists}" target="_blank">${page.title?if_exists}</a>
-					</dt>
-					<dd>
-						<p>
-							发布时间: ${page.publishdate?if_exists}<br>最佳答案:
-							${page.description?if_exists}...
-							<#if page.content?exists>
-							<br/>
-							${page.content}
-							</#if>
-						</p>
-						<span>www.baidu.com <a href="http://www.baidu.com/#wd=${keyword?if_exists}" target="_blank">搜索一下</a>
-						</span>
-					</dd>
-				</dl>
-				</#list> 
-			</#if>
-				<div class="clear"></div>
-				<#include "lucene/frontpage.html"><!-- 分页条 -->
-			</div>
+				</#if>
+			</ul>
 		</div>
-		
-		<div class="clear"></div>
+<!--		<div class="page">-->
+			<#include "lucene/frontpage.html"><!-- 分页条 -->
+<!--		</div>-->
 	</div>
-<div class="footer">
-<#include "wwwroot/${sitePath}/template/pc/section/footer.html">
 </div>
+<div style="background: #ffffff;">
+	<#include "wwwroot/${sitePath}/template/footer.html">
+</div>
+<!--todo-->
+
+<!-- 头部区域 -->
+<script src="/bootstrap/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 <script>
-function toSearch(urlStr){
-	var keyWord3 = encodeURI(document.getElementById("keyword3").value);
-	keyWord3 = encodeURI(keyWord3);
-   var classify = document.getElementsByName("classify"); 
-  var itemvalue = ''; 
-  for(i=0;i<classify.length;i++)    { 
-     if(classify[i].checked){   
-      itemvalue = classify[i].value; 
-     }
-  }
-	var catid = document.getElementById("catid").value;
-	window.location = urlStr+"&keyword="+keyWord3+"&classify="+itemvalue+"&catid="+catid+"&siteid="+${site.id};
-	
-}
+	$("header").load("section/header_0.html");
+	$("footer").load("section/footer_0.html");
 </script>
 </body>
+<script type="application/javascript">
+	function toSearch(urlStr){
+		var keyWord3 = encodeURI(document.getElementById("keywords").value);
+		keyWord3 = encodeURI(keyWord3);
+		// var classify = document.getElementsByName("classify");
+		// var itemvalue = '';
+		// for(i=0;i<classify.length;i++)    {
+		// 	if(classify[i].checked){
+		// 		itemvalue = classify[i].value;
+		// 	}
+		// }
+		// var catid = document.getElementById("catid").value;
+		window.location = urlStr+"&keyword="+keyWord3+"&siteid="+${site.id};
+
+	}
+</script>
 </html>
