@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+
+${keyword}_雷铭新闻搜索
+</title>
+<link rel="stylesheet" type="text/css" href="/pcstyle/main.css" />
+<link href="/pcstyle/top.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/list.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/pcstyle/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/front.js"></script>
+<link href="/pcstyle/global.css" rel="stylesheet" type="text/css" />
+<link href="/pcstyle/reg.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${contextpath}/media/image/favicon.ico" />
+
+
+<script>
+var contextpath="${contextpath}";
+	function changepic(obj, img) {
+		obj.src = img;
+	}
+</script>
+
+<!--关键字高亮处-->
+<style type="text/css">
+<!--
+.highlight {color:#ff0000;font-size:16px;}
+
+.r {
+    float: right;
+    width: 160px;
+    padding:0px;
+}
+</style>
+</head>
+<body>
+<#include "wwwroot/${sitePath}/template/pc/section/menu.html">
+	<div id="maincontent" style="
+    width: 970px;>
+		<h2 style="line-height: 35px;">搜索结果</h2>
+		<span class="bg s_ipt_wr">
+			<input id="keyword3" class="s_ipt" value="${keyword?if_exists}" name="keyword"  autocomplete="off"></input> 
+		</span> 
+		<span class="bg s_btn_wr"> 
+			<input id="su" class="bg s_btn" type="button" onclick="toSearch('${contextpath}/front/frontController.do?search');" value="搜索"></input> 
+		</span>
+		<br />
+		<span style="float:left;">
+			<input type="radio" name="classify" value="0" <#if classify == 0 || classify == ''>checked</#if>/>全部
+			<input type="radio" name="classify" value="1" <#if classify == 1>checked</#if>/>新闻
+			<input type="radio" name="classify" value="2" <#if classify == 2>checked</#if>/>组图
+			<input type="radio" name="classify" value="4" <#if classify == 4>checked</#if>/>视频
+			
+			<select name="catid" id="catid">
+				<option value="0">频道</option>
+				<#list catList as cat>
+					<option value="${cat.id}" <#if catid == cat.id>selected </#if> >
+					 	${cat.name}
+					</option>
+				</#list>
+			</select>
+		</span>
+		<div class="l" style="margin-top: 20px; clear: both;">
+			<div class="menulist">
+			<#if pageList?exists>
+			 	<#list pageList as page>
+				<dl>
+					<dt>
+						<a href="${page.url?if_exists}" target="_blank">${page.title?if_exists}</a>
+					</dt>
+					<dd>
+						<p>
+							发布时间: ${page.publishdate?if_exists}<br>最佳答案:
+							${page.description?if_exists}...
+							<#if page.content?exists>
+							<br/>
+							${page.content}
+							</#if>
+						</p>
+						<span>www.baidu.com <a href="http://www.baidu.com/#wd=${keyword?if_exists}" target="_blank">搜索一下</a>
+						</span>
+					</dd>
+				</dl>
+				</#list> 
+			</#if>
+				<div class="clear"></div>
+				<#include "lucene/frontpage.html"><!-- 分页条 -->
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+<div class="footer">
+<#include "wwwroot/${sitePath}/template/pc/section/footer.html">
+</div>
+<script>
+function toSearch(urlStr){
+	var keyWord3 = encodeURI(document.getElementById("keyword3").value);
+	keyWord3 = encodeURI(keyWord3);
+   var classify = document.getElementsByName("classify"); 
+  var itemvalue = ''; 
+  for(i=0;i<classify.length;i++)    { 
+     if(classify[i].checked){   
+      itemvalue = classify[i].value; 
+     }
+  }
+	var catid = document.getElementById("catid").value;
+	window.location = urlStr+"&keyword="+keyWord3+"&classify="+itemvalue+"&catid="+catid+"&siteid="+${site.id};
+	
+}
+</script>
+</body>
+</html>
