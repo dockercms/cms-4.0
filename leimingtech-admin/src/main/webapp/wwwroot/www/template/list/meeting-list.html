@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+  <!-- Bootstrap -->
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/common.min.css" rel="stylesheet">
+  <link href="/css/meeting-list.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 头部区域 -->
+  <div class="header-bg">
+    <#include "/wwwroot/${sitePath}/section/header.html">
+    <div class="breadcrumb-unified container">
+      <div class="meeting-list">
+        <#assign articleTag =newTag("articleTag")>
+        <#assign articleList=articleTag("{'name':'报名'}")>
+        <#if articleList?exists && articleList?size gt 0>
+        <#list articleList as article>
+        <div class="meeting-list-ceil">
+          <div class="list-ceil-left">
+            <p>${article.title!''}</p>
+            <img src="/img/index_25.png" alt="">
+            <#assign activityTag =newTag("activityTag")>
+            <#assign activity =activityTag("{'contentId':'${article.id}'}")>
+            <span class="ceil-left-time">报名时间：
+            <#if activity.activityapplystarttime?exists>${activity.activityapplystarttime?string("yyyy-MM-dd")!''}</#if> -
+            <#if activity.activityapplyendtime?exists>${activity.activityapplyendtime?string("yyyy-MM-dd")!''}</#if>
+            </span>
+          </div>
+          <div class="list-ceil-right">
+            <a href="${article.url!'javascript:void(0);'}" target="_blank">我要报名</a>
+          </div>
+        </div>
+        </#list>
+        <#else> 无数据
+        </#if>
+        ${pagebar}
+
+
+      </div>
+      <div class="container" style="background:rgba(245,245,245,.52)!important;">
+        <#include "/wwwroot/${sitePath}/section/footer.html"><!-- 页脚 -->
+      </div>
+    </div>
+  </div>
+
+<!--todo-->
+
+<!-- 头部区域 -->
+<script src="/bootstrap/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  $("header").load("header.html");
+  $("footer").load("footer.html");
+</script>
+</body>
+</html>

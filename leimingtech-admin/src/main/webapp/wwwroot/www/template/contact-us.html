@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+  <!-- Bootstrap -->
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/common.min.css" rel="stylesheet">
+  <link href="/css/contact-us.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 头部区域 -->
+  <div class="header-bg">
+    <#include "/wwwroot/${sitePath}/section/header.html">
+    <div class="breadcrumb-unified container">
+      <ol class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <li>联系我们</li>
+      </ol>
+      <div class="contact-us">
+        <div class="left">
+          <contact-us-map></contact-us-map>
+        </div>
+        <div class="right">
+          <div class="right-contact-us">
+            <p class="line"></p><span class="contact-us-txt">联系我们</span>
+            <ul>
+              <li><a href="">办公地址：中国北京市复兴门内大街160号 逸夫会议中心</a></li>
+              <li><a href="">邮　　编：100031 </a></li>
+              <li><a href="">传　　真：86-10-66416156</a></li>
+            </ul>
+          </div>
+          <div class="right-line">
+            <p class="line"></p><span class="contact-us-txt">乘车路线</span>
+            <ul>
+              <li><a href="">机　　场：从机场乘坐机场快线到东直门,转乘地铁2号线到复兴门C口。</a></li>
+              <li><a href="">火 车 站：从北京站乘坐地铁2号线到复兴门C口;</a></li>
+              <li><a href=""> 北京西站乘坐地铁9号线到军事博物馆站,换乘地铁1号线到复兴门站下车C口既可;</a></li>
+              <li><a href="">北京南站乘坐地铁4号线到宣武门站,换乘地铁2号线到复兴门站下车C口即可。</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background: #ffffff;">
+    <#include "/wwwroot/${sitePath}/section/footer.html"><!-- 页脚 -->
+  </div>
+<!--todo-->
+
+<!-- 头部区域 -->
+<script src="/bootstrap/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<script>
+  $("header").load("header.html");
+  $("footer").load("footer.html");
+  $("contact-us-map").load("/contact-us-map.html");
+</script>
+</body>
+</html>

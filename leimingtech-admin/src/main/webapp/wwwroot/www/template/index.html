@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+  <!-- Bootstrap -->
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/common.min.css" rel="stylesheet">
+  <link href="/css/index.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 头部区域 -->
+  <div class="header-bg">
+    <#include "/wwwroot/${sitePath}/section/header.html">
+    <div class="container">
+      <div class="content"></div>
+      <div class="cloumn">
+        <div class="row">
+          <div class="col-xs-6 col-sm-3">
+            <div class="cloumn-img1"></div>
+            <span class="cloumn-txt">入职申请</span>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div class="cloumn-img2"></div>
+            <span  class="cloumn-txt">项目申报</span>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <#assign catalogTag =newTag("catalogTag")>
+            <#assign catalog =catalogTag("{'levels':'self','name':'报名'}")>
+            <#if catalog?exists && catalog?size gt 0>
+            <a href="${catalog.url!'javascript:void(0);'}" target="_blank">
+            <div class="cloumn-img3"></div>
+            <span  class="cloumn-txt">会议／培训报名</span>
+            </a>
+            </#if>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div class="cloumn-img4"></div>
+            <span  class="cloumn-txt">视频专区</span>
+          </div>
+        </div>
+      </div>
+      <!-- 最新政策 -->
+      <div class="new-departure">
+        <div class="content-title">
+          <#assign catalogTag =newTag("catalogTag")>
+          <#assign catalog =catalogTag("{'levels':'self','name':'最新政策'}")>
+          <#if catalog?exists && catalog?size gt 0>
+          <p>${catalog.name!'最新政策'}</p>
+          <span class="more"><a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多></a></span>
+          </#if>
+        </div>
+        <div class="new-departure-left">
+          <#assign articleTag =newTag("articleTag")>
+          <#assign articleList=articleTag("{'name':'最新政策'}")>
+          <#if articleList?exists && articleList?size gt 0>
+          <#list articleList as article>
+          <div class="left-img"></div>
+          <p>高校毕业就业难？哪个专业就业前景高？</p>
+          <span class="left-txt">2020届全国普通高校毕业生规模预计达8校毕业生规模预计达874万人,江苏毕业生总数达74万人,江苏毕业生总数达58.4万人,比2019届多2.2万人类</span>
+        </div>
+        <div class="new-departure-right">
+          <ul>
+            <li><a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a></li>
+          </ul>
+        </div>
+        </#list>
+        </#if>
+      </div>
+      <!-- 项目指南 -->
+      <div class="project-guide">
+        <div class="content-title">
+          <#assign catalogTag =newTag("catalogTag")>
+          <#assign catalog =catalogTag("{'levels':'self','name':'项目指南'}")>
+          <#if catalog?exists && catalog?size gt 0>
+          <p id="projectGuide">${catalog.name!'项目指南'}</p>
+        <span class="more"><a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多></a></span>
+          </#if>
+        </div>
+        <p class="main-items">主要项目</p>
+        <div class="main-items-around">
+          <div style="position: relative">
+            <div id="myCarouselexpert" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <#assign articleTag =newTag("articleTag")>
+                  <#assign articleList=articleTag("{'name':'主要项目'}")>
+                  <#if articleList?exists && articleList?size gt 0>
+                  <#list articleList as article>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <img src="${article.thumb!'/img/index_15.png'}" alt="">
+                      <div class="expert-content">${article.title!''}</div>
+                    </div>
+                  </div>
+                </#list>
+                </#if>
+                </div>
+              </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="expert-left carousel-control" href="#myCarouselexpert" role="button" data-slide="prev"
+              style="left: -6%;top: 30%;">
+              <div class="left-paly"></div>
+            </a>
+            <a class="expert-right carousel-control" href="#myCarouselexpert" role="button" data-slide="next"
+              style="left: 91%;top: 30%">
+              <div class="right-paly"></div>
+            </a>
+          </div>
+        </div>
+        <p class="main-items">推荐项目</p>
+        <div class="recommand-project">
+          <ul>
+            <#assign articleTag =newTag("articleTag")>
+            <#assign articleList=articleTag("{'name':'推荐项目'}")>
+            <#if articleList?exists && articleList?size gt 0>
+            <#list articleList as article>
+            <li>${article.title!''}</li>
+            </#list>
+            </#if>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 通知公告 -->
+      <div class="notice-announcement">
+        <div class="content-title">
+          <#assign catalogTag =newTag("catalogTag")>
+          <#assign catalog =catalogTag("{'levels':'self','name':'通知公告'}")>
+          <#if catalog?exists && catalog?size gt 0>
+          <p>${catalog.name!'通知公告'}</p>
+        </#if>
+        <span class="more"><a href="${catalog.url!'javascript:void(0);'}" target="_blank">更多></a></span>
+        </div>
+        <div class="notice-announcement-content">
+          <div class="media">
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="/img/index_19.png" alt="...">
+              </a>
+              <a href="#">
+                <img class="media-object" src="/img/index_19.png" alt="...">
+              </a>
+            </div>
+            <div class="media-body">
+              <#assign articleTag =newTag("articleTag")>
+              <#assign articleList=articleTag("{'name':'通知公告','count':4}")>
+              <#if articleList?exists && articleList?size gt 0>
+              <#list articleList as article>
+              <h4 class="media-heading">${article.title!''}</h4>
+              <span class="media-content">
+                ${article.digest!''}
+              </span>
+              </#list>
+              </#if>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 友情链接 -->
+      <div class="friendship-link">
+        <div class="content-title">
+          <#assign catalogTag =newTag("catalogTag")>
+          <#assign catalog =catalogTag("{'levels':'self','name':'友情链接'}")>
+          <#if catalog?exists && catalog?size gt 0>
+          <p>${catalog.name!'友情链接'}</p>
+        </#if>
+        </div>
+        <div class="friendship-link-content">
+          <div class="row">
+            <#assign articleTag =newTag("articleTag")>
+            <#assign articleTagList=articleTag("{'name':'297ec2966eafc85d016eaff00bd50013','count':8}")>
+            <#if articleTagList?exists && articleTagList?size gt 0>
+            <#list articleTagList as article>
+            <#if article_index+1 &gt; 4>
+            </div>
+            <div class="row">
+            <div class="col-xs-3">
+              <a href="${article.url!'javascript:void(0);'}" target="_blank">
+                <div class="friendship-link-img" style="background: url(${article.thumb!''})">
+                  <div class="link-img${article_index+1}-bg">${article.title!''}</div>
+                </div>
+              </a>
+            </div>
+            <#else>
+            <div class="col-xs-3">
+              <a href="${article.url!'javascript:void(0);'}" target="_blank">
+              <div class="friendship-link-img" style="background: url(${article.thumb!''})">
+                <div class="link-img${article_index+1}-bg">${article.title!''}</div>
+              </div>
+              </a>
+            </div>
+            </#if>
+            </#list>
+            </#if>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="link-footer">
+      <ul class="container">
+        <li><a href="">法律信息</a></li>
+        <li><a href="">招纳贤士</a></li>
+        <li><a href="">常见问题</a></li>
+        <li><a href="">联系我们</a></li>
+      </ul>
+      <div class="footer-txt">
+        <p class="container">Copyright © 2016. 高校毕业生就业协会版权所有 | 京ICP备11025035</p>
+      </div>
+    </div>
+  </div>
+<!--todo-->
+
+<!-- 头部区域 -->
+<script src="/bootstrap/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  $("header").load("header.html");
+  $("footer").load("footer.html");
+</script>
+</body>
+</html>

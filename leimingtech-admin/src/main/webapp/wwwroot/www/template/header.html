@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<div class="header container">
+  <div style="overflow: hidden;">
+    <div class="left">
+      <p>高校毕业生就业协会海外就业办公室</p>
+      <h5>Overseas employment office of college graduate employment association</h5>
+    </div>
+    <div class="right">
+      <span class="txt">English</span>
+      <span>中文</span>
+    </div>
+  </div>
+  <!-- 搜索 -->
+  <div style="overflow: hidden;">
+    <div class="search">
+      <form id = "searchForm" class="navbar-form navbar-left" role="search" style="padding: 0px;"
+            action="/leimingtech_cms/front/frontController.do">
+        <div class="form-group">
+          <input type="hidden" name="search">
+          <input type="text" name="keyword" class="form-control" value="${keyword!''}" placeholder="">
+          <input type="hidden" name="siteid" value="1">
+        </div>
+        <span class="login" onclick="submitForm()">搜索</span>
+        <p class="tip">热词：毕业生就业</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <div class="nav-bar container">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <div class="dropdown-img1"></div>
+        <a href="#" class="dropdown-toggle nav-txt" data-toggle="dropdown">
+          协会简介
+        </a>
+        <ul class="dropdown-menu">
+          <#assign catalogTag =newTag("catalogTag")>
+          <#assign catalogListChild =catalogTag("{'levels':'child','name':'297ec2966eaac9ae016eabf14cbc0044'}")>
+          <#if catalogListChild?exists && catalogListChild?size gt 0>
+          <#list catalogListChild as catalogChild>
+          <li><a href="${catalogChild.url!'javascript:void(0);'}">${catalogChild.name!''}</a></li>
+        </#list>
+      </#if>
+    </ul>
+    </li>
+    <li>
+      <div class="dropdown-img2"></div>
+      <#assign catalog =catalogTag("{'levels':'self','name':'项目指南'}")>
+      <#if catalog?exists && catalog?size gt 0>
+      <a class="nav-txt" href="#projectGuide">${catalog.name!'项目指南'}</a></li>
+  </#if>
+  <li>
+    <div class="dropdown-img3"></div>
+    <#assign catalog =catalogTag("{'levels':'self','name':'通知公告'}")>
+    <#if catalog?exists && catalog?size gt 0>
+    <a href="${catalog.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt">${catalog.name!'通知公告'}</a>
+  </#if>
+  </li>
+  <li>
+    <div class="dropdown-img4"></div>
+    <#assign catalog =catalogTag("{'levels':'self','name':'最新政策'}")>
+    <#if catalog?exists && catalog?size gt 0>
+    <a href="${catalog.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt">${catalog.name!'最新政策'}</a>
+  </#if>
+  </li>
+  <li>
+    <div class="dropdown-img5"></div>
+    <#assign catalog =catalogTag("{'levels':'self','name':'297ec2966eaac9ae016eabf88b500053'}")>
+    <#if catalog?exists && catalog?size gt 0>
+    <#assign articleTag =newTag("articleTag")>
+    <#assign articleList=articleTag("{'name':'297ec2966eaac9ae016eabf88b500053'}")>
+    <#if articleList?exists && articleList?size gt 0>
+    <#list articleList as article>
+    <a href="${article.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt" >${catalog.name!'分支机构'}</a>
+  </#list>
+  <#else>
+  <a href="javascript:void(0);" class="dropdown-toggle nav-txt" >分支机构</a>
+</#if>
+</#if>
+</li>
+<li>
+  <div class="dropdown-img6"></div>
+  <#assign catalog =catalogTag("{'levels':'self','name':'297ec2966eaac9ae016eabf8fd550055'}")>
+  <#if catalog?exists && catalog?size gt 0>
+  <#assign articleTag =newTag("articleTag")>
+  <#assign articleList=articleTag("{'name':'297ec2966eaac9ae016eabf8fd550055'}")>
+  <#if articleList?exists && articleList?size gt 0>
+  <#list articleList as article>
+  <a href="${article.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt" >${catalog.name!'关于我们'}</a>
+</#list>
+<#else>
+<a href="javascript:void(0);" class="dropdown-toggle nav-txt" >关于我们</a>
+</#if>
+</#if>
+</li>
+</ul>
+</div>
+</div>
+<script type="application/javascript">
+  function submitForm() {
+    // var keyword = $("input[name='searchLeft']").val();
+    // sessionStorage.setItem("searchWord",val);
+    // window.location.href = "/search-list.html"
+    // $("#searchForm").attr("action", "/leimingtech_cms/front/frontController.do?search&keyword=" + keyword);
+    $("#searchForm").submit();
+  }
+  $("input[name='searchLeft']").keypress(function (e) {
+    if (e.which == 13) {
+      submitForm();
+    }
+  });
+</script>
+</html>

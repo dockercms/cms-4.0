@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+  <!-- Bootstrap -->
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/css/common.min.css" rel="stylesheet">
+  <link href="/css/notice-announcement.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- 头部区域 -->
+  <div class="header-bg">
+    <#include "/wwwroot/${sitePath}/section/header.html">
+    <div class="breadcrumb-unified container">
+      <ol class="breadcrumb">
+        <li><a href="/">首页</a></li>
+        <#assign catalogTag =newTag("catalogTag")>
+        <#assign catalog =catalogTag("{'levels':'self','name':'最新政策'}")>
+        <#if catalog?exists && catalog?size gt 0>
+        <li>${catalog.name!'最新政策'}</li>
+        </#if>
+      </ol>
+      <div class="notice-announcement-list">
+        <ul>
+          <#assign articleTag =newTag("articleTag")>
+          <#assign articleList=articleTag("{'name':'最新政策'}")>
+          <#if articleList?exists && articleList?size gt 0>
+          <#list articleList as article>
+          <li>
+            <a href="${article.url!'javascript:void(0);'}" target="_blank">${article.title!''}</a>
+            <span class="time">${article.published?string('yyyy-MM-dd')}</span>
+          </li>
+          </#list>
+        </ul>
+      </div>
+         <#else> 无数据
+         </#if>
+         ${pagebar}
+    </div>
+  </div>
+  <div style="background: #ffffff;">
+    <#include "/wwwroot/${sitePath}/section/footer.html"><!-- 页脚 -->
+  </div>
+<!--todo-->
+
+<!-- 头部区域 -->
+<script src="/bootstrap/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  $("header").load("header.html");
+  $("footer").load("footer.html");
+</script>
+</body>
+</html>
