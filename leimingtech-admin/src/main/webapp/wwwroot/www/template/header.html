@@ -3,7 +3,7 @@
 <div class="header container">
   <div style="overflow: hidden;">
     <div class="left">
-      <p><a href="/">高校毕业生就业协会海外就业办公室</a></p>
+      <p>高校毕业生就业协会海外就业办公室</p>
       <h5>Overseas employment office of college graduate employment association</h5>
     </div>
     <div class="right">
@@ -40,7 +40,7 @@
           <#assign catalogListChild =catalogTag("{'levels':'child','name':'297ec2966eaac9ae016eabf14cbc0044'}")>
           <#if catalogListChild?exists && catalogListChild?size gt 0>
           <#list catalogListChild as catalogChild>
-          <li><a href="${catalogChild.url!'javascript:void(0);'}">${catalogChild.name!''}</a></li>
+          <li><a href="${catalogChild.url+'#synopsis${catalogChild_index+1}'!'javascript:void(0);'}">${catalogChild.name!''}</a></li>
         </#list>
       </#if>
     </ul>
@@ -67,18 +67,10 @@
   </li>
   <li>
     <div class="dropdown-img5"></div>
-    <#assign catalog =catalogTag("{'levels':'self','name':'297ec2966eaac9ae016eabf88b500053'}")>
+    <#assign catalog =catalogTag("{'levels':'self','name':'机构列表'}")>
     <#if catalog?exists && catalog?size gt 0>
-    <#assign articleTag =newTag("articleTag")>
-    <#assign articleList=articleTag("{'name':'297ec2966eaac9ae016eabf88b500053'}")>
-    <#if articleList?exists && articleList?size gt 0>
-    <#list articleList as article>
-    <a href="${article.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt" >${catalog.name!'分支机构'}</a>
-  </#list>
-  <#else>
-  <a href="javascript:void(0);" class="dropdown-toggle nav-txt" >分支机构</a>
-</#if>
-</#if>
+    <a href="${catalog.url!'javascript:void(0);'}" class="dropdown-toggle nav-txt" >分支机构</a>
+    </#if>
 </li>
 <li>
   <div class="dropdown-img6"></div>
