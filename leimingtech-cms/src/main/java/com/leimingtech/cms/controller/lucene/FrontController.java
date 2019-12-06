@@ -115,7 +115,7 @@ public class FrontController extends BaseController {
 		}
 
 		List<ContentCatEntity> catList = catalogService.catalogList(siteid);
-		
+
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("site", site);
@@ -123,6 +123,7 @@ public class FrontController extends BaseController {
 		map.put("searchtime", (end - start));
 		map.put("pageList", newslist);
 		map.put("pageNo", pageNo);
+		map.put("totalSize", totalSize);
 		map.put("pageCount", pageCount);
 		map.put("sitePath", memberMng.getSitePath());
 		map.put("domain", PlatFormUtil.getSessionSite().getDomain());
@@ -132,7 +133,7 @@ public class FrontController extends BaseController {
 
 		return new ModelAndView("lucene/results", map);
 	}
-	
+
 	/**
 	 * 根据类型查询
 	 * @param request
@@ -197,10 +198,10 @@ public class FrontController extends BaseController {
 		}
 
 		List<ContentCatEntity> catList = catalogService.catalogList(siteid);
-		
-		
+
+
 		SiteEntity siteMaster=PlatFormUtil.getFrontSessionSite();
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("site", site);
 		map.put("keyword", keyWord);
@@ -214,7 +215,7 @@ public class FrontController extends BaseController {
 		map.put("catid", catid);
 		map.put("catList", catList);
 		map.put("istype", istype);
-		
+
 		if(siteid==null || siteid==""){
 			return new ModelAndView("lucene/results_gov",map);
 		}else{
@@ -224,7 +225,7 @@ public class FrontController extends BaseController {
 
 	/**
 	 * 前台视频播放
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -260,7 +261,7 @@ public class FrontController extends BaseController {
 
 	/**
 	 * wap--端搜索--
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -340,7 +341,7 @@ public class FrontController extends BaseController {
 		map.put("catList", catList);
 
 		JSONArray jArray = new JSONArray();
-		 
+
 		for (NewsIndexEntity n : newslist) {
 			JSONObject jObject = new JSONObject();
 			jObject.accumulate("title", n.getTitle());

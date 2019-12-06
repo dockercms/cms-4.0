@@ -42,11 +42,11 @@ import com.leimingtech.core.util.StringUtil;
  * @author
  * @date 2015-08-28 17:59:53
  * @version V1.0
- * 
+ *
  */
 @Controller
-@RequestMapping("/activityOptionExtController")
-public class ActivityOptionExtController extends BaseController {
+@RequestMapping("/activityOptionExtController_bak")
+public class ActivityOptionExtController_bak extends BaseController {
 
 	private String message;
 	/** 活动报名表接口 */
@@ -65,7 +65,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 活动报名表列表
-	 * 
+	 *
 	 * @param request
 	 */
 	@RequestMapping(params = "activityOptionExt")
@@ -89,7 +89,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 后台活动报名表查看
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "queryLog")
@@ -118,7 +118,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 活动报名表更新
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "edit")
@@ -133,7 +133,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 活动报名表保存
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "save")
@@ -176,7 +176,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 活动报名表删除
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "del")
@@ -202,7 +202,7 @@ public class ActivityOptionExtController extends BaseController {
 
 	/**
 	 * 前台活动提交保存
-	 * 
+	 *
 	 * @param request
 	 * @throws ParseException
 	 */

@@ -14,6 +14,7 @@
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/common.min.css" rel="stylesheet">
 	<link href="/css/notice-announcement.min.css" rel="stylesheet">
+
 </head>
 <body>
 <!-- 头部区域 -->
@@ -34,9 +35,7 @@
 				</#if>
 			</ul>
 		</div>
-<!--		<div class="page">-->
-			<#include "lucene/frontpage.html"><!-- 分页条 -->
-<!--		</div>-->
+		<#include "lucene/frontpage.html"><!-- 分页条 -->
 	</div>
 </div>
 <div style="background: #ffffff;">
@@ -47,25 +46,12 @@
 <!-- 头部区域 -->
 <script src="/bootstrap/js/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<script>
-	$("header").load("section/header_0.html");
-	$("footer").load("section/footer_0.html");
-</script>
 </body>
 <script type="application/javascript">
 	function toSearch(urlStr){
 		var keyWord3 = encodeURI(document.getElementById("keywords").value);
 		keyWord3 = encodeURI(keyWord3);
-		// var classify = document.getElementsByName("classify");
-		// var itemvalue = '';
-		// for(i=0;i<classify.length;i++)    {
-		// 	if(classify[i].checked){
-		// 		itemvalue = classify[i].value;
-		// 	}
-		// }
-		// var catid = document.getElementById("catid").value;
 		window.location = urlStr+"&keyword="+keyWord3+"&siteid="+${site.id};
-
 	}
 </script>
 </html>
