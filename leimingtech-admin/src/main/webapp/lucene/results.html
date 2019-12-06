@@ -21,6 +21,10 @@
 <div class="header-bg">
 	<#include "wwwroot/${sitePath}/template/header.html">
 	<div class="breadcrumb-unified container">
+        <ol class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li>搜索</li>
+        </ol>
 		<p style="font-size: 18px;font-weight: bold;">搜索“${keyword!''}”共${totalSize!''}条结果</p>
 		<input type="hidden" id="keywords" value="${keyword!''}">
 		<div class="notice-announcement-list">
