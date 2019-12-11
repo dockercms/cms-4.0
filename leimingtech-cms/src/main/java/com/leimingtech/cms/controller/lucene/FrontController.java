@@ -43,6 +43,11 @@ import com.leimingtech.core.util.PlatFormUtil;
 @RequestMapping("/front/frontController")
 public class FrontController extends BaseController {
 
+	private static final String PAGE_NO = "pageNo";
+
+	private static final String PAGE_SIZE = "pageSize";
+
+
 	@Autowired
 	private LuceneServiceI luceneServiceImpl;
 	@Autowired
@@ -78,8 +83,8 @@ public class FrontController extends BaseController {
 		}
 
 		// 获取页码数
-		int pageSize = StringUtils.isEmpty(request.getParameter("pageSize")) ? 10 : Integer.valueOf(request.getParameter("pageSize"));
-		int pageNo = StringUtils.isEmpty(request.getParameter("pageNo")) ? 1 : Integer.valueOf(request.getParameter("pageNo"));
+		int pageSize = StringUtils.isEmpty(request.getParameter(PAGE_SIZE)) ? 10 : Integer.valueOf(request.getParameter(PAGE_SIZE));
+		int pageNo = StringUtils.isEmpty(request.getParameter(PAGE_NO)) ? 1 : Integer.valueOf(request.getParameter(PAGE_NO));
 
 		List<NewsIndexEntity> newslist = new ArrayList<NewsIndexEntity>();
 		Map<String, Object> newsMap = new HashMap<String, Object>();
@@ -98,7 +103,7 @@ public class FrontController extends BaseController {
 			params.put("catid", catid);
 			params.put("classify", classify);
 			params.put("pageNO", pageNo);
-			params.put("pageSize", pageSize);
+			params.put(PAGE_SIZE, pageSize);
 			try {
 				newsMap = luceneServiceImpl.searchIndex(site, params);// 检索后返回的数据
 				newslist = (List<NewsIndexEntity>) newsMap.get("newslist");// 当前页条数
@@ -122,7 +127,7 @@ public class FrontController extends BaseController {
 		map.put("keyword", keyWord);
 		map.put("searchtime", (end - start));
 		map.put("pageList", newslist);
-		map.put("pageNo", pageNo);
+		map.put(PAGE_NO, pageNo);
 		map.put("totalSize", totalSize);
 		map.put("pageCount", pageCount);
 		map.put("sitePath", memberMng.getSitePath());
@@ -162,8 +167,8 @@ public class FrontController extends BaseController {
 		}
 
 		// 获取页码数
-		int pageSize = StringUtils.isEmpty(request.getParameter("pageSize")) ? 10 : Integer.valueOf(request.getParameter("pageSize"));
-		int pageNo = StringUtils.isEmpty(request.getParameter("pageNo")) ? 1 : Integer.valueOf(request.getParameter("pageNo"));
+		int pageSize = StringUtils.isEmpty(request.getParameter(PAGE_SIZE)) ? 10 : Integer.valueOf(request.getParameter(PAGE_SIZE));
+		int pageNo = StringUtils.isEmpty(request.getParameter(PAGE_NO)) ? 1 : Integer.valueOf(request.getParameter(PAGE_NO));
 
 		List<NewsIndexEntity> newslist = new ArrayList<NewsIndexEntity>();
 		Map<String, Object> newsMap = new HashMap<String, Object>();
@@ -181,8 +186,8 @@ public class FrontController extends BaseController {
 		params.put("istype", istype);
 		params.put("catid", catid);
 		params.put("classify", classify);
-		params.put("pageNO", pageNo);
-		params.put("pageSize", pageSize);
+		params.put(PAGE_NO, pageNo);
+		params.put(PAGE_SIZE, pageSize);
 		try {
 			newsMap = luceneServiceImpl.searchIndex(site, params);// 检索后返回的数据
 			newslist = (List<NewsIndexEntity>) newsMap.get("newslist");// 当前页条数
@@ -207,7 +212,7 @@ public class FrontController extends BaseController {
 		map.put("keyword", keyWord);
 		map.put("searchtime", (end - start));
 		map.put("pageList", newslist);
-		map.put("pageNo", pageNo);
+		map.put(PAGE_NO, pageNo);
 		map.put("pageCount", pageCount);
 		map.put("sitePath", siteMaster.getSitePath()); //主站的路径地址
 		map.put("domain", PlatFormUtil.getSessionSite().getDomain());
@@ -290,8 +295,8 @@ public class FrontController extends BaseController {
 		}
 
 		// 获取页码数
-		int pageSize = StringUtils.isEmpty(request.getParameter("pageSize")) ? 3 : Integer.valueOf(request.getParameter("pageSize"));
-		int pageNo = StringUtils.isEmpty(request.getParameter("pageNo")) ? 1 : Integer.valueOf(request.getParameter("pageNo"));
+		int pageSize = StringUtils.isEmpty(request.getParameter(PAGE_SIZE)) ? 3 : Integer.valueOf(request.getParameter(PAGE_SIZE));
+		int pageNo = StringUtils.isEmpty(request.getParameter(PAGE_NO)) ? 1 : Integer.valueOf(request.getParameter(PAGE_NO));
 
 		List<NewsIndexEntity> newslist = new ArrayList<NewsIndexEntity>();
 		Map<String, Object> newsMap = new HashMap<String, Object>();
@@ -309,8 +314,8 @@ public class FrontController extends BaseController {
 			params.put("keyword", keyWord);
 			params.put("catid", catid);
 			params.put("classify", classify);
-			params.put("pageNO", pageNo);
-			params.put("pageSize", pageSize);
+			params.put(PAGE_NO, pageNo);
+			params.put(PAGE_SIZE, pageSize);
 			try {
 				newsMap = luceneServiceImpl.searchIndex(site, params);// 检索后返回的数据
 				newslist = (List<NewsIndexEntity>) newsMap.get("newslist");// 当前页条数
@@ -332,7 +337,7 @@ public class FrontController extends BaseController {
 		map.put("keyword", keyWord);
 		map.put("searchtime", (end - start));
 		map.put("pageList", newslist);
-		map.put("pageNo", pageNo);
+		map.put(PAGE_NO, pageNo);
 		map.put("pageCount", pageCount);
 		map.put("sitePath", memberMng.getSitePath());
 		map.put("domain", PlatFormUtil.getSessionSite().getDomain());
@@ -372,8 +377,8 @@ public class FrontController extends BaseController {
 		}
 
 		// 获取页码数
-		int pageSize = StringUtils.isEmpty(request.getParameter("pageSize")) ? 10 : Integer.valueOf(request.getParameter("pageSize"));
-		int pageNo = StringUtils.isEmpty(request.getParameter("pageNo")) ? 1 : Integer.valueOf(request.getParameter("pageNo"));
+		int pageSize = StringUtils.isEmpty(request.getParameter(PAGE_SIZE)) ? 10 : Integer.valueOf(request.getParameter(PAGE_SIZE));
+		int pageNo = StringUtils.isEmpty(request.getParameter(PAGE_NO)) ? 1 : Integer.valueOf(request.getParameter(PAGE_NO));
 
 		List<NewsIndexEntity> newslist = new ArrayList<NewsIndexEntity>();
 		Map<String, Object> newsMap = new HashMap<String, Object>();
@@ -389,8 +394,8 @@ public class FrontController extends BaseController {
 			start = System.currentTimeMillis();
 			Map params = new HashMap();
 			params.put("keyword", keyWord);
-			params.put("pageNO", pageNo);
-			params.put("pageSize", pageSize);
+			params.put(PAGE_NO, pageNo);
+			params.put(PAGE_SIZE, pageSize);
 			params.put("catid", catid);
 			params.put("classify", classify);
 			try {
@@ -413,7 +418,7 @@ public class FrontController extends BaseController {
 		map.put("keyword", keyWord);
 		map.put("searchtime", (end - start));
 		map.put("pageList", newslist);
-		map.put("pageNo", pageNo);
+		map.put(PAGE_NO, pageNo);
 		map.put("pageCount", pageCount);
 		map.put("sitePath", memberMng.getSitePath());
 		map.put("domain", PlatFormUtil.getSessionSite().getDomain());
